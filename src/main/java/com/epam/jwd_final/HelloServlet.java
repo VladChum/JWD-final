@@ -1,4 +1,4 @@
-package com.epam;
+package com.epam.jwd_final;
 
 import java.io.*;
 import javax.servlet.http.*;
