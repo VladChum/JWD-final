@@ -1,0 +1,104 @@
+.img-wrap {
+    position: relative;
+}
+
+.img-wrap h1 {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+}
+
+.header {
+    background-color: rgb(52, 58, 64);
+}
+
+.img-text {
+    margin: 350px 60px;
+    
+}
+
+#map {
+    height: 500px;
+    width: 100%;
+}
+
+.banner-item__text {
+    font-size: 120%;
+    line-height: 2;
+    color: #eccf14;
+    margin: 0 0 20px;
+}
+
+primary {
+    background: #eccf14;
+    color: #fff;
+    border-color: #eccf14;
+    border-radius: 100px;
+    -webkit-box-shadow: 0 4px 12px rgb(223 23 20 / 20%);
+    box-shadow: 0 4px 12px rgb(223 23 20 / 20%);
+    -webkit-transition: all ease .4s;
+    transition: all ease .4s;
+}
+
+.button {
+    background-color: #eccf14;
+    color: #424242;
+    border: 1px solid #eccf14;
+    border-radius: 100px;
+    padding: .7em 1.2em;
+    display: inline-block;
+    font-weight: 500;
+    font-size: 20px;
+    text-align: center;
+    letter-spacing: .01em;
+    text-decoration: none ;
+}
+
+.tariff-title {
+    text-align: center;
+    font-size: 48px;
+    line-height: 1.25;
+    color: #484747;
+    margin: 40px 0;
+}
+
+.button-tariff {
+    background-color: #0d6efd!important;
+    color: white;
+    border: 1px solid #0d6efd!important;
+    border-radius: 100px;
+    padding: .7em 1.2em;
+    display: inline-block;
+    font-weight: 500;
+    font-size: 15px;
+    text-align: center;
+    letter-spacing: .01em;
+    text-decoration: none ;
+    margin: 0 0 0 -10px;
+}
+
+.card {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    height: calc(100% - 20px);
+    margin: 0 0 20px;
+    background: #fff;
+    -webkit-box-shadow: 0 8px 24px rgb(137 150 155 / 15%);
+    box-shadow: 0 8px 24px rgb(137 150 155 / 15%);
+    border-radius: 10px;
+    overflow: hidden;
+    padding: 39px 35px;
+}
+
+.tariff-item__price {
+    margin: 0 0 15px 0;
+}
