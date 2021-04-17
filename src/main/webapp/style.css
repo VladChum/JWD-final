@@ -15,7 +15,7 @@
 
 .img-text {
     margin: 350px 60px;
-    
+
 }
 
 #map {
@@ -52,7 +52,7 @@ primary {
     font-size: 20px;
     text-align: center;
     letter-spacing: .01em;
-    text-decoration: none ;
+    text-decoration: none;
 }
 
 .tariff-title {
@@ -64,9 +64,9 @@ primary {
 }
 
 .button-tariff {
-    background-color: #0d6efd!important;
+    background-color: #0d6efd !important;
     color: white;
-    border: 1px solid #0d6efd!important;
+    border: 1px solid #0d6efd !important;
     border-radius: 100px;
     padding: .7em 1.2em;
     display: inline-block;
@@ -74,7 +74,7 @@ primary {
     font-size: 15px;
     text-align: center;
     letter-spacing: .01em;
-    text-decoration: none ;
+    text-decoration: none;
     margin: 0 0 0 -10px;
 }
 
@@ -101,4 +101,135 @@ primary {
 
 .tariff-item__price {
     margin: 0 0 15px 0;
+}
+
+.about-page__first {
+    text-align: center;
+    font-size: 18px;
+    line-height: 1.67;
+    color: #484747;
+    padding: 40px 0 34px;
+}
+
+.about-page__content {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.b-contact-info {
+    margin-bottom: 40px;
+}
+
+.advantages-section {
+    padding: 85px 0 60px;
+}
+
+.container_about {
+    width: 100%;
+    padding-right: 10px;
+    padding-left: 10px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.row {
+    display: -ms-flexbox;
+    display: -webkit-box;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    margin-right: -10px;
+    margin-left: -10px;
+}
+
+.col-6 {
+    -ms-flex: 0 0 50%;
+    -webkit-box-flex: 0;
+    flex: 0 0 50%;
+    max-width: 50%;
+}
+
+.advantage-item {
+    text-align: center;
+    margin: 0 0 59px;
+}
+
+.advantage-item__img {
+    display: inline-block;
+    height: 72px;
+    width: 72px;
+    line-height: 54px;
+    border-radius: 50%;
+    background: #fff;
+    -webkit-box-shadow: 0 8px 24px rgb(137 150 155 / 15%);
+    box-shadow: 0 8px 24px rgb(137 150 155 / 15%);
+    margin: 0 0 21px;
+}
+
+.h2 {
+    font-size: 40px;
+    line-height: 1.2;
+    text-align: center;
+    color: #484747;
+}
+
+.advantages-section .h2 {
+    margin: 0 0 40px;
+}
+
+.col-lg-4 {
+    -ms-flex: 0 0 33.333333%;
+    -webkit-box-flex: 0;
+    flex: 0 0 33.333333%;
+    max-width: 33.333333%;
+}
+
+
+.b-contact-info__item:first-child {
+    padding-top: 15px;
+}
+
+.b-contact-info__item {
+    display: flex;
+    flex-flow: wrap;
+    border-bottom: 1px solid #f2f2f2;
+    padding-bottom: 30px;
+    padding-top: 30px;
+}
+
+.b-contact-info__title {
+
+    font-size: 20px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 1.15;
+    letter-spacing: 0.2px;
+    color: #333;
+
+}
+
+.b-contact-info__item-col:nth-child(2) {
+    flex: 0 0 33.333333%;
+    max-width: 33.333333%;
+}
+
+.b-contact-info__item-col:nth-child(1) {
+    width: 40%;
+}
+
+.about-page__first img {
+    display: inline-block;
+    width: 200px;
+    max-width: 100%;
+    height: auto;
+    margin: 0 0 41px;
+}
+
+.header-logo img {
+    display: inline-block;
+    width: 50px;
+    max-width: 100%;
+    height: auto;
+    margin: 0 20px 0 -0px;
 }
