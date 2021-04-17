@@ -7,6 +7,12 @@ public class Discount extends AbstractBaseEntity {
     private Date endDate;
     private double size;
 
+    public Discount(Date startDate, Date endDate, double size) {
+        super();
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.size = size;
+    }
 
     public Date getStartDate() {
         return startDate;

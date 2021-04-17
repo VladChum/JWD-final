@@ -66,7 +66,6 @@ public class ConnectionProxy implements Connection {
 
     @Override
     public void close() throws SQLException {
-//        connection.close();
         try {
             ConnectionPool.INSTANCE.releaseConnection(this);
         } catch (ConnectionPoolException e) {

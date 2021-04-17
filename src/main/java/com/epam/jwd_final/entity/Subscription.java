@@ -9,6 +9,7 @@ public class Subscription extends AbstractBaseEntity {
     private TariffPlan tariffPlan;
 
     public Subscription(User user, Date startDate, Date endDate, TariffPlan tariffPlan) {
+        super();
         this.user = user;
         this.startDate = startDate;
         this.endDate = endDate;

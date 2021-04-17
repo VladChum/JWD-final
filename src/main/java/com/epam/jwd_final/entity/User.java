@@ -10,6 +10,7 @@ public class User extends AbstractBaseEntity {
     private double balance;
 
     public User(Account account, String firstName, String lastName, String phone, String email, Status status, double balance) {
+        super();
         this.account = account;
         this.firstName = firstName;
         this.lastName = lastName;
