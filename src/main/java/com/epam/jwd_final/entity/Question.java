@@ -1,12 +1,13 @@
 package com.epam.jwd_final.entity;
 
-public class Question {
+public class Question extends AbstractBaseEntity {
     private String question;
     private String answer;
     private User user;
     private Support support;
 
     public Question(String question, String answer, User user, Support support) {
+        super();
         this.question = question;
         this.answer = answer;
         this.user = user;

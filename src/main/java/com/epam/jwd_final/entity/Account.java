@@ -5,6 +5,7 @@ public class Account extends AbstractBaseEntity {
     private String password;
 
     public Account(String login, String password) {
+        super();
         this.login = login;
         this.password = password;
     }

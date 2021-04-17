@@ -9,6 +9,7 @@ public class UserPayment extends AbstractBaseEntity{
     private PaymentType paymentType;
 
     public UserPayment(Date date, float amount, User userId, PaymentType paymentType) {
+        super();
         this.date = date;
         this.amount = amount;
         this.userId = userId;

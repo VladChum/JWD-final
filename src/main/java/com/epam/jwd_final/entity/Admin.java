@@ -4,6 +4,7 @@ public class Admin extends AbstractBaseEntity {
     private Account account;
 
     public Admin(Account account) {
+        super();
         this.account = account;
     }
 

@@ -5,6 +5,7 @@ public class Support extends AbstractBaseEntity {
     private String name;
 
     public Support(Account account, String name) {
+        super();
         this.account = account;
         this.name = name;
     }

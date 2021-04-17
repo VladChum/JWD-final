@@ -6,6 +6,7 @@ public class TariffPlan extends AbstractBaseEntity {
     private Discount discount;
 
     public TariffPlan(String name, float price, Discount discount) {
+        super();
         this.name = name;
         this.price = price;
         this.discount = discount;
