@@ -385,3 +385,15 @@ primary {
     flex: 1;
     margin-right: 40px;
 }
+
+.admin-filter__item--user {
+    background-image: url(../user.svg);
+    background-size: 25px;
+    background-position-x: 35px;
+}
+
+.admin-filter__item--statistics {
+    background-image: url(../statistics.svg);
+    background-size: 25px;
+    background-position-x: 35px;
+}
