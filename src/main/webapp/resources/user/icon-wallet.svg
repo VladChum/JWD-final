@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="25px" height="25px" viewBox="0 0 25 25" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>Group 3</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <path d="M3,3.00335124 C3,1.34464615 4.29406614,0.356915092 5.89873867,0.799498221 L22.1012613,5.26829983 C23.7021905,5.7098505 25,7.41338798 25,9.06662349 L25,11.0011746 C25,12.6573801 23.6569187,14 21.9986131,14 L6.00138694,14 C4.3437667,14 3,12.6576211 3,10.9966488 L3,3.00335124 Z" id="path-1" fill="#64BEEB"></path>
+        <mask id="mask-2" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="22" height="14" fill="#64BEEB">
+            <use xlink:href="#path-1"></use>
+        </mask>
+    </defs>
+    <g id="Symbols" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="tabbar/icon/payments/idle">
+            <g id="Group-3">
+                <path d="M0,9.99253976 C0,8.33980569 1.34410858,7 2.99075223,7 L22.0092478,7 C23.6609946,7 25,8.35292554 25,9.99253976 L25,22.0074602 C25,23.6601943 23.6558914,25 22.0092478,25 L2.99075223,25 C1.33900538,25 0,23.6470745 0,22.0074602 L0,9.99253976 Z M3.5,17.5 C4.32842712,17.5 5,16.8284271 5,16 C5,15.1715729 4.32842712,14.5 3.5,14.5 C2.67157288,14.5 2,15.1715729 2,16 C2,16.8284271 2.67157288,17.5 3.5,17.5 Z" id="Combined-Shape" fill="#64BEEB"></path>
+                <use id="Rectangle-10" stroke="#FFFFFF" mask="url(#mask-2)" stroke-width="2" xlink:href="#path-1"></use>
+            </g>
+        </g>
+    </g>
+</svg>

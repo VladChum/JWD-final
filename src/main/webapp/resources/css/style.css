@@ -26,7 +26,7 @@
 .banner-item__text {
     font-size: 120%;
     line-height: 2;
-    color: #eccf14;
+    color: #fff;
     margin: 0 0 20px;
 }
 
@@ -42,9 +42,9 @@ primary {
 }
 
 .button {
-    background-color: #eccf14;
-    color: #424242;
-    border: 1px solid #eccf14;
+    background-color: #0d6efd;
+    color: #fff;
+    border: 1px solid #0d6efd;
     border-radius: 100px;
     padding: .7em 1.2em;
     display: inline-block;
@@ -232,4 +232,156 @@ primary {
     max-width: 100%;
     height: auto;
     margin: 0 20px 0 -0px;
+}
+
+.card-user {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    height: calc(100% - 20px);
+    margin: 0 0 20px;
+    background: #fff;
+    border: 1px solid #efefef;
+    -webkit-box-shadow: 0 8px 24px rgb(137 150 155 / 15%);
+    box-shadow: 0 8px 24px rgb(137 150 155 / 15%);
+    border-radius: 10px;
+    overflow: hidden;
+    padding: 20px 15px;
+}
+
+.balance-user {
+    font-size: 20px;
+}
+
+.button-user {
+    background-color: #0d6efd;
+    color: white;
+    border: 1px solid #0d6efd;
+    border-radius: 100px;
+    padding: .7em 3em;
+    display: inline-block;
+    font-weight: 500;
+    font-size: 15px;
+    text-align: center;
+    letter-spacing: .01em;
+    text-decoration: none;
+    margin: 0 0 10px -10px;
+}
+
+.btn-user {
+    background-color: #ffffff;
+    color: black;
+    border: 1px solid rgba(245, 146, 245, 0.24);
+    border-radius: 100px;
+    padding: .7em 6em;
+    display: inline-block;
+    font-weight: 500;
+    font-size: 15px;
+    text-align: center;
+    letter-spacing: .01em;
+    text-decoration: none;
+    margin: 0 0 10px -10px;
+}
+
+.tarrifs-filter__item--bundle {
+    background-image: url(../user/sq.svg);
+    background-size: 25px;
+    background-position-x: 35px;
+
+}
+
+.tarrifs-filter__item {
+    width: 250px;
+    padding-left: 80px;
+    background-size: 25px;
+    background-position: 30px 50%;
+    background-repeat: no-repeat;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    border-color: rgba(0,0,0,.09);
+    border-radius: 100px;
+    display: inline-block;
+    font-weight: 500;
+    font-size: 15px;
+    text-align: center;
+    letter-spacing: .01em;
+    text-decoration: none;
+    margin: 0 0 10px -10px;
+}
+
+.tarrifs-filter__item--wallet {
+    background-image: url(../user/icon-wallet.svg);
+    background-size: 25px;
+    background-position-x: 35px;
+}
+
+.tarrifs-filter__item--help {
+    background-image: url(../user/lifesaver.svg);
+    background-size: 25px;
+    background-position-x: 35px;
+}
+
+.tarrifs-filter__item--sails {
+    background-image: url(../user/sail.svg);
+    background-size: 25px;
+    background-position-x: 35px;
+}
+
+.tarrifs-filter__item--sating {
+    background-image: url(../user/sating.svg);
+    background-size: 25px;
+    background-position-x: 35px;
+}
+
+.tarrifs-filter__item--user {
+    background-image: url(../user/user.svg);
+    background-size: 25px;
+    background-position-x: 35px;
+}
+
+.footer__item--instagram {
+    background-image: url(../social/instagram.svg);
+    background-size: 34px;
+    background-position-x: 34px;
+}
+
+.footer-items {
+    width: 34px;
+    height: 34px;
+    border: red;
+    background-size: 25px;
+    background-position: 3px;
+    background-repeat: no-repeat;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    border-radius: 100px;
+    display: inline-block;
+    text-align: center;
+    letter-spacing: .01em;
+    margin: 0 0 10px -10px;
+}
+
+.footer__item--twitter {
+    background-image: url(../social/twitter.svg);
+    background-size: 34px;
+    background-position-x: 34px;
+}
+
+
+.copy_area .socials {
+    flex: 1;
+    margin-right: 40px;
 }
