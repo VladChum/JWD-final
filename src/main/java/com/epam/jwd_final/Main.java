@@ -1,6 +1,8 @@
 package com.epam.jwd_final;
 
-import com.epam.jwd_final.db.ConnectionPool;
+import com.epam.jwd_final.dao.AccountDao;
+import com.epam.jwd_final.dao.connection.ConnectionPool;
+import com.epam.jwd_final.dao.impl.AccountDaoImpl;
 import com.epam.jwd_final.exception.ConnectionPoolException;
 
 import java.sql.*;
@@ -20,6 +22,7 @@ public class Main {
         } catch (SQLException | ConnectionPoolException throwables) {
             throwables.printStackTrace();
         }
+
     }
 
 
