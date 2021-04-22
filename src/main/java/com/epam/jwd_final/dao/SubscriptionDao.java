@@ -1,2 +1,4 @@
-package com.epam.jwd_final.dao;public interface SubscriptionDao {
+package com.epam.jwd_final.dao;
+
+public interface SubscriptionDao {
 }

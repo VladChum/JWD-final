@@ -1,11 +1,10 @@
-package com.epam.jwd_final.db;
+package com.epam.jwd_final.dao.connection;
 
 import com.epam.jwd_final.exception.ConnectionPoolException;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
 import java.sql.Connection;
-import java.sql.Driver;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.*;
@@ -16,10 +15,10 @@ public enum ConnectionPool {
     INSTANCE;
 
     private static final Logger LOGGER = Logger.getLogger(ConnectionPool.class);
-    private final int CONNECTION_POOL_SIZE = 16;
     private final String URL;
     private final String USER;
     private final String PASSWORD;
+    private final int CONNECTION_POOL_SIZE;
 
     private BlockingQueue<ConnectionProxy> freeConnections;
     private Queue<ConnectionProxy> givenAwayConnections;
@@ -30,6 +29,7 @@ public enum ConnectionPool {
         this.URL = dbResourceManager.getValue(DBParameter.DB_URL);
         this.USER = dbResourceManager.getValue(DBParameter.DB_USER);
         this.PASSWORD = dbResourceManager.getValue(DBParameter.DB_PASSWORD);
+        this.CONNECTION_POOL_SIZE = Integer.parseInt(dbResourceManager.getValue(DBParameter.DB_CONNECTION_POOL_SIZE));
         init();
         givenAwayConnections = new ArrayDeque<>();
     }

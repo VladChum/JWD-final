@@ -1,2 +1,4 @@
-package com.epam.jwd_final.dao;public interface SupportDao {
+package com.epam.jwd_final.dao;
+
+public interface SupportDao {
 }
