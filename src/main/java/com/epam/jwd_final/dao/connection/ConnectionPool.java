@@ -60,15 +60,12 @@ public enum ConnectionPool {
     }
 
     public void releaseConnection(Connection connection) throws ConnectionPoolException {
-        if (connection != null) {
-            if (connection instanceof ConnectionProxy && givenAwayConnections.remove(connection)) {
-                try {
-                    freeConnections.put((ConnectionProxy) connection);
-                } catch (InterruptedException e) {
-                    LOGGER.log(Level.FATAL, "Connection is not a ProxyConnection");
-                    throw new ConnectionPoolException("Connection is not a ProxyConnection", e);
-                }
-            }
+        if (connection.getClass() == ConnectionProxy.class) {
+            givenAwayConnections.remove(connection);
+            freeConnections.offer((ConnectionProxy) connection);
+        } else {
+            LOGGER.log(Level.FATAL, "Connection is not a ProxyConnection");
+            throw new ConnectionPoolException("Attempt to close connection not from connection pool");
         }
         LOGGER.log(Level.INFO, "Connection release");
     }
@@ -76,27 +73,11 @@ public enum ConnectionPool {
     public void destroyPool() throws ConnectionPoolException {
         for (int i = 0; i < CONNECTION_POOL_SIZE; i++) {
             try {
-                if (!freeConnections.isEmpty()) {
-                    ConnectionProxy connectionProxy = freeConnections.take();
-                    connectionProxy.reallyClose();
-                }
+                freeConnections.take().reallyClose();
             } catch (InterruptedException e) {
-                e.printStackTrace();
+                throw new ConnectionPoolException("Unable to destroy pool connection");
             }
         }
-        deregisterDrivers();
     }
 
-    private void deregisterDrivers() throws ConnectionPoolException {
-        Enumeration<Driver> drivers = DriverManager.getDrivers();
-        while (drivers.hasMoreElements()) {
-            Driver driver = drivers.nextElement();
-            try {
-                DriverManager.deregisterDriver(driver);
-            } catch (SQLException e) {
-                LOGGER.log(Level.ERROR, "Registered drivers are missing", e);
-                throw new ConnectionPoolException("Registered drivers are missing", e);
-            }
-        }
-    }
 }
