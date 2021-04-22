@@ -1,27 +1,36 @@
 package com.epam.jwd_final.entity;
 
 import java.util.Date;
+import java.util.Objects;
 
 public class Subscription extends AbstractBaseEntity {
-    private User user;
+    private Long userId;
     private Date startDate;
     private Date endDate;
-    private TariffPlan tariffPlan;
+    private Long tariffPlanId;
 
-    public Subscription(User user, Date startDate, Date endDate, TariffPlan tariffPlan) {
-        super();
-        this.user = user;
+    public Subscription(Long id, Long userId, Date startDate, Date endDate, Long tariffPlanId) {
+        super(id);
+        this.userId = userId;
         this.startDate = startDate;
         this.endDate = endDate;
-        this.tariffPlan = tariffPlan;
+        this.tariffPlanId = tariffPlanId;
     }
 
-    public User getUser() {
-        return user;
+    public Long getUserId() {
+        return userId;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setUserId(Long userId) {
+        this.userId = userId;
+    }
+
+    public Long getTariffPlanId() {
+        return tariffPlanId;
+    }
+
+    public void setTariffPlanId(Long tariffPlanId) {
+        this.tariffPlanId = tariffPlanId;
     }
 
     public Date getStartDate() {
@@ -40,11 +49,30 @@ public class Subscription extends AbstractBaseEntity {
         this.endDate = endDate;
     }
 
-    public TariffPlan getTariffPlan() {
-        return tariffPlan;
+    @Override
+    public int hashCode() {
+        return Objects.hash(userId, startDate, endDate, tariffPlanId);
     }
 
-    public void setTariffPlan(TariffPlan tariffPlan) {
-        this.tariffPlan = tariffPlan;
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+
+        Subscription subscription = (Subscription) obj;
+        return Objects.equals(userId, subscription.userId)
+                && Objects.equals(startDate, subscription.startDate)
+                && Objects.equals(endDate, subscription.endDate)
+                && Objects.equals(tariffPlanId, subscription.tariffPlanId);
+    }
+
+    @Override
+    public String toString() {
+        return "Subscription{" +
+                "userId=" + userId +
+                ", startDate=" + startDate +
+                ", endDate=" + endDate +
+                ", tariffPlanId=" + tariffPlanId +
+                '}';
     }
 }

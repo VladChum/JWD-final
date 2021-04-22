@@ -1,11 +1,10 @@
 package com.epam.jwd_final.entity;
 
 public abstract class AbstractBaseEntity implements BaseEntity {
-    private static long countId = 0;
     private Long id;
 
-    public AbstractBaseEntity() {
-        this.id = countId++;
+    public AbstractBaseEntity(Long id) {
+        this.id = id;
     }
 
     @Override
