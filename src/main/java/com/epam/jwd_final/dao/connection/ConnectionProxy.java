@@ -1,4 +1,4 @@
-package com.epam.jwd_final.db;
+package com.epam.jwd_final.dao.connection;
 
 import com.epam.jwd_final.exception.ConnectionPoolException;
 

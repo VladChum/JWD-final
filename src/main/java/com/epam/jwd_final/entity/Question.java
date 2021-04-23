@@ -1,17 +1,20 @@
 package com.epam.jwd_final.entity;
 
+import java.awt.desktop.QuitStrategy;
+import java.util.Objects;
+
 public class Question extends AbstractBaseEntity {
     private String question;
     private String answer;
-    private User user;
-    private Support support;
+    private Long userId;
+    private Long supportId;
 
-    public Question(String question, String answer, User user, Support support) {
-        super();
+    public Question(Long id, String question, String answer, Long userId, Long supportId) {
+        super(id);
         this.question = question;
         this.answer = answer;
-        this.user = user;
-        this.support = support;
+        this.userId = userId;
+        this.supportId = supportId;
     }
 
     public String getQuestion() {
@@ -30,19 +33,46 @@ public class Question extends AbstractBaseEntity {
         this.answer = answer;
     }
 
-    public User getUser() {
-        return user;
+    public Long getUserId() {
+        return userId;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 
-    public Support getSupport() {
-        return support;
+    public Long getSupportId() {
+        return supportId;
     }
 
-    public void setSupport(Support support) {
-        this.support = support;
+    public void setSupportId(Long supportId) {
+        this.supportId = supportId;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(question, answer, userId, supportId);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+
+        Question question = (Question) obj;
+        return Objects.equals(question, question.question)
+                && Objects.equals(answer, question.answer)
+                && Objects.equals(userId, question.userId)
+                && Objects.equals(supportId,question.supportId);
+    }
+
+    @Override
+    public String toString() {
+        return "Question{" +
+                "question='" + question + '\'' +
+                ", answer='" + answer + '\'' +
+                ", userId=" + userId +
+                ", supportId=" + supportId +
+                '}';
     }
 }

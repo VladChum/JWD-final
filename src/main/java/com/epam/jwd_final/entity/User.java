@@ -1,17 +1,21 @@
 package com.epam.jwd_final.entity;
 
+import java.math.BigDecimal;
+import java.util.Objects;
+
 public class User extends AbstractBaseEntity {
-    private Account account;
+    private Long accountId;
     private String firstName;
     private String lastName;
     private String phone;
     private String email;
     private Status status;
-    private double balance;
+    private BigDecimal balance;
 
-    public User(Account account, String firstName, String lastName, String phone, String email, Status status, double balance) {
-        super();
-        this.account = account;
+    public User(Long id, Long accountId, String firstName, String lastName,
+                String phone, String email, Status status, BigDecimal balance) {
+        super(id);
+        this.accountId = accountId;
         this.firstName = firstName;
         this.lastName = lastName;
         this.phone = phone;
@@ -20,12 +24,23 @@ public class User extends AbstractBaseEntity {
         this.balance = balance;
     }
 
-    public Account getAccount() {
-        return account;
+    public User(Long accountId, String firstName, String lastName,
+                String phone, String email, Status status) {
+        super(0L);
+        this.accountId = accountId;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.phone = phone;
+        this.email = email;
+        this.status = status;
     }
 
-    public void setAccount(Account account) {
-        this.account = account;
+    public Long getAccountId() {
+        return accountId;
+    }
+
+    public void setAccountId(Long accountId) {
+        this.accountId = accountId;
     }
 
     public String getFirstName() {
@@ -68,11 +83,44 @@ public class User extends AbstractBaseEntity {
         this.status = status;
     }
 
-    public double getBalance() {
+    public BigDecimal getBalance() {
         return balance;
     }
 
-    public void setBalance(double balance) {
+    public void setBalance(BigDecimal balance) {
         this.balance = balance;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(accountId, firstName, lastName, phone, email, status, balance);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+
+        User user = (User) obj;
+        return Objects.equals(accountId, user.accountId)
+                && Objects.equals(firstName, user.firstName)
+                && Objects.equals(lastName, user.lastName)
+                && Objects.equals(phone, user.phone)
+                && Objects.equals(email, user.email)
+                && Objects.equals(status, user.status)
+                && Objects.equals(balance, user.balance);
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "accountId=" + accountId +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", phone='" + phone + '\'' +
+                ", email='" + email + '\'' +
+                ", status=" + status +
+                ", balance=" + balance +
+                '}';
     }
 }

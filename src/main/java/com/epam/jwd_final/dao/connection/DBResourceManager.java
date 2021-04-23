@@ -1,4 +1,4 @@
-package com.epam.jwd_final.db;
+package com.epam.jwd_final.dao.connection;
 
 import java.util.ResourceBundle;
 
@@ -8,8 +8,7 @@ public class DBResourceManager
 
     private ResourceBundle bundle = ResourceBundle.getBundle("db");
 
-    public static DBResourceManager getInstance()
-    {
+    public static DBResourceManager getInstance() {
         return instance;
     }
 

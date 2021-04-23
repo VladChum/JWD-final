@@ -14,7 +14,7 @@
 }
 
 .img-text {
-    margin: 350px 60px;
+    margin: -550px 60px 250px;
 
 }
 
@@ -92,7 +92,7 @@ primary {
     height: calc(100% - 20px);
     margin: 0 0 20px;
     background: #fff;
-    -webkit-box-shadow: 0 8px 24px rgb(137 150 155 / 15%);
+    -webkit-box-shadow: 0 8px 24px rgba(137, 150, 155, 0.15);
     box-shadow: 0 8px 24px rgb(137 150 155 / 15%);
     border-radius: 10px;
     overflow: hidden;
@@ -308,7 +308,7 @@ primary {
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
-    border-color: rgba(0,0,0,.09);
+    border-color: rgba(0, 0, 0, .09);
     border-radius: 100px;
     display: inline-block;
     font-weight: 500;
@@ -349,37 +349,29 @@ primary {
     background-position-x: 35px;
 }
 
-.footer__item--instagram {
-    background-image: url(../social/instagram.svg);
-    background-size: 34px;
-    background-position-x: 34px;
+
+.footer-items a {
+    text-decoration: none;
 }
 
-.footer-items {
-    width: 34px;
-    height: 34px;
-    border: red;
-    background-size: 25px;
-    background-position: 3px;
-    background-repeat: no-repeat;
-    cursor: pointer;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
+.footer-item {
+    width: 50px;
+    height: 50px;
     border-radius: 100px;
-    display: inline-block;
-    text-align: center;
-    letter-spacing: .01em;
-    margin: 0 0 10px -10px;
+    border: red;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-.footer__item--twitter {
-    background-image: url(../social/twitter.svg);
-    background-size: 34px;
-    background-position-x: 34px;
+.footer-item:hover {
+    background-color: rgba(137, 150, 155, 0.15);
 }
 
+.footer-item img {
+    width: 30px;
+}
 
 .copy_area .socials {
     flex: 1;

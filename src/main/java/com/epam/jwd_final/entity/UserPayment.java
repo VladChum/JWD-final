@@ -1,15 +1,16 @@
 package com.epam.jwd_final.entity;
 
 import java.util.Date;
+import java.util.Objects;
 
 public class UserPayment extends AbstractBaseEntity{
     private Date date;
     private float amount;
-    private User userId;
+    private Long userId;
     private PaymentType paymentType;
 
-    public UserPayment(Date date, float amount, User userId, PaymentType paymentType) {
-        super();
+    public UserPayment(Long id, Date date, float amount, Long userId, PaymentType paymentType) {
+        super(id);
         this.date = date;
         this.amount = amount;
         this.userId = userId;
@@ -32,11 +33,11 @@ public class UserPayment extends AbstractBaseEntity{
         this.amount = amount;
     }
 
-    public User getUserId() {
+    public Long getUserId() {
         return userId;
     }
 
-    public void setUserId(User userId) {
+    public void setUserId(Long userId) {
         this.userId = userId;
     }
 
@@ -46,5 +47,32 @@ public class UserPayment extends AbstractBaseEntity{
 
     public void setPaymentType(PaymentType paymentType) {
         this.paymentType = paymentType;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(date, amount, userId, paymentType);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+
+        UserPayment userPayment = (UserPayment) obj;
+        return Objects.equals(date, userPayment.date)
+                && Objects.equals(amount, userPayment.amount)
+                && Objects.equals(userId, userPayment.userId)
+                && Objects.equals(paymentType, userPayment.paymentType);
+    }
+
+    @Override
+    public String toString() {
+        return "UserPayment{" +
+                "date=" + date +
+                ", amount=" + amount +
+                ", userId=" + userId +
+                ", paymentType=" + paymentType +
+                '}';
     }
 }
