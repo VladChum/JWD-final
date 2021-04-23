@@ -24,6 +24,17 @@ public class User extends AbstractBaseEntity {
         this.balance = balance;
     }
 
+    public User(Long accountId, String firstName, String lastName,
+                String phone, String email, Status status) {
+        super(0L);
+        this.accountId = accountId;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.phone = phone;
+        this.email = email;
+        this.status = status;
+    }
+
     public Long getAccountId() {
         return accountId;
     }

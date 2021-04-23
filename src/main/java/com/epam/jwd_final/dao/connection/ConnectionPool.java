@@ -46,6 +46,7 @@ public enum ConnectionPool {
             LOGGER.log(Level.FATAL, "ConnectionPool was not initialized", e);
             throw new RuntimeException("ConnectionPool was not initialized", e);
         }
+//        LOGGER.log(Level.DEBUG, "connection init");
     }
 
     public Connection getConnection() {
@@ -56,6 +57,7 @@ public enum ConnectionPool {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+        LOGGER.log(Level.DEBUG, "get Connection");
         return connection;
     }
 
@@ -67,7 +69,7 @@ public enum ConnectionPool {
             LOGGER.log(Level.FATAL, "Connection is not a ProxyConnection");
             throw new ConnectionPoolException("Attempt to close connection not from connection pool");
         }
-        LOGGER.log(Level.INFO, "Connection release");
+        LOGGER.log(Level.DEBUG, "Connection release");
     }
 
     public void destroyPool() throws ConnectionPoolException {
