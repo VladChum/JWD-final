@@ -16,20 +16,6 @@ import java.util.List;
 
 public class Main {
     public static void main(String[] args) throws DaoException, ConnectionPoolException {
-//
-//        try  {
-//            Connection connection = ConnectionPool.INSTANCE.getConnection();
-//            Statement statement = connection.createStatement();
-//            ResultSet resultSet = statement.executeQuery("SELECT * FROM account");
-//            while (resultSet.next()) {
-//                System.out.println(resultSet.getLong(1) + " " + resultSet.getString(2) + " " + resultSet.getString(3));
-//            }
-//            ConnectionPool.INSTANCE.releaseConnection(connection);
-//            ConnectionPool.INSTANCE.destroyPool();
-//        } catch (SQLException | ConnectionPoolException throwables) {
-//            throwables.printStackTrace();
-//        }
-
         List<Account> accounts = new ArrayList<>(DaoProvider.INSTANCE.getAccountDao().getAllAccount());
         for (int i = 0; i < accounts.size(); i++) {
             System.out.println(accounts.get(i));
@@ -39,7 +25,12 @@ public class Main {
             System.out.println(user.get(i));
         }
         System.out.println(DaoProvider.INSTANCE.getUserDao().findUserById(1).toString());
-        User user1 = new User(2L, "qwe", "qwe", "+37523131231212", "qweqweqeq", Status.ACTIVATE);
-        DaoProvider.INSTANCE.getUserDao().createUser(user1);
+//
+//        User user1 = new User(3L, "qwewwwwee", "qwe", "+37523131212", "qweqqweqeq", Status.ACTIVATE);
+//        DaoProvider.INSTANCE.getUserDao().createUser(user1);
+//        DaoProvider.INSTANCE.getUserDao().deleteUser(user.get(2));
+        DaoProvider.INSTANCE.getAdminDao().createAdmin(7L);
+//        System.out.println(DaoProvider.INSTANCE.getAdminDao().findAdminById(1).toString());
+//        DaoProvider.INSTANCE.getAdminDao().deleteAdmin(DaoProvider.INSTANCE.getAdminDao().findAdminById(2).get());
     }
 }
