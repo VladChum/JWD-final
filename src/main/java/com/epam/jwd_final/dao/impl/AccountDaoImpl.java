@@ -15,9 +15,6 @@ import java.util.List;
 import java.util.Optional;
 
 public class AccountDaoImpl implements AccountDao {
-    private final Connection transactionConnection;
-    private final boolean isConnection;
-
     private static final String FIND_ACCOUNT_BY_ID = "select a.id, a.login, a.password from account a where id = ?";
     private static final String GET_ALL_ACCOUNT = "select a.id, a.login, a.password from account a";
 
@@ -26,25 +23,13 @@ public class AccountDaoImpl implements AccountDao {
     private static final String DELETE_ACCOUNT = "delete from account where id = ?";
 
     AccountDaoImpl() {
-        this.transactionConnection = null;
-        this.isConnection = false;
-    }
-
-    public AccountDaoImpl(Connection transactionConnection) {
-        this.transactionConnection = transactionConnection;
-        this.isConnection = true;
-    }
-
-    public Connection getConnection() {
-        return isConnection ? transactionConnection : ConnectionPool.INSTANCE.getConnection();
     }
 
     @Override
     public List<Account> getAllAccount() throws DaoException, ConnectionPoolException {
-        Connection connection = getConnection();
         List<Account> accounts = new ArrayList<Account>();
 
-        try (Connection connectionResource = isConnection ? null : connection;
+        try (Connection connection = ConnectionPool.INSTANCE.getConnection();
              PreparedStatement prepareStatement = connection.prepareStatement(GET_ALL_ACCOUNT)) {
             try (ResultSet resultSet = prepareStatement.executeQuery()) {
                 while (resultSet.next()) {
@@ -60,9 +45,7 @@ public class AccountDaoImpl implements AccountDao {
 
     @Override
     public Optional<Account> findAccountById(int accountId) throws DaoException {
-        Connection connection = getConnection();
-
-        try (Connection connectionResource = isConnection ? null : connection;
+        try (Connection connection = ConnectionPool.INSTANCE.getConnection();
              PreparedStatement prepareStatement = connection.prepareStatement(FIND_ACCOUNT_BY_ID)) {
 
             prepareStatement.setInt(1, accountId);
@@ -85,9 +68,7 @@ public class AccountDaoImpl implements AccountDao {
     * */
     @Override
     public void createAccount(String login, String password) {
-        Connection connection = getConnection();
-
-        try (Connection connectionResource = isConnection ? null : connection;
+        try (Connection connection = ConnectionPool.INSTANCE.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(CREATE_ACCOUNT)) {
             preparedStatement.setString(1, login);
             preparedStatement.setString(2, password);
@@ -99,9 +80,7 @@ public class AccountDaoImpl implements AccountDao {
 
     @Override
     public void updateAccount(Account account) {
-        Connection connection = getConnection();
-
-        try (Connection connectionResource = isConnection ? null : connection;
+        try (Connection connection = ConnectionPool.INSTANCE.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_ACCOUNT)) {
             preparedStatement.setString(1, account.getPassword());
             preparedStatement.setString(2, account.getLogin());
@@ -113,9 +92,7 @@ public class AccountDaoImpl implements AccountDao {
 
     @Override
     public void deleteAccount(Account account) {
-        Connection connection = getConnection();
-
-        try (Connection connectionResource = isConnection ? null : connection;
+        try (Connection connection = ConnectionPool.INSTANCE.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(DELETE_ACCOUNT)) {
             preparedStatement.setLong(1, account.getId());
             preparedStatement.executeUpdate();

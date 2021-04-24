@@ -16,7 +16,7 @@ import java.util.List;
 
 public class Main {
     public static void main(String[] args) throws DaoException, ConnectionPoolException {
-//
+
 //        try  {
 //            Connection connection = ConnectionPool.INSTANCE.getConnection();
 //            Statement statement = connection.createStatement();
@@ -30,16 +30,16 @@ public class Main {
 //            throwables.printStackTrace();
 //        }
 
-        List<Account> accounts = new ArrayList<>(DaoProvider.INSTANCE.getAccountDao().getAllAccount());
-        for (int i = 0; i < accounts.size(); i++) {
-            System.out.println(accounts.get(i));
-        }
-        List<User> user = new ArrayList<>(DaoProvider.INSTANCE.getUserDao().getAllUser());
-        for (int i = 0; i < user.size(); i++) {
-            System.out.println(user.get(i));
-        }
+//        List<Account> accounts = new ArrayList<>(DaoProvider.INSTANCE.getAccountDao().getAllAccount());
+//        for (int i = 0; i < accounts.size(); i++) {
+//            System.out.println(accounts.get(i));
+//        }
+//        List<User> user = new ArrayList<>(DaoProvider.INSTANCE.getUserDao().getAllUser());
+//        for (int i = 0; i < user.size(); i++) {
+//            System.out.println(user.get(i));
+//        }
         System.out.println(DaoProvider.INSTANCE.getUserDao().findUserById(1).toString());
-        User user1 = new User(2L, "qwe", "qwe", "+37523131231212", "qweqweqeq", Status.ACTIVATE);
-        DaoProvider.INSTANCE.getUserDao().createUser(user1);
+//        User user1 = new User(2L, "qwe", "qwe", "+37523131231212", "qweqweqeq", Status.ACTIVATE);
+//        DaoProvider.INSTANCE.getUserDao().createUser(user1);
     }
 }
