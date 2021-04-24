@@ -4,7 +4,6 @@ import com.epam.jwd_final.dao.UserDao;
 import com.epam.jwd_final.dao.connection.ConnectionPool;
 import com.epam.jwd_final.entity.Status;
 import com.epam.jwd_final.entity.User;
-import com.epam.jwd_final.exception.ConnectionPoolException;
 import com.epam.jwd_final.exception.DaoException;
 
 import java.sql.Connection;
@@ -16,21 +15,29 @@ import java.util.List;
 import java.util.Optional;
 
 public class UserDaoImpl implements UserDao {
-    private static final String FIND_USER_BY_ID = "select u.id, u.account_id, u.first_name, u.last_name, u.phone, u.email, " +
+    private static final String FIND_USER_BY_ID = "select u.id, u.account_id, " +
+            "u.first_name, u.last_name, " +
+            "u.phone, u.email, " +
             "u.balance, u.status_id_fk " +
             "from user u " +
             "inner join account a on a.id = u.account_id " +
             "inner join user_status s on  s.id = u.status_id_fk " +
             "where u.id = ?";
-    private static final String GET_ALL_USER = "select u.id, u.account_id, u.first_name, u.last_name, u.phone, u.email, " +
+    private static final String GET_ALL_USER = "select u.id, u.account_id, " +
+            "u.first_name, u.last_name, " +
+            "u.phone, u.email, " +
             "u.balance, u.status_id_fk " +
             "from user u " +
             "inner join account a on a.id = u.account_id " +
             "inner join user_status s on  s.id = u.status_id_fk";
-
-    private static final String CREATE_USER = "insert into user (account_id, first_name, last_name, phone, email, status_id_fk) VALUES (?, ?, ?, ?, ?, ?)";
-    private static final String UPDATE_USER = "update account set password = ? where login = ?";
-    private static final String DELETE_USER = "delete from account where id = ?";
+    private static final String CREATE_USER = "insert into user " +
+            "(account_id, first_name, last_name, phone, email, status_id_fk) " +
+            "VALUES (?, ?, ?, ?, ?, ?)";
+    /***TODO
+     * update user status
+     * */
+    private static final String UPDATE_USER = "update user set  where login = ?";
+    private static final String DELETE_USER = "delete from user where id = ?";
 
     UserDaoImpl() {
     }
@@ -38,7 +45,7 @@ public class UserDaoImpl implements UserDao {
 
 
     @Override
-    public List<User> getAllUser() throws DaoException, ConnectionPoolException {
+    public List<User> getAllUser() throws DaoException {
         List<User> users = new ArrayList<User>();
 
         try (Connection connection = ConnectionPool.INSTANCE.getConnection();
@@ -104,11 +111,17 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public void updateUser(User user) {
-
     }
 
     @Override
     public void deleteUser(User user) {
+        try (Connection connection = ConnectionPool.INSTANCE.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(DELETE_USER)) {
+            preparedStatement.setLong(1, user.getId());
+            preparedStatement.executeUpdate();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
 
     }
 

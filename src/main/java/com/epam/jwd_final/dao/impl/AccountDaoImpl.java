@@ -3,7 +3,6 @@ package com.epam.jwd_final.dao.impl;
 import com.epam.jwd_final.dao.AccountDao;
 import com.epam.jwd_final.dao.connection.ConnectionPool;
 import com.epam.jwd_final.entity.Account;
-import com.epam.jwd_final.exception.ConnectionPoolException;
 import com.epam.jwd_final.exception.DaoException;
 
 import java.sql.Connection;
@@ -26,7 +25,7 @@ public class AccountDaoImpl implements AccountDao {
     }
 
     @Override
-    public List<Account> getAllAccount() throws DaoException, ConnectionPoolException {
+    public List<Account> getAllAccount() throws DaoException {
         List<Account> accounts = new ArrayList<Account>();
 
         try (Connection connection = ConnectionPool.INSTANCE.getConnection();

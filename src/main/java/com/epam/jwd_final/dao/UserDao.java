@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Optional;
 
 public interface UserDao {
-    List<User> getAllUser() throws DaoException, ConnectionPoolException;
+    List<User> getAllUser() throws DaoException;
     Optional<User> findUserById(int userId) throws DaoException;
     /**todo
      *
