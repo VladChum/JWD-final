@@ -2,7 +2,6 @@ package com.epam.jwd_final.dao.impl;
 
 import com.epam.jwd_final.dao.AdminDao;
 import com.epam.jwd_final.dao.connection.ConnectionPool;
-import com.epam.jwd_final.entity.Account;
 import com.epam.jwd_final.entity.Admin;
 import com.epam.jwd_final.exception.DaoException;
 
