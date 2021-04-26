@@ -1,18 +1,26 @@
 package com.epam.jwd_final.entity;
 
+import java.math.BigDecimal;
 import java.util.Objects;
 
 public class TariffPlan extends AbstractBaseEntity {
     private String name;
-    private float price;
+    private BigDecimal price;
     private Long discountId;
     private int speed;
 
-    public TariffPlan(Long id, String name, float price, Long discountId, int speed) {
+    public TariffPlan(Long id, String name, BigDecimal price, Long discountId, int speed) {
         super(id);
         this.name = name;
         this.price = price;
         this.discountId = discountId;
+        this.speed = speed;
+    }
+
+    public TariffPlan(Long id, String name, BigDecimal price, int speed) {
+        super(id);
+        this.name = name;
+        this.price = price;
         this.speed = speed;
     }
 
@@ -24,11 +32,11 @@ public class TariffPlan extends AbstractBaseEntity {
         this.name = name;
     }
 
-    public float getPrice() {
+    public BigDecimal getPrice() {
         return price;
     }
 
-    public void setPrice(float price) {
+    public void setPrice(BigDecimal price) {
         this.price = price;
     }
 

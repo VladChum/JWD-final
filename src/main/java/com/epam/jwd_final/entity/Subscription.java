@@ -9,7 +9,7 @@ public class Subscription extends AbstractBaseEntity {
     private Date endDate;
     private Long tariffPlanId;
 
-    public Subscription(Long id, Long userId, Date startDate, Date endDate, Long tariffPlanId) {
+    public Subscription(Long id,  Date startDate, Date endDate, Long userId, Long tariffPlanId) {
         super(id);
         this.userId = userId;
         this.startDate = startDate;

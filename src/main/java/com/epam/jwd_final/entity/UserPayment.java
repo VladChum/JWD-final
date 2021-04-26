@@ -1,15 +1,16 @@
 package com.epam.jwd_final.entity;
 
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.Objects;
 
 public class UserPayment extends AbstractBaseEntity{
     private Date date;
-    private float amount;
+    private BigDecimal amount;
     private Long userId;
     private PaymentType paymentType;
 
-    public UserPayment(Long id, Date date, float amount, Long userId, PaymentType paymentType) {
+    public UserPayment(Long id, Date date, BigDecimal amount, Long userId, PaymentType paymentType) {
         super(id);
         this.date = date;
         this.amount = amount;
@@ -25,11 +26,11 @@ public class UserPayment extends AbstractBaseEntity{
         this.date = date;
     }
 
-    public float getAmount() {
+    public BigDecimal getAmount() {
         return amount;
     }
 
-    public void setAmount(float amount) {
+    public void setAmount(BigDecimal amount) {
         this.amount = amount;
     }
 
