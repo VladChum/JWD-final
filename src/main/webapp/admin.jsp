@@ -1,3 +1,11 @@
+<%--
+  Created by IntelliJ IDEA.
+  User: vlad
+  Date: 1.05.21
+  Time: 22:15
+  To change this template use File | Settings | File Templates.
+--%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -20,9 +28,9 @@
                     <img alt="logo" src="resources/logo2.png">
                 </div>
                 <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-                    <li><a href="#" class="nav-link px-2 text-white me-3">Home</a></li>
-                    <li><a href="#" class="nav-link px-2 text-white me-3">Tariff</a></li>
-                    <li><a href="#" class="nav-link px-2 text-white me-3">About</a></li>
+                    <li><a href="Controller?command=HOME_PAGE" class="nav-link px-2 text-white me-3">Home</a></li>
+                    <li><a href="Controller?command=TARIFF_PAGE" class="nav-link px-2 text-white me-3">Tariff</a></li>
+                    <li><a href="Controller?command=ABOUT_PAGE" class="nav-link px-2 text-white me-3">About</a></li>
                 </ul>
                 <div class="dropdown">
                     <button class="btn btn-outline-light dropdown-toggle me-3" type="button" id="languageMenu"
