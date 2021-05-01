@@ -4,15 +4,15 @@ import com.epam.jwd_final.controller.command.Command;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 
 public class TariffPage implements Command {
     public TariffPage() {
-        System.out.println("tariff page");
     }
 
     @Override
-    public void execute(HttpServletRequest req, HttpServletResponse resp) {
-        System.out.println("TARIFF page");
+    public void execute(HttpServletRequest req, HttpServletResponse resp) throws IOException {
 
+        resp.sendRedirect("/tariff.jsp");
     }
 }

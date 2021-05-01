@@ -1,5 +1,6 @@
 package com.epam.jwd_final.controller.command;
 
+import com.epam.jwd_final.controller.command.impl.AboutCompanyPage;
 import com.epam.jwd_final.controller.command.impl.HomePage;
 import com.epam.jwd_final.controller.command.impl.TariffPage;
 import org.apache.log4j.Level;
@@ -17,6 +18,7 @@ public enum ProviderCommand {
     ProviderCommand() {
         commands.put("HOME_PAGE", new HomePage());
         commands.put("TARIFF_PAGE", new TariffPage());
+        commands.put("ABOUT_PAGE", new AboutCompanyPage());
     }
 
     public Command getCommand(String commandName) {

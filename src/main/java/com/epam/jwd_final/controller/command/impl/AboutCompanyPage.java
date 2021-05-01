@@ -6,14 +6,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-public class HomePage implements Command {
+public class AboutCompanyPage implements Command {
 
-    public HomePage() {
+    public AboutCompanyPage() {
     }
 
     @Override
     public void execute(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-        System.out.println("HOME Page");
-        resp.sendRedirect("/home.jsp");
+        resp.sendRedirect("/aboutCompany.jsp");
     }
 }
