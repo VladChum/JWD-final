@@ -17,7 +17,7 @@
           integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
     <link rel="stylesheet" href="resources/css/style.css">
 
-    <title>home</title>
+    <title>Home</title>
 </head>
 <body class="d-flex flex-column min-vh-100">
 <div class="intro">
@@ -28,9 +28,9 @@
                     <img alt="logo" src="resources/logo2.png">
                 </div>
                 <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-                    <li><a href="#" class="nav-link px-2 text-white me-3">Home</a></li>
-                    <li><a href="#" class="nav-link px-2 text-white me-3">Tariff</a></li>
-                    <li><a href="#" class="nav-link px-2 text-white me-3">About</a></li>
+                    <li><a href="Controller?command=HOME_PAGE" class="nav-link px-2 text-white me-3">Home</a></li>
+                    <li><a href="Controller?command=TARIFF_PAGE" class="nav-link px-2 text-white me-3">Tariff</a></li>
+                    <li><a href="Controller?command=ABOUT_PAGE" class="nav-link px-2 text-white me-3">About</a></li>
                 </ul>
                 <div class="dropdown">
                     <button class="btn btn-outline-light dropdown-toggle me-3" type="button" id="languageMenu"
