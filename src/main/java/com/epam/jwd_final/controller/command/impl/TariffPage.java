@@ -7,12 +7,14 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 public class TariffPage implements Command {
+
+    private final String TARIFF_PAGE = "/tariff.jsp";
     public TariffPage() {
     }
 
     @Override
     public void execute(HttpServletRequest req, HttpServletResponse resp) throws IOException {
 
-        resp.sendRedirect("/tariff.jsp");
+        resp.sendRedirect(TARIFF_PAGE);
     }
 }

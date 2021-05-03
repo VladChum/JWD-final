@@ -8,12 +8,13 @@ import java.io.IOException;
 
 public class HomePage implements Command {
 
+    private final String HOME_PAGE = "/home.jsp";
     public HomePage() {
     }
 
     @Override
     public void execute(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-        System.out.println("HOME Page");
-        resp.sendRedirect("/home.jsp");
+
+        resp.sendRedirect(HOME_PAGE);
     }
 }

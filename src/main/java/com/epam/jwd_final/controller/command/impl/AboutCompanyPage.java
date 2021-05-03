@@ -8,11 +8,13 @@ import java.io.IOException;
 
 public class AboutCompanyPage implements Command {
 
+    private final String ABOUT_COMPANY_PAGE = "/aboutCompany.jsp";
+
     public AboutCompanyPage() {
     }
 
     @Override
     public void execute(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-        resp.sendRedirect("/aboutCompany.jsp");
+        resp.sendRedirect(ABOUT_COMPANY_PAGE);
     }
 }
