@@ -389,3 +389,34 @@ primary {
     background-size: 25px;
     background-position-x: 35px;
 }
+
+.form-signin {
+    width: 100%;
+    max-width: 330px;
+    padding: 15px;
+    margin: auto;
+}
+
+.button-sign-in {
+    background-color: #0d6efd !important;
+    color: white;
+    border: 1px solid #0d6efd !important;
+    border-radius: 100px;
+    padding: .7em 1.2em;
+    display: inline-block;
+    font-weight: 500;
+    font-size: 15px;
+    text-align: center;
+    letter-spacing: .01em;
+    text-decoration: none;
+    margin: 0 0 0 -10px;
+}
+
+.position-signIn {
+    margin: 100px 0  100px 1100px
+}
+
+.login-color {
+    background: linear-gradient(rgba(48, 89, 154, 0.75), rgba(84, 0, 156, 0.82));
+    height: 720px;
+}
