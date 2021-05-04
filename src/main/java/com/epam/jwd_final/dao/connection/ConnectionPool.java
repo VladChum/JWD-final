@@ -7,7 +7,8 @@ import org.apache.log4j.Logger;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.util.*;
+import java.util.ArrayDeque;
+import java.util.Queue;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingDeque;
 
@@ -46,7 +47,6 @@ public enum ConnectionPool {
             LOGGER.log(Level.FATAL, "ConnectionPool was not initialized", e);
             throw new RuntimeException("ConnectionPool was not initialized", e);
         }
-//        LOGGER.log(Level.DEBUG, "connection init");
     }
 
     public Connection getConnection() {

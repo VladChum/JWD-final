@@ -1,6 +1,11 @@
 package com.epam.jwd_final.dao.impl;
 
-import com.epam.jwd_final.dao.*;
+
+import com.epam.jwd_final.dao.AccountDao;
+import com.epam.jwd_final.dao.AdminDao;
+import com.epam.jwd_final.dao.TariffPlanDao;
+import com.epam.jwd_final.dao.UserDao;
+import com.epam.jwd_final.dao.SubscriptionDao;
 
 public enum DaoProvider {
     INSTANCE;
