@@ -12,7 +12,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <link rel="stylesheet" href="resources/css/style.css">
+    <link rel="stylesheet" href="../../resources/css/style.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css"
     rel="stylesheet"
     integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
@@ -24,7 +24,7 @@
         <div class="container">
             <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
                 <div class="header-logo">
-                    <img alt="logo" src="resources/logo2.png">
+                    <img alt="logo" src="../../resources/logo2.png">
                 </div>
                 <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
                     <li><a href="Controller?command=HOME_PAGE" class="nav-link px-2 text-white me-3">Home</a></li>
@@ -53,24 +53,21 @@
             <div class="col-sm-7">
                 <div class="card">
                     <main class="form-signin">
-                        <form>
+                        <form method="post" action="/Controller?command=SIGN_IN">
                             <h1 class="h3 mb-3 fw-normal ">Sign in</h1>
-
                             <div class="form-floating">
-                                <input type="login" class="form-control" id="floatingInput"
-                                       placeholder="name@example.com">
+                                <input type="login" name="login" class="form-control" id="floatingInput"
+                                           placeholder="name@example.com">
                                 <label for="floatingInput">Login</label>
                             </div>
                             <br>
                             <div class="form-floating">
-                                <input type="password" class="form-control" id="floatingPassword"
+                                <input type="password" name="password" class="form-control" id="floatingPassword"
                                        placeholder="Password">
                                 <label for="floatingPassword">Password</label>
                             </div>
                             <br>
-
                             <button class="w-100 btn btn-lg btn-primary" type="submit">Sign in</button>
-                            <p class="mt-5 mb-3 text-muted">© 2017–2021</p>
                         </form>
                     </main>
                 </div>

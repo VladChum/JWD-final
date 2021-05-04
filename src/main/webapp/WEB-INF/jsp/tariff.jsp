@@ -14,7 +14,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css"
           rel="stylesheet"
           integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
-    <link rel="stylesheet" href="resources/css/style.css">
+    <link rel="stylesheet" href="../../resources/css/style.css">
 
     <title>Tariff</title>
 </head>
@@ -24,7 +24,7 @@
         <div class="container">
             <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
                 <div class="header-logo">
-                    <img alt="logo" src="resources/logo2.png">
+                    <img alt="logo" src="../../resources/logo2.png">
                 </div>
                 <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
                     <li><a href="Controller?command=HOME_PAGE" class="nav-link px-2 text-white me-3">Home</a></li>
@@ -231,19 +231,19 @@
         <section class="d-flex justify-content-center footer-items mb-4">
             <!-- Facebook -->
             <a class="m-1 footer-item" href="#" role="button">
-                <img class="mx-auto" alt="footer-facebook" src="resources/social/facebook.svg">
+                <img class="mx-auto" alt="footer-facebook" src="../../resources/social/facebook.svg">
             </a>
             <!-- Twitter -->
             <a class="m-1 footer-item" href="#" role="button" 0>
-                <img alt="footer-twitter" src="resources/social/twitter.svg">
+                <img alt="footer-twitter" src="../../resources/social/twitter.svg">
             </a>
             <!-- Google -->
             <a class="m-1 footer-item" href="#" role="button">
-                <img alt="footer-google" src="resources/social/google.svg">
+                <img alt="footer-google" src="../../resources/social/google.svg">
             </a>
             <!-- Instagram -->
             <a class="m-1 footer-item" href="#" role="button">
-                <img alt="footer-google" src="resources/social/instagram.svg">
+                <img alt="footer-google" src="../../resources/social/instagram.svg">
             </a>
         </section>
     </div>

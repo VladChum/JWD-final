@@ -322,31 +322,31 @@ primary {
 .tarrifs-filter__item--wallet {
     background-image: url(../user/icon-wallet.svg);
     background-size: 25px;
-    background-position-x: 35px;
+    /*background-position-x: 35px;*/
 }
 
 .tarrifs-filter__item--help {
     background-image: url(../user/lifesaver.svg);
     background-size: 25px;
-    background-position-x: 35px;
+    /*background-position-x: 35px;*/
 }
 
 .tarrifs-filter__item--sails {
     background-image: url(../user/sail.svg);
     background-size: 25px;
-    background-position-x: 35px;
+    /*background-position-x: 35px;*/
 }
 
 .tarrifs-filter__item--sating {
     background-image: url(../user/sating.svg);
     background-size: 25px;
-    background-position-x: 35px;
+    /*background-position-x: 35px;*/
 }
 
 .tarrifs-filter__item--user {
     background-image: url(../user/user.svg);
     background-size: 25px;
-    background-position-x: 35px;
+    /*background-position-x: 35px;*/
 }
 
 
