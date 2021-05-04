@@ -3,7 +3,6 @@ package com.epam.jwd_final.dao.impl;
 import com.epam.jwd_final.dao.SubscriptionDao;
 import com.epam.jwd_final.dao.connection.ConnectionPool;
 import com.epam.jwd_final.entity.Subscription;
-import com.epam.jwd_final.entity.TariffPlan;
 import com.epam.jwd_final.exception.DaoException;
 
 import java.sql.Connection;
