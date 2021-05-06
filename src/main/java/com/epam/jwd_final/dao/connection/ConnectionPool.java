@@ -19,6 +19,7 @@ public enum ConnectionPool {
     private final String URL;
     private final String USER;
     private final String PASSWORD;
+    private final String DRIVER;
     private final int CONNECTION_POOL_SIZE;
 
     private BlockingQueue<ConnectionProxy> freeConnections;
@@ -26,24 +27,27 @@ public enum ConnectionPool {
 
     ConnectionPool() {
         DBResourceManager dbResourceManager = DBResourceManager.getInstance();
-
         this.URL = dbResourceManager.getValue(DBParameter.DB_URL);
         this.USER = dbResourceManager.getValue(DBParameter.DB_USER);
         this.PASSWORD = dbResourceManager.getValue(DBParameter.DB_PASSWORD);
         this.CONNECTION_POOL_SIZE = Integer.parseInt(dbResourceManager.getValue(DBParameter.DB_CONNECTION_POOL_SIZE));
+        this.DRIVER = dbResourceManager.getValue(DBParameter.DB_DRIVER);
+
         init();
         givenAwayConnections = new ArrayDeque<>();
     }
 
     private void init() {
+
         freeConnections = new LinkedBlockingDeque<>(CONNECTION_POOL_SIZE);
         Connection connection;
         try {
+            Class.forName(DRIVER);
             for (int i = 0; i < CONNECTION_POOL_SIZE; i++) {
                 connection = DriverManager.getConnection(URL, USER, PASSWORD);
                 freeConnections.add(new ConnectionProxy(connection));
             }
-        } catch (SQLException e) {
+        } catch (SQLException | ClassNotFoundException e) {
             LOGGER.log(Level.FATAL, "ConnectionPool was not initialized", e);
             throw new RuntimeException("ConnectionPool was not initialized", e);
         }
@@ -55,6 +59,7 @@ public enum ConnectionPool {
             connection = freeConnections.take();
             givenAwayConnections.offer(connection);
         } catch (InterruptedException e) {
+            LOGGER.log(Level.ERROR, e.getMessage() + " " + e);
             e.printStackTrace();
         }
         LOGGER.log(Level.DEBUG, "get Connection");

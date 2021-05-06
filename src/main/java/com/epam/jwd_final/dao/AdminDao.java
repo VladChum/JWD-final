@@ -8,6 +8,7 @@ import java.util.Optional;
 
 public interface AdminDao {
     Optional<Admin> findAdminById(int adminId) throws DaoException;
+    Optional<Admin> findAdminByAccountId(int accountId) throws DaoException;
     /**todo
      *
      * add create

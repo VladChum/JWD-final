@@ -9,6 +9,7 @@ import java.util.Optional;
 public interface AccountDao {
     List<Account> getAllAccount() throws DaoException;
     Optional<Account> findAccountById(int accountId) throws DaoException;
+    Optional<Account> findAccountByLoginAndPassword(String accountLogin, String accountPassword) throws DaoException;
     /**todo
      *
      * add create

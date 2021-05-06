@@ -16,6 +16,8 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css"
     rel="stylesheet"
     integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
+
+
     <title>login</title>
 </head>
 <body class="d-flex flex-column min-vh-100">
@@ -53,12 +55,12 @@
             <div class="col-sm-7">
                 <div class="card">
                     <main class="form-signin">
-                        <form method="post" action="/Controller?command=SIGN_IN">
+                        <form id="loginPage" method="post" action="/Controller?command=SIGN_IN">
                             <h1 class="h3 mb-3 fw-normal ">Sign in</h1>
                             <div class="form-floating">
-                                <input type="login" name="login" class="form-control" id="floatingInput"
+                                <input type="login" name="login" class="form-control" id="login"
                                            placeholder="name@example.com">
-                                <label for="floatingInput">Login</label>
+                                <label for="login">Login</label>
                             </div>
                             <br>
                             <div class="form-floating">
@@ -67,6 +69,7 @@
                                 <label for="floatingPassword">Password</label>
                             </div>
                             <br>
+                            <span id="msg"></span>
                             <button class="w-100 btn btn-lg btn-primary" type="submit">Sign in</button>
                         </form>
                     </main>
@@ -104,5 +107,7 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
         crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+<script src="../../resources/js/script.js"></script>
 </body>
 </html>
