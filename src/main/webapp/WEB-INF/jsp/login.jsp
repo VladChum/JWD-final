@@ -55,10 +55,10 @@
             <div class="col-sm-7">
                 <div class="card">
                     <main class="form-signin">
-                        <form method="post" action="/Controller?command=SIGN_IN">
+                        <form id="loginPage" method="post" action="/Controller?command=SIGN_IN">
                             <h1 class="h3 mb-3 fw-normal ">Sign in</h1>
                             <div class="form-floating">
-                                <input id="login" type="login" name="login" class="form-control" id="login"
+                                <input type="login" name="login" class="form-control" id="login"
                                            placeholder="name@example.com">
                                 <label for="login">Login</label>
                             </div>

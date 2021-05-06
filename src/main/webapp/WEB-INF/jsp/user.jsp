@@ -1,4 +1,5 @@
-<%--
+<%@ page import="com.epam.jwd_final.service.ServiceProvider" %>
+<%@ page import="com.epam.jwd_final.entity.Account" %><%--
   Created by IntelliJ IDEA.
   User: vlad
   Date: 1.05.21
@@ -110,7 +111,21 @@
                     <div class="tariff-item">
                         <div class="tariff-item__top">
                             <div class="tariff-item__title">
-                                <h5 class="card-title">Абонент : Чумачёв Владислав Константинович</h5>
+                                <h5 class="card-title">Абонент :
+
+                                    <% Account account = (Account) session.getAttribute("account"); %>
+                                        ${ServiceProvider.INSTANCE.getUserService()
+                                                .findUserByAccountId(account.getId())
+                                                .get()
+                                                .getFirstName()}
+
+                                        ${ServiceProvider.INSTANCE
+                                                .getUserService()
+                                                .findUserByAccountId(account.getId())
+                                                .get()
+                                                .getLastName()}
+
+                                </h5>
                             </div>
                             <div class="tariff-item__title">
                                 <h5 class="card-title">Логин : 1561001453502</h5>
