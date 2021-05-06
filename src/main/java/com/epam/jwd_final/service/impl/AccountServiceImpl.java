@@ -17,12 +17,11 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
-    public Optional<Account> findAccountByLogin(String login, String password) throws ServiceException {
+    public Optional<Account> findAccountByLoginAndPassword(String login, String password) throws ServiceException {
         try {
-            return accountDao.findAccountByLogin(login, password);
+            return accountDao.findAccountByLoginAndPassword(login, password);
         } catch (DaoException e) {
             throw new ServiceException(e);
         }
-
     }
 }
