@@ -2,7 +2,7 @@ package com.epam.jwd_final.exception;
 
 import java.sql.SQLException;
 
-public class DaoException extends Throwable {
+public class DaoException extends Exception {
     private static final long serialVersionUID = 1L;
 
     public DaoException() {
