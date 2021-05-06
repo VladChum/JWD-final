@@ -19,7 +19,7 @@ public class AccountDaoImpl implements AccountDao {
     private static final String CREATE_ACCOUNT = "insert into account (login, password) VALUES (?, ?)";
     private static final String UPDATE_ACCOUNT = "update account set password = ? where login = ?";
     private static final String DELETE_ACCOUNT = "delete from account where id = ?";
-    private static final String FIND_ACCOUNT_BY_LOGIN
+    private static final String FIND_ACCOUNT_BY_LOGIN_AND_PASSWORD
             = "select a.id, a.login, a.password from account a where a.login = ? and a.password = ?";
 
     AccountDaoImpl() {
@@ -63,9 +63,9 @@ public class AccountDaoImpl implements AccountDao {
     }
 
     @Override
-    public Optional<Account> findAccountByLogin(String accountLogin, String accountPassword) throws DaoException {
+    public Optional<Account> findAccountByLoginAndPassword(String accountLogin, String accountPassword) throws DaoException {
         try (Connection connection = ConnectionPool.INSTANCE.getConnection();
-             PreparedStatement prepareStatement = connection.prepareStatement(FIND_ACCOUNT_BY_LOGIN)) {
+             PreparedStatement prepareStatement = connection.prepareStatement(FIND_ACCOUNT_BY_LOGIN_AND_PASSWORD)) {
             prepareStatement.setString(1, accountLogin);
             prepareStatement.setString(2, accountPassword);
             try (ResultSet resultSet = prepareStatement.executeQuery()) {

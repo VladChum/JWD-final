@@ -23,6 +23,14 @@ public class UserDaoImpl implements UserDao {
             "inner join account a on a.id = u.account_id " +
             "inner join user_status s on  s.id = u.status_id_fk " +
             "where u.id = ?";
+    private static final String FIND_USER_BY_ACCOUNT_ID = "select u.id, u.account_id, " +
+            "u.first_name, u.last_name, " +
+            "u.phone, u.email, " +
+            "u.balance, u.status_id_fk " +
+            "from user u " +
+            "inner join account a on a.id = u.account_id " +
+            "inner join user_status s on  s.id = u.status_id_fk " +
+            "where u.account_id = ?";
     private static final String GET_ALL_USER = "select u.id, u.account_id, " +
             "u.first_name, u.last_name, " +
             "u.phone, u.email, " +
@@ -74,6 +82,29 @@ public class UserDaoImpl implements UserDao {
 
         try (Connection connection = ConnectionPool.INSTANCE.getConnection();
              PreparedStatement prepareStatement = connection.prepareStatement(FIND_USER_BY_ID)) {
+            prepareStatement.setInt(1, userId);
+            try (ResultSet resultSet = prepareStatement.executeQuery()) {
+                if (resultSet.next()) {
+                    return Optional.of(new User(resultSet.getLong("id")
+                            , resultSet.getLong(2)
+                            , resultSet.getString(3)
+                            , resultSet.getString(4)
+                            , resultSet.getString(5)
+                            , resultSet.getString(6)
+                            , Status.resolveStatusById(resultSet.getInt(8)),
+                            resultSet.getBigDecimal(7)));
+                }
+            }
+        } catch (SQLException e) {
+            throw new DaoException(e);
+        }
+        return Optional.empty();
+    }
+
+    @Override
+    public Optional<User> findUserByAccountId(int userId) throws DaoException {
+        try (Connection connection = ConnectionPool.INSTANCE.getConnection();
+             PreparedStatement prepareStatement = connection.prepareStatement(FIND_USER_BY_ACCOUNT_ID)) {
             prepareStatement.setInt(1, userId);
             try (ResultSet resultSet = prepareStatement.executeQuery()) {
                 if (resultSet.next()) {

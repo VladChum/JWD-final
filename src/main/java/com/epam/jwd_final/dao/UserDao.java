@@ -12,6 +12,7 @@ import java.util.Optional;
 public interface UserDao {
     List<User> getAllUser() throws DaoException;
     Optional<User> findUserById(int userId) throws DaoException;
+    Optional<User> findUserByAccountId(int userId) throws DaoException;
     /**todo
      *
      * add create

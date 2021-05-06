@@ -16,6 +16,10 @@ public class AdminDaoImpl implements AdminDao {
             "from admin a " +
             "inner join account on account.id = a.account_id " +
             "where a.id= ?";
+    private static final String FIND_ADMIN_BY_ACCOUNT_ID = "select a.id, a.account_id " +
+            "from admin a " +
+            "inner join account on account.id = a.account_id " +
+            "where a.account_id= ?";
     private static final String CREATE_ADMIN = "insert into admin (account_id) VALUES (?)";
     private static final String UPDATE_ACCOUNT = "update account set password = ? where login = ?";
     private static final String DELETE_ADMIN = "delete from admin where id = ?";
@@ -29,6 +33,24 @@ public class AdminDaoImpl implements AdminDao {
              PreparedStatement prepareStatement = connection.prepareStatement(FIND_ADMIN_BY_ID)) {
 
             prepareStatement.setInt(1, adminId);
+            try (ResultSet resultSet = prepareStatement.executeQuery()) {
+                if (resultSet.next()) {
+                    return Optional.of(new Admin(resultSet.getLong("id")
+                            , resultSet.getLong(2)));
+                }
+            }
+        } catch (SQLException e) {
+            throw new DaoException(e);
+        }
+        return Optional.empty();
+    }
+
+    @Override
+    public Optional<Admin> findAdminByAccountId(int accountId) throws DaoException {
+        try (Connection connection = ConnectionPool.INSTANCE.getConnection();
+             PreparedStatement prepareStatement = connection.prepareStatement(FIND_ADMIN_BY_ACCOUNT_ID)) {
+
+            prepareStatement.setInt(1, accountId);
             try (ResultSet resultSet = prepareStatement.executeQuery()) {
                 if (resultSet.next()) {
                     return Optional.of(new Admin(resultSet.getLong("id")
