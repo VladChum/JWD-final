@@ -5,11 +5,10 @@ import com.epam.jwd_final.dao.impl.DaoProvider;
 import com.epam.jwd_final.entity.Account;
 import com.epam.jwd_final.exception.DaoException;
 import com.epam.jwd_final.exception.ServiceException;
-import com.epam.jwd_final.service.ServiceProvider;
+import com.epam.jwd_final.service.impl.ServiceProvider;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -19,8 +18,8 @@ import java.io.IOException;
 public class SignIn implements Command {
     private static final Logger LOGGER = Logger.getLogger(SignIn.class);
     private final String ACCOUNT = "account";
-    private final String SIGN_IN_USER = "/WEB-INF/jsp/user.jsp";
-    private final String SIGN_IN_ADMIN = "/WEB-INF/jsp/admin.jsp";
+    private final String SIGN_IN_USER = "/Controller?command=userPage";
+    private final String SIGN_IN_ADMIN = "/Controller?command=adminPage";
     private final String LOGIN = "login";
     private final String PASSWORD = "password";
 
@@ -37,17 +36,18 @@ public class SignIn implements Command {
         System.out.println(password);
         String nextPage = "";
 
+//      temporary solution
         try {
             if (!ServiceProvider.INSTANCE.getAccountService().findAccountByLoginAndPassword(login, password).isPresent()) {
-                nextPage = "WEB-INF/jsp/home.jsp";
+                nextPage = "/Controller?command=homePage";
             } else {
                 Account account = DaoProvider.INSTANCE.getAccountDao().findAccountByLoginAndPassword(login, password).get();
                 if (session.getAttribute(ACCOUNT) == null) {
                     session.setAttribute(ACCOUNT, account);
-                    LOGGER.log(Level.INFO, "add account in session: " + account.getId());
+                    LOGGER.log(Level.DEBUG, "add account in session: " + account.getId());
                 } else {
                     session.setAttribute(ACCOUNT, account);
-                    LOGGER.log(Level.INFO, "cheng account in session " + account.getId());
+                    LOGGER.log(Level.DEBUG, "cheng account in session " + account.getId());
                 }
                 
                 if (ServiceProvider.INSTANCE.getAdminService().findAdminByAccountId(account.getId()).isPresent()) {
@@ -60,7 +60,6 @@ public class SignIn implements Command {
             LOGGER.log(Level.ERROR, e.getMessage(), e);
         }
 
-        RequestDispatcher requestDispatcher = req.getRequestDispatcher(nextPage);
-        requestDispatcher.forward(req, resp);
+        resp.sendRedirect(nextPage);
     }
 }

@@ -16,6 +16,7 @@ public enum ConnectionPool {
     INSTANCE;
 
     private static final Logger LOGGER = Logger.getLogger(ConnectionPool.class);
+
     private final String URL;
     private final String USER;
     private final String PASSWORD;

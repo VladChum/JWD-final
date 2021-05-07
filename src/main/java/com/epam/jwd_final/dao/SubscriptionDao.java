@@ -11,7 +11,7 @@ import java.util.Optional;
 public interface SubscriptionDao {
     List<Subscription> getAllUserSubscription(Long userId) throws DaoException;
     Optional<Subscription> findUserSubscriptionById(int subscriptionId) throws DaoException;
-    void createSubscription(Subscription subscription);
-    void updateSubscription(Subscription subscription);
-    void deleteSubscription(Subscription subscription);
+    void createSubscription(Subscription subscription) throws DaoException;
+    void updateSubscription(Subscription subscription) throws DaoException;
+    void deleteSubscription(Subscription subscription) throws DaoException;
 }

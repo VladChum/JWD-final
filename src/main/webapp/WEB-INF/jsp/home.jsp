@@ -28,9 +28,9 @@
                     <img alt="logo" src="../../resources/logo2.png">
                 </div>
                 <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-                    <li><a href="Controller?command=HOME_PAGE" class="nav-link px-2 text-white me-3">Home</a></li>
-                    <li><a href="Controller?command=TARIFF_PAGE" class="nav-link px-2 text-white me-3">Tariff</a></li>
-                    <li><a href="Controller?command=ABOUT_PAGE" class="nav-link px-2 text-white me-3">About</a></li>
+                    <li><a href="Controller?command=homePage" class="nav-link px-2 text-white me-3">Home</a></li>
+                    <li><a href="Controller?command=tariffPage" class="nav-link px-2 text-white me-3">Tariff</a></li>
+                    <li><a href="Controller?command=aboutPage" class="nav-link px-2 text-white me-3">About</a></li>
                 </ul>
                 <div class="dropdown">
                     <button class="btn btn-outline-light dropdown-toggle me-3" type="button" id="languageMenu"
@@ -43,7 +43,7 @@
                         <button class="dropdown-item" type="button">EN</button>
                     </div>
                 </div>
-                <a href="Controller?command=LOGIN_PAGE">
+                <a href="Controller?command=loginPage">
                 <button type="button" class="btn btn-primary">Login</button>
                 </a>
             </div>
@@ -61,7 +61,7 @@
             <p>Мощные Wi-Fi роутеры (2,4 + 5 ГГЦ).</p>
             <p>Всё оборудование выдаётся без доплаты.</p></div>
         <div class="banner-item__btn">
-            <a class="button primary" href="Controller?command=TARIFF_PAGE">Выбрать тариф</a>
+            <a class="button primary" href="Controller?command=tariffPage">Выбрать тариф</a>
         </div>
     </div>
 </div>
@@ -311,9 +311,5 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
         crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
-        crossorigin="anonymous"></script>
-
 </body>
 </html>

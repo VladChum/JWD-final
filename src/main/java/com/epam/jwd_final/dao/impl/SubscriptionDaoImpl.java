@@ -73,11 +73,11 @@ public class SubscriptionDaoImpl implements SubscriptionDao {
             prepareStatement.setInt(1, subscriptionId);
             try (ResultSet resultSet = prepareStatement.executeQuery()) {
                 if (resultSet.next()) {
-                    return Optional.of(new Subscription(resultSet.getLong("id")
-                            , resultSet.getDate(2)
-                            , resultSet.getDate(3)
-                            , resultSet.getLong(4)
-                            , resultSet.getLong(5)));
+                    return Optional.of(new Subscription(resultSet.getLong("id"),
+                            resultSet.getDate(2),
+                            resultSet.getDate(3),
+                            resultSet.getLong(4),
+                            resultSet.getLong(5)));
                 }
             }
         } catch (SQLException e) {
@@ -87,17 +87,17 @@ public class SubscriptionDaoImpl implements SubscriptionDao {
     }
 
     @Override
-    public void createSubscription(Subscription subscription) {
+    public void createSubscription(Subscription subscription) throws DaoException {
 
     }
 
     @Override
-    public void updateSubscription(Subscription subscription) {
+    public void updateSubscription(Subscription subscription) throws DaoException {
 
     }
 
     @Override
-    public void deleteSubscription(Subscription subscription) {
+    public void deleteSubscription(Subscription subscription) throws DaoException {
 
     }
 }

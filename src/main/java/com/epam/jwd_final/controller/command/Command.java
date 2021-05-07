@@ -8,5 +8,5 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 public interface Command {
-    void execute(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException, DaoException;
+    void execute(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException;
 }

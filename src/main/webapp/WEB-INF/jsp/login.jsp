@@ -29,9 +29,9 @@
                     <img alt="logo" src="../../resources/logo2.png">
                 </div>
                 <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-                    <li><a href="Controller?command=HOME_PAGE" class="nav-link px-2 text-white me-3">Home</a></li>
-                    <li><a href="Controller?command=TARIFF_PAGE" class="nav-link px-2 text-white me-3">Tariff</a></li>
-                    <li><a href="Controller?command=ABOUT_PAGE" class="nav-link px-2 text-white me-3">About</a></li>
+                    <li><a href="Controller?command=homePage" class="nav-link px-2 text-white me-3">Home</a></li>
+                    <li><a href="Controller?command=tariffPage" class="nav-link px-2 text-white me-3">Tariff</a></li>
+                    <li><a href="Controller?command=aboutPage" class="nav-link px-2 text-white me-3">About</a></li>
                 </ul>
                 <div class="dropdown">
                     <button class="btn btn-outline-light dropdown-toggle me-3" type="button" id="languageMenu"
@@ -44,7 +44,9 @@
                         <button class="dropdown-item" type="button">EN</button>
                     </div>
                 </div>
-                <button type="button" class="btn btn-primary">Login</button>
+                <a href="Controller?command=loginPage">
+                    <button type="button" class="btn btn-primary">Login</button>
+                </a>
             </div>
         </div>
     </header>
@@ -55,7 +57,7 @@
             <div class="col-sm-7">
                 <div class="card">
                     <main class="form-signin">
-                        <form id="loginPage" method="post" action="/Controller?command=SIGN_IN">
+                        <form id="loginPage" method="post" action="/Controller?command=signIn">
                             <h1 class="h3 mb-3 fw-normal ">Sign in</h1>
                             <div class="form-floating">
                                 <input type="login" name="login" class="form-control" id="login"

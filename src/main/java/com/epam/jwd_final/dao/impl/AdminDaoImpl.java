@@ -29,28 +29,40 @@ public class AdminDaoImpl implements AdminDao {
 
     @Override
     public Optional<Admin> findAdminById(int adminId) throws DaoException {
-        try (Connection connection = ConnectionPool.INSTANCE.getConnection();
-             PreparedStatement prepareStatement = connection.prepareStatement(FIND_ADMIN_BY_ID)) {
-
-            prepareStatement.setInt(1, adminId);
-            try (ResultSet resultSet = prepareStatement.executeQuery()) {
-                if (resultSet.next()) {
-                    return Optional.of(new Admin(resultSet.getLong("id")
-                            , resultSet.getLong(2)));
-                }
-            }
-        } catch (SQLException e) {
-            throw new DaoException(e);
-        }
-        return Optional.empty();
+        return findAccount(adminId, FIND_ADMIN_BY_ID);
     }
 
     @Override
     public Optional<Admin> findAdminByAccountId(int accountId) throws DaoException {
-        try (Connection connection = ConnectionPool.INSTANCE.getConnection();
-             PreparedStatement prepareStatement = connection.prepareStatement(FIND_ADMIN_BY_ACCOUNT_ID)) {
+        return findAccount(accountId, FIND_ADMIN_BY_ACCOUNT_ID);
+    }
 
-            prepareStatement.setInt(1, accountId);
+    @Override
+    public void createAdmin(Long accountId) throws DaoException {
+        try (Connection connection = ConnectionPool.INSTANCE.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(CREATE_ADMIN)) {
+            preparedStatement.setInt(1, accountId.intValue());
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            throw new DaoException(e);
+        }
+    }
+
+    @Override
+    public void deleteAdmin(Admin admin) throws DaoException {
+        try (Connection connection = ConnectionPool.INSTANCE.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(DELETE_ADMIN)) {
+            preparedStatement.setLong(1, admin.getId());
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            throw new DaoException(e);
+        }
+    }
+
+    private Optional<Admin> findAccount(int id, String request) throws DaoException {
+        try (Connection connection = ConnectionPool.INSTANCE.getConnection();
+             PreparedStatement prepareStatement = connection.prepareStatement(request)) {
+            prepareStatement.setInt(1, id);
             try (ResultSet resultSet = prepareStatement.executeQuery()) {
                 if (resultSet.next()) {
                     return Optional.of(new Admin(resultSet.getLong("id")
@@ -61,27 +73,5 @@ public class AdminDaoImpl implements AdminDao {
             throw new DaoException(e);
         }
         return Optional.empty();
-    }
-
-    @Override
-    public void createAdmin(Long accountId) {
-        try (Connection connection = ConnectionPool.INSTANCE.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(CREATE_ADMIN)) {
-            preparedStatement.setInt(1, accountId.intValue());
-            preparedStatement.executeUpdate();
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
-    }
-
-    @Override
-    public void deleteAdmin(Admin admin) {
-        try (Connection connection = ConnectionPool.INSTANCE.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(DELETE_ADMIN)) {
-            preparedStatement.setLong(1, admin.getId());
-            preparedStatement.executeUpdate();
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
     }
 }
