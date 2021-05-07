@@ -1,4 +1,4 @@
-<%@ page import="com.epam.jwd_final.service.ServiceProvider" %>
+<%@ page import="com.epam.jwd_final.service.impl.ServiceProvider" %>
 <%@ page import="com.epam.jwd_final.entity.Account" %><%--
   Created by IntelliJ IDEA.
   User: vlad
@@ -29,9 +29,9 @@
                     <img alt="logo" src="../../resources/logo2.png">
                 </div>
                 <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-                    <li><a href="Controller?command=HOME_PAGE" class="nav-link px-2 text-white me-3">Home</a></li>
-                    <li><a href="Controller?command=TARIFF_PAGE" class="nav-link px-2 text-white me-3">Tariff</a></li>
-                    <li><a href="Controller?command=ABOUT_PAGE" class="nav-link px-2 text-white me-3">About</a></li>
+                    <li><a href="Controller?command=homePage" class="nav-link px-2 text-white me-3">Home</a></li>
+                    <li><a href="Controller?command=tariffPage" class="nav-link px-2 text-white me-3">Tariff</a></li>
+                    <li><a href="Controller?command=aboutPage" class="nav-link px-2 text-white me-3">About</a></li>
                 </ul>
                 <div class="dropdown">
                     <button class="btn btn-outline-light dropdown-toggle me-3" type="button" id="languageMenu"
@@ -44,7 +44,9 @@
                         <button class="dropdown-item" type="button">EN</button>
                     </div>
                 </div>
-                <button type="button" class="btn btn-primary">Login</button>
+                <a href="Controller?command=loginPage">
+                    <button type="button" class="btn btn-primary">Login</button>
+                </a>
             </div>
         </div>
     </header>
@@ -60,17 +62,35 @@
                     <div class="tariff-item">
                         <div class="tariff-item__top">
                             <div class="tariff-item__title">
-                                <h5 class="card-title">Чумачёв Владислав</h5>
+                                <h5 class="card-title">
+                                    ${ServiceProvider.INSTANCE.getUserService()
+                                            .findUserByAccountId(account.getId())
+                                            .get()
+                                            .getFirstName()}
+                                    ${ServiceProvider.INSTANCE
+                                            .getUserService()
+                                            .findUserByAccountId(account.getId())
+                                            .get()
+                                            .getLastName()}
+                                </h5>
                             </div>
                             <div class="tariff-item__text">
-                                <b><p>1561001453502</p></b>
+                                <b>
+                                    <p>${ServiceProvider.INSTANCE.accountService.findAccountById(account.getId()).get().login}</p>
+                                </b>
                             </div>
                         </div>
                         <div class="tariff-item__body">
                             <div>
                                 <div class="tariff-item__price">
                                     <div class="balance-user">
-                                        Баланс : <b>45,90</b> руб
+                                        Баланс : <b>
+                                        ${ServiceProvider.INSTANCE
+                                                .getUserService()
+                                                .findUserByAccountId(account.getId())
+                                                .get()
+                                                .getBalance()}
+                                    </b> руб
                                     </div>
                                 </div>
                                 <hr class="featurette-divider">
@@ -112,26 +132,27 @@
                         <div class="tariff-item__top">
                             <div class="tariff-item__title">
                                 <h5 class="card-title">Абонент :
+                                    ${ServiceProvider.INSTANCE.getUserService()
+                                            .findUserByAccountId(account.getId())
+                                            .get()
+                                            .getFirstName()}
 
-                                    <% Account account = (Account) session.getAttribute("account"); %>
-                                        ${ServiceProvider.INSTANCE.getUserService()
-                                                .findUserByAccountId(account.getId())
-                                                .get()
-                                                .getFirstName()}
-
-                                        ${ServiceProvider.INSTANCE
-                                                .getUserService()
-                                                .findUserByAccountId(account.getId())
-                                                .get()
-                                                .getLastName()}
+                                    ${ServiceProvider.INSTANCE
+                                            .getUserService()
+                                            .findUserByAccountId(account.getId())
+                                            .get()
+                                            .getLastName()}
 
                                 </h5>
                             </div>
                             <div class="tariff-item__title">
-                                <h5 class="card-title">Логин : 1561001453502</h5>
+                                <h5 class="card-title">Логин
+                                    : ${ServiceProvider.INSTANCE.accountService.findAccountById(account.getId()).get().login}</h5>
                             </div>
                             <div class="tariff-item__title">
-                                <h5 class="card-title">Статус : не блокирован</h5>
+                                <h5 class="card-title">Статус :
+                                    ${ServiceProvider.INSTANCE.getUserService().findUserByAccountId(account.getId()).get().getStatus()}
+                                </h5>
                             </div>
                             <div class="tariff-item__title">
                                 <h5 class="card-title">Дата активации : 11.03.2021 02:37:21</h5>

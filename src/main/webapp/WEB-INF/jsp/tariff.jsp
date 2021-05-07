@@ -1,11 +1,7 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: vlad
-  Date: 1.05.21
-  Time: 22:09
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -27,9 +23,9 @@
                     <img alt="logo" src="../../resources/logo2.png">
                 </div>
                 <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-                    <li><a href="Controller?command=HOME_PAGE" class="nav-link px-2 text-white me-3">Home</a></li>
-                    <li><a href="Controller?command=TARIFF_PAGE" class="nav-link px-2 text-white me-3">Tariff</a></li>
-                    <li><a href="Controller?command=ABOUT_PAGE" class="nav-link px-2 text-white me-3">About</a></li>
+                    <li><a href="Controller?command=homePage" class="nav-link px-2 text-white me-3">Home</a></li>
+                    <li><a href="Controller?command=tariffPage" class="nav-link px-2 text-white me-3">Tariff</a></li>
+                    <li><a href="Controller?command=aboutPage" class="nav-link px-2 text-white me-3">About</a></li>
                 </ul>
                 <div class="dropdown">
                     <button class="btn btn-outline-light dropdown-toggle me-3" type="button" id="languageMenu"
@@ -42,7 +38,9 @@
                         <button class="dropdown-item" type="button">EN</button>
                     </div>
                 </div>
-                <button type="button" class="btn btn-primary">Login</button>
+                <a href="Controller?command=loginPage">
+                    <button type="button" class="btn btn-primary">Login</button>
+                </a>
             </div>
         </div>
     </header>
@@ -53,176 +51,41 @@
         <h1>Тарифы</h1>
     </div>
     <div class="row row-cols-1 row-cols-md-3 g-4">
-        <div class="col-sm-6">
-            <div class="card">
-                <div class="card-body">
-                    <div class="tariff-item">
-                        <div class="tariff-item__top">
-                            <div class="tariff-item__title">
-                                <h5 class="card-title">GigaFi Box4K</h5>
+        <c:forEach items="${tariffPlans}" var="tariffPlan">
+            <div class="col-sm-6">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="tariff-item">
+                            <div class="tariff-item__top">
+                                <div class="tariff-item__title">
+                                    <h5 class="card-title">
+                                        ${tariffPlan.name}
+                                    </h5>
+                                </div>
+                                <div class="tariff-item__text">
+                                    <p>Проводное подключение по Ethernet </p>
+                                    <p>Безлимит
+                                        ${tariffPlan.speed}
+                                        Мбит/с </p>
+                                    <p>Keenetic Speedster 2.4 + 5 ГГц </p>
+                                </div>
                             </div>
-                            <div class="tariff-item__text">
-                                <!--Безлимитный интернет <b>300 мБит/сек</b>; -->
-                                <p>Проводное подключение по Ethernet </p>
-                                <p>Безлимит 300/300 Мбит/с </p>
-                                <p>Keenetic Speedster 2.4 + 5 ГГц </p>
-                            </div>
-                        </div>
-                        <div class="tariff-item__body">
-                            <div class="tariff-item__price">
-                                <span><b>45,90</b> руб/мес</span>
-
-                            </div>
-                            <div class="tariff-item__btns">
-                                <a href="javascript:;" class="button-tariff js-open-popup" data-id="single"
-                                   data-local="https://my.unet.by/plans" data-title="подключение GigaFi Box4K">Подключить</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-sm-6">
-            <div class="card">
-                <div class="card-body">
-                    <div class="tariff-item">
-                        <div class="tariff-item__top">
-                            <div class="tariff-item__title">
-                                <h5 class="card-title">GigaFi Box4K</h5>
-                            </div>
-                            <div class="tariff-item__text">
-                                <!--Безлимитный интернет <b>300 мБит/сек</b>; -->
-                                <p>Проводное подключение по Ethernet </p>
-                                <p>Безлимит 300/300 Мбит/с </p>
-                                <p>Keenetic Speedster 2.4 + 5 ГГц </p>
-                            </div>
-                        </div>
-                        <div class="tariff-item__body">
-                            <div class="tariff-item__price">
-                                <span><b>45,90</b> руб/мес</span>
-                            </div>
-                            <div class="tariff-item__btns">
-                                <a href="javascript:;" class="button-tariff js-open-popup" data-id="single"
-                                   data-local="https://my.unet.by/plans" data-title="подключение GigaFi Box4K">Подключить</a>
+                            <div class="tariff-item__body">
+                                <div class="tariff-item__price">
+                                <span><b>
+                                   ${tariffPlan.price}
+                                </b> руб/мес</span>
+                                </div>
+                                <div class="tariff-item__btns">
+                                    <a href="javascript:;" class="button-tariff js-open-popup" data-id="single"
+                                       data-local="https://my.unet.by/plans" data-title="подключение GigaFi Box4K">Подключить</a>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="col-sm-6">
-            <div class="card">
-                <div class="card-body">
-                    <div class="tariff-item">
-                        <div class="tariff-item__top">
-                            <div class="tariff-item__title">
-                                <h5 class="card-title">GigaFi Box4K</h5>
-                            </div>
-                            <div class="tariff-item__text">
-                                <!--Безлимитный интернет <b>300 мБит/сек</b>; -->
-                                <p>Проводное подключение по Ethernet </p>
-                                <p>Безлимит 300/300 Мбит/с </p>
-                                <p>Keenetic Speedster 2.4 + 5 ГГц </p>
-                            </div>
-                        </div>
-                        <div class="tariff-item__body">
-                            <div class="tariff-item__price">
-                                <span><b>45,90</b> руб/мес</span>
-                            </div>
-                            <div class="tariff-item__btns">
-                                <a href="javascript:;" class="button-tariff js-open-popup" data-id="single"
-                                   data-local="https://my.unet.by/plans" data-title="подключение GigaFi Box4K">Подключить</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-sm-6">
-            <div class="card">
-                <div class="card-body">
-                    <div class="tariff-item">
-                        <div class="tariff-item__top">
-                            <div class="tariff-item__title">
-                                <h5 class="card-title">GigaFi Box4K</h5>
-                            </div>
-                            <div class="tariff-item__text">
-                                <!--Безлимитный интернет <b>300 мБит/сек</b>; -->
-                                <p>Проводное подключение по Ethernet </p>
-                                <p>Безлимит 300/300 Мбит/с </p>
-                                <p>Keenetic Speedster 2.4 + 5 ГГц </p>
-                            </div>
-                        </div>
-                        <div class="tariff-item__body">
-                            <div class="tariff-item__price">
-                                <span><b>45,90</b> руб/мес</span>
-                            </div>
-
-                            <div class="tariff-item__btns">
-                                <a href="javascript:;" class="button-tariff js-open-popup" data-id="single"
-                                   data-local="https://my.unet.by/plans" data-title="подключение GigaFi Box4K">Подключить</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-sm-6">
-            <div class="card">
-                <div class="card-body">
-                    <div class="tariff-item">
-                        <div class="tariff-item__top">
-                            <div class="tariff-item__title">
-                                <h5 class="card-title">GigaFi Box4K</h5>
-                            </div>
-                            <div class="tariff-item__text">
-                                <!--Безлимитный интернет <b>300 мБит/сек</b>; -->
-                                <p>Проводное подключение по Ethernet </p>
-                                <p>Безлимит 300/300 Мбит/с </p>
-                                <p>Keenetic Speedster 2.4 + 5 ГГц </p>
-                            </div>
-                        </div>
-                        <div class="tariff-item__body">
-                            <div class="tariff-item__price">
-                                <span><b>45,90</b> руб/мес</span>
-                            </div>
-                            <div class="tariff-item__btns">
-                                <a href="javascript:;" class="button-tariff js-open-popup" data-id="single"
-                                   data-local="https://my.unet.by/plans" data-title="подключение GigaFi Box4K">Подключить</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-sm-6">
-            <div class="card">
-                <div class="card-body">
-                    <div class="tariff-item">
-                        <div class="tariff-item__top">
-                            <div class="tariff-item__title">
-                                <h5>GigaFi</h5>
-                            </div>
-                            <div class="tariff-item__text">
-                                <!--Безлимитный интернет <b>300 мБит/сек</b>; -->
-                                <p>Проводное подключение по Ethernet </p>
-                                <p>Безлимит 300/300 Мбит/с </p>
-                                <p>Keenetic Speedster 2.4 + 5 ГГц </p></div>
-                        </div>
-                        <div class="tariff-item__body">
-                            <div class="tariff-item__price">
-                                <span><b>42,90</b> руб/мес</span>
-                            </div>
-                            <div class="tariff-item__btns">
-                                <a href="javascript:;" class="button-tariff js-open-popup" data-id="single"
-                                   data-local="" data-title="подключение GigaFi">Подключить</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
+        </c:forEach>
     </div>
 </div>
 <br><br>
