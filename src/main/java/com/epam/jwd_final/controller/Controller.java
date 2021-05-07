@@ -1,8 +1,7 @@
 package com.epam.jwd_final.controller;
 
 import com.epam.jwd_final.controller.command.Command;
-import com.epam.jwd_final.controller.command.ProviderCommand;
-import com.epam.jwd_final.exception.DaoException;
+import com.epam.jwd_final.controller.command.CommandProvider;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
@@ -22,24 +21,16 @@ public class Controller extends HttpServlet {
         String name = req.getParameter("command");
         LOGGER.log(Level.DEBUG, "command name: " + name);
         System.out.println(req.getPathInfo()    );
-        Command command = ProviderCommand.INSTANCE.getCommand(name);
-        try {
-            command.execute(req, resp);
-        } catch (DaoException e) {
-            e.printStackTrace();
-        }
+        Command command = CommandProvider.INSTANCE.getCommand(name);
+        command.execute(req, resp);
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String name = req.getParameter("command");
         LOGGER.log(Level.DEBUG, "command name: " + name);
-        Command command = ProviderCommand.INSTANCE.getCommand(name);
-        try {
-            command.execute(req, resp);
-        } catch (DaoException e) {
-            e.printStackTrace();
-        }
+        Command command = CommandProvider.INSTANCE.getCommand(name);
+        command.execute(req, resp);
     }
 
 
