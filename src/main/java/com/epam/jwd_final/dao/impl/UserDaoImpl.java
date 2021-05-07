@@ -60,13 +60,13 @@ public class UserDaoImpl implements UserDao {
              PreparedStatement prepareStatement = connection.prepareStatement(GET_ALL_USER)) {
             try (ResultSet resultSet = prepareStatement.executeQuery()) {
                 while (resultSet.next()) {
-                    User user = new User(resultSet.getLong("id")
-                            , resultSet.getLong(2)
-                            , resultSet.getString(3)
-                            , resultSet.getString(4)
-                            , resultSet.getString(5)
-                            , resultSet.getString(6)
-                            , Status.resolveStatusById(resultSet.getInt(8)),
+                    User user = new User(resultSet.getLong("id"),
+                            resultSet.getLong(2),
+                            resultSet.getString(3),
+                            resultSet.getString(4),
+                            resultSet.getString(5),
+                            resultSet.getString(6),
+                            Status.resolveStatusById(resultSet.getInt(8)),
                             resultSet.getBigDecimal(7));
                     users.add(user);
                 }
@@ -85,13 +85,13 @@ public class UserDaoImpl implements UserDao {
             prepareStatement.setInt(1, userId);
             try (ResultSet resultSet = prepareStatement.executeQuery()) {
                 if (resultSet.next()) {
-                    return Optional.of(new User(resultSet.getLong("id")
-                            , resultSet.getLong(2)
-                            , resultSet.getString(3)
-                            , resultSet.getString(4)
-                            , resultSet.getString(5)
-                            , resultSet.getString(6)
-                            , Status.resolveStatusById(resultSet.getInt(8)),
+                    return Optional.of(new User(resultSet.getLong("id"),
+                            resultSet.getLong(2),
+                            resultSet.getString(3),
+                            resultSet.getString(4),
+                            resultSet.getString(5),
+                            resultSet.getString(6),
+                            Status.resolveStatusById(resultSet.getInt(8)),
                             resultSet.getBigDecimal(7)));
                 }
             }
@@ -108,13 +108,13 @@ public class UserDaoImpl implements UserDao {
             prepareStatement.setInt(1, userId);
             try (ResultSet resultSet = prepareStatement.executeQuery()) {
                 if (resultSet.next()) {
-                    return Optional.of(new User(resultSet.getLong("id")
-                            , resultSet.getLong(2)
-                            , resultSet.getString(3)
-                            , resultSet.getString(4)
-                            , resultSet.getString(5)
-                            , resultSet.getString(6)
-                            , Status.resolveStatusById(resultSet.getInt(8)),
+                    return Optional.of(new User(resultSet.getLong("id"),
+                            resultSet.getLong(2),
+                            resultSet.getString(3),
+                            resultSet.getString(4),
+                            resultSet.getString(5),
+                            resultSet.getString(6),
+                            Status.resolveStatusById(resultSet.getInt(8)),
                             resultSet.getBigDecimal(7)));
                 }
             }
@@ -125,7 +125,7 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public void createUser(User user) {
+    public void createUser(User user) throws DaoException {
         try (Connection connection = ConnectionPool.INSTANCE.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(CREATE_USER)) {
             preparedStatement.setInt(1, user.getAccountId().intValue());
@@ -135,8 +135,8 @@ public class UserDaoImpl implements UserDao {
             preparedStatement.setString(5, user.getEmail());
             preparedStatement.setInt(6, user.getStatus().getId().intValue());
             preparedStatement.executeUpdate();
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
+        } catch (SQLException e) {
+            throw new DaoException(e);
         }
     }
 
@@ -145,19 +145,19 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public void deleteUser(User user) {
+    public void deleteUser(User user) throws DaoException {
         try (Connection connection = ConnectionPool.INSTANCE.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(DELETE_USER)) {
             preparedStatement.setLong(1, user.getId());
             preparedStatement.executeUpdate();
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
+        } catch (SQLException e) {
+            throw new DaoException(e);
         }
 
     }
 
     @Override
-    public void updateUserStatus(Status status) {
+    public void updateUserStatus(Status status) throws DaoException {
 
     }
 }

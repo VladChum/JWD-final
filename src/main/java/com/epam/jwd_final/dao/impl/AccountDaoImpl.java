@@ -51,9 +51,9 @@ public class AccountDaoImpl implements AccountDao {
             prepareStatement.setInt(1, accountId);
             try (ResultSet resultSet = prepareStatement.executeQuery()) {
                 if (resultSet.next()) {
-                    return Optional.of(new Account(resultSet.getLong("id")
-                            , resultSet.getString("login")
-                            , resultSet.getString("password")));
+                    return Optional.of(new Account(resultSet.getLong("id"),
+                            resultSet.getString("login"),
+                            resultSet.getString("password")));
                 }
             }
         } catch (SQLException e) {
@@ -70,9 +70,9 @@ public class AccountDaoImpl implements AccountDao {
             prepareStatement.setString(2, accountPassword);
             try (ResultSet resultSet = prepareStatement.executeQuery()) {
                 if (resultSet.next()) {
-                    return Optional.of(new Account(resultSet.getLong("id")
-                            , resultSet.getString("login")
-                            , resultSet.getString("password")));
+                    return Optional.of(new Account(resultSet.getLong("id"),
+                            resultSet.getString("login"),
+                            resultSet.getString("password")));
                 }
             }
         } catch (SQLException e) {
@@ -87,37 +87,37 @@ public class AccountDaoImpl implements AccountDao {
      * check duplicate account
      */
     @Override
-    public void createAccount(String login, String password) {
+    public void createAccount(String login, String password) throws DaoException {
         try (Connection connection = ConnectionPool.INSTANCE.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(CREATE_ACCOUNT)) {
             preparedStatement.setString(1, login);
             preparedStatement.setString(2, password);
             preparedStatement.executeUpdate();
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
+        } catch (SQLException e) {
+            throw new DaoException(e);
         }
     }
 
     @Override
-    public void updateAccount(Account account) {
+    public void updateAccount(Account account) throws DaoException {
         try (Connection connection = ConnectionPool.INSTANCE.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_ACCOUNT)) {
             preparedStatement.setString(1, account.getPassword());
             preparedStatement.setString(2, account.getLogin());
             preparedStatement.executeUpdate();
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
+        } catch (SQLException e) {
+            throw new DaoException(e);
         }
     }
 
     @Override
-    public void deleteAccount(Account account) {
+    public void deleteAccount(Account account) throws DaoException {
         try (Connection connection = ConnectionPool.INSTANCE.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(DELETE_ACCOUNT)) {
             preparedStatement.setLong(1, account.getId());
             preparedStatement.executeUpdate();
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
+        } catch (SQLException e) {
+            throw new DaoException(e);
         }
     }
 }

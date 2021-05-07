@@ -21,8 +21,8 @@ public interface UserDao {
      * add dto
      *
      * */
-    void createUser(User user);
+    void createUser(User user) throws DaoException;
     void updateUser(User user);
-    void deleteUser(User user);
-    void updateUserStatus(Status status);
+    void deleteUser(User user) throws DaoException;
+    void updateUserStatus(Status status) throws DaoException;
 }

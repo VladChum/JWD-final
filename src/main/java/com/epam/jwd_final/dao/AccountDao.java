@@ -18,7 +18,7 @@ public interface AccountDao {
      * add dto
      *
      * */
-    void createAccount(String login, String password);
-    void updateAccount(Account account);
-    void deleteAccount(Account account);
+    void createAccount(String login, String password) throws DaoException;
+    void updateAccount(Account account) throws DaoException;
+    void deleteAccount(Account account) throws DaoException;
 }

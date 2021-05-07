@@ -14,6 +14,6 @@ public interface AdminDao {
      * add create
      * add dto
      * */
-    void createAdmin(Long accountId);
-    void deleteAdmin(Admin admin);
+    void createAdmin(Long accountId) throws DaoException;
+    void deleteAdmin(Admin admin) throws DaoException;
 }

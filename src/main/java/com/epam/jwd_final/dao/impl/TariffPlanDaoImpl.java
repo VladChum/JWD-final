@@ -44,11 +44,11 @@ public class TariffPlanDaoImpl implements com.epam.jwd_final.dao.TariffPlanDao {
              PreparedStatement prepareStatement = connection.prepareStatement(GET_ALL_TARIFF)) {
             try (ResultSet resultSet = prepareStatement.executeQuery()) {
                 while (resultSet.next()) {
-                    TariffPlan tariffPlan = new TariffPlan(resultSet.getLong("id")
-                            , resultSet.getString(2)
-                            , resultSet.getBigDecimal(3)
-                            , resultSet.getLong(4)
-                            , resultSet.getInt(5));
+                    TariffPlan tariffPlan = new TariffPlan(resultSet.getLong("id"),
+                            resultSet.getString(2),
+                            resultSet.getBigDecimal(3),
+                            resultSet.getLong(4),
+                            resultSet.getInt(5));
                     tariffPlans.add(tariffPlan);
                 }
             }
@@ -65,11 +65,11 @@ public class TariffPlanDaoImpl implements com.epam.jwd_final.dao.TariffPlanDao {
             prepareStatement.setInt(1, tariffId);
             try (ResultSet resultSet = prepareStatement.executeQuery()) {
                 if (resultSet.next()) {
-                    return Optional.of(new TariffPlan(resultSet.getLong("id")
-                            , resultSet.getString(2)
-                            , resultSet.getBigDecimal(3)
-                            , resultSet.getLong(4)
-                            , resultSet.getInt(5)));
+                    return Optional.of(new TariffPlan(resultSet.getLong("id"),
+                            resultSet.getString(2),
+                            resultSet.getBigDecimal(3),
+                            resultSet.getLong(4),
+                            resultSet.getInt(5)));
                 }
             }
         } catch (SQLException e) {
