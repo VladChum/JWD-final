@@ -21,7 +21,6 @@ public class AdminServiceImpl implements AdminService {
             return adminDao.findAdminById(id.intValue());
         } catch (DaoException e) {
             throw new ServiceException(e);
-
         }
     }
 
@@ -31,7 +30,6 @@ public class AdminServiceImpl implements AdminService {
             return adminDao.findAdminByAccountId(id.intValue());
         } catch (DaoException e) {
             throw new ServiceException(e);
-
         }
     }
 }

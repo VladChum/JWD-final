@@ -12,7 +12,6 @@ import java.util.Optional;
 public class AccountServiceImpl implements AccountService {
     private final AccountDao accountDao = DaoProvider.INSTANCE.getAccountDao();
 
-
     public AccountServiceImpl() {
     }
 
@@ -20,6 +19,15 @@ public class AccountServiceImpl implements AccountService {
     public Optional<Account> findAccountByLoginAndPassword(String login, String password) throws ServiceException {
         try {
             return accountDao.findAccountByLoginAndPassword(login, password);
+        } catch (DaoException e) {
+            throw new ServiceException(e);
+        }
+    }
+
+    @Override
+    public Optional<Account> findAccountById(Long id) throws ServiceException {
+        try {
+            return accountDao.findAccountById(id.intValue());
         } catch (DaoException e) {
             throw new ServiceException(e);
         }

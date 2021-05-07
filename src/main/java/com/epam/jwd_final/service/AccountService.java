@@ -7,4 +7,5 @@ import java.util.Optional;
 
 public interface AccountService {
     Optional<Account> findAccountByLoginAndPassword (String login, String password) throws ServiceException;
+    Optional<Account> findAccountById(Long id) throws ServiceException;
 }
