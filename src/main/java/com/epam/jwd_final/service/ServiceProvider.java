@@ -1,9 +1,13 @@
-package com.epam.jwd_final.service.impl;
+package com.epam.jwd_final.service;
 
 import com.epam.jwd_final.service.AccountService;
 import com.epam.jwd_final.service.AdminService;
 import com.epam.jwd_final.service.TariffService;
 import com.epam.jwd_final.service.UserService;
+import com.epam.jwd_final.service.impl.AccountServiceImpl;
+import com.epam.jwd_final.service.impl.AdminServiceImpl;
+import com.epam.jwd_final.service.impl.TariffServiceImpl;
+import com.epam.jwd_final.service.impl.UserServiceImpl;
 
 public enum ServiceProvider {
     INSTANCE;
