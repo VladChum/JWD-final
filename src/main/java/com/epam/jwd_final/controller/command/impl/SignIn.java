@@ -34,9 +34,6 @@ public class SignIn implements Command {
         String login = req.getParameter(LOGIN);
         String password = req.getParameter(PASSWORD);
         HttpSession session = req.getSession();
-
-        System.out.println(login);
-        System.out.println(password);
         String nextPage = "";
 
 //      temporary solution
