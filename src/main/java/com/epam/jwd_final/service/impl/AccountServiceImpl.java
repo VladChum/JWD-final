@@ -12,9 +12,6 @@ import java.util.Optional;
 public class AccountServiceImpl implements AccountService {
     private final AccountDao accountDao = DaoProvider.INSTANCE.getAccountDao();
 
-    public AccountServiceImpl() {
-    }
-
     @Override
     public Optional<Account> findAccountByLoginAndPassword(String login, String password) throws ServiceException {
         try {
