@@ -1,9 +1,6 @@
-package com.epam.jwd_final.service.impl;
+package com.epam.jwd_final.service;
 
-import com.epam.jwd_final.service.AccountService;
-import com.epam.jwd_final.service.AdminService;
-import com.epam.jwd_final.service.TariffService;
-import com.epam.jwd_final.service.UserService;
+import com.epam.jwd_final.service.impl.*;
 
 public enum ServiceProvider {
     INSTANCE;
@@ -12,6 +9,7 @@ public enum ServiceProvider {
    private final AdminService adminService = new AdminServiceImpl();
    private final UserService userService = new UserServiceImpl();
    private final TariffService tariffService = new TariffServiceImpl();
+   private final SubscriptionService subscriptionService = new SubscriptionServiceImpl();
 
     public AccountService getAccountService() {
         return accountService;
@@ -27,5 +25,9 @@ public enum ServiceProvider {
 
     public TariffService getTariffService() {
         return tariffService;
+    }
+
+    public SubscriptionService getSubscriptionService() {
+        return subscriptionService;
     }
 }

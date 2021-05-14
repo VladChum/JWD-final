@@ -11,9 +11,6 @@ import java.io.IOException;
 public class LoginPage implements Command {
     private final String LOGIN_PAGE = "/WEB-INF/jsp/login.jsp";
 
-    public LoginPage() {
-    }
-
     @Override
     public void execute(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
         RequestDispatcher requestDispatcher = req.getRequestDispatcher(LOGIN_PAGE);

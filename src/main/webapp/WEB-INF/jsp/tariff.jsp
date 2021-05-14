@@ -59,13 +59,13 @@
                             <div class="tariff-item__top">
                                 <div class="tariff-item__title">
                                     <h5 class="card-title">
-                                        ${tariffPlan.name}
+                                            ${tariffPlan.name}
                                     </h5>
                                 </div>
                                 <div class="tariff-item__text">
                                     <p>Проводное подключение по Ethernet </p>
                                     <p>Безлимит
-                                        ${tariffPlan.speed}
+                                            ${tariffPlan.speed}
                                         Мбит/с </p>
                                     <p>Keenetic Speedster 2.4 + 5 ГГц </p>
                                 </div>
@@ -73,12 +73,12 @@
                             <div class="tariff-item__body">
                                 <div class="tariff-item__price">
                                 <span><b>
-                                   ${tariffPlan.price}
+                                        ${tariffPlan.price}
                                 </b> руб/мес</span>
                                 </div>
                                 <div class="tariff-item__btns">
-                                    <a href="javascript:;" class="button-tariff js-open-popup" data-id="single"
-                                       data-local="https://my.unet.by/plans" data-title="подключение GigaFi Box4K">Подключить</a>
+                                    <a class="button-tariff js-open-popup" data-id="single"
+                                       data-title="подключение">Подключить</a>
                                 </div>
                             </div>
                         </div>

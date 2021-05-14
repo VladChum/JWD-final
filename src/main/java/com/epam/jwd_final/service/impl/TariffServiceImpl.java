@@ -13,7 +13,7 @@ public class TariffServiceImpl implements TariffService {
     private final TariffPlanDao tariffPlanDao = DaoProvider.INSTANCE.getTariffPlanDao();
 
     @Override
-    public List<TariffPlan> getAllTariff() throws ServiceException {
+    public List<TariffPlan> findAllTariff() throws ServiceException {
         try {
             return tariffPlanDao.getAllTariff();
         } catch (DaoException e) {

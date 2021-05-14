@@ -3,7 +3,7 @@ package com.epam.jwd_final.controller.command.impl;
 import com.epam.jwd_final.controller.command.Command;
 import com.epam.jwd_final.entity.TariffPlan;
 import com.epam.jwd_final.exception.ServiceException;
-import com.epam.jwd_final.service.impl.ServiceProvider;
+import com.epam.jwd_final.service.ServiceProvider;
 import com.epam.jwd_final.service.TariffService;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
@@ -26,7 +26,7 @@ public class TariffPage implements Command {
     @Override
     public void execute(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
         try {
-            List<TariffPlan> tariffPlans = tariffService.getAllTariff();
+            List<TariffPlan> tariffPlans = tariffService.findAllTariff();
             req.setAttribute(TARIFF_PLANS, tariffPlans);
         } catch (ServiceException e) {
             LOGGER.log(Level.ERROR, e.getMessage() + " " + e);

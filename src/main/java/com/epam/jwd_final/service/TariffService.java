@@ -6,5 +6,5 @@ import com.epam.jwd_final.exception.ServiceException;
 import java.util.List;
 
 public interface TariffService {
-    List<TariffPlan> getAllTariff() throws ServiceException;
+    List<TariffPlan> findAllTariff() throws ServiceException;
 }
