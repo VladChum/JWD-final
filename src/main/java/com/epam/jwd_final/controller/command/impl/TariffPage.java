@@ -26,7 +26,7 @@ public class TariffPage implements Command {
     @Override
     public void execute(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
         try {
-            List<TariffPlan> tariffPlans = tariffService.getAllTariff();
+            List<TariffPlan> tariffPlans = tariffService.findAllTariff();
             req.setAttribute(TARIFF_PLANS, tariffPlans);
         } catch (ServiceException e) {
             LOGGER.log(Level.ERROR, e.getMessage() + " " + e);
