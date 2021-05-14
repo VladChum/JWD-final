@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Optional;
 
 public interface AccountDao {
-    List<Account> getAllAccount() throws DaoException;
+    List<Account> findAllAccount() throws DaoException;
     Optional<Account> findAccountById(int accountId) throws DaoException;
     Optional<Account> findAccountByLoginAndPassword(String accountLogin, String accountPassword) throws DaoException;
     /**todo

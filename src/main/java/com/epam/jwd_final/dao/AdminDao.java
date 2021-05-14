@@ -1,6 +1,5 @@
 package com.epam.jwd_final.dao;
 
-import com.epam.jwd_final.entity.Account;
 import com.epam.jwd_final.entity.Admin;
 import com.epam.jwd_final.exception.DaoException;
 
