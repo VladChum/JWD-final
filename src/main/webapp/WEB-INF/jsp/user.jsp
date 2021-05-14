@@ -1,18 +1,11 @@
-<%@ page import="com.epam.jwd_final.service.ServiceProvider" %>
-<%@ page import="com.epam.jwd_final.entity.Account" %><%--
-  Created by IntelliJ IDEA.
-  User: vlad
-  Date: 1.05.21
-  Time: 22:15
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css"
           rel="stylesheet"
           integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
@@ -51,7 +44,8 @@
         </div>
     </header>
 </div>
-
+<c:set value="${user}" var="user"/>
+<c:set value="${account}" var="account"/>
 <div id="content" class="container">
     <br>
     <br>
@@ -63,20 +57,15 @@
                         <div class="tariff-item__top">
                             <div class="tariff-item__title">
                                 <h5 class="card-title">
-                                    ${ServiceProvider.INSTANCE.getUserService()
-                                            .findUserByAccountId(account.getId())
-                                            .get()
-                                            .getFirstName()}
-                                    ${ServiceProvider.INSTANCE
-                                            .getUserService()
-                                            .findUserByAccountId(account.getId())
-                                            .get()
-                                            .getLastName()}
+                                    ${user.firstName}
+                                    ${user.lastName}
                                 </h5>
                             </div>
                             <div class="tariff-item__text">
                                 <b>
-                                    <p>${ServiceProvider.INSTANCE.accountService.findAccountById(account.getId()).get().login}</p>
+                                    <p>
+                                        ${account.login}
+                                    </p>
                                 </b>
                             </div>
                         </div>
@@ -85,11 +74,7 @@
                                 <div class="tariff-item__price">
                                     <div class="balance-user">
                                         Баланс : <b>
-                                        ${ServiceProvider.INSTANCE
-                                                .getUserService()
-                                                .findUserByAccountId(account.getId())
-                                                .get()
-                                                .getBalance()}
+                                        ${user.balance}
                                     </b> руб
                                     </div>
                                 </div>
@@ -162,24 +147,58 @@
                                         <h5 class="card-title">Статус : не блокирован</h5>
                                     </div>
                                     <div class="tariff-item__title">
-                                        <h5 class="card-title">Дата активации : 11.03.2021 02:37:21</h5>
+                                        <c:set var="subscription" value="${subscription}"/>
+                                        <h5 class="card-title">
+                                            ${subscription.startDate}
+                                        </h5>
                                     </div>
                                 </div>
                             </div>
 
                             <div class="tab-pane fade show" id="tariffs" role="tabpanel">
                                 <div class="tariff-item__top">
-                                    <div class="tariff-item__title">
-                                        <h5 class="card-title">tariffs</h5>
-                                    </div>
-                                    <div class="tariff-item__title">
-                                        <h5 class="card-title">Логин : 1561001453502</h5>
-                                    </div>
-                                    <div class="tariff-item__title">
-                                        <h5 class="card-title">Статус : не блокирован</h5>
-                                    </div>
-                                    <div class="tariff-item__title">
-                                        <h5 class="card-title">Дата активации : 11.03.2021 02:37:21</h5>
+                                    <div class="row row-cols-1 row-cols-md-3 g-4">
+                                        <c:forEach items="${tariffPlans}" var="tariffPlan">
+                                            <div class="col-sm-6">
+                                                <div class="card">
+                                                    <div class="card-body">
+                                                        <div class="tariff-item">
+                                                            <div class="tariff-item__top">
+                                                                <div class="tariff-item__title">
+                                                                    <h5 class="card-title">
+                                                                            ${tariffPlan.name}
+                                                                    </h5>
+                                                                </div>
+                                                                <div class="tariff-item__text">
+                                                                    <p>Проводное подключение по Ethernet </p>
+                                                                    <p>Безлимит
+                                                                            ${tariffPlan.speed}
+                                                                        Мбит/с </p>
+                                                                    <p>Keenetic Speedster 2.4 + 5 ГГц </p>
+                                                                </div>
+                                                            </div>
+                                                            <div class="tariff-item__body">
+                                                                <div class="tariff-item__price">
+                                                                    <span>
+                                                                        <b>
+                                                                                ${tariffPlan.price}
+                                                                        </b>
+                                                                        руб/мес
+                                                                    </span>
+                                                                </div>
+                                                                <c:if test="${tariffPlan.id != subscription.tariffPlanId}">
+                                                                    <div class="tariff-item__btns">
+                                                                        <a class="button-tariff js-open-popup"
+                                                                           data-id="single"
+                                                                           data-title="подключение">Подключить</a>
+                                                                    </div>
+                                                                </c:if>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </c:forEach>
                                     </div>
                                 </div>
                             </div>
@@ -258,7 +277,6 @@
         </div>
     </div>
 </div>
-
 <footer class="bg-dark text-center text-white mt-auto">
     <div class="container p-4 pb-0">
         <section class="d-flex justify-content-center footer-items mb-4">

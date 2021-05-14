@@ -21,7 +21,7 @@ public class SubscriptionDaoImpl implements SubscriptionDao {
             "inner join user u on u.id = s.user_id " +
             "inner join tariff_plan t on  t.id = s.tariff_plan_id " +
             "where s.id = ?";
-    private static final String GET_ALL_USER_SUBSCRIPTION = "select s.id, s.start_date, " +
+    private static final String FIND_ALL_USER_SUBSCRIPTION = "select s.id, s.start_date, " +
             "s.end_date, s.user_id, " +
             "s.tariff_plan_id " +
             "from user_subscription s " +
@@ -44,11 +44,12 @@ public class SubscriptionDaoImpl implements SubscriptionDao {
      * cheng list for return user subscription
      * */
     @Override
-    public List<Subscription> getAllUserSubscription(Long userId) throws DaoException {
-        List<Subscription> subscriptions = new ArrayList<Subscription>();
+    public List<Subscription> findAllUserSubscription(Long userId) throws DaoException {
+        List<Subscription> subscriptions = new ArrayList<>();
 
         try (Connection connection = ConnectionPool.INSTANCE.getConnection();
-             PreparedStatement prepareStatement = connection.prepareStatement(GET_ALL_USER_SUBSCRIPTION)) {
+             PreparedStatement prepareStatement = connection.prepareStatement(FIND_ALL_USER_SUBSCRIPTION)) {
+            prepareStatement.setInt(1, userId.intValue());
             try (ResultSet resultSet = prepareStatement.executeQuery()) {
                 while (resultSet.next()) {
                     Subscription subscription = new Subscription(
@@ -67,7 +68,7 @@ public class SubscriptionDaoImpl implements SubscriptionDao {
     }
 
     @Override
-    public Optional<Subscription> findUserSubscriptionById(int subscriptionId) throws DaoException {
+    public Optional<Subscription> findById(int subscriptionId) throws DaoException {
         try (Connection connection = ConnectionPool.INSTANCE.getConnection();
              PreparedStatement prepareStatement = connection.prepareStatement(FIND_SUBSCRIPTION_BY_ID)) {
             prepareStatement.setInt(1, subscriptionId);
