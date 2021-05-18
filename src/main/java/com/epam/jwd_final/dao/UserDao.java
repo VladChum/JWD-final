@@ -1,9 +1,7 @@
 package com.epam.jwd_final.dao;
-
-import com.epam.jwd_final.entity.Account;
+;
 import com.epam.jwd_final.entity.Status;
 import com.epam.jwd_final.entity.User;
-import com.epam.jwd_final.exception.ConnectionPoolException;
 import com.epam.jwd_final.exception.DaoException;
 
 import java.util.List;
@@ -22,7 +20,7 @@ public interface UserDao {
      *
      * */
     void createUser(User user) throws DaoException;
-    void updateUser(User user);
+    void updateUser(User user) throws DaoException;
     void deleteUser(User user) throws DaoException;
     void updateUserStatus(Status status) throws DaoException;
 }

@@ -5,10 +5,8 @@ import com.epam.jwd_final.dao.connection.ConnectionPool;
 import com.epam.jwd_final.entity.Subscription;
 import com.epam.jwd_final.exception.DaoException;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -31,22 +29,15 @@ public class SubscriptionDaoImpl implements SubscriptionDao {
     private static final String CREATE_SUBSCRIPTION = "insert into user_subscription " +
             "(start_date, user_id, tariff_plan_id) " +
             "VALUES (?, ?, ?)";
-    /***TODO
-     * update user status
-     * */
-    private static final String UPDATE_SUBSCRIPTION = "update  set  where login = ?";
+    private static final String UPDATE_SUBSCRIPTION = "update user_subscription set end_date = ? where id = ?";
     private static final String DELETE_SUBSCRIPTION = "delete from user where id = ?";
 
     SubscriptionDaoImpl() {
     }
 
-    /**TODO
-     * cheng list for return user subscription
-     * */
     @Override
     public List<Subscription> findAllUserSubscription(Long userId) throws DaoException {
         List<Subscription> subscriptions = new ArrayList<>();
-
         try (Connection connection = ConnectionPool.INSTANCE.getConnection();
              PreparedStatement prepareStatement = connection.prepareStatement(FIND_ALL_USER_SUBSCRIPTION)) {
             prepareStatement.setInt(1, userId.intValue());
@@ -89,12 +80,27 @@ public class SubscriptionDaoImpl implements SubscriptionDao {
 
     @Override
     public void createSubscription(Subscription subscription) throws DaoException {
-
+        try (Connection connection = ConnectionPool.INSTANCE.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(CREATE_SUBSCRIPTION)) {
+            preparedStatement.setDate(1, Date.valueOf(String.valueOf(subscription.getStartDate())));
+            preparedStatement.setInt(2, subscription.getUserId().intValue());
+            preparedStatement.setInt(3, subscription.getTariffPlanId().intValue());
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            throw new DaoException(e);
+        }
     }
 
     @Override
     public void updateSubscription(Subscription subscription) throws DaoException {
-
+        try (Connection connection = ConnectionPool.INSTANCE.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_SUBSCRIPTION)) {
+            preparedStatement.setDate(1, Date.valueOf(String.valueOf(subscription.getEndDate())));
+            preparedStatement.setInt(2, subscription.getId().intValue());
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            throw new DaoException(e);
+        }
     }
 
     @Override

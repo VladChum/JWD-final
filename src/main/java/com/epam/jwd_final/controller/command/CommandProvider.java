@@ -21,6 +21,7 @@ public enum CommandProvider {
         commands.put("signIn", new SignIn());
         commands.put("userPage", new UserPage());
         commands.put("adminPage", new AdminPage());
+        commands.put("updateTariff", new UpdateTariff());
     }
 
     public Command getCommand(String commandName) {

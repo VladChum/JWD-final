@@ -7,6 +7,7 @@ import com.epam.jwd_final.exception.DaoException;
 import com.epam.jwd_final.exception.ServiceException;
 import com.epam.jwd_final.service.UserService;
 
+import java.util.List;
 import java.util.Optional;
 
 public class UserServiceImpl implements UserService {
@@ -27,6 +28,24 @@ public class UserServiceImpl implements UserService {
             return userDao.findUserByAccountId(id.intValue());
         } catch (DaoException e) {
             throw  new ServiceException(e);
+        }
+    }
+
+    @Override
+    public List<User> findAll() throws ServiceException {
+        try {
+            return userDao.getAllUser();
+        } catch (DaoException e) {
+            throw new ServiceException(e);
+        }
+    }
+
+    @Override
+    public void addUser(User user) throws ServiceException {
+        try {
+            userDao.createUser(user);
+        } catch (DaoException e) {
+            throw new ServiceException(e);
         }
     }
 }

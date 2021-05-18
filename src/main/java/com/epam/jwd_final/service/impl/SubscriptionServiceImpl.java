@@ -7,6 +7,9 @@ import com.epam.jwd_final.exception.DaoException;
 import com.epam.jwd_final.exception.ServiceException;
 import com.epam.jwd_final.service.SubscriptionService;
 
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -42,6 +45,34 @@ public class SubscriptionServiceImpl implements SubscriptionService {
     public List<Subscription> findAllUserSubscription(Long userId) throws ServiceException {
         try {
             return subscriptionDao.findAllUserSubscription(userId);
+        } catch (DaoException e) {
+            throw new ServiceException(e);
+        }
+    }
+
+    @Override
+    public void stopActiveSubscription(Long userId, Long TariffId) throws ServiceException {
+        try {
+            Subscription subscription = findActiveUserSubscription(userId);
+            if (subscription != null) {
+                Date date = new Date();
+                SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+                subscription.setEndDate(java.sql.Date.valueOf(dateFormat.format(date)));
+                subscriptionDao.updateSubscription(subscription);
+            }
+        } catch (DaoException e) {
+            throw new ServiceException(e);
+        }
+    }
+
+    @Override
+    public void newSubscription(Long userId, Long newTariffId) throws ServiceException {
+        try {
+            Date startDate = new Date();
+            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+            Subscription subscription = new Subscription(1L, userId,
+                    java.sql.Date.valueOf(dateFormat.format(startDate)), newTariffId);
+            subscriptionDao.createSubscription(subscription);
         } catch (DaoException e) {
             throw new ServiceException(e);
         }

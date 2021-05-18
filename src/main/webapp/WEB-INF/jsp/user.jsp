@@ -154,7 +154,6 @@
                                     </div>
                                 </div>
                             </div>
-
                             <div class="tab-pane fade show" id="tariffs" role="tabpanel">
                                 <div class="tariff-item__top">
                                     <div class="row row-cols-1 row-cols-md-3 g-4">
@@ -188,7 +187,8 @@
                                                                 </div>
                                                                 <c:if test="${tariffPlan.id != subscription.tariffPlanId}">
                                                                     <div class="tariff-item__btns">
-                                                                        <a class="button-tariff js-open-popup"
+                                                                        <a href="Controller?command=updateTariff"
+                                                                           class="button-tariff js-open-popup"
                                                                            data-id="single"
                                                                            data-title="подключение">Подключить</a>
                                                                     </div>

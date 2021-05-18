@@ -20,4 +20,20 @@ public class TariffServiceImpl implements TariffService {
             throw new ServiceException(e);
         }
     }
+
+    @Override
+    public TariffPlan findById(int tariffId) throws ServiceException {
+        TariffPlan tariffPlan = null;
+        try {
+            tariffPlan = tariffPlanDao.findTariffById(tariffId).get();
+        } catch (DaoException e) {
+            throw new ServiceException(e);
+        }
+        return tariffPlan;
+    }
+
+    @Override
+    public void updateTariff(Long userId, Long newTariffId) throws ServiceException {
+
+    }
 }
