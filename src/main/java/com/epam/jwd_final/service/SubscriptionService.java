@@ -10,4 +10,6 @@ public interface SubscriptionService {
     Optional<Subscription> findById(Long id) throws ServiceException;
     Subscription findActiveUserSubscription(Long userId) throws ServiceException;
     List<Subscription> findAllUserSubscription(Long userId) throws ServiceException;
+    void stopActiveSubscription(Long userId, Long tariffId) throws ServiceException;
+    void newSubscription(Long userId, Long newTariffId) throws ServiceException;
 }

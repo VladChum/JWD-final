@@ -1,11 +1,6 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: vlad
-  Date: 1.05.21
-  Time: 22:15
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -62,26 +57,44 @@
                         <div class="tariff-item__body">
                             <img src="../../resources/admin.jpg" class="card-img-top" alt="...">
                             <hr class="featurette-divider">
-                            <button type="button"
-                                    class="btn-user btn-outline-primary tarrifs-filter__item admin-filter__item--user ng-star-inserted">
-                                Пользователи
-                            </button>
-                            <button type="button"
-                                    class="btn-user btn-outline-primary tarrifs-filter__item admin-filter__item--statistics ng-star-inserted">
-                                Статистика
-                            </button>
-                            <button type="button"
-                                    class="btn-user btn-outline-primary tarrifs-filter__item tarrifs-filter__item--bundle ng-star-inserted">
-                                Тарифы
-                            </button>
-                            <button type="button"
-                                    class="btn-user btn-outline-primary tarrifs-filter__item tarrifs-filter__item--sails ng-star-inserted">
-                                Акции
-                            </button>
-                            <button type="button"
-                                    class="btn-user btn-outline-primary tarrifs-filter__item tarrifs-filter__item--sating ng-star-inserted">
-                                Настройки
-                            </button>
+                            <div class="nav" id="v-pills-tab" role="tablist"
+                                 aria-orientation="vertical">
+                                <button type="button"
+                                        class="nav-link active btn-user btn-outline-primary tarrifs-filter__item admin-filter__item--user ng-star-inserted"
+                                        id="users-tab" data-bs-toggle="pill"
+                                        data-bs-target="#users" role="tab" aria-controls="users"
+                                        aria-selected="true">
+                                    Пользователи
+                                </button>
+                                <button type="button"
+                                        class="nav-link btn-user btn-outline-primary tarrifs-filter__item admin-filter__item--statistics ng-star-inserted"
+                                        id="statistics-tab" data-bs-toggle="pill"
+                                        data-bs-target="#statistics" role="tab" aria-controls="statistics"
+                                        aria-selected="false">
+                                    Статистика
+                                </button>
+                                <button type="button"
+                                        class="nav-link btn-user btn-outline-primary tarrifs-filter__item tarrifs-filter__item--bundle ng-star-inserted"
+                                        id="tariffs-tab" data-bs-toggle="pill"
+                                        data-bs-target="#tariffs" role="tab" aria-controls="tariffs"
+                                        aria-selected="false">
+                                    Тарифы
+                                </button>
+                                <button type="button"
+                                        class="nav-link btn-user btn-outline-primary tarrifs-filter__item tarrifs-filter__item--sails ng-star-inserted"
+                                        id="stock-tab" data-bs-toggle="pill"
+                                        data-bs-target="#stock" role="tab" aria-controls="stock"
+                                        aria-selected="false">
+                                    Акции
+                                </button>
+                                <button type="button"
+                                        class="nav-link btn-user btn-outline-primary tarrifs-filter__item tarrifs-filter__item--sating ng-star-inserted"
+                                        id="settings-tab" data-bs-toggle="pill"
+                                        data-bs-target="#settings" role="tab" aria-controls="settings"
+                                        aria-selected="false">
+                                    Настройки
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -91,27 +104,111 @@
             <div class="card-user">
                 <div class="card-body">
                     <div class="tariff-item">
-                        <div class="tariff-item__top">
-                            <div class="tariff-item__title">
-                                <h5 class="card-title">Абонент : Чумачёв Владислав Константинович</h5>
+                        <div class="tab-content" id="v-pills-tabContent">
+                            <div class="tab-pane fade show active" id="users" role="tabpanel">
+                                <div class="tariff-item__title">
+                                    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                                        <div class="dropdown">
+                                            <button class="btn  me-3 add-button" type="button"
+                                                    id="add"
+                                                    data-bs-toggle="dropdown" aria-haspopup="true"
+                                                    aria-expanded="false">
+                                                +
+                                            </button>
+                                            <div class="dropdown-menu" aria-labelledby="add">
+                                                <button class="dropdown-item" type="button">добавить пользователя
+                                                </button>
+                                                <button class="dropdown-item" type="button">добавить админа</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <table class="table table-striped table-hover">
+                                    <thead>
+                                    <tr>
+                                        <th scope="col">имя</th>
+                                        <th scope="col">фамилия</th>
+                                        <th scope="col">статус</th>
+                                        <th scope="col">баланс</th>
+                                    </tr>
+                                    <tbody>
+                                    <c:forEach items="${users}" var="user">
+                                        <tr>
+                                            <td>${user.firstName}</td>
+                                            <td>${user.lastName}</td>
+                                            <td>${user.status}</td>
+                                            <td>${user.balance}</td>
+                                        </tr>
+                                    </c:forEach>
+                                    </tbody>
+                                    </thead>
+                                </table>
                             </div>
-                            <div class="tariff-item__title">
-                                <h5 class="card-title">Логин : 1561001453502</h5>
+                            <div class="tab-pane fade show" id="statistics" role="tabpanel">
+                                <div class="tariff-item__title">
+                                    <h5 class="card-title">Абонент : Чумачёв Владислав Константинович</h5>
+                                </div>
+                                <div class="tariff-item__title">
+                                    <h5 class="card-title">Логин : 1561001453502</h5>
+                                </div>
+                                <div class="tariff-item__title">
+                                    <h5 class="card-title">Статус :</h5>
+                                </div>
+                                <div class="tariff-item__title">
+                                    <h5 class="card-title">Дата активации : 11.03.2021 02:37:21</h5>
+                                </div>
                             </div>
-                            <div class="tariff-item__title">
-                                <h5 class="card-title">Статус : не блокирован</h5>
+                            <div class="tab-pane fade show" id="tariffs" role="tabpanel">
+                                <div class="tariff-item__title">
+                                    <h5 class="card-title">Абонент : Чумачёв Владислав Константинович</h5>
+                                </div>
+                                <div class="tariff-item__title">
+                                    <h5 class="card-title">Логин : </h5>
+                                </div>
+                                <div class="tariff-item__title">
+                                    <h5 class="card-title">Статус : не блокирован</h5>
+                                </div>
+                                <div class="tariff-item__title">
+                                    <h5 class="card-title">Дата активации : 11.03.2021 02:37:21</h5>
+                                </div>
                             </div>
-                            <div class="tariff-item__title">
-                                <h5 class="card-title">Дата активации : 11.03.2021 02:37:21</h5>
+                            <div class="tab-pane fade show" id="stock" role="tabpanel">
+                                <div class="tariff-item__title">
+                                    <h5 class="card-title">Абонент : Чумачёв Константинович</h5>
+                                </div>
+                                <div class="tariff-item__title">
+                                    <h5 class="card-title">Логин : 1561001453502</h5>
+                                </div>
+                                <div class="tariff-item__title">
+                                    <h5 class="card-title">Статус : не блокирован</h5>
+                                </div>
+                                <div class="tariff-item__title">
+                                    <h5 class="card-title">Дата активации : 11.03.2021 02:37:21</h5>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade show" id="settings" role="tabpanel">
+                                <div class="tariff-item__title">
+                                    <h5 class="card-title">Абонент : Владислав Константинович</h5>
+                                </div>
+                                <div class="tariff-item__title">
+                                    <h5 class="card-title">Логин : 1561001453502</h5>
+                                </div>
+                                <div class="tariff-item__title">
+                                    <h5 class="card-title">Статус : не блокирован</h5>
+                                </div>
+                                <div class="tariff-item__title">
+                                    <h5 class="card-title">Дата активации : 11.03.2021 02:37:21</h5>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-
-
     </div>
+
+
+</div>
 </div>
 
 <footer class="bg-dark text-center text-white mt-auto">

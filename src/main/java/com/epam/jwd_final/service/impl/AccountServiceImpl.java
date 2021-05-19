@@ -29,4 +29,14 @@ public class AccountServiceImpl implements AccountService {
             throw new ServiceException(e);
         }
     }
+
+    @Override
+    public Long addAccount(String login, String password) throws ServiceException {
+        try {
+            accountDao.createAccount(login, password);
+            return findAccountByLoginAndPassword(login, password).get().getId();
+        } catch (DaoException e) {
+            throw new ServiceException(e);
+        }
+    }
 }

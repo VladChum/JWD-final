@@ -1,6 +1,7 @@
 package com.epam.jwd_final.entity;
 
-import java.util.Date;
+import java.sql.Date;
+import java.time.LocalDate;
 import java.util.Objects;
 
 public class Subscription extends AbstractBaseEntity {
@@ -9,11 +10,18 @@ public class Subscription extends AbstractBaseEntity {
     private Date endDate;
     private Long tariffPlanId;
 
-    public Subscription(Long id,  Date startDate, Date endDate, Long userId, Long tariffPlanId) {
+    public Subscription(Long id, Date startDate, Date endDate, Long userId, Long tariffPlanId) {
         super(id);
         this.userId = userId;
         this.startDate = startDate;
         this.endDate = endDate;
+        this.tariffPlanId = tariffPlanId;
+    }
+
+    public Subscription(Long id, Long userId, Date startDate, Long tariffPlanId) {
+        super(id);
+        this.userId = userId;
+        this.startDate = startDate;
         this.tariffPlanId = tariffPlanId;
     }
 

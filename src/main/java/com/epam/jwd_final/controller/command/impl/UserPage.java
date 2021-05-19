@@ -22,9 +22,10 @@ public class UserPage implements Command {
     private static final Logger LOGGER = Logger.getLogger(UserPage.class);
 
     private final String USER_PAGE = "/WEB-INF/jsp/user.jsp";
-    private static final String TARIFF_PLANS = "tariffPlans";
-    private final String USER = "user";
+    private final String TARIFF_PLANS = "tariffPlans";
+    private final String SUBSCRIPTION = "subscription";
     private final String ACCOUNT = "account";
+    private final String USER = "user";
 
     private final UserService userService = ServiceProvider.INSTANCE.getUserService();
     private final AccountService accountService = ServiceProvider.INSTANCE.getAccountService();
@@ -42,7 +43,7 @@ public class UserPage implements Command {
             req.setAttribute(USER, user);
             req.setAttribute(ACCOUNT, account);
             req.setAttribute(TARIFF_PLANS, tariffPlans);
-            req.setAttribute("subscription", subscription);
+            req.setAttribute(SUBSCRIPTION, subscription);
         } catch (ServiceException e) {
             LOGGER.log(Level.ERROR, e.getMessage() + " " + e);
         }
