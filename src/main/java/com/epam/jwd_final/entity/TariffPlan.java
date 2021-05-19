@@ -17,8 +17,8 @@ public class TariffPlan extends AbstractBaseEntity {
         this.speed = speed;
     }
 
-    public TariffPlan(Long id, String name, BigDecimal price, int speed) {
-        super(id);
+    public TariffPlan(String name, BigDecimal price, int speed) {
+        super(1L);
         this.name = name;
         this.price = price;
         this.speed = speed;

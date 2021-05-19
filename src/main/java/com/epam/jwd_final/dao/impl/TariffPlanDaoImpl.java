@@ -27,10 +27,12 @@ public class TariffPlanDaoImpl implements com.epam.jwd_final.dao.TariffPlanDao {
             "VALUES (?, ?, ?)";
     /**TODO
      * add update tariff price
-     * add delete tariff
      * add update tariff discount
      * */
     private static final String UPDATE_TARIFF = "update user set  where login = ?";
+    /**ToDo
+     * обработка удаления тарифа если его кто-то использует
+     * */
     private static final String DELETE_TARIFF = "delete from tariff where id = ?";
 
     TariffPlanDaoImpl() {
@@ -79,15 +81,15 @@ public class TariffPlanDaoImpl implements com.epam.jwd_final.dao.TariffPlanDao {
     }
 
     @Override
-    public void createTariff(TariffPlan tariffPlan) {
+    public void createTariff(TariffPlan tariffPlan) throws DaoException {
         try (Connection connection = ConnectionPool.INSTANCE.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(CREATE_TARIFF)) {
             preparedStatement.setString(1, tariffPlan.getName());
             preparedStatement.setBigDecimal(2, tariffPlan.getPrice());
             preparedStatement.setInt(3, tariffPlan.getSpeed());
             preparedStatement.executeUpdate();
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
+        } catch (SQLException e) {
+            throw new DaoException(e);
         }
     }
 
@@ -97,7 +99,13 @@ public class TariffPlanDaoImpl implements com.epam.jwd_final.dao.TariffPlanDao {
     }
 
     @Override
-    public void deleteTariff(TariffPlan tariffPlan) {
-
+    public void deleteTariff(TariffPlan tariffPlan) throws DaoException {
+        try (Connection connection = ConnectionPool.INSTANCE.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(DELETE_TARIFF)) {
+            preparedStatement.setLong(1, tariffPlan.getId());
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            throw new DaoException(e);
+        }
     }
 }

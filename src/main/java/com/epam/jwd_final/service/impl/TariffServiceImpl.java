@@ -36,4 +36,22 @@ public class TariffServiceImpl implements TariffService {
     public void updateTariff(Long userId, Long newTariffId) throws ServiceException {
 
     }
+
+    @Override
+    public void createTariff(TariffPlan tariffPlan) throws ServiceException {
+        try {
+            tariffPlanDao.createTariff(tariffPlan);
+        } catch (DaoException e) {
+            throw new ServiceException(e);
+        }
+    }
+
+    @Override
+    public void deleteTariff(TariffPlan tariffPlan) throws ServiceException {
+        try {
+            tariffPlanDao.deleteTariff(tariffPlan);
+        } catch (DaoException e) {
+            throw new ServiceException(e);
+        }
+    }
 }
