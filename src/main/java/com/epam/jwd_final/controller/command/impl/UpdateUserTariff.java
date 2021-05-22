@@ -15,11 +15,12 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
-public class UpdateTariff implements Command {
-    private static final Logger LOGGER = Logger.getLogger(UpdateTariff.class);
+public class UpdateUserTariff implements Command {
+    private static final Logger LOGGER = Logger.getLogger(UpdateUserTariff.class);
 
     private final String USER_PAGE = "/Controller?command=userPage";
     private final String USER = "user";
+    private final String TARIFF_ID = "tariffId";
     private final SubscriptionService subscriptionService = ServiceProvider.INSTANCE.getSubscriptionService();
     private final UserService userService = ServiceProvider.INSTANCE.getUserService();
 
@@ -28,16 +29,12 @@ public class UpdateTariff implements Command {
         HttpSession session = req.getSession();
         try {
             User user = userService.findUserByAccountId((Long) session.getAttribute(USER)).get();
-            /**ToDo
-             * cheng
-             * newTariffId = get from from user page
-            * */
-            Long newTariffId = 2L;
+            Long newTariffId = Long.valueOf(req.getParameter(TARIFF_ID));
             Long activeSubscriptionId = null;
             if (subscriptionService.findActiveUserSubscription(user.getId()) != null) {
                 activeSubscriptionId = subscriptionService.findActiveUserSubscription(user.getId()).getId();
+                subscriptionService.stopActiveSubscription(user.getId(), activeSubscriptionId);
             }
-            subscriptionService.stopActiveSubscription(user.getId(), activeSubscriptionId);
             subscriptionService.newSubscription(user.getId(), newTariffId);
         } catch (ServiceException e) {
             LOGGER.log(Level.ERROR, e.getMessage() + " " + e);

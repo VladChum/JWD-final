@@ -105,6 +105,7 @@
                     <div class="tariff-item">
                         <div class="tab-content" id="v-pills-tabContent">
                             <div class="tab-pane fade show active" id="users" role="tabpanel">
+<%--                               tariff button--%>
                                 <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
                                     <li class="nav-item" role="presentation">
                                         <button class="nav-link active" id="pills-home-tab" data-bs-toggle="pill"
@@ -126,20 +127,20 @@
                                     </li>
                                 </ul>
                                 <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                                <div class="dropdown">
-                                    <button class="btn add-button me-3" type="button"
-                                            id="add"
-                                            data-bs-toggle="dropdown" aria-haspopup="true"
-                                            aria-expanded="false">
-                                        +
-                                    </button>
-                                    <div class="dropdown-menu" aria-labelledby="add">
-                                        <button class="dropdown-item" type="button">добавить пользователя
+                                    <div class="dropdown">
+                                        <button class="btn add-button me-3" type="button"
+                                                id="add"
+                                                data-bs-toggle="dropdown" aria-haspopup="true"
+                                                aria-expanded="false">
+                                            +
                                         </button>
-                                        <button class="dropdown-item" type="button">добавить админа</button>
+                                        <div class="dropdown-menu" aria-labelledby="add">
+                                            <button class="dropdown-item" type="button">добавить пользователя
+                                            </button>
+                                            <button class="dropdown-item" type="button">добавить админа</button>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
                                 <div class="tab-content" id="pills-tabContent">
                                     <%--                                    user table--%>
                                     <div class="tab-pane fade show active" id="pills-home" role="tabpanel"
@@ -245,18 +246,84 @@
                                     <h5 class="card-title">Дата активации : 11.03.2021 02:37:21</h5>
                                 </div>
                             </div>
+                            <%--                            tariffs--%>
                             <div class="tab-pane fade show" id="tariffs" role="tabpanel">
-                                <div class="tariff-item__title">
-                                    <h5 class="card-title">Абонент : Чумачёв Владислав Константинович</h5>
+                                <ul class="nav nav-pills mb-3" id="tariff-tab" role="tablist">
+                                    <li class="nav-item" role="presentation">
+                                        <button class="nav-link active" id="active-tab" data-bs-toggle="pill"
+                                                data-bs-target="#pills-profile" type="button" role="tab"
+                                                aria-controls="pills-profile" aria-selected="false">активные тарифы
+                                        </button>
+                                    </li>
+                                    <li class="nav-item" role="presentation">
+                                        <button class="nav-link" id="deleted-tab" data-bs-toggle="pill"
+                                                data-bs-target="#pills-contact" type="button" role="tab"
+                                                aria-controls="pills-contact" aria-selected="false">удалённые тарифы
+                                        </button>
+                                    </li>
+                                </ul>
+                                <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                                    <button class="btn add-tariff-button me-3" type="button"
+                                            id="addTariff"
+                                            aria-expanded="false">
+                                        +
+                                    </button>
                                 </div>
-                                <div class="tariff-item__title">
-                                    <h5 class="card-title">Логин : </h5>
-                                </div>
-                                <div class="tariff-item__title">
-                                    <h5 class="card-title">Статус : не блокирован</h5>
-                                </div>
-                                <div class="tariff-item__title">
-                                    <h5 class="card-title">Дата активации : 11.03.2021 02:37:21</h5>
+<%--                                tariff cards--%>
+                                <div class="tariff-item__top">
+                                    <div class="row row-cols-1 row-cols-md-3 g-4">
+                                        <c:forEach items="${tariffs}" var="tariff">
+                                            <div class="col-sm-6">
+                                                <div class="card">
+                                                    <div class="card-body">
+                                                        <div class="tariff-item">
+                                                            <div class="tariff-item__top">
+                                                                <div class="tariff-item__title">
+                                                                    <h5 class="card-title">
+                                                                            ${tariff.name}
+                                                                    </h5>
+                                                                </div>
+                                                                <div class="tariff-item__text">
+                                                                    <p>Проводное подключение по Ethernet </p>
+                                                                    <p>Безлимит
+                                                                            ${tariff.speed}
+                                                                        Мбит/с </p>
+                                                                    <p>Keenetic Speedster 2.4 + 5 ГГц </p>
+                                                                </div>
+                                                            </div>
+                                                            <div class="tariff-item__body">
+                                                                <div class="tariff-item__price">
+                                                                    <span>
+                                                                        <b>
+                                                                                ${tariff.price}
+                                                                        </b>
+                                                                        руб/мес
+                                                                    </span>
+                                                                </div>
+                                                                <div class="dropdown">
+                                                                    <button class="btn button-tariff  me-3"
+                                                                            type="button" id="tariffMenu"
+                                                                            data-bs-toggle="dropdown"
+                                                                            aria-haspopup="true" aria-expanded="false">
+                                                                        изменить
+                                                                    </button>
+                                                                    <div class="dropdown-menu"
+                                                                         aria-labelledby="languageMenu">
+                                                                        <button class="dropdown-item" type="button">
+                                                                            изменить
+                                                                        </button>
+                                                                        <button class="dropdown-item" type="button">
+                                                                            удалить
+                                                                        </button>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </c:forEach>
+                                    </div>
                                 </div>
                             </div>
                             <div class="tab-pane fade show" id="stock" role="tabpanel">
