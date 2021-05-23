@@ -187,10 +187,11 @@
                                                                 </div>
                                                                 <c:if test="${tariffPlan.id != subscription.tariffPlanId}">
                                                                     <div class="tariff-item__btns">
-                                                                        <a href="Controller?command=updateTariff"
-                                                                           class="button-tariff js-open-popup"
-                                                                           data-id="single"
-                                                                           data-title="подключение">Подключить</a>
+                                                                        <button name="chengTariffButton"
+                                                                                class="chengTariffButton btn button-tariff"
+                                                                                data-tariff-id="${tariffPlan.id}"
+                                                                                type="button">Подключить
+                                                                        </button>
                                                                     </div>
                                                                 </c:if>
                                                             </div>
@@ -308,5 +309,7 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
         crossorigin="anonymous"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script type="text/javascript" src="/resources/js/script.js"></script>
 </body>
 </html>

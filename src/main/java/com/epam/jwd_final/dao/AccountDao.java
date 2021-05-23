@@ -10,14 +10,6 @@ public interface AccountDao {
     List<Account> findAllAccount() throws DaoException;
     Optional<Account> findAccountById(int accountId) throws DaoException;
     Optional<Account> findAccountByLoginAndPassword(String accountLogin, String accountPassword) throws DaoException;
-    /**todo
-     *
-     * add create
-     *
-     *
-     * add dto
-     *
-     * */
     void createAccount(String login, String password) throws DaoException;
     void updateAccount(Account account) throws DaoException;
     void deleteAccount(Account account) throws DaoException;

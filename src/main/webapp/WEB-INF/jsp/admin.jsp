@@ -11,7 +11,6 @@
           rel="stylesheet"
           integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
     <link rel="stylesheet" href="../../resources/css/style.css">
-
     <title>admin</title>
 </head>
 <body class="d-flex flex-column min-vh-100">
@@ -106,43 +105,132 @@
                     <div class="tariff-item">
                         <div class="tab-content" id="v-pills-tabContent">
                             <div class="tab-pane fade show active" id="users" role="tabpanel">
-                                <div class="tariff-item__title">
-                                    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                                        <div class="dropdown">
-                                            <button class="btn  me-3 add-button" type="button"
-                                                    id="add"
-                                                    data-bs-toggle="dropdown" aria-haspopup="true"
-                                                    aria-expanded="false">
-                                                +
+<%--                               tariff button--%>
+                                <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+                                    <li class="nav-item" role="presentation">
+                                        <button class="nav-link active" id="pills-home-tab" data-bs-toggle="pill"
+                                                data-bs-target="#pills-home" type="button" role="tab"
+                                                aria-controls="pills-home" aria-selected="true">пользователи
+                                        </button>
+                                    </li>
+                                    <li class="nav-item" role="presentation">
+                                        <button class="nav-link" id="pills-profile-tab" data-bs-toggle="pill"
+                                                data-bs-target="#pills-profile" type="button" role="tab"
+                                                aria-controls="pills-profile" aria-selected="false">админы
+                                        </button>
+                                    </li>
+                                    <li class="nav-item" role="presentation">
+                                        <button class="nav-link" id="pills-contact-tab" data-bs-toggle="pill"
+                                                data-bs-target="#pills-contact" type="button" role="tab"
+                                                aria-controls="pills-contact" aria-selected="false">заблокированные
+                                        </button>
+                                    </li>
+                                </ul>
+                                <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                                    <div class="dropdown">
+                                        <button class="btn add-button me-3" type="button"
+                                                id="add"
+                                                data-bs-toggle="dropdown" aria-haspopup="true"
+                                                aria-expanded="false">
+                                            +
+                                        </button>
+                                        <div class="dropdown-menu" aria-labelledby="add">
+                                            <button class="dropdown-item" type="button">добавить пользователя
                                             </button>
-                                            <div class="dropdown-menu" aria-labelledby="add">
-                                                <button class="dropdown-item" type="button">добавить пользователя
-                                                </button>
-                                                <button class="dropdown-item" type="button">добавить админа</button>
-                                            </div>
+                                            <button class="dropdown-item" type="button">добавить админа</button>
                                         </div>
                                     </div>
                                 </div>
-                                <table class="table table-striped table-hover">
-                                    <thead>
-                                    <tr>
-                                        <th scope="col">имя</th>
-                                        <th scope="col">фамилия</th>
-                                        <th scope="col">статус</th>
-                                        <th scope="col">баланс</th>
-                                    </tr>
-                                    <tbody>
-                                    <c:forEach items="${users}" var="user">
-                                        <tr>
-                                            <td>${user.firstName}</td>
-                                            <td>${user.lastName}</td>
-                                            <td>${user.status}</td>
-                                            <td>${user.balance}</td>
-                                        </tr>
-                                    </c:forEach>
-                                    </tbody>
-                                    </thead>
-                                </table>
+                                <div class="tab-content" id="pills-tabContent">
+                                    <%--                                    user table--%>
+                                    <div class="tab-pane fade show active" id="pills-home" role="tabpanel"
+                                         aria-labelledby="pills-home-tab">
+                                        <table class="table table-striped table-hover">
+                                            <thead>
+                                            <tr>
+                                                <th scope="col">имя</th>
+                                                <th scope="col">фамилия</th>
+                                                <th scope="col">статус</th>
+                                                <th scope="col">баланс</th>
+                                            </tr>
+                                            <tbody>
+                                            <c:forEach items="${users}" var="user">
+                                                <tr>
+                                                    <td>${user.firstName}</td>
+                                                    <td>${user.lastName}</td>
+                                                    <td>${user.status}</td>
+                                                    <td>${user.balance}</td>
+                                                </tr>
+                                            </c:forEach>
+                                            </tbody>
+                                            </thead>
+                                        </table>
+                                    </div>
+                                    <%--                                    admin table--%>
+                                    <div class="tab-pane fade" id="pills-profile" role="tabpanel"
+                                         aria-labelledby="pills-profile-tab">
+                                        <table class="table table-striped table-hover">
+                                            <thead>
+                                            <tr>
+                                                <th scope="col">account id</th>
+                                                <th scope="col">login</th>
+                                                <th></th>
+                                            </tr>
+                                            <tbody>
+                                            <c:forEach items="${admins}" var="admin">
+                                                <tr>
+                                                    <td>${admin.id}</td>
+                                                    <td>${admin.login}</td>
+                                                    <td>
+                                                        <button>
+                                                            удалить
+                                                        </button>
+                                                    </td>
+                                                </tr>
+                                            </c:forEach>
+                                            </tbody>
+                                            </thead>
+                                        </table>
+                                    </div>
+                                    <%--                                    baned users--%>
+                                    <div class="tab-pane fade" id="pills-contact" role="tabpanel"
+                                         aria-labelledby="pills-contact-tab">
+                                        <table class="table table-striped">
+                                            <thead>
+                                            <tr>
+                                                <th scope="col">имя</th>
+                                                <th scope="col">фамилия</th>
+                                                <th scope="col">статус</th>
+                                                <th scope="col">баланс</th>
+                                                <th></th>
+                                                <th></th>
+                                            </tr>
+                                            <tbody class="table-danger">
+                                            <c:forEach items="${users}" var="user">
+                                                <c:if test="${user.status == \"BANNED\"}">
+                                                    <tr>
+                                                        <td>${user.firstName}</td>
+                                                        <td>${user.lastName}</td>
+                                                        <td class="color: #D90707">${user.status}</td>
+                                                        <td>${user.balance}</td>
+                                                        <td>
+                                                            <button>
+                                                                разблокировать
+                                                            </button>
+                                                        </td>
+                                                        <td>
+                                                            <button>
+                                                                удалить
+                                                            </button>
+                                                        </td>
+                                                    </tr>
+                                                </c:if>
+                                            </c:forEach>
+                                            </tbody>
+                                            </thead>
+                                        </table>
+                                    </div>
+                                </div>
                             </div>
                             <div class="tab-pane fade show" id="statistics" role="tabpanel">
                                 <div class="tariff-item__title">
@@ -158,18 +246,84 @@
                                     <h5 class="card-title">Дата активации : 11.03.2021 02:37:21</h5>
                                 </div>
                             </div>
+                            <%--                            tariffs--%>
                             <div class="tab-pane fade show" id="tariffs" role="tabpanel">
-                                <div class="tariff-item__title">
-                                    <h5 class="card-title">Абонент : Чумачёв Владислав Константинович</h5>
+                                <ul class="nav nav-pills mb-3" id="tariff-tab" role="tablist">
+                                    <li class="nav-item" role="presentation">
+                                        <button class="nav-link active" id="active-tab" data-bs-toggle="pill"
+                                                data-bs-target="#pills-profile" type="button" role="tab"
+                                                aria-controls="pills-profile" aria-selected="false">активные тарифы
+                                        </button>
+                                    </li>
+                                    <li class="nav-item" role="presentation">
+                                        <button class="nav-link" id="deleted-tab" data-bs-toggle="pill"
+                                                data-bs-target="#pills-contact" type="button" role="tab"
+                                                aria-controls="pills-contact" aria-selected="false">удалённые тарифы
+                                        </button>
+                                    </li>
+                                </ul>
+                                <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                                    <button class="btn add-tariff-button me-3" type="button"
+                                            id="addTariff"
+                                            aria-expanded="false">
+                                        +
+                                    </button>
                                 </div>
-                                <div class="tariff-item__title">
-                                    <h5 class="card-title">Логин : </h5>
-                                </div>
-                                <div class="tariff-item__title">
-                                    <h5 class="card-title">Статус : не блокирован</h5>
-                                </div>
-                                <div class="tariff-item__title">
-                                    <h5 class="card-title">Дата активации : 11.03.2021 02:37:21</h5>
+<%--                                tariff cards--%>
+                                <div class="tariff-item__top">
+                                    <div class="row row-cols-1 row-cols-md-3 g-4">
+                                        <c:forEach items="${tariffs}" var="tariff">
+                                            <div class="col-sm-6">
+                                                <div class="card">
+                                                    <div class="card-body">
+                                                        <div class="tariff-item">
+                                                            <div class="tariff-item__top">
+                                                                <div class="tariff-item__title">
+                                                                    <h5 class="card-title">
+                                                                            ${tariff.name}
+                                                                    </h5>
+                                                                </div>
+                                                                <div class="tariff-item__text">
+                                                                    <p>Проводное подключение по Ethernet </p>
+                                                                    <p>Безлимит
+                                                                            ${tariff.speed}
+                                                                        Мбит/с </p>
+                                                                    <p>Keenetic Speedster 2.4 + 5 ГГц </p>
+                                                                </div>
+                                                            </div>
+                                                            <div class="tariff-item__body">
+                                                                <div class="tariff-item__price">
+                                                                    <span>
+                                                                        <b>
+                                                                                ${tariff.price}
+                                                                        </b>
+                                                                        руб/мес
+                                                                    </span>
+                                                                </div>
+                                                                <div class="dropdown">
+                                                                    <button class="btn button-tariff  me-3"
+                                                                            type="button" id="tariffMenu"
+                                                                            data-bs-toggle="dropdown"
+                                                                            aria-haspopup="true" aria-expanded="false">
+                                                                        изменить
+                                                                    </button>
+                                                                    <div class="dropdown-menu"
+                                                                         aria-labelledby="languageMenu">
+                                                                        <button class="dropdown-item" type="button">
+                                                                            изменить
+                                                                        </button>
+                                                                        <button class="dropdown-item" type="button">
+                                                                            удалить
+                                                                        </button>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </c:forEach>
+                                    </div>
                                 </div>
                             </div>
                             <div class="tab-pane fade show" id="stock" role="tabpanel">

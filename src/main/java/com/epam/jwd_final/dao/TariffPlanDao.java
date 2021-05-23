@@ -14,7 +14,7 @@ public interface TariffPlanDao {
      *add cheng price and speed
      *add cheng discount
      * */
-    void createTariff(TariffPlan tariffPlan);
+    void createTariff(TariffPlan tariffPlan) throws DaoException;
     void updateTariff(TariffPlan tariffPlan);
-    void deleteTariff(TariffPlan tariffPlan);
+    void deleteTariff(TariffPlan tariffPlan) throws DaoException;
 }

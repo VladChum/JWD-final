@@ -6,7 +6,6 @@ import com.epam.jwd_final.entity.Subscription;
 import com.epam.jwd_final.exception.DaoException;
 
 import java.sql.*;
-import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
