@@ -9,7 +9,11 @@ import java.util.List;
 import java.util.Optional;
 
 public interface AdminService {
-    Optional<Admin> findAdminById (Long id) throws ServiceException;
+    Optional<Admin> findAdminById(Long id) throws ServiceException;
+
     Optional<Admin> findAdminByAccountId(Long id) throws ServiceException;
+
     List<Account> findAllAdminAccounts() throws ServiceException;
+
+    void createAdmin(Admin admin) throws ServiceException;
 }

@@ -40,4 +40,13 @@ public class AdminServiceImpl implements AdminService {
             throw new ServiceException(e);
         }
     }
+
+    @Override
+    public void createAdmin(Admin admin) throws ServiceException {
+        try {
+            adminDao.createAdmin(admin.getAccountId());
+        } catch (DaoException e) {
+            throw new ServiceException(e);
+        }
+    }
 }

@@ -19,9 +19,14 @@ public enum CommandProvider {
         commands.put("aboutPage", new AboutCompanyPage());
         commands.put("loginPage", new LoginPage());
         commands.put("signIn", new SignIn());
+        commands.put("signOut", new SignOut());
         commands.put("userPage", new UserPage());
         commands.put("adminPage", new AdminPage());
         commands.put("updateUserTariff", new UpdateUserTariff());
+        commands.put("createTariff", new CreateTariff());
+        commands.put("createUser", new CreateUser());
+        commands.put("deleteTariff", new DeleteTariff());
+        commands.put("createAdmin", new CreateAdmin());
     }
 
     public Command getCommand(String commandName) {
