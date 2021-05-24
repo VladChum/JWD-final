@@ -158,6 +158,7 @@
                                 <div class="tariff-item__top">
                                     <div class="row row-cols-1 row-cols-md-3 g-4">
                                         <c:forEach items="${tariffPlans}" var="tariffPlan">
+                                            <c:if test="${tariffPlan.active == 'true' || tariffPlan.id == subscription.tariffPlanId}">
                                             <div class="col-sm-6">
                                                 <div class="card">
                                                     <div class="card-body">
@@ -199,6 +200,7 @@
                                                     </div>
                                                 </div>
                                             </div>
+                                            </c:if>
                                         </c:forEach>
                                     </div>
                                 </div>

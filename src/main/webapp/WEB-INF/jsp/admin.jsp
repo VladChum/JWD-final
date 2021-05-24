@@ -354,14 +354,14 @@
                                 <ul class="nav nav-pills mb-3" id="tariff-tab" role="tablist">
                                     <li class="nav-item" role="presentation">
                                         <button class="nav-link active" id="active-tab" data-bs-toggle="pill"
-                                                data-bs-target="#pills-profile" type="button" role="tab"
-                                                aria-controls="pills-profile" aria-selected="false">активные тарифы
+                                                data-bs-target="#active-tariffs" type="button" role="tab"
+                                                aria-selected="false">активные тарифы
                                         </button>
                                     </li>
                                     <li class="nav-item" role="presentation">
-                                        <button class="nav-link" id="deleted-tab" data-bs-toggle="pill"
-                                                data-bs-target="#pills-contact" type="button" role="tab"
-                                                aria-controls="pills-contact" aria-selected="false">удалённые тарифы
+                                        <button class="nav-link" id="archive-tab" data-bs-toggle="pill"
+                                                data-bs-target="#archive-tariffs" type="button" role="tab"
+                                                aria-selected="false">архив
                                         </button>
                                     </li>
                                 </ul>
@@ -373,59 +373,130 @@
                                     </button>
                                 </div>
                                 <%--                                tariff cards--%>
-                                <div class="tariff-item__top">
-                                    <div class="row row-cols-1 row-cols-md-3 g-4">
-                                        <c:forEach items="${tariffs}" var="tariff">
-                                            <div class="col-sm-6">
-                                                <div class="card">
-                                                    <div class="card-body">
-                                                        <div class="tariff-item">
-                                                            <div class="tariff-item__top">
-                                                                <div class="tariff-item__title">
-                                                                    <h5 class="card-title">
-                                                                            ${tariff.name}
-                                                                    </h5>
-                                                                </div>
-                                                                <div class="tariff-item__text">
-                                                                    <p>Проводное подключение по Ethernet </p>
-                                                                    <p>Безлимит
-                                                                            ${tariff.speed}
-                                                                        Мбит/с </p>
-                                                                    <p>Keenetic Speedster 2.4 + 5 ГГц </p>
-                                                                </div>
-                                                            </div>
-                                                            <div class="tariff-item__body">
-                                                                <div class="tariff-item__price">
+                                <div class="tab-content" id="pills-tariffs">
+                                    <div class="tab-pane fade show active" id="active-tariffs" role="tabpanel">
+                                        <div class="tariff-item__top">
+                                            <div class="row row-cols-1 row-cols-md-3 g-4">
+                                                <c:forEach items="${tariffs}" var="tariff">
+                                                    <c:if test="${tariff.active == 'true'}">
+                                                        <div class="col-sm-6">
+                                                            <div class="card">
+                                                                <div class="card-body">
+                                                                    <div class="tariff-item">
+                                                                        <div class="tariff-item__top">
+                                                                            <div class="tariff-item__title">
+                                                                                <h5 class="card-title">
+                                                                                        ${tariff.name}
+                                                                                </h5>
+                                                                            </div>
+                                                                            <div class="tariff-item__text">
+                                                                                <p>Проводное подключение по
+                                                                                    Ethernet </p>
+                                                                                <p>Безлимит
+                                                                                        ${tariff.speed}
+                                                                                    Мбит/с </p>
+                                                                                <p>Keenetic Speedster 2.4 + 5 ГГц </p>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="tariff-item__body">
+                                                                            <div class="tariff-item__price">
                                                                     <span>
                                                                         <b>
                                                                                 ${tariff.price}
                                                                         </b>
                                                                         руб/мес
                                                                     </span>
-                                                                </div>
-                                                                <div class="dropdown">
-                                                                    <button class="btn button-tariff  me-3"
-                                                                            type="button" id="tariffMenu"
-                                                                            data-bs-toggle="dropdown"
-                                                                            aria-haspopup="true" aria-expanded="false">
-                                                                        изменить
-                                                                    </button>
-                                                                    <div class="dropdown-menu"
-                                                                         aria-labelledby="languageMenu">
-                                                                        <button class="dropdown-item" type="button">
-                                                                            изменить
-                                                                        </button>
-                                                                        <button class="dropdown-item" type="button">
-                                                                            удалить
-                                                                        </button>
+                                                                            </div>
+                                                                            <div class="dropdown">
+                                                                                <button class="btn button-tariff  me-3"
+                                                                                        type="button" id="tariffMenu"
+                                                                                        data-bs-toggle="dropdown"
+                                                                                        aria-haspopup="true"
+                                                                                        aria-expanded="false">
+                                                                                    изменить
+                                                                                </button>
+                                                                                <div class="dropdown-menu">
+                                                                                    <button class="dropdown-item"
+                                                                                            type="button">
+                                                                                        изменить
+                                                                                    </button>
+                                                                                    <button class="dropdown-item"
+                                                                                            type="button">
+                                                                                        удалить
+                                                                                    </button>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                    </div>
-                                                </div>
+                                                    </c:if>
+                                                </c:forEach>
                                             </div>
-                                        </c:forEach>
+                                        </div>
+                                    </div>
+                                    <div class="tab-pane fade" id="archive-tariffs" role="tabpanel">
+                                        <div class="tariff-item__top">
+                                            <div class="row row-cols-1 row-cols-md-3 g-4">
+                                                <c:forEach items="${tariffs}" var="tariff">
+                                                    <c:if test="${tariff.active == 'false'}">
+                                                        <div class="col-sm-6">
+                                                            <div class="card">
+                                                                <div class="card-body">
+                                                                    <div class="tariff-item">
+                                                                        <div class="tariff-item__top">
+                                                                            <div class="tariff-item__title">
+                                                                                <h5 class="card-title">
+                                                                                        ${tariff.name}
+                                                                                </h5>
+                                                                            </div>
+                                                                            <div class="tariff-item__text">
+                                                                                <p>Проводное подключение по
+                                                                                    Ethernet </p>
+                                                                                <p>Безлимит
+                                                                                        ${tariff.speed}
+                                                                                    Мбит/с </p>
+                                                                                <p>Keenetic Speedster 2.4 + 5 ГГц </p>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="tariff-item__body">
+                                                                            <div class="tariff-item__price">
+                                                                                <span>
+                                                                                    <b>
+                                                                                            ${tariff.price}
+                                                                                    </b>
+                                                                                    руб/мес
+                                                                                </span>
+                                                                            </div>
+                                                                            <div class="dropdown">
+                                                                                <button class="btn button-tariff  me-3"
+                                                                                        type="button" id="archiveTariffMenu"
+                                                                                        data-bs-toggle="dropdown"
+                                                                                        aria-haspopup="true"
+                                                                                        aria-expanded="false">
+                                                                                    изменить
+                                                                                </button>
+                                                                                <div class="dropdown-menu">
+                                                                                    <button class="dropdown-item"
+                                                                                            type="button">
+                                                                                        изменить
+                                                                                    </button>
+                                                                                    <button class="dropdown-item"
+                                                                                            type="button">
+                                                                                        активировать
+                                                                                    </button>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </c:if>
+                                                </c:forEach>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>

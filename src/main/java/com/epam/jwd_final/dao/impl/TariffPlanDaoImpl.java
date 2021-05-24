@@ -15,11 +15,13 @@ import java.util.Optional;
 public class TariffPlanDaoImpl implements com.epam.jwd_final.dao.TariffPlanDao {
     private static final String GET_ALL_TARIFF = "select t.id, t.name, " +
             "t.price, t.discount_id, " +
-            "t.speed " +
+            "t.speed, " +
+            "t.active " +
             "from tariff_plan t ";
     private static final String FIND_TARIFF_BY_ID = "select t.id, t.name, " +
             "t.price, t.discount_id, " +
-            "t.speed " +
+            "t.speed," +
+            "t.active " +
             "from tariff_plan t " +
             "where t.id = ?";
     private static final String CREATE_TARIFF = "insert into tariff_plan " +
@@ -50,7 +52,8 @@ public class TariffPlanDaoImpl implements com.epam.jwd_final.dao.TariffPlanDao {
                             resultSet.getString(2),
                             resultSet.getBigDecimal(3),
                             resultSet.getLong(4),
-                            resultSet.getInt(5));
+                            resultSet.getInt(5),
+                            resultSet.getBoolean(6));
                     tariffPlans.add(tariffPlan);
                 }
             }
@@ -71,7 +74,8 @@ public class TariffPlanDaoImpl implements com.epam.jwd_final.dao.TariffPlanDao {
                             resultSet.getString(2),
                             resultSet.getBigDecimal(3),
                             resultSet.getLong(4),
-                            resultSet.getInt(5)));
+                            resultSet.getInt(5),
+                            resultSet.getBoolean(6)));
                 }
             }
         } catch (SQLException e) {

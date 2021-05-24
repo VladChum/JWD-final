@@ -8,13 +8,15 @@ public class TariffPlan extends AbstractBaseEntity {
     private BigDecimal price;
     private Long discountId;
     private int speed;
+    private boolean active;
 
-    public TariffPlan(Long id, String name, BigDecimal price, Long discountId, int speed) {
+    public TariffPlan(Long id, String name, BigDecimal price, Long discountId, int speed, boolean active) {
         super(id);
         this.name = name;
         this.price = price;
         this.discountId = discountId;
         this.speed = speed;
+        this.active = active;
     }
 
     public TariffPlan(String name, BigDecimal price, int speed) {
@@ -22,6 +24,7 @@ public class TariffPlan extends AbstractBaseEntity {
         this.name = name;
         this.price = price;
         this.speed = speed;
+        this.active = true;
     }
 
     public String getName() {
@@ -34,6 +37,14 @@ public class TariffPlan extends AbstractBaseEntity {
 
     public BigDecimal getPrice() {
         return price;
+    }
+
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
     }
 
     public void setPrice(BigDecimal price) {
@@ -70,7 +81,8 @@ public class TariffPlan extends AbstractBaseEntity {
         return Objects.equals(name, tariffPlan.name)
                 && Objects.equals(price, tariffPlan.price)
                 && Objects.equals(discountId, tariffPlan.discountId)
-                && Objects.equals(speed, tariffPlan.speed);
+                && Objects.equals(speed, tariffPlan.speed)
+                && Objects.equals(active, tariffPlan.active);
     }
 
     @Override
@@ -80,6 +92,7 @@ public class TariffPlan extends AbstractBaseEntity {
                 ", price=" + price +
                 ", discountId=" + discountId +
                 ", speed=" + speed +
+                ", active=" + active +
                 '}';
     }
 }
