@@ -35,7 +35,7 @@ public class TariffPlanDaoImpl implements com.epam.jwd_final.dao.TariffPlanDao {
     /**ToDo
      * обработка удаления тарифа если его кто-то использует
      * */
-    private static final String DELETE_TARIFF = "delete from tariff where id = ?";
+    private static final String DELETE_TARIFF = "update tariff_plan set active = 0 where id = ?";
 
     TariffPlanDaoImpl() {
     }
@@ -103,10 +103,10 @@ public class TariffPlanDaoImpl implements com.epam.jwd_final.dao.TariffPlanDao {
     }
 
     @Override
-    public void deleteTariff(TariffPlan tariffPlan) throws DaoException {
+    public void deleteTariff(Long tariffId) throws DaoException {
         try (Connection connection = ConnectionPool.INSTANCE.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(DELETE_TARIFF)) {
-            preparedStatement.setLong(1, tariffPlan.getId());
+            preparedStatement.setLong(1, tariffId);
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             throw new DaoException(e);

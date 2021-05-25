@@ -128,10 +128,95 @@ $("document").ready(function () {
         }
     });
 
-    $('#closeCreateAdminModal').on('click', function (){
+    $('#closeCreateAdminModal').on('click', function () {
         $('#newAdminCreatePassword').val("");
         $('#newAdminCreateLogin').val("");
         $('#errorPasswordAdmin').html("");
         $('#errorLoginAdmin').html("");
+    });
+
+    $('#newTariffName').on('keyup', function () {
+        var name = $('#newTariffName').val();
+        if (name.length < 2 && name.length !== 0) {
+            $('#errorNameTariff').html("Wrong input: name too short");
+        } else {
+            $('#errorNameTariff').html("");
+        }
+    });
+
+    $('#newTariffSpeed').on('keyup', function () {
+        var speed = parseInt($('#newTariffSpeed').val());
+        if (speed <= 0 || speed > 100000000) {
+            $('#errorSpeedTariff').html("Wrong input: speed > 0 and speed < 100000000");
+        } else {
+            $('#errorSpeedTariff').html("");
+        }
+    });
+
+    $('#newTariffPrice').on('keyup', function () {
+        var price = parseFloat($('#newTariffPrice').val());
+        if (price < 0 || price > 100000000) {
+            $('#errorPriceTariff').html("Wrong input: price >= 0 and price < 100000000");
+        } else {
+            $('#errorPriceTariff').html("");
+        }
+    });
+
+    $('#closeCreateTariff').on('click', function () {
+        $('#newTariffPrice').val("");
+        $('#newTariffSpeed').val("");
+        $('#newTariffName').val("");
+        $('#errorPriceTariff').html("");
+        $('#errorSpeedTariff').html("");
+        $('#errorNameTariff').html("");
+    });
+
+    $('#createTariff').on('click', function () {
+        var name = $('#newTariffName').val();
+        var price = parseFloat($('#newTariffPrice').val());
+        var speed = parseInt($('#newTariffSpeed').val());
+        var valid = 0;
+
+        if (name.length < 2 && name.length !== 0) {
+            $('#errorNameTariff').html("Wrong input: name too short");
+        } else {
+            $('#errorNameTariff').html("");
+            valid++;
+        }
+        if (speed <= 0 || speed > 100000000) {
+            $('#errorSpeedTariff').html("Wrong input: speed > 0 and speed < 100000000");
+        } else {
+            $('#errorSpeedTariff').html("");
+            valid++;
+        }
+        if (price < 0 || price > 100000000) {
+            $('#errorPriceTariff').html("Wrong input: price >= 0 and price < 100000000");
+        } else {
+            $('#errorPriceTariff').html("");
+            valid++;
+        }
+
+        if (valid === 3) {
+            var data = {
+                name: name,
+                price: price,
+                speed: speed
+            }
+            var url = "Controller?command=createTariff";
+            $.post(url, data, function (data, status) {
+                location.reload();
+            });
+        }
+    });
+
+    $('.archiveTariffButton').on('click', function () {
+        var tariffId = $(this).attr('data-tariff-id');
+        var data = {
+            tariffId: tariffId
+        }
+        var url = "Controller?command=deleteTariff";
+        $.post(url, data, function (data, status) {
+            location.reload();
+        });
     });
 })

@@ -1,6 +1,9 @@
 package com.epam.jwd_final;
 
+import com.epam.jwd_final.dao.impl.DaoProvider;
+import com.epam.jwd_final.dao.impl.TariffPlanDaoImpl;
 import com.epam.jwd_final.entity.Subscription;
+import com.epam.jwd_final.entity.TariffPlan;
 import com.epam.jwd_final.exception.ConnectionPoolException;
 import com.epam.jwd_final.exception.DaoException;
 import com.epam.jwd_final.exception.ServiceException;
@@ -38,9 +41,10 @@ public class Main {
 //        } catch (ServiceException e) {
 //            e.printStackTrace();
 //        }
-        List<Subscription> subscription = ServiceProvider.INSTANCE.getSubscriptionService().findAllUserSubscription(1L);
-        for (int i = 0; i < subscription.size(); i++) {
-            System.out.println(subscription.get(i).toString());
-        }
+//        List<Subscription> subscription = ServiceProvider.INSTANCE.getSubscriptionService().findAllUserSubscription(1L);
+//        for (int i = 0; i < subscription.size(); i++) {
+//            System.out.println(subscription.get(i).toString());
+//        }
+//        DaoProvider.INSTANCE.getTariffPlanDao().deleteTariff(2L);
     }
 }

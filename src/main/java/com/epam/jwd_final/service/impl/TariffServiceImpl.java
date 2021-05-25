@@ -47,9 +47,9 @@ public class TariffServiceImpl implements TariffService {
     }
 
     @Override
-    public void deleteTariff(TariffPlan tariffPlan) throws ServiceException {
+    public void deleteTariff(Long tariffId) throws ServiceException {
         try {
-            tariffPlanDao.deleteTariff(tariffPlan);
+            tariffPlanDao.deleteTariff(tariffId);
         } catch (DaoException e) {
             throw new ServiceException(e);
         }

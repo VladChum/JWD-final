@@ -19,7 +19,7 @@ public class CreateTariff implements Command {
 
     private final TariffService tariffService = ServiceProvider.INSTANCE.getTariffService();
 
-    private final String TARIFF_NAME = "tariffName";
+    private final String TARIFF_NAME = "name";
     private final String PRICE = "price";
     private final String SPEED = "speed";
 

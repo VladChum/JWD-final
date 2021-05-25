@@ -367,10 +367,53 @@
                                 </ul>
                                 <div class="d-grid gap-2 d-md-flex justify-content-md-end">
                                     <button class="btn add-tariff-button me-3" type="button"
-                                            id="addTariff"
+                                            id="newTariffButton"
+                                            data-bs-toggle="modal" data-bs-target="#newTariffForm"
                                             aria-expanded="false">
                                         +
                                     </button>
+                                </div>
+                                <div class="modal fade" id="newTariffForm" data-bs-backdrop="static"
+                                     data-bs-keyboard="false" tabindex="-1"
+                                     aria-hidden="true">
+                                    <div class="modal-dialog modal-lg">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="newATariff">new Tariff</h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                        aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <br>
+                                                <h6>Name</h6>
+                                                <input id="newTariffName" name="name" class="form-control"
+                                                       placeholder="name">
+                                                <div id="errorNameTariff" class="errorMassage"></div>
+                                                <br>
+                                                <h6>Price</h6>
+                                                <input name="price" class="form-control"
+                                                       id="newTariffPrice"
+                                                       placeholder="price">
+                                                <div id="errorPriceTariff" class="errorMassage"></div>
+                                                <br>
+                                                <h6>Speed</h6>
+                                                <input name="speed" class="form-control"
+                                                       id="newTariffSpeed"
+                                                       placeholder="price">
+                                                <div id="errorSpeedTariff" class="errorMassage"></div>
+                                                <br>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" id="closeCreateTariff"
+                                                        class="btn btn-secondary" data-bs-dismiss="modal">
+                                                    отмена
+                                                </button>
+                                                <button type="button" id="createTariff" class="btn btn-primary">
+                                                    добавить тариф
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                                 <%--                                tariff cards--%>
                                 <div class="tab-content" id="pills-tariffs">
@@ -420,7 +463,9 @@
                                                                                             type="button">
                                                                                         изменить
                                                                                     </button>
-                                                                                    <button class="dropdown-item"
+                                                                                    <button class="archiveTariffButton dropdown-item"
+                                                                                            name="archiveTariffButton"
+                                                                                            data-tariff-id="${tariff.id}"
                                                                                             type="button">
                                                                                         удалить
                                                                                     </button>

@@ -16,5 +16,5 @@ public interface TariffPlanDao {
      * */
     void createTariff(TariffPlan tariffPlan) throws DaoException;
     void updateTariff(TariffPlan tariffPlan);
-    void deleteTariff(TariffPlan tariffPlan) throws DaoException;
+    void deleteTariff(Long tariffId) throws DaoException;
 }
