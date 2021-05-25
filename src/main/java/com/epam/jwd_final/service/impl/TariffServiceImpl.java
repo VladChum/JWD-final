@@ -38,6 +38,15 @@ public class TariffServiceImpl implements TariffService {
     }
 
     @Override
+    public void activateTariff(Long tariffId) throws ServiceException {
+        try {
+            tariffPlanDao.activateTariff(tariffId);
+        } catch (DaoException e) {
+            throw new ServiceException(e);
+        }
+    }
+
+    @Override
     public void createTariff(TariffPlan tariffPlan) throws ServiceException {
         try {
             tariffPlanDao.createTariff(tariffPlan);

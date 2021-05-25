@@ -219,4 +219,15 @@ $("document").ready(function () {
             location.reload();
         });
     });
+
+    $('.activateTariffButton').on('click', function() {
+        var tariffId = $(this).attr('data-tariff-id');
+        var data = {
+            tariffId: tariffId
+        }
+        var url = "Controller?command=activateTariff";
+        $.post(url, data, function (data, status) {
+            location.reload();
+        });
+    });
 })

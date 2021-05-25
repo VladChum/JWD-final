@@ -527,7 +527,9 @@
                                                                                             type="button">
                                                                                         изменить
                                                                                     </button>
-                                                                                    <button class="dropdown-item"
+                                                                                    <button class="activateTariffButton dropdown-item"
+                                                                                            name="activateTariffButton"
+                                                                                            data-tariff-Id="${tariff.id}"
                                                                                             type="button">
                                                                                         активировать
                                                                                     </button>
