@@ -84,17 +84,118 @@
                         <div class="tariff-item__title">
                             <div class="d-grid gap-2 d-md-flex justify-content-md-end">
                                 <div class="dropdown">
-                                        <button class="btn  me-3 add-button" type="button"
-                                                id="add"
-                                                data-bs-toggle="dropdown" aria-haspopup="true"
-                                                aria-expanded="false">
-                                            +
-                                        </button>
-
+                                    <button class="btn add-button me-3" type="button"
+                                            id="add"
+                                            data-bs-toggle="dropdown" aria-haspopup="true"
+                                            aria-expanded="false">
+                                        +
+                                    </button>
                                     <div class="dropdown-menu" aria-labelledby="add">
-                                        <button class="dropdown-item" type="button">добавить пользователя
+                                        <button class="dropdown-item " type="button"
+                                                data-bs-toggle="modal" data-bs-target="#newUserForm">добавить
+                                            пользователя
                                         </button>
-                                        <button class="dropdown-item" type="button">добавить админа</button>
+                                        <button class="dropdown-item" type="button" data-bs-toggle="modal"
+                                                data-bs-target="#newAdminForm">добавить админа
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+<!--                            <%&#45;&#45;                                    modal add user&#45;&#45;%>-->
+                            <div class="modal fade" id="newUserForm" data-bs-backdrop="static"
+                                 data-bs-keyboard="false" tabindex="-1"
+                                 aria-hidden="true">
+                                <div class="modal-dialog modal-lg">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="newUser">add User</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                    aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <br>
+                                            <h6>login</h6>
+                                            <input id="newUserCreateLogin" name="login" class="form-control"
+                                                   placeholder="login">
+                                            <div id="errorLoginUser" class="errorMassage"></div>
+                                            <br>
+                                            <h6>password</h6>
+                                            <input type="password" name="password" class="form-control"
+                                                   id="newUserCreatePassword"
+                                                   placeholder="password">
+                                            <div id="errorPasswordUser" class="errorMassage"></div>
+                                            <br>
+                                            <h6>имя</h6>
+                                            <input name="firstName" class="form-control"
+                                                   id="newUserFirstName"
+                                                   placeholder="first name">
+                                            <div id="errorFirstNameUser" class="errorMassage"></div>
+                                            <br>
+                                            <h6>Фамилия</h6>
+                                            <input class="form-control"
+                                                   id="newUserLastName"
+                                                   placeholder="last name">
+                                            <div class="errorMassage" id="errorLastNameUser"></div>
+                                            <br>
+                                            <h6>мобильный номер</h6>
+                                            <input class="form-control"
+                                                   id="newUserPhone"
+                                                   placeholder="phone">
+                                            <div id="errorPhoneUser" class="errorMassage"></div>
+                                            <br>
+                                            <h6>e-mail</h6>
+                                            <input class="form-control"
+                                                   id="newUserEmail"
+                                                   placeholder="e-mail">
+                                            <div id="errorEmailUser" class="errorMassage"></div>
+                                            <br>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" id="closeCreateUserModal"
+                                                    class="btn btn-secondary" data-bs-dismiss="modal">
+                                                отмена
+                                            </button>
+                                            <button type="button" id="createUserButton" class="btn btn-primary">
+                                                добавить пользователя
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <%--                                    new admin form--%>
+                            <div class="modal fade" id="newAdminForm" data-bs-backdrop="static"
+                                 data-bs-keyboard="false" tabindex="-1"
+                                 aria-hidden="true">
+                                <div class="modal-dialog modal-lg">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="newAdmin">new Admin</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                    aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <br>
+                                            <h6>login</h6>
+                                            <input id="newAdminCreateLogin" name="login" class="form-control"
+                                                   placeholder="login">
+                                            <div id="errorLoginAdmin" class="errorMassage"></div>
+                                            <br>
+                                            <h6>password</h6>
+                                            <input type="password" name="password" class="form-control"
+                                                   id="newAdminCreatePassword"
+                                                   placeholder="password">
+                                            <div id="errorPasswordAdmin" class="errorMassage"></div>
+                                            <br>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" id="closeCreateAdminModal"
+                                                    class="btn btn-secondary" data-bs-dismiss="modal">
+                                                Close
+                                            </button>
+                                            <button type="button" id="createAdminButton" class="btn btn-primary">add
+                                                admin
+                                            </button>
+                                        </div>
                                     </div>
                                 </div>
                             </div>

@@ -14,5 +14,5 @@ public interface TariffService {
 
     void createTariff(TariffPlan tariffPlan) throws ServiceException;
 
-    void deleteTariff(TariffPlan tariffPlan) throws ServiceException;
+    void deleteTariff(Long tariffId) throws ServiceException;
 }
