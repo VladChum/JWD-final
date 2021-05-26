@@ -13,7 +13,9 @@ public interface DiscountDao {
 
     Optional<Discount> findById(Long id) throws DaoException;
 
-    void stopDiscount() throws DaoException;
+    void stopDiscount(Discount discount) throws DaoException;
 
     void activateDiscount(Discount discount) throws DaoException;
+
+    void updateDiscount(Discount discount) throws DaoException;
 }

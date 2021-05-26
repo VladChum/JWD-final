@@ -29,6 +29,8 @@ public enum CommandProvider {
         commands.put("createAdmin", new CreateAdmin());
         commands.put("activateTariff", new ActivateTariff());
         commands.put("createDiscount", new CreateDiscount());
+        commands.put("stopDiscount", new StopDiscount());
+        commands.put("updateDiscount", new UpdateDiscount());
     }
 
     public Command getCommand(String commandName) {

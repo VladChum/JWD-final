@@ -296,4 +296,15 @@ $("document").ready(function () {
             });
         }
     });
+
+    $('.archiveDiscountButton').on('click', function () {
+        var discountId = $(this).attr('data-tariff-id');
+        var data = {
+            discountId: discountId
+        }
+        var url = "Controller?command=stopDiscount";
+        $.post(url, data, function (data, status) {
+            location.reload();
+        });
+    });
 })
