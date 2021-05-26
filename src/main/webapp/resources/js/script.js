@@ -230,4 +230,70 @@ $("document").ready(function () {
             location.reload();
         });
     });
+
+    $('#newDiscountSize').on('keyup', function () {
+        let size = parseFloat($('#newDiscountSize').val());
+        if (size > 0 && size <= 100 || $('#newDiscountSize').val().length === 0) {
+            $('#errorDiscountSize').html("");
+        } else {
+            $('#errorDiscountSize').html("Wrong input: 0 < discount size < 100");
+        }
+    });
+
+    $('#newStartDateDiscount').on('keyup', function () {
+        var startDate = $('#newStartDateDiscount').val();
+        if (startDate.length != 10) {
+            $('#errorStartDateDiscount').html("Wrong input: date example 2020-03-03");
+        } else {
+            $('#errorStartDateDiscount').html("");
+        }
+    });
+
+    $('#newEndDateDiscount').on('keyup', function () {
+        var endDate = $('#newEndDateDiscount').val();
+        if (endDate.length != 10) {
+            $('#errorNameTariff').html("Wrong input: date example 2020-03-04");
+        } else {
+            $('#errorNameTariff').html("");
+        }
+    });
+    // доделать нормальную проверку даты
+
+    $('#createDiscount').on('click', function () {
+        var size = parseFloat($('#newDiscountSize').val());
+        var startDate = $('#newStartDateDiscount').val();
+        var endDate = $('#newEndDateDiscount').val();
+        var valid = 0;
+
+        if (size > 0 && size <= 100 && $('#newDiscountSize').val().length === 0) {
+            $('#errorDiscountSize').html("");
+            valid++;
+        } else {
+            $('#errorDiscountSize').html("Wrong input: name too short");
+        }
+        if (endDate.length != 10) {
+            $('#errorEndDateDiscount').html("Wrong input: date example 2020-03-04");
+        } else {
+            $('#errorEndDateDiscount').html("");
+            valid++;
+        }
+        if (startDate.length != 10) {
+            $('#errorStartDateDiscount').html("Wrong input: date example 2020-03-04");
+        } else {
+            $('#errorStartDateDiscount').html("");
+            valid++;
+        }
+
+        if (valid === 3) {
+            var data = {
+                size: size,
+                startDate: startDate,
+                endDate: endDate
+            }
+            var url = "Controller?command=createDiscount";
+            $.post(url, data, function (data, status) {
+                location.reload();
+            });
+        }
+    });
 })
