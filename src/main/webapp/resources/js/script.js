@@ -252,9 +252,9 @@ $("document").ready(function () {
     $('#newEndDateDiscount').on('keyup', function () {
         var endDate = $('#newEndDateDiscount').val();
         if (endDate.length != 10) {
-            $('#errorNameTariff').html("Wrong input: date example 2020-03-04");
+            $('#errorEndDateDiscount').html("Wrong input: date example 2020-03-04");
         } else {
-            $('#errorNameTariff').html("");
+            $('#errorEndDateDiscount').html("");
         }
     });
     // доделать нормальную проверку даты
@@ -265,11 +265,11 @@ $("document").ready(function () {
         var endDate = $('#newEndDateDiscount').val();
         var valid = 0;
 
-        if (size > 0 && size <= 100 && $('#newDiscountSize').val().length === 0) {
+        if (size > 0 && size <= 100 && $('#newDiscountSize').val().length != 0) {
             $('#errorDiscountSize').html("");
             valid++;
         } else {
-            $('#errorDiscountSize').html("Wrong input: name too short");
+            $('#errorDiscountSize').html("Wrong input:  0 < discount size < 100");
         }
         if (endDate.length != 10) {
             $('#errorEndDateDiscount').html("Wrong input: date example 2020-03-04");

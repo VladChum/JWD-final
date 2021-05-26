@@ -25,8 +25,8 @@ public class DiscountDaoImpl implements DiscountDao {
         try (Connection connection = ConnectionPool.INSTANCE.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(CREATE_DISCOUNT)) {
             preparedStatement.setDouble(1, discount.getSize());
-            preparedStatement.setDate(2, Date.valueOf(String.valueOf(discount.getStartDate())));
-            preparedStatement.setDate(3, Date.valueOf(String.valueOf(discount.getEndDate())));
+            preparedStatement.setDate(2, (Date) discount.getStartDate());
+            preparedStatement.setDate(3, (Date) discount.getEndDate());
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             throw new DaoException(e);

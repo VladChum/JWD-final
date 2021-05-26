@@ -1,14 +1,18 @@
 package com.epam.jwd_final.controller.command.impl;
 
 import com.epam.jwd_final.controller.command.Command;
+import com.epam.jwd_final.entity.Discount;
+import com.epam.jwd_final.exception.ServiceException;
 import com.epam.jwd_final.service.DiscountService;
 import com.epam.jwd_final.service.ServiceProvider;
+import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -26,7 +30,14 @@ public class CreateDiscount implements Command {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
         double size = Double.parseDouble(req.getParameter(SIZE));
-        Date startDate =  req.getParameter(START_DATE);
-        Date endDate = req.getParameter(END_DATE);
+        try {
+            Date startDate =  dateFormat.parse(req.getParameter(START_DATE));
+            Date endDate = dateFormat.parse(req.getParameter(END_DATE));
+
+            Discount discount = new Discount(startDate, endDate, size);
+            discountService.create(discount);
+        } catch (ParseException | ServiceException e) {
+            LOGGER.log(Level.ERROR, e.getMessage() + " " + e);
+        }
     }
 }
