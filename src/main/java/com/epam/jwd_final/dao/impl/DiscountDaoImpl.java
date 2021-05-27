@@ -14,7 +14,7 @@ public class DiscountDaoImpl implements DiscountDao {
     private static final String FIND_DISCOUNT_BY_ID = "select d.id, d.size, d.start_date, d.end_date from discount d where id = ?";
     private static final String FIND_ALL_DISCOUNT = "select d.id, d.size, d.start_date, d.end_date from discount d";
     private static final String CREATE_DISCOUNT = "insert into discount (size, start_date, end_date) VALUES (?, ?, ?)";
-    private static final String UPDATE_DISCOUNT = "update discount set d.size = ?, d.start_date = ?, d.end_date = ? where id = ?";
+    private static final String UPDATE_DISCOUNT = "update discount d set d.size = ?, d.start_date = ?, d.end_date = ? where id = ?";
     private static final String ACTIVATE_DISCOUNT = "";
     private static final String STOP_DISCOUNT = "update discount set end_date = ? where id = ?";
 

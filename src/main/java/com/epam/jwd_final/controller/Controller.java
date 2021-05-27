@@ -20,7 +20,6 @@ public class Controller extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String name = req.getParameter("command");
         LOGGER.log(Level.DEBUG, "command name: " + name);
-        System.out.println(req.getPathInfo()    );
         Command command = CommandProvider.INSTANCE.getCommand(name);
         command.execute(req, resp);
     }
