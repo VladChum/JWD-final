@@ -516,7 +516,8 @@
                                                                             </div>
                                                                             <div class="dropdown">
                                                                                 <button class="btn button-tariff  me-3"
-                                                                                        type="button" id="archiveTariffMenu"
+                                                                                        type="button"
+                                                                                        id="archiveTariffMenu"
                                                                                         data-bs-toggle="dropdown"
                                                                                         aria-haspopup="true"
                                                                                         aria-expanded="false">
@@ -527,7 +528,9 @@
                                                                                             type="button">
                                                                                         изменить
                                                                                     </button>
-                                                                                    <button class="dropdown-item"
+                                                                                    <button class="activateTariffButton dropdown-item"
+                                                                                            name="activateTariffButton"
+                                                                                            data-tariff-Id="${tariff.id}"
                                                                                             type="button">
                                                                                         активировать
                                                                                     </button>
@@ -545,18 +548,318 @@
                                     </div>
                                 </div>
                             </div>
+                            <%--                            discount --%>
                             <div class="tab-pane fade show" id="stock" role="tabpanel">
-                                <div class="tariff-item__title">
-                                    <h5 class="card-title">Абонент : Чумачёв Константинович</h5>
+                                <ul class="nav nav-pills mb-3" id="discount-tab" role="tablist">
+                                    <li class="nav-item" role="presentation">
+                                        <button class="nav-link active" id="activeDiscount-tab" data-bs-toggle="pill"
+                                                data-bs-target="#active-discount" type="button" role="tab"
+                                                aria-selected="false">активные
+                                        </button>
+                                    </li>
+                                    <li class="nav-item" role="presentation">
+                                        <button class="nav-link" id="archiveDiscount-tab" data-bs-toggle="pill"
+                                                data-bs-target="#archive-discount" type="button" role="tab"
+                                                aria-selected="false">архив
+                                        </button>
+                                    </li>
+                                </ul>
+                                <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                                    <button class="btn add-tariff-button me-3" type="button"
+                                            id="newDiscountButton"
+                                            data-bs-toggle="modal" data-bs-target="#newDiscountForm"
+                                            aria-expanded="false">
+                                        +
+                                    </button>
                                 </div>
-                                <div class="tariff-item__title">
-                                    <h5 class="card-title">Логин : 1561001453502</h5>
+                                <div class="modal fade" id="newDiscountForm" data-bs-backdrop="static"
+                                     data-bs-keyboard="false" tabindex="-1"
+                                     aria-hidden="true">
+                                    <div class="modal-dialog modal-lg">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="newDiscount">new Discount</h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                        aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <br>
+                                                <h6>Discount size</h6>
+                                                <input id="newDiscountSize" name="discountSize" class="form-control"
+                                                       placeholder="discountSize">
+                                                <div id="errorDiscountSize" class="errorMassage"></div>
+                                                <br>
+                                                <h6>start date</h6>
+                                                <input name="startDate" class="form-control"
+                                                       id="newStartDateDiscount"
+                                                       placeholder="price">
+                                                <div id="errorStartDateDiscount" class="errorMassage"></div>
+                                                <br>
+                                                <h6>end date</h6>
+                                                <input name="endDate" class="form-control"
+                                                       id="newEndDateDiscount"
+                                                       placeholder="price">
+                                                <div id="errorEndDateDiscount" class="errorMassage"></div>
+                                                <br>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" id="closeCreateDiscount"
+                                                        class="btn btn-secondary" data-bs-dismiss="modal">
+                                                    отмена
+                                                </button>
+                                                <button type="button" id="createDiscount" class="btn btn-primary">
+                                                    добавить скидку
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="tariff-item__title">
-                                    <h5 class="card-title">Статус : не блокирован</h5>
+                                <%--                                discount cards--%>
+                                <div class="tab-content" id="pills-tariffs">
+                                    <div class="tab-pane fade show active" id="active-discount" role="tabpanel">
+                                        <div class="tariff-item__top">
+                                            <div class="row row-cols-1 row-cols-md-3 g-4">
+                                                <c:forEach items="${discounts}" var="discount">
+                                                    <c:if test="${discount.endDate >= dateNow && discount.startDate <= dateNow}">
+                                                        <div class="col-sm-6">
+                                                            <div class="card">
+                                                                <div class="card-body">
+                                                                    <div class="tariff-item">
+                                                                        <div class="tariff-item__top">
+                                                                            <div class="tariff-item__title">
+                                                                                <h5 class="card-title">
+                                                                                    discount
+                                                                                </h5>
+                                                                            </div>
+                                                                            <div class="tariff-item__text">
+                                                                                <p>start
+                                                                                    date: ${discount.startDate} </p>
+                                                                                <p></p>
+                                                                                <p>end date: ${discount.endDate} </p>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="tariff-item__body">
+                                                                            <div class="tariff-item__price">
+                                                                                <span>
+                                                                                    <b>
+                                                                                            ${discount.size}
+                                                                                    </b>
+                                                                                    %
+                                                                                </span>
+                                                                                <b class="tariffActive">
+                                                                                    active
+                                                                                </b>
+                                                                            </div>
+                                                                            <div class="dropdown">
+                                                                                <button class="btn button-tariff  me-3"
+                                                                                        type="button"
+                                                                                        id="discountMenu"
+                                                                                        data-bs-toggle="dropdown"
+                                                                                        aria-haspopup="true"
+                                                                                        aria-expanded="false">
+                                                                                    изменить
+                                                                                </button>
+                                                                                <div class=" dropdown-menu">
+                                                                                    <button class="updateDiscountButton dropdown-item"
+                                                                                            data-discount-id="${discount.id}"
+                                                                                            data-discount-size="${discount.size}"
+                                                                                            date-discount-start="${discount.startDate}"
+                                                                                            data-discount-end="${discount.endDate}"
+                                                                                            data-bs-toggle="modal"
+                                                                                            data-bs-target="#updateDiscountForm"
+                                                                                            aria-expanded="false"
+                                                                                            type="button">
+                                                                                        изменить
+                                                                                    </button>
+                                                                                    <button class="addTariffsForDiscountButton dropdown-item"
+                                                                                            data-discount-id="${discount.id}"
+                                                                                            data-discount-size="${discount.size}"
+                                                                                            data-bs-toggle="modal"
+                                                                                            data-bs-target="#addTariffsForDiscountForm"
+                                                                                            aria-expanded="false"
+                                                                                            type="button">
+                                                                                        тарифы
+                                                                                    </button>
+                                                                                    <button class="archiveDiscountButton dropdown-item"
+                                                                                            name="archiveDiscountButton"
+                                                                                            data-tariff-id="${discount.id}"
+                                                                                            type="button">
+                                                                                        остановить
+                                                                                    </button>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </c:if>
+                                                </c:forEach>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="tab-pane fade" id="archive-discount" role="tabpanel">
+                                        <div class="tariff-item__top">
+                                            <div class="row row-cols-1 row-cols-md-3 g-4">
+                                                <c:forEach items="${discounts}" var="discount">
+                                                    <c:if test="${dateNow > discount.endDate || dateNow < discount.startDate}">
+                                                        <div class="col-sm-6">
+                                                            <div class="card">
+                                                                <div class="card-body">
+                                                                    <div class="tariff-item">
+                                                                        <div class="tariff-item__top">
+                                                                            <div class="tariff-item__title">
+                                                                                <h5 class="card-title">
+                                                                                    discount
+                                                                                </h5>
+                                                                            </div>
+                                                                            <div class="tariff-item__text">
+                                                                                <p>start
+                                                                                    date: ${discount.startDate} </p>
+                                                                                <p></p>
+                                                                                <p>end date: ${discount.endDate} </p>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="tariff-item__body">
+                                                                            <div class="tariff-item__price">
+                                                                                <span>
+                                                                                    <b>
+                                                                                            ${discount.size}
+                                                                                    </b>
+                                                                                    %
+                                                                                </span>
+                                                                                <c:if test="${discount.startDate > dateNow}">
+                                                                                    <b class="planed">
+                                                                                        planed
+                                                                                    </b>
+                                                                                </c:if>
+                                                                                <c:if test="${discount.startDate < dateNow}">
+                                                                                    <b class="ended">
+                                                                                        ended
+                                                                                    </b>
+                                                                                </c:if>
+                                                                            </div>
+                                                                            <button class="updateDiscountButton btn button-tariff  me-3"
+                                                                                    name="updateDiscountButton"
+                                                                                    data-bs-toggle="modal"
+                                                                                    data-bs-target="#updateDiscountForm"
+                                                                                    aria-expanded="false"
+                                                                                    data-discount-id="${discount.id}"
+                                                                                    data-discount-size="${discount.size}"
+                                                                                    date-discount-start="${discount.startDate}"
+                                                                                    data-discount-end="${discount.endDate}"
+                                                                                    type="button">
+                                                                                обновить
+                                                                            </button>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </c:if>
+                                                </c:forEach>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="tariff-item__title">
-                                    <h5 class="card-title">Дата активации : 11.03.2021 02:37:21</h5>
+                            </div>
+                            <%--                            update discount --%>
+                            <div class="modal fade" id="updateDiscountForm" data-bs-backdrop="static"
+                                 data-bs-keyboard="false" tabindex="-1"
+                                 aria-hidden="true">
+                                <div class="modal-dialog modal-lg">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="updateDiscount">update Discount</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                    aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <br>
+                                            <h6>Discount size</h6>
+                                            <input id="updateDiscountSize" name="discountSize" class="form-control"
+                                                   placeholder="discountSize">
+                                            <div id="errorUpdateDiscountSize" class="errorMassage"></div>
+                                            <br>
+                                            <h6>start date</h6>
+                                            <input name="startDate" class="form-control"
+                                                   id="updateStartDateDiscount"
+                                                   placeholder="price">
+                                            <div id="errorUpdateStartDateDiscount" class="errorMassage"></div>
+                                            <br>
+                                            <h6>end date</h6>
+                                            <input name="endDate" class="form-control"
+                                                   id="updateEndDateDiscount"
+                                                   placeholder="price">
+                                            <div id="errorUpdateEndDateDiscount" class="errorMassage"></div>
+                                            <br>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" id="closeUpdateDiscount"
+                                                    class="btn btn-secondary" data-bs-dismiss="modal">
+                                                отмена
+                                            </button>
+                                            <button type="button" id="updateDiscountButton"
+                                                    class="btn btn-primary">
+                                                обновить
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <%--                            add tariff for discount--%>
+                            <div class="modal fade" id="addTariffsForDiscountForm" data-bs-backdrop="static"
+                                 data-bs-keyboard="false" tabindex="-1"
+                                 aria-hidden="true">
+                                <div class="modal-dialog modal-lg">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="addTariffsForDiscount">add tariffs discount</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                    aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <br>
+                                            <table class="table table-striped table-hover">
+                                                <thead>
+                                                <tr>
+                                                    <th scope="col">name</th>
+                                                    <th scope="col">price</th>
+                                                    <th scope="col">speed</th>
+                                                    <th scope="col">discount id</th>
+                                                    <th></th>
+                                                </tr>
+                                                <tbody>
+                                                <c:forEach items="${tariffs}" var="tariff">
+                                                    <tr>
+                                                        <td>${tariff.name}</td>
+                                                        <td>${tariff.price}</td>
+                                                        <td>${tariff.speed}</td>
+                                                        <td>${tariff.discountId}</td>
+                                                        <td>
+                                                            <button class="addTariff btn btn-primary"
+                                                                    data-tariff-id="${tariff.id}"
+                                                                    data-discount-id="${tariff.discountId}">
+                                                                добавить
+                                                            </button>
+                                                        </td>
+                                                    </tr>
+                                                </c:forEach>
+                                                </tbody>
+                                                </thead>
+                                            </table>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" id="closeAddTariffsForDiscount"
+                                                    class="btn btn-secondary" data-bs-dismiss="modal">
+                                                отмена
+                                            </button>
+                                            <button type="button" id="addTariffsForDiscountButton"
+                                                    class="btn btn-primary">
+                                                добавить
+                                            </button>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                             <div class="tab-pane fade show" id="settings" role="tabpanel">

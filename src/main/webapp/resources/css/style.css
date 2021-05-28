@@ -442,3 +442,15 @@ primary {
 .errorMassage {
     color: red;
 }
+
+.ended {
+    color: red;
+}
+
+.tariffActive {
+    color: #14b60c;
+}
+
+.planed {
+    color: #d69b10;
+}

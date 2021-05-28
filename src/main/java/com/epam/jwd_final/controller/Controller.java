@@ -18,20 +18,18 @@ public class Controller extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String name = req.getParameter("command");
-        LOGGER.log(Level.DEBUG, "command name: " + name);
-        System.out.println(req.getPathInfo()    );
-        Command command = CommandProvider.INSTANCE.getCommand(name);
-        command.execute(req, resp);
+        process(req, resp);
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        process(req, resp);
+    }
+
+    private void process(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
         String name = req.getParameter("command");
         LOGGER.log(Level.DEBUG, "command name: " + name);
         Command command = CommandProvider.INSTANCE.getCommand(name);
         command.execute(req, resp);
     }
-
-
 }

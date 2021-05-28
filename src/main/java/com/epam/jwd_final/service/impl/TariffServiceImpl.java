@@ -38,6 +38,15 @@ public class TariffServiceImpl implements TariffService {
     }
 
     @Override
+    public void activateTariff(Long tariffId) throws ServiceException {
+        try {
+            tariffPlanDao.activateTariff(tariffId);
+        } catch (DaoException e) {
+            throw new ServiceException(e);
+        }
+    }
+
+    @Override
     public void createTariff(TariffPlan tariffPlan) throws ServiceException {
         try {
             tariffPlanDao.createTariff(tariffPlan);
@@ -50,6 +59,15 @@ public class TariffServiceImpl implements TariffService {
     public void deleteTariff(Long tariffId) throws ServiceException {
         try {
             tariffPlanDao.deleteTariff(tariffId);
+        } catch (DaoException e) {
+            throw new ServiceException(e);
+        }
+    }
+
+    @Override
+    public void updateTariffDiscount(TariffPlan tariffPlan, Long discountId) throws ServiceException {
+        try {
+            tariffPlanDao.updateDiscount(tariffPlan, discountId);
         } catch (DaoException e) {
             throw new ServiceException(e);
         }

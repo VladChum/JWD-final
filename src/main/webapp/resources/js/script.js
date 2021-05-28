@@ -219,4 +219,218 @@ $("document").ready(function () {
             location.reload();
         });
     });
+
+    $('.activateTariffButton').on('click', function () {
+        var tariffId = $(this).attr('data-tariff-id');
+        var data = {
+            tariffId: tariffId
+        }
+        var url = "Controller?command=activateTariff";
+        $.post(url, data, function (data, status) {
+            location.reload();
+        });
+    });
+
+    $('#newDiscountSize').on('keyup', function () {
+        let size = parseFloat($('#newDiscountSize').val());
+        if (size > 0 && size <= 100 || $('#newDiscountSize').val().length === 0) {
+            $('#errorDiscountSize').html("");
+        } else {
+            $('#errorDiscountSize').html("Wrong input: 0 < discount size < 100");
+        }
+    });
+
+    $('#newStartDateDiscount').on('keyup', function () {
+        var startDate = $('#newStartDateDiscount').val();
+        if (startDate.length != 10) {
+            $('#errorStartDateDiscount').html("Wrong input: date example 2020-03-03");
+        } else {
+            $('#errorStartDateDiscount').html("");
+        }
+    });
+
+    $('#newEndDateDiscount').on('keyup', function () {
+        var endDate = $('#newEndDateDiscount').val();
+        if (endDate.length != 10) {
+            $('#errorEndDateDiscount').html("Wrong input: date example 2020-03-04");
+        } else {
+            $('#errorEndDateDiscount').html("");
+        }
+    });
+    // доделать нормальную проверку даты
+
+    $('#createDiscount').on('click', function () {
+        var size = parseFloat($('#newDiscountSize').val());
+        var startDate = $('#newStartDateDiscount').val();
+        var endDate = $('#newEndDateDiscount').val();
+        var valid = 0;
+
+        if (size > 0 && size <= 100 && $('#newDiscountSize').val().length != 0) {
+            $('#errorDiscountSize').html("");
+            valid++;
+        } else {
+            $('#errorDiscountSize').html("Wrong input:  0 < discount size < 100");
+        }
+        if (endDate.length != 10) {
+            $('#errorEndDateDiscount').html("Wrong input: date example 2020-03-04");
+        } else {
+            $('#errorEndDateDiscount').html("");
+            valid++;
+        }
+        if (startDate.length != 10) {
+            $('#errorStartDateDiscount').html("Wrong input: date example 2020-03-04");
+        } else {
+            $('#errorStartDateDiscount').html("");
+            valid++;
+        }
+
+        if (valid === 3) {
+            var data = {
+                size: size,
+                startDate: startDate,
+                endDate: endDate
+            }
+            var url = "Controller?command=createDiscount";
+            $.post(url, data, function (data, status) {
+                location.reload();
+            });
+        }
+    });
+
+    $('.archiveDiscountButton').on('click', function () {
+        var discountId = $(this).attr('data-tariff-id');
+        var data = {
+            discountId: discountId
+        }
+        var url = "Controller?command=stopDiscount";
+        $.post(url, data, function (data, status) {
+            location.reload();
+        });
+    });
+
+    var discountIdForUpdate;
+
+    $('.updateDiscountButton').on('click', function () {
+        var size = $(this).attr('data-discount-size');
+        var startDate = $(this).attr('date-discount-start');
+        var endDate = $(this).attr('data-discount-end');
+        discountIdForUpdate = $(this).attr('data-discount-id');
+
+        document.getElementById('updateDiscountSize').value = size;
+        document.getElementById('updateEndDateDiscount').value = endDate;
+        document.getElementById('updateStartDateDiscount').value = startDate;
+    });
+
+    $('#updateDiscountSize').on('keyup', function () {
+        var size = parseFloat($('#updateDiscountSize').val());
+        if (size > 0 && size <= 100 || $('#updateDiscountSize').val().length === 0) {
+            $('#errorUpdateDiscountSize').html("");
+        } else {
+            $('#errorUpdateDiscountSize').html("Wrong input: 0 < discount size < 100");
+        }
+    });
+
+    $('#updateStartDateDiscount').on('keyup', function () {
+        var startDate = $('#updateStartDateDiscount').val();
+        if (startDate.length != 10) {
+            $('#errorUpdateStartDateDiscount').html("Wrong input: date example 2020-03-03");
+        } else {
+            $('#errorUpdateStartDateDiscount').html("");
+        }
+    });
+
+    $('#updateEndDateDiscount').on('keyup', function () {
+        var endDate = $('#updateEndDateDiscount').val();
+        if (endDate.length != 10) {
+            $('#errorUpdateEndDateDiscount').html("Wrong input: date example 2020-03-04");
+        } else {
+            $('#errorUpdateEndDateDiscount').html("");
+        }
+    });
+
+    $('#updateDiscountButton').on('click', function () {
+        var size = parseFloat($('#updateDiscountSize').val());
+        var startDate = $('#updateStartDateDiscount').val();
+        var endDate = $('#updateEndDateDiscount').val();
+        var valid = 0;
+
+        if (size > 0 && size <= 100 || $('#updateDiscountSize').val().length === 0) {
+            $('#errorUpdateDiscountSize').html("");
+            valid++;
+        } else {
+            $('#errorUpdateDiscountSize').html("Wrong input: 0 < discount size < 100");
+        }
+        if (startDate.length != 10) {
+            $('#errorUpdateStartDateDiscount').html("Wrong input: date example 2020-03-03");
+        } else {
+            $('#errorUpdateStartDateDiscount').html("");
+            valid++;
+        }
+        if (endDate.length != 10) {
+            $('#errorUpdateEndDateDiscount').html("Wrong input: date example 2020-03-04");
+        } else {
+            $('#errorUpdateEndDateDiscount').html("");
+            valid++;
+        }
+
+        if (valid === 3) {
+            var data = {
+                discountId: discountIdForUpdate,
+                discountSize: size,
+                startDate: startDate,
+                endDate: endDate
+            }
+            var url = "Controller?command=updateDiscount";
+            $.post(url, data, function (data, status) {
+                location.reload();
+            });
+        }
+    });
+
+    $('#closeUpdateDiscount').on('click', function () {
+        $('#updateDiscountSize').val("");
+        $('#updateStartDateDiscount').val("");
+        $('#updateEndDateDiscount').val("");
+        $('#errorUpdateEndDateDiscount').html("");
+        $('#errorUpdateStartDateDiscount').html("");
+        $('#errorUpdateDiscountSize').html("");
+    });
+
+    var discountIdForTariffs;
+
+    $('.addTariffsForDiscountButton').on('click', function () {
+        discountIdForTariffs = $(this).attr('data-discount-id');
+    });
+
+    var tariffs = [];
+
+    $('.addTariff').on('click', function () {
+        var tariffDiscountId = $(this).attr('data-tariff-id');
+        $(this).prop('disabled', true);
+        tariffs.push(tariffDiscountId);
+    });
+
+    //ToDo изменить оброботку события при создании
+    $('.addTariff').on('mouseenter', function () {
+        var tariffDiscountId = $(this).attr('data-discount-id');
+        var discountId = discountIdForTariffs;
+        if (tariffDiscountId === discountId) {
+            $(this).prop('disabled', true);
+        }
+    });
+
+    $('#addTariffsForDiscountButton').on('click', function () {
+
+        var data = {
+            discountId: discountIdForTariffs,
+            tariffs: tariffs.toString()
+        }
+        tariffs.splice(0, tariffs.length);
+        var url = "Controller?command=addTariffsToDiscount";
+        $.post(url, data, function (data, status) {
+            location.reload();
+        });
+    });
+
+
 })

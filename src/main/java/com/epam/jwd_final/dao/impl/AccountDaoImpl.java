@@ -33,7 +33,10 @@ public class AccountDaoImpl implements AccountDao {
              PreparedStatement prepareStatement = connection.prepareStatement(GET_ALL_ACCOUNT)) {
             try (ResultSet resultSet = prepareStatement.executeQuery()) {
                 while (resultSet.next()) {
-                    Account account = new Account(resultSet.getLong("id"), resultSet.getString("login"), resultSet.getString("password"));
+                    Account account = new Account(
+                            resultSet.getLong("id"),
+                            resultSet.getString("login"),
+                            resultSet.getString("password"));
                     accounts.add(account);
                 }
             }

@@ -29,12 +29,10 @@ public class TariffPlanDaoImpl implements com.epam.jwd_final.dao.TariffPlanDao {
             "VALUES (?, ?, ?)";
     /**TODO
      * add update tariff price
-     * add update tariff discount
      * */
+    private static final String UPDATE_DISCOUNT = "update tariff_plan set discount_id = ? where id = ?;";
+    private static final String ACTIVATE_TARIFF = "update tariff_plan set active = 1 where id = ?";
     private static final String UPDATE_TARIFF = "update user set  where login = ?";
-    /**ToDo
-     * обработка удаления тарифа если его кто-то использует
-     * */
     private static final String DELETE_TARIFF = "update tariff_plan set active = 0 where id = ?";
 
     TariffPlanDaoImpl() {
@@ -103,10 +101,31 @@ public class TariffPlanDaoImpl implements com.epam.jwd_final.dao.TariffPlanDao {
     }
 
     @Override
-    public void deleteTariff(Long tariffId) throws DaoException {
+    public void updateDiscount(TariffPlan tariffPlan, Long discountId) throws DaoException {
         try (Connection connection = ConnectionPool.INSTANCE.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(DELETE_TARIFF)) {
-            preparedStatement.setLong(1, tariffId);
+             PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_DISCOUNT)) {
+            preparedStatement.setLong(1, discountId);
+            preparedStatement.setLong(2, tariffPlan.getId());
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            throw new DaoException(e);
+        }
+    }
+
+    @Override
+    public void activateTariff(Long tariffId) throws DaoException {
+        updateActiveStatus(tariffId, ACTIVATE_TARIFF);
+    }
+
+    @Override
+    public void deleteTariff(Long tariffId) throws DaoException {
+        updateActiveStatus(tariffId, DELETE_TARIFF);
+    }
+
+    private void updateActiveStatus(Long id, String request) throws DaoException {
+        try (Connection connection = ConnectionPool.INSTANCE.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(request)) {
+            preparedStatement.setLong(1, id);
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             throw new DaoException(e);
