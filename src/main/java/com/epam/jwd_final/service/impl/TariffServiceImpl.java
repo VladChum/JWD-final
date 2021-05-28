@@ -63,4 +63,13 @@ public class TariffServiceImpl implements TariffService {
             throw new ServiceException(e);
         }
     }
+
+    @Override
+    public void updateTariffDiscount(TariffPlan tariffPlan, Long discountId) throws ServiceException {
+        try {
+            tariffPlanDao.updateDiscount(tariffPlan, discountId);
+        } catch (DaoException e) {
+            throw new ServiceException(e);
+        }
+    }
 }

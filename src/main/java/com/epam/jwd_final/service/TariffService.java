@@ -17,4 +17,6 @@ public interface TariffService {
     void deleteTariff(Long tariffId) throws ServiceException;
 
     void activateTariff(Long tariffId) throws ServiceException;
+
+    void updateTariffDiscount(TariffPlan tariffPlan, Long discountId) throws ServiceException;
 }

@@ -220,7 +220,7 @@ $("document").ready(function () {
         });
     });
 
-    $('.activateTariffButton').on('click', function() {
+    $('.activateTariffButton').on('click', function () {
         var tariffId = $(this).attr('data-tariff-id');
         var data = {
             tariffId: tariffId
@@ -316,9 +316,9 @@ $("document").ready(function () {
         var endDate = $(this).attr('data-discount-end');
         discountIdForUpdate = $(this).attr('data-discount-id');
 
-        document.getElementById('updateDiscountSize').value=size;
-        document.getElementById('updateEndDateDiscount').value=endDate;
-        document.getElementById('updateStartDateDiscount').value=startDate;
+        document.getElementById('updateDiscountSize').value = size;
+        document.getElementById('updateEndDateDiscount').value = endDate;
+        document.getElementById('updateStartDateDiscount').value = startDate;
     });
 
     $('#updateDiscountSize').on('keyup', function () {
@@ -395,4 +395,42 @@ $("document").ready(function () {
         $('#errorUpdateStartDateDiscount').html("");
         $('#errorUpdateDiscountSize').html("");
     });
+
+    var discountIdForTariffs;
+
+    $('.addTariffsForDiscountButton').on('click', function () {
+        discountIdForTariffs = $(this).attr('data-discount-id');
+    });
+
+    var tariffs = [];
+
+    $('.addTariff').on('click', function () {
+        var tariffDiscountId = $(this).attr('data-tariff-id');
+        $(this).prop('disabled', true);
+        tariffs.push(tariffDiscountId);
+    });
+
+    //ToDo изменить оброботку события при создании
+    $('.addTariff').on('mouseenter', function () {
+        var tariffDiscountId = $(this).attr('data-discount-id');
+        var discountId = discountIdForTariffs;
+        if (tariffDiscountId === discountId) {
+            $(this).prop('disabled', true);
+        }
+    });
+
+    $('#addTariffsForDiscountButton').on('click', function () {
+
+        var data = {
+            discountId: discountIdForTariffs,
+            tariffs: tariffs.toString()
+        }
+        tariffs.splice(0, tariffs.length);
+        var url = "Controller?command=addTariffsToDiscount";
+        $.post(url, data, function (data, status) {
+            location.reload();
+        });
+    });
+
+
 })

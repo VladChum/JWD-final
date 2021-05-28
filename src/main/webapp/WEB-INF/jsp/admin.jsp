@@ -820,15 +820,34 @@
                                         </div>
                                         <div class="modal-body">
                                             <br>
-                                            <c:forEach items="${tariffs}" var="tariff">
-                                                <div class="form-check form-switch">
-                                                    <label>
-                                                        <input class="addTariff form-check-input" type="checkbox"
-                                                               data-tariff-id="${tariff.id}">
-                                                            ${tariff.name} ${tariff.price}
-                                                    </label>
-                                                </div>
-                                            </c:forEach>
+                                            <table class="table table-striped table-hover">
+                                                <thead>
+                                                <tr>
+                                                    <th scope="col">name</th>
+                                                    <th scope="col">price</th>
+                                                    <th scope="col">speed</th>
+                                                    <th scope="col">discount id</th>
+                                                    <th></th>
+                                                </tr>
+                                                <tbody>
+                                                <c:forEach items="${tariffs}" var="tariff">
+                                                    <tr>
+                                                        <td>${tariff.name}</td>
+                                                        <td>${tariff.price}</td>
+                                                        <td>${tariff.speed}</td>
+                                                        <td>${tariff.discountId}</td>
+                                                        <td>
+                                                            <button class="addTariff btn btn-primary"
+                                                                    data-tariff-id="${tariff.id}"
+                                                                    data-discount-id="${tariff.discountId}">
+                                                                добавить
+                                                            </button>
+                                                        </td>
+                                                    </tr>
+                                                </c:forEach>
+                                                </tbody>
+                                                </thead>
+                                            </table>
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button" id="closeAddTariffsForDiscount"
