@@ -14,7 +14,7 @@ public interface AdminDao {
 
     void createAdmin(Long accountId) throws DaoException;
 
-    void deleteAdmin(Admin admin) throws DaoException;
+    void deleteAdmin(Long id) throws DaoException;
 
     List<Account> findAllAdminAccount() throws DaoException;
 }

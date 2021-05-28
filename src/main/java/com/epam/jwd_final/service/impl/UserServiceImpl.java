@@ -48,4 +48,13 @@ public class UserServiceImpl implements UserService {
             throw new ServiceException(e);
         }
     }
+
+    @Override
+    public void delete(Long userId) throws ServiceException {
+        try {
+            userDao.deleteUser(userId);
+        } catch (DaoException e) {
+            throw new ServiceException(e);
+        }
+    }
 }

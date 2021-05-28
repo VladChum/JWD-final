@@ -432,5 +432,43 @@ $("document").ready(function () {
         });
     });
 
+    $('.deleteAdmin').on('click', function () {
+        var adminId = $(this).attr('data-admin-id');
+        var data = {
+            adminId: adminId
+        }
+        var url = "Controller?command=deleteAdmin";
+        $.post(url, data, function (data, status) {
+            location.reload();
+        });
+    });
 
+    $('.deleteUser').on('click', function () {
+        var userId = $(this).attr('data-user-id');
+        var data = {
+            userId: userId
+        }
+        var url = "Controller?command=deleteUser";
+        $.post(url, data, function (data, status) {
+            location.reload();
+        });
+    });
+
+    var userIdForStatus;
+
+    $('.userStatus').on('click', function () {
+        userIdForStatus = $(this).attr('data-user-id');
+    });
+
+    $('.status').on('click', function () {
+        var statusId = $(this).attr('data-status-id');
+        var data = {
+            userId: userIdForStatus,
+            statusId: statusId
+        }
+        var url = "Controller?command=chengUserStatus";
+        $.post(url, data, function (data, status) {
+            location.reload();
+        });
+    });
 })

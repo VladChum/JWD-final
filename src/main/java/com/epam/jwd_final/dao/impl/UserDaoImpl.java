@@ -45,11 +45,10 @@ public class UserDaoImpl implements UserDao {
      * update user status
      * */
     private static final String UPDATE_USER = "update user set  where login = ?";
-    private static final String DELETE_USER = "delete from user where id = ?";
-
+    private static final String DELETE_USER = "delete user, account from user inner join account on user.account_id = account.id " +
+            "where user.id = ?";
     UserDaoImpl() {
     }
-
 
 
     @Override
@@ -144,10 +143,10 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public void deleteUser(User user) throws DaoException {
+    public void deleteUser(Long id) throws DaoException {
         try (Connection connection = ConnectionPool.INSTANCE.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(DELETE_USER)) {
-            preparedStatement.setLong(1, user.getId());
+            preparedStatement.setLong(1, id);
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             throw new DaoException(e);

@@ -49,4 +49,14 @@ public class AdminServiceImpl implements AdminService {
             throw new ServiceException(e);
         }
     }
+
+    @Override
+    public void delete(Long accountId) throws ServiceException {
+        try {
+            Admin admin = adminDao.findAdminByAccountId(accountId.intValue()).get();
+            adminDao.deleteAdmin(admin.getId());
+        } catch (DaoException e) {
+            throw new ServiceException(e);
+        }
+    }
 }

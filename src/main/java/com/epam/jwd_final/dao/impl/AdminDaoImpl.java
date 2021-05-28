@@ -58,10 +58,10 @@ public class AdminDaoImpl implements AdminDao {
     }
 
     @Override
-    public void deleteAdmin(Admin admin) throws DaoException {
+    public void deleteAdmin(Long id) throws DaoException {
         try (Connection connection = ConnectionPool.INSTANCE.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(DELETE_ADMIN)) {
-            preparedStatement.setLong(1, admin.getId());
+            preparedStatement.setLong(1, id);
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             throw new DaoException(e);
