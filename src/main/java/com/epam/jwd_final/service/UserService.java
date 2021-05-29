@@ -16,4 +16,6 @@ public interface UserService {
     void addUser(User user) throws ServiceException;
 
     void delete(Long userId) throws ServiceException;
+
+    void chengStatus(User user, Long statusId) throws ServiceException;
 }

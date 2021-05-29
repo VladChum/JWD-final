@@ -57,4 +57,13 @@ public class UserServiceImpl implements UserService {
             throw new ServiceException(e);
         }
     }
+
+    @Override
+    public void chengStatus(User user, Long statusId) throws ServiceException {
+        try {
+            userDao.updateUserStatus(user, statusId);
+        } catch (DaoException e) {
+            throw new ServiceException(e);
+        }
+    }
 }

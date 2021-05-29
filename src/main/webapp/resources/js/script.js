@@ -454,14 +454,9 @@ $("document").ready(function () {
         });
     });
 
-    var userIdForStatus;
-
     $('.userStatus').on('click', function () {
-        userIdForStatus = $(this).attr('data-user-id');
-    });
-
-    $('.status').on('click', function () {
-        var statusId = $(this).attr('data-status-id');
+        var userIdForStatus = $(this).attr('data-user-id');
+        var statusId = $('option:selected', this).attr('value');;
         var data = {
             userId: userIdForStatus,
             statusId: statusId
@@ -471,4 +466,5 @@ $("document").ready(function () {
             location.reload();
         });
     });
+
 })

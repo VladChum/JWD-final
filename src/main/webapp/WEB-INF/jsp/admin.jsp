@@ -266,9 +266,9 @@
                                                         <div class="col-md-10">
                                                             <select id="inputState" class="userStatus form-select" data-user-id="${user.id}">
                                                                 <option class="status" selected>${user.status}</option>
-                                                                <option class="status" data-status-id="1">ACTIVATE</option>
-                                                                <option class="status" data-status-id="2">BANNED</option>
-                                                                <option class="status" data-status-id="3">SUSPENDED</option>
+                                                                <option class="status" value="1">ACTIVATE</option>
+                                                                <option class="status" value="2">BANNED</option>
+                                                                <option class="status" value="3">SUSPENDED</option>
                                                             </select>
                                                         </div>
                                                     </td>
