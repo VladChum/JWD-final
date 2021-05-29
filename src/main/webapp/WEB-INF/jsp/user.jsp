@@ -1,5 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt" %>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -159,83 +161,123 @@
                                     <div class="row row-cols-1 row-cols-md-3 g-4">
                                         <c:forEach items="${tariffPlans}" var="tariffPlan">
                                             <c:if test="${tariffPlan.active == 'true' || tariffPlan.id == subscription.tariffPlanId}">
-                                            <div class="col-sm-6">
-                                                <div class="card">
-                                                    <div class="card-body">
-                                                        <div class="tariff-item">
-                                                            <div class="tariff-item__top">
-                                                                <div class="tariff-item__title">
-                                                                    <h5 class="card-title">
-                                                                            ${tariffPlan.name}
-                                                                    </h5>
+                                                <div class="col-sm-6">
+                                                    <div class="card">
+                                                        <div class="card-body">
+                                                            <div class="tariff-item">
+                                                                <div class="tariff-item__top">
+                                                                    <div class="tariff-item__title">
+                                                                        <h5 class="card-title">
+                                                                                ${tariffPlan.name}
+                                                                        </h5>
+                                                                    </div>
+                                                                    <div class="tariff-item__text">
+                                                                        <p>Проводное подключение по Ethernet </p>
+                                                                        <p>Безлимит
+                                                                                ${tariffPlan.speed}
+                                                                            Мбит/с </p>
+                                                                        <p>Keenetic Speedster 2.4 + 5 ГГц </p>
+                                                                    </div>
                                                                 </div>
-                                                                <div class="tariff-item__text">
-                                                                    <p>Проводное подключение по Ethernet </p>
-                                                                    <p>Безлимит
-                                                                            ${tariffPlan.speed}
-                                                                        Мбит/с </p>
-                                                                    <p>Keenetic Speedster 2.4 + 5 ГГц </p>
-                                                                </div>
-                                                            </div>
-                                                            <div class="tariff-item__body">
-                                                                <div class="tariff-item__price">
+                                                                <div class="tariff-item__body">
+                                                                    <div class="tariff-item__price">
                                                                     <span>
                                                                         <b>
                                                                                 ${tariffPlan.price}
                                                                         </b>
                                                                         руб/мес
                                                                     </span>
-                                                                </div>
-                                                                <c:if test="${tariffPlan.id != subscription.tariffPlanId}">
-                                                                    <div class="tariff-item__btns">
-                                                                        <button name="chengTariffButton"
-                                                                                class="chengTariffButton btn button-tariff"
-                                                                                data-tariff-id="${tariffPlan.id}"
-                                                                                type="button">Подключить
-                                                                        </button>
                                                                     </div>
-                                                                </c:if>
+                                                                    <c:if test="${tariffPlan.id != subscription.tariffPlanId}">
+                                                                        <div class="tariff-item__btns">
+                                                                            <button name="chengTariffButton"
+                                                                                    class="chengTariffButton btn button-tariff"
+                                                                                    data-tariff-id="${tariffPlan.id}"
+                                                                                    type="button">Подключить
+                                                                            </button>
+                                                                        </div>
+                                                                    </c:if>
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </div>
                                             </c:if>
                                         </c:forEach>
                                     </div>
                                 </div>
                             </div>
-
                             <div class="tab-pane fade show" id="payment" role="tabpanel">
-                                <div class="tariff-item__top">
-                                    <div class="tariff-item__title">
-                                        <h5 class="card-title">Абонент : Чумачёв Владислав Константинович</h5>
-                                    </div>
-                                    <div class="tariff-item__title">
-                                        <h5 class="card-title">Логин : 1561001453502</h5>
-                                    </div>
-                                    <div class="tariff-item__title">
-                                        <h5 class="card-title">Статус : не блокирован</h5>
-                                    </div>
-                                    <div class="tariff-item__title">
-                                        <h5 class="card-title">Дата активации : 11.03.2021 02:37:21</h5>
-                                    </div>
+                                <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                                    <button class="btn add-tariff-button me-3" type="button"
+                                            id="cardReplenishButton"
+                                            data-bs-toggle="modal" data-bs-target="#newDiscountForm"
+                                            aria-expanded="false">
+                                        +
+                                    </button>
                                 </div>
+
                             </div>
 
+<%--                            discount--%>
                             <div class="tab-pane fade show" id="stock" role="tabpanel">
-                                <div class="tariff-item__top">
-                                    <div class="tariff-item__title">
-                                        <h5 class="card-title">Абонент : Чумачёв Владислав Константинович</h5>
-                                    </div>
-                                    <div class="tariff-item__title">
-                                        <h5 class="card-title">Логин : 1561001453502</h5>
-                                    </div>
-                                    <div class="tariff-item__title">
-                                        <h5 class="card-title">Статус : не блокирован</h5>
-                                    </div>
-                                    <div class="tariff-item__title">
-                                        <h5 class="card-title">Дата активации : 11.03.2021 02:37:21</h5>
+                                <div class="tab-pane fade show active" role="tabpanel">
+                                    <div class="tariff-item__top">
+                                        <div class="row row-cols-1 row-cols-md-3 g-4">
+                                            <c:forEach items="${discounts}" var="discount">
+                                                <c:if test="${discount.endDate >= dateNow && discount.startDate <= dateNow}">
+                                                    <div class="col-sm-6">
+                                                        <div class="card">
+                                                            <div class="card-body">
+                                                                <div class="tariff-item">
+                                                                    <div class="tariff-item__top">
+                                                                        <div class="tariff-item__title">
+                                                                            <h5 class="card-title">
+                                                                                discount
+                                                                            </h5>
+                                                                        </div>
+                                                                        <div class="tariff-item__text">
+                                                                            <p>start
+                                                                                date: ${discount.startDate} </p>
+                                                                            <p></p>
+                                                                            <p>end date: ${discount.endDate} </p>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="tariff-item__body">
+                                                                        <div class="tariff-item__price">
+                                                                                <span>
+                                                                                    <b>
+                                                                                            ${discount.size}
+                                                                                    </b>
+                                                                                    %
+                                                                                </span>
+                                                                            <b class="tariffActive">
+                                                                                active
+                                                                            </b>
+                                                                        </div>
+                                                                        <c:forEach var="tariff" items="${tariffPlans}">
+                                                                            <c:if test="${discount.id == tariff.discountId}">
+                                                                                <p class="discountTariff">
+                                                                                    <b>
+                                                                                            ${tariff.name}
+                                                                                        <s>
+                                                                                                ${tariff.price}
+                                                                                        </s>
+                                                                                    <fmt:formatNumber type="number" maxFractionDigits="2" >
+                                                                                        ${tariff.price * (100 - discount.size) / 100}
+                                                                                    </fmt:formatNumber>
+                                                                                </b>
+                                                                                </p>
+                                                                            </c:if>
+                                                                        </c:forEach>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </c:if>
+                                            </c:forEach>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
