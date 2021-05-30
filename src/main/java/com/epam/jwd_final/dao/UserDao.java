@@ -13,6 +13,7 @@ public interface UserDao {
     Optional<User> findUserByAccountId(int userId) throws DaoException;
     void createUser(User user) throws DaoException;
     void updateUser(User user) throws DaoException;
+    void updateBalance(User user) throws DaoException;
     void deleteUser(Long id) throws DaoException;
     void updateUserStatus(User user,  Long statusId) throws DaoException;
 }

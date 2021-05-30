@@ -467,4 +467,63 @@ $("document").ready(function () {
         });
     });
 
+    $('.cardAmount').on('keyup', function () {
+       var amount = parseFloat($('.cardAmount').val());
+       if ((amount > 1000 || amount <= 0) && $('.cardAmount').val().length !== 0) {
+            $('#errorAmount').html("Wrong input: 0 < amount <= 1000");
+       } else {
+           $('#errorAmount').html("");
+       }
+    });
+
+    $('#replenishButton').on('click', function () {
+        var amount = parseFloat($('.cardAmount').val());
+        var userId = $(this).attr('data-user-id');
+        var paymentType = 1;
+        if ((amount > 1000 || amount <= 0) || $('.cardAmount').val().length === 0) {
+            $('#errorAmount').html("Wrong input: 0 < amount <= 1000");
+        } else {
+            var data = {
+                userId: userId,
+                amount: amount,
+                paymentType: paymentType
+            }
+            var url = "Controller?command=userPayment";
+            $.post(url, data, function (data, status) {
+                location.reload();
+            });
+        }
+    });
+
+    $('#closeCardForm').on('click', function () {
+
+    });
+
+    $('#replenishAmount').on('keyup', function () {
+        var amount = parseFloat($('#replenishAmount').val());
+        if ((amount > 15 || amount <= 0) && $('#replenishAmount').val().length !== 0) {
+            $('#errorReplenishAmount').html("Wrong input: 0 < amount <= 15");
+        } else {
+            $('#errorReplenishAmount').html("");
+        }
+    });
+
+    $('.ReplenishButton').on('click', function () {
+        var userId = $(this).attr('data-user-id');
+        var paymentType = 2;
+        var amount = parseFloat($('#replenishAmount').val());
+        if ((amount > 15 || amount <= 0) || $('#replenishAmount').val().length === 0) {
+            $('#errorReplenishAmount').html("Wrong input: 0 < amount <= 15");
+        } else {
+            var data = {
+                userId: userId,
+                amount: amount,
+                paymentType: paymentType
+            }
+            var url = "Controller?command=userPayment";
+            $.post(url, data, function (data, status) {
+                location.reload();
+            });
+        }
+    });
 })

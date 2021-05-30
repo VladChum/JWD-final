@@ -12,6 +12,7 @@ public enum DaoProvider {
     private final TariffPlanDao tariffPlanDao = new TariffPlanDaoImpl();
     private final SubscriptionDao subscriptionDao = new SubscriptionDaoImpl();
     private final DiscountDao discountDao = new DiscountDaoImpl();
+    private final PaymentDao paymentDao = new PaymentDaoImpl();
 
     public AccountDao getAccountDao() {
         return accountDao;
@@ -29,5 +30,9 @@ public enum DaoProvider {
 
     public DiscountDao getDiscountDao() {
         return discountDao;
+    }
+
+    public PaymentDao getPaymentDao() {
+        return paymentDao;
     }
 }

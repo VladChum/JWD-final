@@ -18,6 +18,14 @@ public class UserPayment extends AbstractBaseEntity{
         this.paymentType = paymentType;
     }
 
+    public UserPayment(Date date, BigDecimal amount, Long userId, PaymentType paymentType) {
+        super(1L);
+        this.date = date;
+        this.amount = amount;
+        this.userId = userId;
+        this.paymentType = paymentType;
+    }
+
     public Date getDate() {
         return date;
     }

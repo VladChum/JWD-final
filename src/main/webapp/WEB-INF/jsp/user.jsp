@@ -207,19 +207,161 @@
                                     </div>
                                 </div>
                             </div>
+                            <%--                            payment--%>
                             <div class="tab-pane fade show" id="payment" role="tabpanel">
                                 <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                                    <button class="btn add-tariff-button me-3" type="button"
+                                    <button class="btn replenish-button me-3" type="button"
                                             id="cardReplenishButton"
-                                            data-bs-toggle="modal" data-bs-target="#newDiscountForm"
+                                            data-bs-toggle="modal" data-bs-target="#cardForm"
                                             aria-expanded="false">
                                         +
                                     </button>
                                 </div>
-
+                                <center>
+                                    <h4>Регистрация обещанного платежа</h4>
+                                </center>
+                                <br>
+                                <table>
+                                    <tbody>
+                                    <tr>
+                                        <td align="right">
+                                            <b>Введите cумму платежа:<b></b></b></td>
+                                        <td>
+                                            <input type="text" id="replenishAmount" class="form form-control">
+                                            * max — 15.00 руб.
+                                            <div id="errorReplenishAmount" class="errorMassage"></div>
+                                        </td>
+                                        <td>
+                                            <button class="ReplenishButton btn btn-primary"
+                                                    data-user-id="${user.id}">
+                                                Применить
+                                            </button>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                                <div id="errorReplenish" class="errorMassage"></div>
+                                <br>
+                                <center>
+                                    <h5>Пополнение</h5>
+                                </center>
+                                <div class="paymentTable">
+                                    <table class="paymentTable table table-bordered">
+                                        <thead>
+                                        <tr>
+                                            <th scope="col">data</th>
+                                            <th scope="col">amount</th>
+                                            <th scope="col">payment Type</th>
+                                        </tr>
+                                        <tbody class="table">
+                                        <c:forEach items="${userPayments}" var="userPayment">
+                                            <c:if test="${userPayment.userId == user.id}">
+                                                <tr>
+                                                    <td>${userPayment.date}</td>
+                                                    <td>${userPayment.amount}</td>
+                                                    <td>${userPayment.paymentType}</td>
+                                                </tr>
+                                            </c:if>
+                                        </c:forEach>
+                                        </tbody>
+                                        </thead>
+                                    </table>
+                                </div>
+                                <center>
+                                    <h5>Списание</h5>
+                                </center>
+                                <div class="paymentTable">
+                                    <table class="table table-bordered">
+                                        <thead>
+                                        <tr>
+                                            <th scope="col">data</th>
+                                            <th scope="col">amount</th>
+                                            <th scope="col">payment Type</th>
+                                        </tr>
+                                        <tbody class="table">
+                                        <c:forEach items="${userPayments}" var="userPayment">
+                                            <c:if test="${userPayment.userId == user.id}">
+                                                <tr>
+                                                    <td>${userPayment.date}</td>
+                                                    <td>${userPayment.amount}</td>
+                                                    <td>${userPayment.paymentType}</td>
+                                                </tr>
+                                            </c:if>
+                                        </c:forEach>
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
+                            <div class="modal fade" id="cardForm" data-bs-backdrop="static"
+                                 data-bs-keyboard="false" tabindex="-1"
+                                 aria-hidden="true">
+                                <div class="modal-dialog modal-lg">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="card">card</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                    aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <br>
+                                            <div class="row gy-3">
+                                                <div class="col-md-6">
+                                                    <label for="cc-name" class="form-label">Name on card</label>
+                                                    <input type="text" class="form-control" id="cc-name" placeholder=""
+                                                           required="">
+                                                    <small class="text-muted">Full name as displayed on card</small>
+                                                    <div class="invalid-feedback">
+                                                        Name on card is required
+                                                    </div>
+                                                </div>
 
-<%--                            discount--%>
+                                                <div class="col-md-6">
+                                                    <label for="cc-number" class="form-label">Credit card number</label>
+                                                    <input type="text" class="form-control" id="cc-number"
+                                                           placeholder="" required="">
+                                                    <div class="invalid-feedback">
+                                                        Credit card number is required
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-3">
+                                                    <label for="cc-expiration" class="form-label">Expiration</label>
+                                                    <input type="text" class="form-control" id="cc-expiration">
+                                                    <div class="invalid-feedback">
+                                                        Expiration date required
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-3">
+                                                    <label for="cc-cvv" class="form-label">CVV</label>
+                                                    <input type="text" class="form-control" id="cc-cvv">
+                                                    <div class="invalid-feedback">
+                                                        Security code required
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <br>
+                                            <h6>Amount</h6>
+                                            <div class="col-md-3">
+                                                <input type="text" class="cardAmount form-control">
+                                                <div id="errorAmount" class="errorMassage"></div>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" id="closeCardForm"
+                                                    class="btn btn-secondary" data-bs-dismiss="modal">
+                                                отмена
+                                            </button>
+                                            <button type="button" id="replenishButton"
+                                                    data-user-id="${user.id}"
+                                                    class="btn btn-primary">
+                                                пополнить
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <%--                            discount--%>
                             <div class="tab-pane fade show" id="stock" role="tabpanel">
                                 <div class="tab-pane fade show active" role="tabpanel">
                                     <div class="tariff-item__top">
@@ -263,10 +405,11 @@
                                                                                         <s>
                                                                                                 ${tariff.price}
                                                                                         </s>
-                                                                                    <fmt:formatNumber type="number" maxFractionDigits="2" >
-                                                                                        ${tariff.price * (100 - discount.size) / 100}
-                                                                                    </fmt:formatNumber>
-                                                                                </b>
+                                                                                        <fmt:formatNumber type="number"
+                                                                                                          maxFractionDigits="2">
+                                                                                            ${tariff.price * (100 - discount.size) / 100}
+                                                                                        </fmt:formatNumber>
+                                                                                    </b>
                                                                                 </p>
                                                                             </c:if>
                                                                         </c:forEach>
@@ -283,20 +426,6 @@
                             </div>
 
                             <div class="tab-pane fade show" id="help" role="tabpanel">
-                                <div class="tariff-item__top">
-                                    <div class="tariff-item__title">
-                                        <h5 class="card-title">Абонент : Чумачёв Владислав Константинович</h5>
-                                    </div>
-                                    <div class="tariff-item__title">
-                                        <h5 class="card-title">Логин : 1561001453502</h5>
-                                    </div>
-                                    <div class="tariff-item__title">
-                                        <h5 class="card-title">Статус : не блокирован</h5>
-                                    </div>
-                                    <div class="tariff-item__title">
-                                        <h5 class="card-title">Дата активации : 11.03.2021 02:37:21</h5>
-                                    </div>
-                                </div>
                             </div>
 
                             <div class="tab-pane fade show" id="settings" role="tabpanel">

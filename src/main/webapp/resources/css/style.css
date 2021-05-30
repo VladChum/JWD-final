@@ -439,6 +439,14 @@ primary {
     margin: -60px -61px 0 0;
 }
 
+.replenish-button {
+    background: linear-gradient(rgba(48, 89, 154, 0.75), rgba(84, 0, 156, 0.82));
+    border-radius: 100px;
+    color: #f2f2f2;
+    width: 45px;
+    height: 45px;
+}
+
 .errorMassage {
     color: red;
 }
@@ -458,3 +466,20 @@ primary {
 .discountTariff {
     color: #d69b10;
 }
+
+center {
+
+ }
+
+.form {
+   margin: 20px 0 0 50px;
+}
+
+.ReplenishButton {
+    margin: 0 0 0 250px;
+}
+
+.paymentTable {
+    height: 200px;
+}
+

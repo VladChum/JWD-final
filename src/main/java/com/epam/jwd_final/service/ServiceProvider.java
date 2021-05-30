@@ -11,6 +11,7 @@ public enum ServiceProvider {
    private final TariffService tariffService = new TariffServiceImpl();
    private final SubscriptionService subscriptionService = new SubscriptionServiceImpl();
    private final DiscountService discountService = new DiscountServiceImpl();
+   private final PaymentService paymentService = new PaymentServiceImpl();
 
     public AccountService getAccountService() {
         return accountService;
@@ -34,5 +35,9 @@ public enum ServiceProvider {
 
     public DiscountService getDiscountService() {
         return discountService;
+    }
+
+    public PaymentService getPaymentService() {
+        return paymentService;
     }
 }

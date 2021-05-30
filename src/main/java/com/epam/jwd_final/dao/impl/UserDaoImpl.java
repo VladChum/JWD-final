@@ -43,11 +43,12 @@ public class UserDaoImpl implements UserDao {
             "VALUES (?, ?, ?, ?, ?, ?)";
     private static final String UPDATE_USER_STATUS = "update user set status_id_fk = ? where id = ?";
     private static final String UPDATE_USER = "update user set  where login = ?";
+    private static final String UPDATE_BALANCE = "update user set balance = ? where id = ?;";
     private static final String DELETE_USER = "delete user, account from user inner join account on user.account_id = account.id " +
             "where user.id = ?";
+
     UserDaoImpl() {
     }
-
 
     @Override
     public List<User> getAllUser() throws DaoException {
@@ -102,6 +103,18 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public void updateUser(User user) {
+    }
+
+    @Override
+    public void updateBalance(User user) throws DaoException {
+        try (Connection connection = ConnectionPool.INSTANCE.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_BALANCE)) {
+            preparedStatement.setBigDecimal(1, user.getBalance());
+            preparedStatement.setLong(2, user.getId());
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            throw new DaoException(e);
+        }
     }
 
     @Override
