@@ -479,7 +479,7 @@ $("document").ready(function () {
     $('#replenishButton').on('click', function () {
         var amount = parseFloat($('.cardAmount').val());
         var userId = $(this).attr('data-user-id');
-        var paymentType = 1;
+        var paymentType = 2;
         if ((amount > 1000 || amount <= 0) || $('.cardAmount').val().length === 0) {
             $('#errorAmount').html("Wrong input: 0 < amount <= 1000");
         } else {
@@ -510,7 +510,7 @@ $("document").ready(function () {
 
     $('.ReplenishButton').on('click', function () {
         var userId = $(this).attr('data-user-id');
-        var paymentType = 2;
+        var paymentType = 3;
         var amount = parseFloat($('#replenishAmount').val());
         if ((amount > 15 || amount <= 0) || $('#replenishAmount').val().length === 0) {
             $('#errorReplenishAmount').html("Wrong input: 0 < amount <= 15");

@@ -26,12 +26,14 @@ public class UserPage implements Command {
     private final String ACCOUNT = "account";
     private final String USER = "user";
     private final String DISCOUNT = "discounts";
+    private final String USER_PAYMENTS = "userPayments";
 
     private final UserService userService = ServiceProvider.INSTANCE.getUserService();
     private final AccountService accountService = ServiceProvider.INSTANCE.getAccountService();
     private final TariffService tariffService = ServiceProvider.INSTANCE.getTariffService();
     private final SubscriptionService subscriptionService = ServiceProvider.INSTANCE.getSubscriptionService();
     private final DiscountService discountService = ServiceProvider.INSTANCE.getDiscountService();
+    private final PaymentService paymentService = ServiceProvider.INSTANCE.getPaymentService();
 
     @Override
     public void execute(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
@@ -41,6 +43,7 @@ public class UserPage implements Command {
             Account account = accountService.findAccountById(user.getAccountId()).get();
             List<TariffPlan> tariffPlans = tariffService.findAllTariff();
             List<Discount> discounts = discountService.findAll();
+            List<UserPayment> userPayments = paymentService.findAllUserPayments(user.getId());
             Subscription subscription = subscriptionService.findActiveUserSubscription(user.getId());
             Date date = new Date();
             SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
@@ -51,6 +54,7 @@ public class UserPage implements Command {
             req.setAttribute(SUBSCRIPTION, subscription);
             req.setAttribute(DISCOUNT, discounts);
             req.setAttribute("dateNow", java.sql.Date.valueOf(dateFormat.format(date)));
+            req.setAttribute(USER_PAYMENTS, userPayments);
         } catch (ServiceException e) {
             LOGGER.log(Level.ERROR, e.getMessage() + " " + e);
         }

@@ -27,6 +27,7 @@ public class Payment implements Command {
         Long userId = Long.valueOf(req.getParameter(USER_ID));
         BigDecimal amount = BigDecimal.valueOf(Double.parseDouble(req.getParameter(AMOUNT)));
         Long paymentType = Long.valueOf(req.getParameter(PAYMENT_TYPE));
+
         try {
             paymentService.topUpUserBalance(amount, userId, paymentType);
         } catch (ServiceException e) {

@@ -44,8 +44,10 @@ public class UserDaoImpl implements UserDao {
     private static final String UPDATE_USER_STATUS = "update user set status_id_fk = ? where id = ?";
     private static final String UPDATE_USER = "update user set  where login = ?";
     private static final String UPDATE_BALANCE = "update user set balance = ? where id = ?;";
-    private static final String DELETE_USER = "delete user, account from user inner join account on user.account_id = account.id " +
-            "where user.id = ?";
+    private static final String DELETE_USER = "delete user, account" +
+            "from user" +
+            "        inner join account on account.id = user.account_id" +
+            "where user.id = ?;";
 
     UserDaoImpl() {
     }

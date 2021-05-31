@@ -12,6 +12,7 @@ import com.epam.jwd_final.service.ServiceProvider;
 import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 public class PaymentServiceImpl implements PaymentService {
     private final PaymentDao paymentDao = DaoProvider.INSTANCE.getPaymentDao();
@@ -28,6 +29,15 @@ public class PaymentServiceImpl implements PaymentService {
         ServiceProvider.INSTANCE.getUserService().updateBalance(userId, amount);
         try {
             paymentDao.topUpUserBalance(userPayment);
+        } catch (DaoException e) {
+            throw new ServiceException(e);
+        }
+    }
+
+    @Override
+    public List<UserPayment> findAllUserPayments(Long userId) throws ServiceException {
+        try {
+            return paymentDao.findAllUserPayment(userId);
         } catch (DaoException e) {
             throw new ServiceException(e);
         }

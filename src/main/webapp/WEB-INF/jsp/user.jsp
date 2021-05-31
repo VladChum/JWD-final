@@ -243,7 +243,7 @@
                                 <div id="errorReplenish" class="errorMassage"></div>
                                 <br>
                                 <center>
-                                    <h5>Пополнение</h5>
+                                    <h5>Платежи</h5>
                                 </center>
                                 <div class="paymentTable">
                                     <table class="paymentTable table table-bordered">
@@ -255,40 +255,16 @@
                                         </tr>
                                         <tbody class="table">
                                         <c:forEach items="${userPayments}" var="userPayment">
-                                            <c:if test="${userPayment.userId == user.id}">
+<%--                                            <c:if test="${userPayment.paymentType != 'balance'}">--%>
                                                 <tr>
                                                     <td>${userPayment.date}</td>
                                                     <td>${userPayment.amount}</td>
                                                     <td>${userPayment.paymentType}</td>
                                                 </tr>
-                                            </c:if>
+<%--                                            </c:if>--%>
                                         </c:forEach>
                                         </tbody>
                                         </thead>
-                                    </table>
-                                </div>
-                                <center>
-                                    <h5>Списание</h5>
-                                </center>
-                                <div class="paymentTable">
-                                    <table class="table table-bordered">
-                                        <thead>
-                                        <tr>
-                                            <th scope="col">data</th>
-                                            <th scope="col">amount</th>
-                                            <th scope="col">payment Type</th>
-                                        </tr>
-                                        <tbody class="table">
-                                        <c:forEach items="${userPayments}" var="userPayment">
-                                            <c:if test="${userPayment.userId == user.id}">
-                                                <tr>
-                                                    <td>${userPayment.date}</td>
-                                                    <td>${userPayment.amount}</td>
-                                                    <td>${userPayment.paymentType}</td>
-                                                </tr>
-                                            </c:if>
-                                        </c:forEach>
-                                        </tbody>
                                     </table>
                                 </div>
                             </div>
