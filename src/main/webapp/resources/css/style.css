@@ -480,6 +480,7 @@ center {
 }
 
 .paymentTable {
-    height: 200px;
+    height:350px;
+    overflow-y:scroll;
 }
 

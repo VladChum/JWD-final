@@ -220,7 +220,6 @@
                                 <center>
                                     <h4>Регистрация обещанного платежа</h4>
                                 </center>
-                                <br>
                                 <table>
                                     <tbody>
                                     <tr>
@@ -242,29 +241,30 @@
                                 </table>
                                 <div id="errorReplenish" class="errorMassage"></div>
                                 <br>
+                                <br>
                                 <center>
                                     <h5>Платежи</h5>
                                 </center>
                                 <div class="paymentTable">
-                                    <table class="paymentTable table table-bordered">
+                                    <table class="table table-bordered">
                                         <thead>
                                         <tr>
                                             <th scope="col">data</th>
                                             <th scope="col">amount</th>
                                             <th scope="col">payment Type</th>
                                         </tr>
+                                        </thead>
                                         <tbody class="table">
                                         <c:forEach items="${userPayments}" var="userPayment">
-<%--                                            <c:if test="${userPayment.paymentType != 'balance'}">--%>
+                                            <c:if test="${userPayment.paymentType != 'BALANCE'}">
                                                 <tr>
                                                     <td>${userPayment.date}</td>
                                                     <td>${userPayment.amount}</td>
                                                     <td>${userPayment.paymentType}</td>
                                                 </tr>
-<%--                                            </c:if>--%>
+                                            </c:if>
                                         </c:forEach>
                                         </tbody>
-                                        </thead>
                                     </table>
                                 </div>
                             </div>

@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -41,12 +42,15 @@ public class UserPage implements Command {
             HttpSession session = req.getSession();
             User user = userService.findUserByAccountId((Long) session.getAttribute(USER)).get();
             Account account = accountService.findAccountById(user.getAccountId()).get();
+
             List<TariffPlan> tariffPlans = tariffService.findAllTariff();
             List<Discount> discounts = discountService.findAll();
             List<UserPayment> userPayments = paymentService.findAllUserPayments(user.getId());
+
             Subscription subscription = subscriptionService.findActiveUserSubscription(user.getId());
             Date date = new Date();
             SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+            Collections.reverse(userPayments);
 
             req.setAttribute(USER, user);
             req.setAttribute(ACCOUNT, account);
