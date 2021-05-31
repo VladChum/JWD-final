@@ -7,6 +7,7 @@ import com.epam.jwd_final.exception.DaoException;
 import com.epam.jwd_final.exception.ServiceException;
 import com.epam.jwd_final.service.UserService;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 
@@ -44,6 +45,36 @@ public class UserServiceImpl implements UserService {
     public void addUser(User user) throws ServiceException {
         try {
             userDao.createUser(user);
+        } catch (DaoException e) {
+            throw new ServiceException(e);
+        }
+    }
+
+    @Override
+    public void delete(Long userId) throws ServiceException {
+        try {
+            userDao.deleteUser(userId);
+        } catch (DaoException e) {
+            throw new ServiceException(e);
+        }
+    }
+
+    @Override
+    public void chengStatus(User user, Long statusId) throws ServiceException {
+        try {
+            userDao.updateUserStatus(user, statusId);
+        } catch (DaoException e) {
+            throw new ServiceException(e);
+        }
+    }
+
+    @Override
+    public void updateBalance(Long userId, BigDecimal amount) throws ServiceException {
+        User user = findUserById(userId).get();
+        amount = user.getBalance().add(amount);
+        user.setBalance(amount);
+        try {
+            userDao.updateBalance(user);
         } catch (DaoException e) {
             throw new ServiceException(e);
         }

@@ -255,14 +255,30 @@
                                                 <th scope="col">фамилия</th>
                                                 <th scope="col">статус</th>
                                                 <th scope="col">баланс</th>
+                                                <th></th>
                                             </tr>
                                             <tbody>
                                             <c:forEach items="${users}" var="user">
-                                                <tr>
+                                                <tr class="tableLine" data-status="${user.status}">
                                                     <td>${user.firstName}</td>
                                                     <td>${user.lastName}</td>
-                                                    <td>${user.status}</td>
+                                                    <td>
+                                                        <div class="col-md-10">
+                                                            <select id="inputState" class="userStatus form-select" data-user-id="${user.id}">
+                                                                <option class="status" selected>${user.status}</option>
+                                                                <option class="status" value="1">ACTIVATE</option>
+                                                                <option class="status" value="2">BANNED</option>
+                                                                <option class="status" value="3">SUSPENDED</option>
+                                                            </select>
+                                                        </div>
+                                                    </td>
                                                     <td>${user.balance}</td>
+                                                    <td>
+                                                        <button class="deleteUser btn btn-outline-danger"
+                                                                data-user-id="${user.id}">
+                                                            удалить
+                                                        </button>
+                                                    </td>
                                                 </tr>
                                             </c:forEach>
                                             </tbody>
@@ -285,7 +301,8 @@
                                                     <td>${admin.id}</td>
                                                     <td>${admin.login}</td>
                                                     <td>
-                                                        <button>
+                                                        <button class="deleteAdmin btn btn-outline-danger"
+                                                                data-admin-id="${admin.id}">
                                                             удалить
                                                         </button>
                                                     </td>
@@ -322,7 +339,8 @@
                                                             </button>
                                                         </td>
                                                         <td>
-                                                            <button>
+                                                            <button class="deleteUser btn btn-outline-danger"
+                                                                    data-user-id="${user.id}">
                                                                 удалить
                                                             </button>
                                                         </td>

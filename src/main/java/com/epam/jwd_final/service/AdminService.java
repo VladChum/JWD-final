@@ -16,4 +16,6 @@ public interface AdminService {
     List<Account> findAllAdminAccounts() throws ServiceException;
 
     void createAdmin(Admin admin) throws ServiceException;
+
+    void delete(Long adminId) throws ServiceException;
 }

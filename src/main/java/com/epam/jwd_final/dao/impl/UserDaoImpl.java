@@ -41,16 +41,16 @@ public class UserDaoImpl implements UserDao {
     private static final String CREATE_USER = "insert into user " +
             "(account_id, first_name, last_name, phone, email, status_id_fk) " +
             "VALUES (?, ?, ?, ?, ?, ?)";
-    /***TODO
-     * update user status
-     * */
+    private static final String UPDATE_USER_STATUS = "update user set status_id_fk = ? where id = ?";
     private static final String UPDATE_USER = "update user set  where login = ?";
-    private static final String DELETE_USER = "delete from user where id = ?";
+    private static final String UPDATE_BALANCE = "update user set balance = ? where id = ?;";
+    private static final String DELETE_USER = "delete user, account" +
+            "from user" +
+            "        inner join account on account.id = user.account_id" +
+            "where user.id = ?;";
 
     UserDaoImpl() {
     }
-
-
 
     @Override
     public List<User> getAllUser() throws DaoException {
@@ -79,48 +79,12 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public Optional<User> findUserById(int userId) throws DaoException {
-        try (Connection connection = ConnectionPool.INSTANCE.getConnection();
-             PreparedStatement prepareStatement = connection.prepareStatement(FIND_USER_BY_ID)) {
-            prepareStatement.setInt(1, userId);
-            try (ResultSet resultSet = prepareStatement.executeQuery()) {
-                if (resultSet.next()) {
-                    return Optional.of(new User(resultSet.getLong("id"),
-                            resultSet.getLong(2),
-                            resultSet.getString(3),
-                            resultSet.getString(4),
-                            resultSet.getString(5),
-                            resultSet.getString(6),
-                            Status.resolveStatusById(resultSet.getInt(8)),
-                            resultSet.getBigDecimal(7)));
-                }
-            }
-        } catch (SQLException e) {
-            throw new DaoException(e);
-        }
-        return Optional.empty();
+        return findUser(userId, FIND_USER_BY_ID);
     }
 
     @Override
     public Optional<User> findUserByAccountId(int userId) throws DaoException {
-        try (Connection connection = ConnectionPool.INSTANCE.getConnection();
-             PreparedStatement prepareStatement = connection.prepareStatement(FIND_USER_BY_ACCOUNT_ID)) {
-            prepareStatement.setInt(1, userId);
-            try (ResultSet resultSet = prepareStatement.executeQuery()) {
-                if (resultSet.next()) {
-                    return Optional.of(new User(resultSet.getLong("id"),
-                            resultSet.getLong(2),
-                            resultSet.getString(3),
-                            resultSet.getString(4),
-                            resultSet.getString(5),
-                            resultSet.getString(6),
-                            Status.resolveStatusById(resultSet.getInt(8)),
-                            resultSet.getBigDecimal(7)));
-                }
-            }
-        } catch (SQLException e) {
-            throw new DaoException(e);
-        }
-        return Optional.empty();
+        return findUser(userId, FIND_USER_BY_ACCOUNT_ID);
     }
 
     @Override
@@ -144,10 +108,22 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public void deleteUser(User user) throws DaoException {
+    public void updateBalance(User user) throws DaoException {
+        try (Connection connection = ConnectionPool.INSTANCE.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_BALANCE)) {
+            preparedStatement.setBigDecimal(1, user.getBalance());
+            preparedStatement.setLong(2, user.getId());
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            throw new DaoException(e);
+        }
+    }
+
+    @Override
+    public void deleteUser(Long id) throws DaoException {
         try (Connection connection = ConnectionPool.INSTANCE.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(DELETE_USER)) {
-            preparedStatement.setLong(1, user.getId());
+            preparedStatement.setLong(1, id);
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             throw new DaoException(e);
@@ -156,7 +132,36 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public void updateUserStatus(Status status) throws DaoException {
+    public void updateUserStatus(User user,  Long statusId) throws DaoException {
+        try (Connection connection = ConnectionPool.INSTANCE.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_USER_STATUS)) {
+            preparedStatement.setLong(1, statusId);
+            preparedStatement.setLong(2, user.getId());
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            throw new DaoException(e);
+        }
+    }
 
+    private Optional<User> findUser(int userId, String request) throws DaoException {
+        try (Connection connection = ConnectionPool.INSTANCE.getConnection();
+             PreparedStatement prepareStatement = connection.prepareStatement(request)) {
+            prepareStatement.setInt(1, userId);
+            try (ResultSet resultSet = prepareStatement.executeQuery()) {
+                if (resultSet.next()) {
+                    return Optional.of(new User(resultSet.getLong("id"),
+                            resultSet.getLong(2),
+                            resultSet.getString(3),
+                            resultSet.getString(4),
+                            resultSet.getString(5),
+                            resultSet.getString(6),
+                            Status.resolveStatusById(resultSet.getInt(8)),
+                            resultSet.getBigDecimal(7)));
+                }
+            }
+        } catch (SQLException e) {
+            throw new DaoException(e);
+        }
+        return Optional.empty();
     }
 }

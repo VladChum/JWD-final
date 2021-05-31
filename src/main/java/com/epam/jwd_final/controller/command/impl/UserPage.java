@@ -1,10 +1,7 @@
 package com.epam.jwd_final.controller.command.impl;
 
 import com.epam.jwd_final.controller.command.Command;
-import com.epam.jwd_final.entity.Account;
-import com.epam.jwd_final.entity.Subscription;
-import com.epam.jwd_final.entity.TariffPlan;
-import com.epam.jwd_final.entity.User;
+import com.epam.jwd_final.entity.*;
 import com.epam.jwd_final.exception.ServiceException;
 import com.epam.jwd_final.service.*;
 import org.apache.log4j.Level;
@@ -16,6 +13,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 
 public class UserPage implements Command {
@@ -26,11 +26,15 @@ public class UserPage implements Command {
     private final String SUBSCRIPTION = "subscription";
     private final String ACCOUNT = "account";
     private final String USER = "user";
+    private final String DISCOUNT = "discounts";
+    private final String USER_PAYMENTS = "userPayments";
 
     private final UserService userService = ServiceProvider.INSTANCE.getUserService();
     private final AccountService accountService = ServiceProvider.INSTANCE.getAccountService();
     private final TariffService tariffService = ServiceProvider.INSTANCE.getTariffService();
     private final SubscriptionService subscriptionService = ServiceProvider.INSTANCE.getSubscriptionService();
+    private final DiscountService discountService = ServiceProvider.INSTANCE.getDiscountService();
+    private final PaymentService paymentService = ServiceProvider.INSTANCE.getPaymentService();
 
     @Override
     public void execute(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
@@ -38,12 +42,23 @@ public class UserPage implements Command {
             HttpSession session = req.getSession();
             User user = userService.findUserByAccountId((Long) session.getAttribute(USER)).get();
             Account account = accountService.findAccountById(user.getAccountId()).get();
+
             List<TariffPlan> tariffPlans = tariffService.findAllTariff();
+            List<Discount> discounts = discountService.findAll();
+            List<UserPayment> userPayments = paymentService.findAllUserPayments(user.getId());
+
             Subscription subscription = subscriptionService.findActiveUserSubscription(user.getId());
+            Date date = new Date();
+            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+            Collections.reverse(userPayments);
+
             req.setAttribute(USER, user);
             req.setAttribute(ACCOUNT, account);
             req.setAttribute(TARIFF_PLANS, tariffPlans);
             req.setAttribute(SUBSCRIPTION, subscription);
+            req.setAttribute(DISCOUNT, discounts);
+            req.setAttribute("dateNow", java.sql.Date.valueOf(dateFormat.format(date)));
+            req.setAttribute(USER_PAYMENTS, userPayments);
         } catch (ServiceException e) {
             LOGGER.log(Level.ERROR, e.getMessage() + " " + e);
         }
