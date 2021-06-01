@@ -36,7 +36,7 @@ public class SignIn implements Command {
         HttpSession session = req.getSession();
         String nextPage = "";
 
-//      temporary solution
+// todo     temporary solution
         try {
             if (!accountService.findAccountByLoginAndPassword(login, password).isPresent()) {
                 nextPage = "/Controller?command=homePage";
