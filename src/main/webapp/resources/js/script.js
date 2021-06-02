@@ -265,23 +265,31 @@ $("document").ready(function () {
         var endDate = $('#newEndDateDiscount').val();
         var valid = 0;
 
-        if (size > 0 && size <= 100 && $('#newDiscountSize').val().length != 0) {
-            $('#errorDiscountSize').html("");
-            valid++;
-        } else {
-            $('#errorDiscountSize').html("Wrong input:  0 < discount size < 100");
-        }
-        if (endDate.length != 10) {
+        var startDateTime = new Date(startDate);
+        var endDateTime = new Date(endDate);
+
+        if (startDate > endDate) {
             $('#errorEndDateDiscount').html("Wrong input: date example 2020-03-04");
-        } else {
-            $('#errorEndDateDiscount').html("");
-            valid++;
-        }
-        if (startDate.length != 10) {
             $('#errorStartDateDiscount').html("Wrong input: date example 2020-03-04");
         } else {
-            $('#errorStartDateDiscount').html("");
-            valid++;
+            if (size > 0 && size <= 100 && $('#newDiscountSize').val().length != 0) {
+                $('#errorDiscountSize').html("");
+                valid++;
+            } else {
+                $('#errorDiscountSize').html("Wrong input:  0 < discount size < 100");
+            }
+            if (endDate.length != 10) {
+                $('#errorEndDateDiscount').html("Wrong input: date example 2020-03-04");
+            } else {
+                $('#errorEndDateDiscount').html("");
+                valid++;
+            }
+            if (startDate.length != 10) {
+                $('#errorStartDateDiscount').html("Wrong input: date example 2020-03-04");
+            } else {
+                $('#errorStartDateDiscount').html("");
+                valid++;
+            }
         }
 
         if (valid === 3) {
@@ -354,23 +362,31 @@ $("document").ready(function () {
         var endDate = $('#updateEndDateDiscount').val();
         var valid = 0;
 
-        if (size > 0 && size <= 100 || $('#updateDiscountSize').val().length === 0) {
-            $('#errorUpdateDiscountSize').html("");
-            valid++;
-        } else {
-            $('#errorUpdateDiscountSize').html("Wrong input: 0 < discount size < 100");
-        }
-        if (startDate.length != 10) {
+        var startDateTime = new Date(startDate);
+        var endDateTime = new Date(endDate);
+
+        if (startDate > endDate) {
             $('#errorUpdateStartDateDiscount').html("Wrong input: date example 2020-03-03");
-        } else {
-            $('#errorUpdateStartDateDiscount').html("");
-            valid++;
-        }
-        if (endDate.length != 10) {
             $('#errorUpdateEndDateDiscount').html("Wrong input: date example 2020-03-04");
         } else {
-            $('#errorUpdateEndDateDiscount').html("");
-            valid++;
+            if (size > 0 && size <= 100 || $('#updateDiscountSize').val().length === 0) {
+                $('#errorUpdateDiscountSize').html("");
+                valid++;
+            } else {
+                $('#errorUpdateDiscountSize').html("Wrong input: 0 < discount size < 100");
+            }
+            if (startDate.length != 10) {
+                $('#errorUpdateStartDateDiscount').html("Wrong input: date example 2020-03-03");
+            } else {
+                $('#errorUpdateStartDateDiscount').html("");
+                valid++;
+            }
+            if (endDate.length != 10) {
+                $('#errorUpdateEndDateDiscount').html("Wrong input: date example 2020-03-04");
+            } else {
+                $('#errorUpdateEndDateDiscount').html("");
+                valid++;
+            }
         }
 
         if (valid === 3) {
@@ -456,7 +472,8 @@ $("document").ready(function () {
 
     $('.userStatus').on('click', function () {
         var userIdForStatus = $(this).attr('data-user-id');
-        var statusId = $('option:selected', this).attr('value');;
+        var statusId = $('option:selected', this).attr('value');
+        ;
         var data = {
             userId: userIdForStatus,
             statusId: statusId
@@ -468,12 +485,12 @@ $("document").ready(function () {
     });
 
     $('.cardAmount').on('keyup', function () {
-       var amount = parseFloat($('.cardAmount').val());
-       if ((amount > 1000 || amount <= 0) && $('.cardAmount').val().length !== 0) {
+        var amount = parseFloat($('.cardAmount').val());
+        if ((amount > 1000 || amount <= 0) && $('.cardAmount').val().length !== 0) {
             $('#errorAmount').html("Wrong input: 0 < amount <= 1000");
-       } else {
-           $('#errorAmount').html("");
-       }
+        } else {
+            $('#errorAmount').html("");
+        }
     });
 
     $('#replenishButton').on('click', function () {
