@@ -13,8 +13,7 @@ public class SignOut implements Command {
 
     @Override
     public void execute(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
-        HttpSession session = req.getSession();
-
+        HttpSession session = req.getSession(false);
         if (session != null) {
             session.invalidate();
         }
