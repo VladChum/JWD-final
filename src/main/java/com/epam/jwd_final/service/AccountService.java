@@ -11,4 +11,6 @@ public interface AccountService {
     Optional<Account> findAccountById(Long id) throws ServiceException;
 
     Long addAccount(String login, String password) throws ServiceException;
+
+
 }

@@ -1,7 +1,6 @@
-package com.epam.jwd_final.controller.command.impl;
+package com.epam.jwd_final.controller.command.impl.page;
 
 import com.epam.jwd_final.controller.command.Command;
-import com.epam.jwd_final.dao.DiscountDao;
 import com.epam.jwd_final.entity.*;
 import com.epam.jwd_final.exception.ServiceException;
 import com.epam.jwd_final.service.*;

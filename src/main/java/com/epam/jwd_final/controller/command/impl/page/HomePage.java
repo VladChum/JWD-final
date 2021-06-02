@@ -1,4 +1,4 @@
-package com.epam.jwd_final.controller.command.impl;
+package com.epam.jwd_final.controller.command.impl.page;
 
 import com.epam.jwd_final.controller.command.Command;
 
@@ -8,14 +8,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-public class LoginPage implements Command {
-    private final String LOGIN_PAGE = "/WEB-INF/jsp/login.jsp";
+public class HomePage implements Command {
+    private final String HOME_PAGE = "/WEB-INF/jsp/home.jsp";
 
     @Override
     public void execute(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
-        RequestDispatcher requestDispatcher = req.getRequestDispatcher(LOGIN_PAGE);
+        RequestDispatcher requestDispatcher = req.getRequestDispatcher(HOME_PAGE);
         requestDispatcher.forward(req, resp);
     }
-
-
 }
