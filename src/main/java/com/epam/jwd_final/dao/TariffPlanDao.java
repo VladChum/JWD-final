@@ -8,15 +8,22 @@ import java.util.Optional;
 
 public interface TariffPlanDao {
     List<TariffPlan> getAllTariff() throws DaoException;
+
     Optional<TariffPlan> findTariffById(int tariffId) throws DaoException;
-    /**todo
-     *
-     *add cheng price and speed
-     *add cheng discount
-     * */
+
+    /**
+     * todo
+     * <p>
+     * add cheng price and speed
+     * add cheng discount
+     */
     void createTariff(TariffPlan tariffPlan) throws DaoException;
+
     void updateTariff(TariffPlan tariffPlan);
+
     void deleteTariff(Long tariffId) throws DaoException;
+
     void activateTariff(Long tariffId) throws DaoException;
+
     void updateDiscount(TariffPlan tariffPlan, Long discountId) throws DaoException;
 }

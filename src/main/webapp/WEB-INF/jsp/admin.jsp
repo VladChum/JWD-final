@@ -50,7 +50,8 @@
                                  class="account-button rounded-circle">
                         </a>
                         <ul class="account-menu dropdown-menu text-small">
-                            <li><a class="dropdown-item" href="Controller?command=personalAccount">личный кабинет</a></li>
+                            <li><a class="dropdown-item" href="Controller?command=personalAccount">личный кабинет</a>
+                            </li>
                             <li>
                                 <hr class="dropdown-divider">
                             </li>
@@ -282,7 +283,8 @@
                                                     <td>${user.lastName}</td>
                                                     <td>
                                                         <div class="col-md-10">
-                                                            <select id="inputState" class="userStatus form-select" data-user-id="${user.id}">
+                                                            <select id="inputState" class="userStatus form-select"
+                                                                    data-user-id="${user.id}">
                                                                 <option class="status" selected>${user.status}</option>
                                                                 <option class="status" value="1">ACTIVATE</option>
                                                                 <option class="status" value="2">BANNED</option>
@@ -905,8 +907,7 @@
                                         <h5 class="card-title">старый пароль : </h5>
                                     </div>
                                     <div class="col">
-                                        <input id="oldPassword" class="oldPassword form-control"
-                                               placeholder="">
+                                        <input type="password" id="oldPassword" class="oldPassword form-control">
                                     </div>
                                     <div class="col">
                                     </div>
@@ -916,8 +917,7 @@
                                         <h5 class="card-title">новый пароль : </h5>
                                     </div>
                                     <div class="col">
-                                        <input id="newPassword" class="newPassword form-control"
-                                               placeholder="">
+                                        <input type="password" id="newPassword" class="newPassword form-control">
                                     </div>
                                     <div class="col">
                                     </div>
@@ -927,15 +927,17 @@
                                         <h5 class="card-title">ещё раз новый пароль : </h5>
                                     </div>
                                     <div class="col">
-                                        <input id="secondNewPassword" class="secondNewPassword form-control"
-                                               placeholder="">
+                                        <input type="password" id="secondNewPassword"
+                                               class="secondNewPassword form-control">
                                     </div>
                                     <div class="col">
                                     </div>
                                 </div>
-                                <div class="chengEmailButton">
-                                    <a class="button-tariff js-open-popup" data-id="single">обновить</a>
-                                </div>
+                                <div id="errorUpdatePassword" class="errorMassage"></div>
+                                <button type="button" id="chengPasswordButton" class="btn btn-primary"
+                                        data-account-id="${account.id}">
+                                    обновить
+                                </button>
                             </div>
                         </div>
                     </div>

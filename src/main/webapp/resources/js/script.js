@@ -581,4 +581,25 @@ $("document").ready(function () {
             $('#errorNewPhone').html("Wrong input!");
         }
     });
+
+    $('#chengPasswordButton').on('click', function () {
+       var accountId = $(this).attr('data-account-id');
+       var password = $('#oldPassword').val();
+       var newPassword = $('#newPassword').val();
+       var secondNewPassword = $('#secondNewPassword').val();
+
+       if (newPassword === secondNewPassword) {
+           var data = {
+               accountId: accountId,
+               password: password,
+               newPassword: newPassword
+           }
+           var url = "Controller?command=updatePassword";
+           $.post(url, data, function (data, status) {
+               location.reload();
+           });
+       } else {
+           $('#errorUpdatePassword').html("Wrong input!");
+       }
+    });
 })

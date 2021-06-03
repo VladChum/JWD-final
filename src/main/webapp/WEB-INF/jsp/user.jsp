@@ -83,11 +83,7 @@
                                 </h5>
                             </div>
                             <div class="tariff-item__text">
-                                <b>
-                                    <p>
-                                        ${account.login}
-                                    </p>
-                                </b>
+                                <b><p>${account.login}</p></b>
                             </div>
                         </div>
                         <div class="tariff-item__body">
@@ -182,7 +178,7 @@
                                             <div class="col"><h5 class="card-title">${user.balance}</h5></div>
                                         </div>
                                     </div>
-                                    <br><br><br><br><br><br><br><br>
+                                    <br><br><br><br><br><br><br><br><br><br><br><br>
                                     <div class="container">
                                         <div class="row align-items-start">
                                             <div class="col-2"><h5 class="card-title">Телефон : </h5></div>
@@ -499,12 +495,10 @@
                                             </div>
                                         </div>
                                         <div id="errorNewEmail" class="errorMassage"></div>
-                                        <div class="chengEmailButton">
-                                            <button type="button" id="chengEmailButton" class="btn btn-primary"
-                                                    data-email="${user.email}" data-user-id="${user.id}">
-                                                обновить
-                                            </button>
-                                        </div>
+                                        <button type="button" id="chengEmailButton" class="btn btn-primary"
+                                                data-email="${user.email}" data-user-id="${user.id}">
+                                            обновить
+                                        </button>
                                     </div>
                                     <%-- phone--%>
                                     <div class="tab-pane fade" id="pills-phone" role="tabpanel"
@@ -519,12 +513,10 @@
                                             <div class="col"></div>
                                         </div>
                                         <div id="errorNewPhone" class="errorMassage"></div>
-                                        <div class="chengEmailButton">
-                                            <button type="button" id="chengPhoneButton" class="btn btn-primary"
-                                                    data-phone="${user.phone}" data-user-id="${user.id}">
-                                                обновить
-                                            </button>
-                                        </div>
+                                        <button type="button" id="chengPhoneButton" class="btn btn-primary"
+                                                data-phone="${user.phone}" data-user-id="${user.id}">
+                                            обновить
+                                        </button>
                                     </div>
                                     <%-- cheng password--%>
                                     <div class="tab-pane fade" id="pills-password" role="tabpanel"
@@ -535,8 +527,8 @@
                                                 <h5 class="card-title">старый пароль : </h5>
                                             </div>
                                             <div class="col">
-                                                <input id="oldPassword" class="oldPassword form-control"
-                                                       placeholder="">
+                                                <input type="password" id="oldPassword"
+                                                       class="oldPassword form-control">
                                             </div>
                                             <div class="col">
                                             </div>
@@ -546,8 +538,8 @@
                                                 <h5 class="card-title">новый пароль : </h5>
                                             </div>
                                             <div class="col">
-                                                <input id="newPassword" class="newPassword form-control"
-                                                       placeholder="">
+                                                <input type="password" id="newPassword"
+                                                       class="newPassword form-control">
                                             </div>
                                             <div class="col">
                                             </div>
@@ -557,15 +549,17 @@
                                                 <h5 class="card-title">ещё раз новый пароль : </h5>
                                             </div>
                                             <div class="col">
-                                                <input id="secondNewPassword" class="secondNewPassword form-control"
-                                                       placeholder="">
+                                                <input type="password" id="secondNewPassword"
+                                                       class="secondNewPassword form-control">
                                             </div>
                                             <div class="col">
                                             </div>
                                         </div>
-                                        <div class="chengEmailButton">
-                                            <a class="button-tariff js-open-popup" data-id="single">обновить</a>
-                                        </div>
+                                        <div id="errorUpdatePassword" class="errorMassage"></div>
+                                        <button type="button" id="chengPasswordButton" class="btn btn-primary"
+                                                data-account-id="${account.id}">
+                                            обновить
+                                        </button>
                                     </div>
                                 </div>
                             </div>
