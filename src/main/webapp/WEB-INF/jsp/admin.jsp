@@ -46,8 +46,8 @@
                     <div class="dropdown text-end">
                         <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle show"
                            id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="true">
-                            <img src="../resources/user/account.svg" alt="mdo" width="32" height="32"
-                                 class="rounded-circle">
+                            <img src="../resources/user/account.svg" alt="mdo"
+                                 class="account-button rounded-circle">
                         </a>
                         <ul class="account-menu dropdown-menu text-small">
                             <li><a class="dropdown-item" href="Controller?command=personalAccount">личный кабинет</a></li>
@@ -899,17 +899,42 @@
                                 </div>
                             </div>
                             <div class="tab-pane fade show" id="settings" role="tabpanel">
-                                <div class="tariff-item__title">
-                                    <h5 class="card-title">Абонент : Владислав Константинович</h5>
+                                <br>
+                                <div class="row align-items-start">
+                                    <div class="col-4">
+                                        <h5 class="card-title">старый пароль : </h5>
+                                    </div>
+                                    <div class="col">
+                                        <input id="oldPassword" class="oldPassword form-control"
+                                               placeholder="">
+                                    </div>
+                                    <div class="col">
+                                    </div>
                                 </div>
-                                <div class="tariff-item__title">
-                                    <h5 class="card-title">Логин : 1561001453502</h5>
+                                <div class="row align-items-start">
+                                    <div class="col-4">
+                                        <h5 class="card-title">новый пароль : </h5>
+                                    </div>
+                                    <div class="col">
+                                        <input id="newPassword" class="newPassword form-control"
+                                               placeholder="">
+                                    </div>
+                                    <div class="col">
+                                    </div>
                                 </div>
-                                <div class="tariff-item__title">
-                                    <h5 class="card-title">Статус : не блокирован</h5>
+                                <div class="row align-items-start">
+                                    <div class="col-4">
+                                        <h5 class="card-title">ещё раз новый пароль : </h5>
+                                    </div>
+                                    <div class="col">
+                                        <input id="secondNewPassword" class="secondNewPassword form-control"
+                                               placeholder="">
+                                    </div>
+                                    <div class="col">
+                                    </div>
                                 </div>
-                                <div class="tariff-item__title">
-                                    <h5 class="card-title">Дата активации : 11.03.2021 02:37:21</h5>
+                                <div class="chengEmailButton">
+                                    <a class="button-tariff js-open-popup" data-id="single">обновить</a>
                                 </div>
                             </div>
                         </div>

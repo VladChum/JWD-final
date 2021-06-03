@@ -46,8 +46,8 @@
                     <div class="dropdown text-end">
                         <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle show"
                            id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="true">
-                            <img src="../resources/user/account.svg" alt="mdo" width="32" height="32"
-                                 class="rounded-circle">
+                            <img src="../resources/user/account.svg" alt="mdo"
+                                 class="account-button rounded-circle">
                         </a>
                         <ul class="account-menu dropdown-menu text-small">
                             <li><a class="dropdown-item" href="Controller?command=personalAccount">личный кабинет</a></li>

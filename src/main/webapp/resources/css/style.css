@@ -490,3 +490,17 @@ center {
     margin: 0px;
     transform: translate(0px, 34px);
 }
+
+.account-button {
+    width: 40px;
+    height: 40px;
+    margin: 0 0 0 20px;
+}
+
+.chengEmail {
+    margin: 0 100px 0 0;
+}
+
+.chengEmailButton {
+    margin: 0 0 0 15px;
+}
