@@ -43,6 +43,8 @@ public class UserDaoImpl implements UserDao {
             "VALUES (?, ?, ?, ?, ?, ?)";
     private static final String UPDATE_USER_STATUS = "update user set status_id_fk = ? where id = ?";
     private static final String UPDATE_USER = "update user set  where login = ?";
+    private static final String UPDATE_EMAIL = "update user set email = ? where id = ?;";
+    private static final String UPDATE_PHONE = "update user set phone = ? where id = ?;";
     private static final String UPDATE_BALANCE = "update user set balance = ? where id = ?;";
     private static final String DELETE_USER = "delete user, account from user inner join account " +
             "on account.id = user.account_id where user.id = ?;";
@@ -118,6 +120,17 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
+    public void updateEmail(Long userId, String email) throws DaoException {
+        updateUser(userId, email, UPDATE_EMAIL);
+
+    }
+
+    @Override
+    public void updatePhone(Long userId, String phone) throws DaoException {
+        updateUser(userId, phone, UPDATE_PHONE);
+    }
+
+    @Override
     public void deleteUser(Long id) throws DaoException {
         try (Connection connection = ConnectionPool.INSTANCE.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(DELETE_USER)) {
@@ -130,11 +143,22 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public void updateUserStatus(User user,  Long statusId) throws DaoException {
+    public void updateUserStatus(User user, Long statusId) throws DaoException {
         try (Connection connection = ConnectionPool.INSTANCE.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_USER_STATUS)) {
             preparedStatement.setLong(1, statusId);
             preparedStatement.setLong(2, user.getId());
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            throw new DaoException(e);
+        }
+    }
+
+    private void updateUser(Long userId, String parameter, String request) throws DaoException {
+        try (Connection connection = ConnectionPool.INSTANCE.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(request)) {
+            preparedStatement.setString(1, parameter);
+            preparedStatement.setLong(2, userId);
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             throw new DaoException(e);

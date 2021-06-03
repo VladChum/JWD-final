@@ -498,8 +498,12 @@
                                             <div class="col">
                                             </div>
                                         </div>
+                                        <div id="errorNewEmail" class="errorMassage"></div>
                                         <div class="chengEmailButton">
-                                            <a class="button-tariff js-open-popup" data-id="single">обновить</a>
+                                            <button type="button" id="chengEmailButton" class="btn btn-primary"
+                                                    data-email="${user.email}" data-user-id="${user.id}">
+                                                обновить
+                                            </button>
                                         </div>
                                     </div>
                                     <%-- phone--%>
@@ -507,18 +511,19 @@
                                          aria-labelledby="pills-phone-tab">
                                         <br>
                                         <div class="row align-items-start">
-                                            <div class="col-2">
-                                                <h5 class="card-title">Phone : </h5>
-                                            </div>
+                                            <div class="col-2"><h5 class="card-title">Phone : </h5></div>
                                             <div class="col">
                                                 <input id="newPhone" class="chengPhone form-control"
                                                        placeholder="${user.phone}">
                                             </div>
-                                            <div class="col">
-                                            </div>
+                                            <div class="col"></div>
                                         </div>
+                                        <div id="errorNewPhone" class="errorMassage"></div>
                                         <div class="chengEmailButton">
-                                            <a class="button-tariff js-open-popup" data-id="single">обновить</a>
+                                            <button type="button" id="chengPhoneButton" class="btn btn-primary"
+                                                    data-phone="${user.phone}" data-user-id="${user.id}">
+                                                обновить
+                                            </button>
                                         </div>
                                     </div>
                                     <%-- cheng password--%>

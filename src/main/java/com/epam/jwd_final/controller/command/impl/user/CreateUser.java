@@ -1,4 +1,4 @@
-package com.epam.jwd_final.controller.command.impl;
+package com.epam.jwd_final.controller.command.impl.user;
 
 import com.epam.jwd_final.controller.command.Command;
 import com.epam.jwd_final.entity.Status;

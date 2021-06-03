@@ -543,4 +543,42 @@ $("document").ready(function () {
             });
         }
     });
+
+    $('#chengEmailButton').on('click', function () {
+        var oldEmail = $(this).attr('data-email');
+        var userId = $(this).attr('data-user-id');
+        var newEmail = $('#newEmail').val();
+
+        if (oldEmail !== newEmail && newEmail.length !== 0) {
+            var data = {
+                userId: userId,
+                newEmail: newEmail
+            }
+            var url = "Controller?command=updateUserEmail";
+            $.post(url, data, function (data, status) {
+                location.reload();
+            });
+        } else  {
+            $('#errorNewEmail').html("Wrong input!");
+        }
+    });
+
+    $('#chengPhoneButton').on('click', function () {
+        var oldPhone = $(this).attr('data-phone');
+        var userId = $(this).attr('data-user-id');
+        var newPhone = $('#newPhone').val();
+
+        if (oldPhone !== newPhone && newPhone.length !== 0) {
+            var data = {
+                userId: userId,
+                newPhone: newPhone
+            }
+            var url = "Controller?command=updateUserPhone";
+            $.post(url, data, function (data, status) {
+                location.reload();
+            });
+        } else {
+            $('#errorNewPhone').html("Wrong input!");
+        }
+    });
 })
