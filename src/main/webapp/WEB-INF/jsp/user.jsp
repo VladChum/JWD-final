@@ -39,9 +39,28 @@
                         <button class="dropdown-item" type="button">EN</button>
                     </div>
                 </div>
-                <a href="Controller?command=loginPage">
-                    <button type="button" class="btn btn-primary">Login</button>
-                </a>
+                <c:if test="${account.login == null}">
+                    <a href="Controller?command=loginPage">
+                        <button type="button" class="btn btn-primary">Login</button>
+                    </a>
+                </c:if>
+                <c:if test="${account.login != null}">
+                    <div class="dropdown text-end">
+                        <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle show"
+                           id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="true">
+                            <img src="../resources/user/account.svg" alt="mdo"
+                                 class="account-button rounded-circle">
+                        </a>
+                        <ul class="account-menu dropdown-menu text-small">
+                            <li><a class="dropdown-item" href="Controller?command=personalAccount">личный кабинет</a>
+                            </li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="Controller?command=signOut">Sign out</a></li>
+                        </ul>
+                    </div>
+                </c:if>
             </div>
         </div>
     </header>
@@ -64,11 +83,7 @@
                                 </h5>
                             </div>
                             <div class="tariff-item__text">
-                                <b>
-                                    <p>
-                                        ${account.login}
-                                    </p>
-                                </b>
+                                <b><p>${account.login}</p></b>
                             </div>
                         </div>
                         <div class="tariff-item__body">
@@ -139,20 +154,42 @@
                         <div class="tab-content" id="v-pills-tabContent">
                             <div class="tab-pane fade show active" id="score" role="tabpanel">
                                 <div class="tariff-item__top">
-                                    <div class="tariff-item__title">
-                                        <h5 class="card-title">Абонент : Чумачёв Владислав Константинович</h5>
+                                    <div class="container">
+                                        <div class="row align-items-start">
+                                            <div class="col-2"><h5 class="card-title">Абонент : </h5></div>
+                                            <div class="col"><h5>${user.firstName} ${user.lastName}</h5></div>
+                                        </div>
                                     </div>
-                                    <div class="tariff-item__title">
-                                        <h5 class="card-title">Логин : 1561001453502</h5>
+                                    <div class="container">
+                                        <div class="row align-items-start">
+                                            <div class="col-2"><h5 class="card-title">Логин : </h5></div>
+                                            <div class="col"><h5>${account.login}</h5></div>
+                                        </div>
                                     </div>
-                                    <div class="tariff-item__title">
-                                        <h5 class="card-title">Статус : не блокирован</h5>
+                                    <div class="container">
+                                        <div class="row align-items-start">
+                                            <div class="col-2"><h5 class="card-title">Статус : </h5></div>
+                                            <div class="col"><h5>${user.status}</h5></div>
+                                        </div>
                                     </div>
-                                    <div class="tariff-item__title">
-                                        <c:set var="subscription" value="${subscription}"/>
-                                        <h5 class="card-title">
-                                            ${subscription.startDate}
-                                        </h5>
+                                    <div class="container">
+                                        <div class="row align-items-start">
+                                            <div class="col-2"><h5 class="card-title">Баланс : </h5></div>
+                                            <div class="col"><h5 class="card-title">${user.balance}</h5></div>
+                                        </div>
+                                    </div>
+                                    <br><br><br><br><br><br><br><br><br><br><br><br>
+                                    <div class="container">
+                                        <div class="row align-items-start">
+                                            <div class="col-2"><h5 class="card-title">Телефон : </h5></div>
+                                            <div class="col"><h5>${user.phone}</h5></div>
+                                        </div>
+                                    </div>
+                                    <div class="container">
+                                        <div class="row align-items-start">
+                                            <div class="col-2"><h5 class="card-title">E-mail : </h5></div>
+                                            <div class="col"><h5 class="card-title">${user.email}</h5></div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -406,17 +443,123 @@
 
                             <div class="tab-pane fade show" id="settings" role="tabpanel">
                                 <div class="tariff-item__top">
-                                    <div class="tariff-item__title">
-                                        <h5 class="card-title">Абонент : Чумачёв Владислав Константинович</h5>
+                                    <div class="container">
+                                        <div class="row align-items-start">
+                                            <div class="col-2"><h5 class="card-title">Абонент : </h5></div>
+                                            <div class="col"><h5>${user.firstName} ${user.lastName}</h5></div>
+                                        </div>
                                     </div>
-                                    <div class="tariff-item__title">
-                                        <h5 class="card-title">Логин : 1561001453502</h5>
+                                    <div class="container">
+                                        <div class="row align-items-start">
+                                            <div class="col-2"><h5 class="card-title">Статус : </h5></div>
+                                            <div class="col"><h5>${user.status}</h5></div>
+                                        </div>
                                     </div>
-                                    <div class="tariff-item__title">
-                                        <h5 class="card-title">Статус : не блокирован</h5>
+                                </div>
+                                <br>
+                                <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+                                    <li class="nav-item" role="presentation">
+                                        <button class="nav-link active" id="pills-contact-tab" data-bs-toggle="pill"
+                                                data-bs-target="#pills-contact" type="button" role="tab"
+                                                aria-controls="pills-contact" aria-selected="true">контактные данные
+                                        </button>
+                                    </li>
+                                    <li class="nav-item" role="presentation">
+                                        <button class="nav-link" id="pills-phone-tab" data-bs-toggle="pill"
+                                                data-bs-target="#pills-phone" type="button" role="tab"
+                                                aria-controls="pills-phone" aria-selected="false">телефон
+                                        </button>
+                                    </li>
+                                    <li class="nav-item" role="presentation">
+                                        <button class="nav-link" id="pills-password-tab" data-bs-toggle="pill"
+                                                data-bs-target="#pills-password" type="button" role="tab"
+                                                aria-controls="pills-password" aria-selected="false">изменить пароль
+                                        </button>
+                                    </li>
+                                </ul>
+
+                                <div class="tab-content" id="pills-tabContent">
+                                    <%-- contact data--%>
+                                    <div class="tab-pane fade show active" id="pills-contact" role="tabpanel"
+                                         aria-labelledby="pills-contact-tab">
+                                        <br>
+                                        <div class="row align-items-start">
+                                            <div class="col-2">
+                                                <h5 class="card-title">Email : </h5>
+                                            </div>
+                                            <div class="col">
+                                                <input id="newEmail" class="chengEmail form-control"
+                                                       placeholder="${user.email}">
+                                            </div>
+                                            <div class="col">
+                                            </div>
+                                        </div>
+                                        <div id="errorNewEmail" class="errorMassage"></div>
+                                        <button type="button" id="chengEmailButton" class="btn btn-primary"
+                                                data-email="${user.email}" data-user-id="${user.id}">
+                                            обновить
+                                        </button>
                                     </div>
-                                    <div class="tariff-item__title">
-                                        <h5 class="card-title">Дата активации : 11.03.2021 02:37:21</h5>
+                                    <%-- phone--%>
+                                    <div class="tab-pane fade" id="pills-phone" role="tabpanel"
+                                         aria-labelledby="pills-phone-tab">
+                                        <br>
+                                        <div class="row align-items-start">
+                                            <div class="col-2"><h5 class="card-title">Phone : </h5></div>
+                                            <div class="col">
+                                                <input id="newPhone" class="chengPhone form-control"
+                                                       placeholder="${user.phone}">
+                                            </div>
+                                            <div class="col"></div>
+                                        </div>
+                                        <div id="errorNewPhone" class="errorMassage"></div>
+                                        <button type="button" id="chengPhoneButton" class="btn btn-primary"
+                                                data-phone="${user.phone}" data-user-id="${user.id}">
+                                            обновить
+                                        </button>
+                                    </div>
+                                    <%-- cheng password--%>
+                                    <div class="tab-pane fade" id="pills-password" role="tabpanel"
+                                         aria-labelledby="pills-password-tab">
+                                        <br>
+                                        <div class="row align-items-start">
+                                            <div class="col-4">
+                                                <h5 class="card-title">старый пароль : </h5>
+                                            </div>
+                                            <div class="col">
+                                                <input type="password" id="oldPassword"
+                                                       class="oldPassword form-control">
+                                            </div>
+                                            <div class="col">
+                                            </div>
+                                        </div>
+                                        <div class="row align-items-start">
+                                            <div class="col-4">
+                                                <h5 class="card-title">новый пароль : </h5>
+                                            </div>
+                                            <div class="col">
+                                                <input type="password" id="newPassword"
+                                                       class="newPassword form-control">
+                                            </div>
+                                            <div class="col">
+                                            </div>
+                                        </div>
+                                        <div class="row align-items-start">
+                                            <div class="col-4">
+                                                <h5 class="card-title">ещё раз новый пароль : </h5>
+                                            </div>
+                                            <div class="col">
+                                                <input type="password" id="secondNewPassword"
+                                                       class="secondNewPassword form-control">
+                                            </div>
+                                            <div class="col">
+                                            </div>
+                                        </div>
+                                        <div id="errorUpdatePassword" class="errorMassage"></div>
+                                        <button type="button" id="chengPasswordButton" class="btn btn-primary"
+                                                data-account-id="${account.id}">
+                                            обновить
+                                        </button>
                                     </div>
                                 </div>
                             </div>

@@ -37,9 +37,28 @@
                         <button class="dropdown-item" type="button">EN</button>
                     </div>
                 </div>
-                <a href="Controller?command=loginPage">
-                    <button type="button" class="btn btn-primary">Login</button>
-                </a>
+                <c:if test="${account.login == null}">
+                    <a href="Controller?command=loginPage">
+                        <button type="button" class="btn btn-primary">Login</button>
+                    </a>
+                </c:if>
+                <c:if test="${account.login != null}">
+                    <div class="dropdown text-end">
+                        <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle show"
+                           id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="true">
+                            <img src="../resources/user/account.svg" alt="mdo"
+                                 class="account-button rounded-circle">
+                        </a>
+                        <ul class="account-menu dropdown-menu text-small">
+                            <li><a class="dropdown-item" href="Controller?command=personalAccount">личный кабинет</a>
+                            </li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="Controller?command=signOut">Sign out</a></li>
+                        </ul>
+                    </div>
+                </c:if>
             </div>
         </div>
     </header>
@@ -264,7 +283,8 @@
                                                     <td>${user.lastName}</td>
                                                     <td>
                                                         <div class="col-md-10">
-                                                            <select id="inputState" class="userStatus form-select" data-user-id="${user.id}">
+                                                            <select id="inputState" class="userStatus form-select"
+                                                                    data-user-id="${user.id}">
                                                                 <option class="status" selected>${user.status}</option>
                                                                 <option class="status" value="1">ACTIVATE</option>
                                                                 <option class="status" value="2">BANNED</option>
@@ -881,18 +901,43 @@
                                 </div>
                             </div>
                             <div class="tab-pane fade show" id="settings" role="tabpanel">
-                                <div class="tariff-item__title">
-                                    <h5 class="card-title">Абонент : Владислав Константинович</h5>
+                                <br>
+                                <div class="row align-items-start">
+                                    <div class="col-4">
+                                        <h5 class="card-title">старый пароль : </h5>
+                                    </div>
+                                    <div class="col">
+                                        <input type="password" id="oldPassword" class="oldPassword form-control">
+                                    </div>
+                                    <div class="col">
+                                    </div>
                                 </div>
-                                <div class="tariff-item__title">
-                                    <h5 class="card-title">Логин : 1561001453502</h5>
+                                <div class="row align-items-start">
+                                    <div class="col-4">
+                                        <h5 class="card-title">новый пароль : </h5>
+                                    </div>
+                                    <div class="col">
+                                        <input type="password" id="newPassword" class="newPassword form-control">
+                                    </div>
+                                    <div class="col">
+                                    </div>
                                 </div>
-                                <div class="tariff-item__title">
-                                    <h5 class="card-title">Статус : не блокирован</h5>
+                                <div class="row align-items-start">
+                                    <div class="col-4">
+                                        <h5 class="card-title">ещё раз новый пароль : </h5>
+                                    </div>
+                                    <div class="col">
+                                        <input type="password" id="secondNewPassword"
+                                               class="secondNewPassword form-control">
+                                    </div>
+                                    <div class="col">
+                                    </div>
                                 </div>
-                                <div class="tariff-item__title">
-                                    <h5 class="card-title">Дата активации : 11.03.2021 02:37:21</h5>
-                                </div>
+                                <div id="errorUpdatePassword" class="errorMassage"></div>
+                                <button type="button" id="chengPasswordButton" class="btn btn-primary"
+                                        data-account-id="${account.id}">
+                                    обновить
+                                </button>
                             </div>
                         </div>
                     </div>

@@ -17,7 +17,7 @@ public class AccountDaoImpl implements AccountDao {
     private static final String FIND_ACCOUNT_BY_ID = "select a.id, a.login, a.password from account a where id = ?";
     private static final String GET_ALL_ACCOUNT = "select a.id, a.login, a.password from account a";
     private static final String CREATE_ACCOUNT = "insert into account (login, password) VALUES (?, ?)";
-    private static final String UPDATE_ACCOUNT = "update account set password = ? where login = ?";
+    private static final String UPDATE_PASSWORD = "update account set password = ? where id = ?";
     private static final String DELETE_ACCOUNT = "delete from account where id = ?";
     private static final String FIND_ACCOUNT_BY_LOGIN_AND_PASSWORD
             = "select a.id, a.login, a.password from account a where a.login = ? and a.password = ?";
@@ -102,11 +102,11 @@ public class AccountDaoImpl implements AccountDao {
     }
 
     @Override
-    public void updateAccount(Account account) throws DaoException {
+    public void updatePassword(Long accountId, String newPassword) throws DaoException {
         try (Connection connection = ConnectionPool.INSTANCE.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_ACCOUNT)) {
-            preparedStatement.setString(1, account.getPassword());
-            preparedStatement.setString(2, account.getLogin());
+             PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_PASSWORD)) {
+            preparedStatement.setString(1, newPassword);
+            preparedStatement.setLong(2, accountId);
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             throw new DaoException(e);

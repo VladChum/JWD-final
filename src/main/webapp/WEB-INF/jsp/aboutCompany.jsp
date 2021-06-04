@@ -1,11 +1,7 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: vlad
-  Date: 1.05.21
-  Time: 22:13
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -41,9 +37,27 @@
                         <button class="dropdown-item" type="button">EN</button>
                     </div>
                 </div>
-                <a href="Controller?command=loginPage">
-                    <button type="button" class="btn btn-primary">Login</button>
-                </a>
+                <c:if test="${account.login == null}">
+                    <a href="Controller?command=loginPage">
+                        <button type="button" class="btn btn-primary">Login</button>
+                    </a>
+                </c:if>
+                <c:if test="${account.login != null}">
+                    <div class="dropdown text-end">
+                        <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle show"
+                           id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="true">
+                            <img src="../resources/user/account.svg" alt="mdo"
+                                 class="account-button rounded-circle">
+                        </a>
+                        <ul class="account-menu dropdown-menu text-small">
+                            <li><a class="dropdown-item" href="Controller?command=personalAccount">личный кабинет</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="Controller?command=signOut">Sign out</a></li>
+                        </ul>
+                    </div>
+                </c:if>
             </div>
         </div>
     </header>

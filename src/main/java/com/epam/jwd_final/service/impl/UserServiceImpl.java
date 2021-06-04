@@ -19,7 +19,7 @@ public class UserServiceImpl implements UserService {
         try {
             return userDao.findUserById(id.intValue());
         } catch (DaoException e) {
-            throw  new ServiceException(e);
+            throw new ServiceException(e);
         }
     }
 
@@ -28,7 +28,7 @@ public class UserServiceImpl implements UserService {
         try {
             return userDao.findUserByAccountId(id.intValue());
         } catch (DaoException e) {
-            throw  new ServiceException(e);
+            throw new ServiceException(e);
         }
     }
 
@@ -75,6 +75,24 @@ public class UserServiceImpl implements UserService {
         user.setBalance(amount);
         try {
             userDao.updateBalance(user);
+        } catch (DaoException e) {
+            throw new ServiceException(e);
+        }
+    }
+
+    @Override
+    public void updateEmail(Long userId, String email) throws ServiceException {
+        try {
+            userDao.updateEmail(userId, email);
+        } catch (DaoException e) {
+            throw new ServiceException(e);
+        }
+    }
+
+    @Override
+    public void updatePhone(Long userId, String phone) throws ServiceException {
+        try {
+            userDao.updatePhone(userId, phone);
         } catch (DaoException e) {
             throw new ServiceException(e);
         }

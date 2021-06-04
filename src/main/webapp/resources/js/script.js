@@ -265,23 +265,31 @@ $("document").ready(function () {
         var endDate = $('#newEndDateDiscount').val();
         var valid = 0;
 
-        if (size > 0 && size <= 100 && $('#newDiscountSize').val().length != 0) {
-            $('#errorDiscountSize').html("");
-            valid++;
-        } else {
-            $('#errorDiscountSize').html("Wrong input:  0 < discount size < 100");
-        }
-        if (endDate.length != 10) {
+        var startDateTime = new Date(startDate);
+        var endDateTime = new Date(endDate);
+
+        if (startDate > endDate) {
             $('#errorEndDateDiscount').html("Wrong input: date example 2020-03-04");
-        } else {
-            $('#errorEndDateDiscount').html("");
-            valid++;
-        }
-        if (startDate.length != 10) {
             $('#errorStartDateDiscount').html("Wrong input: date example 2020-03-04");
         } else {
-            $('#errorStartDateDiscount').html("");
-            valid++;
+            if (size > 0 && size <= 100 && $('#newDiscountSize').val().length != 0) {
+                $('#errorDiscountSize').html("");
+                valid++;
+            } else {
+                $('#errorDiscountSize').html("Wrong input:  0 < discount size < 100");
+            }
+            if (endDate.length != 10) {
+                $('#errorEndDateDiscount').html("Wrong input: date example 2020-03-04");
+            } else {
+                $('#errorEndDateDiscount').html("");
+                valid++;
+            }
+            if (startDate.length != 10) {
+                $('#errorStartDateDiscount').html("Wrong input: date example 2020-03-04");
+            } else {
+                $('#errorStartDateDiscount').html("");
+                valid++;
+            }
         }
 
         if (valid === 3) {
@@ -354,23 +362,31 @@ $("document").ready(function () {
         var endDate = $('#updateEndDateDiscount').val();
         var valid = 0;
 
-        if (size > 0 && size <= 100 || $('#updateDiscountSize').val().length === 0) {
-            $('#errorUpdateDiscountSize').html("");
-            valid++;
-        } else {
-            $('#errorUpdateDiscountSize').html("Wrong input: 0 < discount size < 100");
-        }
-        if (startDate.length != 10) {
+        var startDateTime = new Date(startDate);
+        var endDateTime = new Date(endDate);
+
+        if (startDate > endDate) {
             $('#errorUpdateStartDateDiscount').html("Wrong input: date example 2020-03-03");
-        } else {
-            $('#errorUpdateStartDateDiscount').html("");
-            valid++;
-        }
-        if (endDate.length != 10) {
             $('#errorUpdateEndDateDiscount').html("Wrong input: date example 2020-03-04");
         } else {
-            $('#errorUpdateEndDateDiscount').html("");
-            valid++;
+            if (size > 0 && size <= 100 || $('#updateDiscountSize').val().length === 0) {
+                $('#errorUpdateDiscountSize').html("");
+                valid++;
+            } else {
+                $('#errorUpdateDiscountSize').html("Wrong input: 0 < discount size < 100");
+            }
+            if (startDate.length != 10) {
+                $('#errorUpdateStartDateDiscount').html("Wrong input: date example 2020-03-03");
+            } else {
+                $('#errorUpdateStartDateDiscount').html("");
+                valid++;
+            }
+            if (endDate.length != 10) {
+                $('#errorUpdateEndDateDiscount').html("Wrong input: date example 2020-03-04");
+            } else {
+                $('#errorUpdateEndDateDiscount').html("");
+                valid++;
+            }
         }
 
         if (valid === 3) {
@@ -456,7 +472,8 @@ $("document").ready(function () {
 
     $('.userStatus').on('click', function () {
         var userIdForStatus = $(this).attr('data-user-id');
-        var statusId = $('option:selected', this).attr('value');;
+        var statusId = $('option:selected', this).attr('value');
+        ;
         var data = {
             userId: userIdForStatus,
             statusId: statusId
@@ -468,12 +485,12 @@ $("document").ready(function () {
     });
 
     $('.cardAmount').on('keyup', function () {
-       var amount = parseFloat($('.cardAmount').val());
-       if ((amount > 1000 || amount <= 0) && $('.cardAmount').val().length !== 0) {
+        var amount = parseFloat($('.cardAmount').val());
+        if ((amount > 1000 || amount <= 0) && $('.cardAmount').val().length !== 0) {
             $('#errorAmount').html("Wrong input: 0 < amount <= 1000");
-       } else {
-           $('#errorAmount').html("");
-       }
+        } else {
+            $('#errorAmount').html("");
+        }
     });
 
     $('#replenishButton').on('click', function () {
@@ -525,5 +542,69 @@ $("document").ready(function () {
                 location.reload();
             });
         }
+    });
+
+    $('#chengEmailButton').on('click', function () {
+        var oldEmail = $(this).attr('data-email');
+        var userId = $(this).attr('data-user-id');
+        var newEmail = $('#newEmail').val();
+
+        if (oldEmail !== newEmail && newEmail.length !== 0) {
+            var data = {
+                userId: userId,
+                newEmail: newEmail
+            }
+            var url = "Controller?command=updateUserEmail";
+            $.post(url, data, function (data, status) {
+                location.reload();
+            });
+        } else  {
+            $('#errorNewEmail').html("Wrong input!");
+        }
+    });
+
+    $('#chengPhoneButton').on('click', function () {
+        var oldPhone = $(this).attr('data-phone');
+        var userId = $(this).attr('data-user-id');
+        var newPhone = $('#newPhone').val();
+
+        if (oldPhone !== newPhone && newPhone.length !== 0) {
+            var data = {
+                userId: userId,
+                newPhone: newPhone
+            }
+            var url = "Controller?command=updateUserPhone";
+            $.post(url, data, function (data, status) {
+                location.reload();
+            });
+        } else {
+            $('#errorNewPhone').html("Wrong input!");
+        }
+    });
+
+    //todo доделать проверку пароля
+    $('#chengPasswordButton').on('click', function () {
+       var accountId = $(this).attr('data-account-id');
+       var password = $('#oldPassword').val();
+       var newPassword = $('#newPassword').val();
+       var secondNewPassword = $('#secondNewPassword').val();
+
+       if (newPassword === secondNewPassword && newPassword.length !== 0) {
+           var data = {
+               accountId: accountId,
+               password: password,
+               newPassword: newPassword
+           }
+           var url = "Controller?command=updatePassword";
+           $.post(url, data, function (data, status) {
+               location.reload();
+           });
+       } else {
+           $('#errorUpdatePassword').html("Wrong input!");
+       }
+    });
+
+    $('#registerNewAccount').on('click', function() {
+
     });
 })

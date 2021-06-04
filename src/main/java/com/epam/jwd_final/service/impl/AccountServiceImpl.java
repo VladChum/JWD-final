@@ -39,4 +39,13 @@ public class AccountServiceImpl implements AccountService {
             throw new ServiceException(e);
         }
     }
+
+    @Override
+    public void updatePassword(Long id, String newPassword) throws ServiceException {
+        try {
+            accountDao.updatePassword(id, newPassword);
+        } catch (DaoException e) {
+            throw new ServiceException(e);
+        }
+    }
 }

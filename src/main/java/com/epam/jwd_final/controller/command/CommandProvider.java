@@ -1,6 +1,8 @@
 package com.epam.jwd_final.controller.command;
 
 import com.epam.jwd_final.controller.command.impl.*;
+import com.epam.jwd_final.controller.command.impl.page.*;
+import com.epam.jwd_final.controller.command.impl.user.*;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
@@ -36,6 +38,10 @@ public enum CommandProvider {
         commands.put("deleteAdmin", new DeleteAdmin());
         commands.put("chengUserStatus", new ChengUserStatus());
         commands.put("userPayment", new Payment());
+        commands.put("personalAccount", new PersonalAccount());
+        commands.put("updateUserEmail", new UpdateUserEmail());
+        commands.put("updateUserPhone", new UpdateUserPhone());
+        commands.put("updatePassword", new UpdatePassword());
     }
 
     public Command getCommand(String commandName) {

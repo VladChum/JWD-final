@@ -1,11 +1,7 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: vlad
-  Date: 3.05.21
-  Time: 17:42
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -44,9 +40,27 @@
                         <button class="dropdown-item" type="button">EN</button>
                     </div>
                 </div>
-                <a href="Controller?command=loginPage">
-                    <button type="button" class="btn btn-primary">Login</button>
-                </a>
+                <c:if test="${account.login == null}">
+                    <a href="Controller?command=loginPage">
+                        <button type="button" class="btn btn-primary">Login</button>
+                    </a>
+                </c:if>
+                <c:if test="${account.login != null}">
+                    <div class="dropdown text-end">
+                        <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle show"
+                           id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="true">
+                            <img src="../resources/user/account.svg" alt="mdo"
+                                 class="account-button rounded-circle">
+                        </a>
+                        <ul class="account-menu dropdown-menu text-small">
+                            <li><a class="dropdown-item" href="Controller?command=personalAccount">личный кабинет</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="Controller?command=signOut">Sign out</a></li>
+                        </ul>
+                    </div>
+                </c:if>
             </div>
         </div>
     </header>
@@ -73,9 +87,71 @@
                             <br>
                             <span id="msg"></span>
                             <button class="w-100 btn btn-lg btn-primary" type="submit">Sign in</button>
+                            <hr class="my-4">
+                            <small class="text-muted"><a id="registerNewAccount" data-bs-toggle="modal" type="button" data-bs-target="#registerNewUser">Register new account</a></small>
                         </form>
                     </main>
                 </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="registerNewUser" data-bs-backdrop="static"
+     data-bs-keyboard="false" tabindex="-1"
+     aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="newUser">Register new User</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                        aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <br>
+                <h6>login</h6>
+                <input id="newUserCreateLogin" name="login" class="form-control"
+                       placeholder="login">
+                <div id="errorLoginUser" class="errorMassage"></div>
+                <br>
+                <h6>password</h6>
+                <input type="password" name="password" class="form-control"
+                       id="newUserCreatePassword"
+                       placeholder="password">
+                <div id="errorPasswordUser" class="errorMassage"></div>
+                <br>
+                <h6>имя</h6>
+                <input name="firstName" class="form-control"
+                       id="newUserFirstName"
+                       placeholder="first name">
+                <div id="errorFirstNameUser" class="errorMassage"></div>
+                <br>
+                <h6>Фамилия</h6>
+                <input class="form-control"
+                       id="newUserLastName"
+                       placeholder="last name">
+                <div class="errorMassage" id="errorLastNameUser"></div>
+                <br>
+                <h6>мобильный номер</h6>
+                <input class="form-control"
+                       id="newUserPhone"
+                       placeholder="phone">
+                <div id="errorPhoneUser" class="errorMassage"></div>
+                <br>
+                <h6>e-mail</h6>
+                <input class="form-control"
+                       id="newUserEmail"
+                       placeholder="e-mail">
+                <div id="errorEmailUser" class="errorMassage"></div>
+                <br>
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="closeCreateUserModal"
+                        class="btn btn-secondary" data-bs-dismiss="modal">
+                    отмена
+                </button>
+                <button type="button" id="createUserButton" class="btn btn-primary">
+                    добавить пользователя
+                </button>
             </div>
         </div>
     </div>

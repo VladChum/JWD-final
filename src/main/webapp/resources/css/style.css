@@ -413,7 +413,7 @@ primary {
 }
 
 .position-signIn {
-    margin: 100px 0  100px 1100px
+    margin: 100px 0 100px 1100px
 }
 
 .login-color {
@@ -469,10 +469,10 @@ primary {
 
 center {
 
- }
+}
 
 .form {
-   margin: 20px 0 0 50px;
+    margin: 20px 0 0 50px;
 }
 
 .ReplenishButton {
@@ -480,7 +480,31 @@ center {
 }
 
 .paymentTable {
-    height:350px;
-    overflow-y:scroll;
+    height: 350px;
+    overflow-y: scroll;
 }
 
+.account-menu {
+    position: absolute;
+    inset: 0px auto auto 0px;
+    margin: 0px;
+    transform: translate(0px, 34px);
+}
+
+.account-button {
+    width: 40px;
+    height: 40px;
+    margin: 0 0 0 20px;
+}
+
+.chengEmail {
+    margin: 0 100px 0 0;
+}
+
+.chengEmailButton {
+    margin: 0 0 0 15px;
+}
+
+#registerNewAccount {
+    color: #0d6efd;
+}

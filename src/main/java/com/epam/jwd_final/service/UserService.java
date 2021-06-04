@@ -21,4 +21,8 @@ public interface UserService {
     void chengStatus(User user, Long statusId) throws ServiceException;
 
     void updateBalance(Long userId, BigDecimal amount) throws ServiceException;
+
+    void updateEmail(Long userId, String email) throws ServiceException;
+
+    void updatePhone(Long userId, String phone) throws ServiceException;
 }
