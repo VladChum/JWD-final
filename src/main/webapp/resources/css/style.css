@@ -504,3 +504,7 @@ center {
 .chengEmailButton {
     margin: 0 0 0 15px;
 }
+
+#registerNewAccount {
+    color: #0d6efd;
+}

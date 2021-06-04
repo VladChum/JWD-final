@@ -87,9 +87,71 @@
                             <br>
                             <span id="msg"></span>
                             <button class="w-100 btn btn-lg btn-primary" type="submit">Sign in</button>
+                            <hr class="my-4">
+                            <small class="text-muted"><a id="registerNewAccount" data-bs-toggle="modal" type="button" data-bs-target="#registerNewUser">Register new account</a></small>
                         </form>
                     </main>
                 </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="registerNewUser" data-bs-backdrop="static"
+     data-bs-keyboard="false" tabindex="-1"
+     aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="newUser">Register new User</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                        aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <br>
+                <h6>login</h6>
+                <input id="newUserCreateLogin" name="login" class="form-control"
+                       placeholder="login">
+                <div id="errorLoginUser" class="errorMassage"></div>
+                <br>
+                <h6>password</h6>
+                <input type="password" name="password" class="form-control"
+                       id="newUserCreatePassword"
+                       placeholder="password">
+                <div id="errorPasswordUser" class="errorMassage"></div>
+                <br>
+                <h6>имя</h6>
+                <input name="firstName" class="form-control"
+                       id="newUserFirstName"
+                       placeholder="first name">
+                <div id="errorFirstNameUser" class="errorMassage"></div>
+                <br>
+                <h6>Фамилия</h6>
+                <input class="form-control"
+                       id="newUserLastName"
+                       placeholder="last name">
+                <div class="errorMassage" id="errorLastNameUser"></div>
+                <br>
+                <h6>мобильный номер</h6>
+                <input class="form-control"
+                       id="newUserPhone"
+                       placeholder="phone">
+                <div id="errorPhoneUser" class="errorMassage"></div>
+                <br>
+                <h6>e-mail</h6>
+                <input class="form-control"
+                       id="newUserEmail"
+                       placeholder="e-mail">
+                <div id="errorEmailUser" class="errorMassage"></div>
+                <br>
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="closeCreateUserModal"
+                        class="btn btn-secondary" data-bs-dismiss="modal">
+                    отмена
+                </button>
+                <button type="button" id="createUserButton" class="btn btn-primary">
+                    добавить пользователя
+                </button>
             </div>
         </div>
     </div>

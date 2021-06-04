@@ -582,13 +582,14 @@ $("document").ready(function () {
         }
     });
 
+    //todo доделать проверку пароля
     $('#chengPasswordButton').on('click', function () {
        var accountId = $(this).attr('data-account-id');
        var password = $('#oldPassword').val();
        var newPassword = $('#newPassword').val();
        var secondNewPassword = $('#secondNewPassword').val();
 
-       if (newPassword === secondNewPassword) {
+       if (newPassword === secondNewPassword && newPassword.length !== 0) {
            var data = {
                accountId: accountId,
                password: password,
@@ -601,5 +602,9 @@ $("document").ready(function () {
        } else {
            $('#errorUpdatePassword').html("Wrong input!");
        }
+    });
+
+    $('#registerNewAccount').on('click', function() {
+
     });
 })
