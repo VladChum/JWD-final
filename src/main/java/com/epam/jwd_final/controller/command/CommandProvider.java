@@ -42,6 +42,7 @@ public enum CommandProvider {
         commands.put("updateUserEmail", new UpdateUserEmail());
         commands.put("updateUserPhone", new UpdateUserPhone());
         commands.put("updatePassword", new UpdatePassword());
+        commands.put("registerUser", new RegisterUser());
     }
 
     public Command getCommand(String commandName) {
