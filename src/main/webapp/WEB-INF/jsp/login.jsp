@@ -148,7 +148,7 @@
                 <br>
             </div>
             <div class="modal-footer">
-                <button type="button" id="closeCreateUserModal"
+                <button type="button" id="closeRegisterUser"
                         class="btn btn-secondary" data-bs-dismiss="modal">
                     отмена
                 </button>

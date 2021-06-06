@@ -23,7 +23,6 @@ public class RegisterUser implements Command {
     private final UserService userService = ServiceProvider.INSTANCE.getUserService();
     private final AccountService accountService = ServiceProvider.INSTANCE.getAccountService();
 
-
     private final String SIGN_IN_USER = "/Controller?command=userPage";
     private final String LOGIN = "login";
     private final String PASSWORD = "password";
@@ -32,7 +31,7 @@ public class RegisterUser implements Command {
     private final String PHONE = "phone";
     private final String EMAIL = "email";
     private final String USER = "user";
-
+    private final String ACCOUNT = "account";
 
     @Override
     public void execute(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
@@ -49,8 +48,8 @@ public class RegisterUser implements Command {
             Account account = accountService.findAccountById(accountId).get();
             User user = new User(accountId, firstNme, lastName, phone, email, Status.SUSPENDED);
             userService.addUser(user);
+            session.setAttribute(ACCOUNT, account);
             session.setAttribute(USER, userService.findUserByAccountId(account.getId()).get().getAccountId());
-
         } catch (ServiceException e) {
             LOGGER.log(Level.ERROR, e.getMessage() + " " + e);
         }

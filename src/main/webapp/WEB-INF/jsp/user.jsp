@@ -293,13 +293,11 @@
                                         </thead>
                                         <tbody class="table">
                                         <c:forEach items="${userPayments}" var="userPayment">
-                                            <c:if test="${userPayment.paymentType != 'BALANCE'}">
-                                                <tr>
-                                                    <td>${userPayment.date}</td>
-                                                    <td>${userPayment.amount}</td>
-                                                    <td>${userPayment.paymentType}</td>
-                                                </tr>
-                                            </c:if>
+                                            <tr>
+                                                <td>${userPayment.date}</td>
+                                                <td>${userPayment.amount}</td>
+                                                <td>${userPayment.paymentType}</td>
+                                            </tr>
                                         </c:forEach>
                                         </tbody>
                                     </table>

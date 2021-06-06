@@ -20,11 +20,10 @@ public enum CommandProvider {
         commands.put("tariffPage", new TariffPage());
         commands.put("aboutPage", new AboutCompanyPage());
         commands.put("loginPage", new LoginPage());
-        commands.put("signIn", new SignIn());
-        commands.put("signOut", new SignOut());
         commands.put("userPage", new UserPage());
         commands.put("adminPage", new AdminPage());
-        commands.put("updateUserTariff", new UpdateUserTariff());
+        commands.put("signIn", new SignIn());
+        commands.put("signOut", new SignOut());
         commands.put("createTariff", new CreateTariff());
         commands.put("createUser", new CreateUser());
         commands.put("deleteTariff", new DeleteTariff());
@@ -32,16 +31,18 @@ public enum CommandProvider {
         commands.put("activateTariff", new ActivateTariff());
         commands.put("createDiscount", new CreateDiscount());
         commands.put("stopDiscount", new StopDiscount());
-        commands.put("updateDiscount", new UpdateDiscount());
         commands.put("addTariffsToDiscount", new AddTariffsToDiscount());
         commands.put("deleteUser", new DeleteUser());
         commands.put("deleteAdmin", new DeleteAdmin());
         commands.put("chengUserStatus", new ChengUserStatus());
         commands.put("userPayment", new Payment());
         commands.put("personalAccount", new PersonalAccount());
+        commands.put("updateTariff", new UpdateTariff());
         commands.put("updateUserEmail", new UpdateUserEmail());
         commands.put("updateUserPhone", new UpdateUserPhone());
+        commands.put("updateDiscount", new UpdateDiscount());
         commands.put("updatePassword", new UpdatePassword());
+        commands.put("updateUserTariff", new UpdateUserTariff());
         commands.put("registerUser", new RegisterUser());
     }
 

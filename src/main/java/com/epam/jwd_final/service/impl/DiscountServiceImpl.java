@@ -64,4 +64,17 @@ public class DiscountServiceImpl implements DiscountService {
             e.printStackTrace();
         }
     }
+
+    @Override
+    public boolean checkActiveDiscount(Discount discount) throws ServiceException {
+        boolean result = false;
+
+        Date startDate = new Date();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        if (discount.getStartDate().compareTo(java.sql.Date.valueOf(dateFormat.format(startDate))) <= 0
+                && discount.getEndDate().compareTo(java.sql.Date.valueOf(dateFormat.format(startDate))) >= 0) {
+            result = true;
+        }
+        return result;
+    }
 }

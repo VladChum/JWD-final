@@ -10,4 +10,6 @@ public interface PaymentService {
     void topUpUserBalance(BigDecimal amount, Long userId, Long paymentTypeId) throws ServiceException;
 
     List<UserPayment> findAllUserPayments(Long userId) throws ServiceException;
+
+    void dailyPaymentForAllUser() throws ServiceException;
 }

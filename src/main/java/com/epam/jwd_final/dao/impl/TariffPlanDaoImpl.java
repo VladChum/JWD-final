@@ -31,9 +31,9 @@ public class TariffPlanDaoImpl implements com.epam.jwd_final.dao.TariffPlanDao {
      * add update tariff price
      * */
     private static final String UPDATE_DISCOUNT = "update tariff_plan set discount_id = ? where id = ?;";
-    private static final String ACTIVATE_TARIFF = "update tariff_plan set active = 1 where id = ?";
-    private static final String UPDATE_TARIFF = "update user set  where login = ?";
-    private static final String DELETE_TARIFF = "update tariff_plan set active = 0 where id = ?";
+    private static final String ACTIVATE_TARIFF = "update tariff_plan set active = 1 where id = ?;";
+    private static final String UPDATE_TARIFF = "update tariff_plan set name = ?, price = ?, speed = ? where id = ?;";
+    private static final String DELETE_TARIFF = "update tariff_plan set active = 0 where id = ?;";
 
     TariffPlanDaoImpl() {
     }
@@ -96,8 +96,17 @@ public class TariffPlanDaoImpl implements com.epam.jwd_final.dao.TariffPlanDao {
     }
 
     @Override
-    public void updateTariff(TariffPlan tariffPlan) {
-
+    public void updateTariff(TariffPlan tariffPlan) throws DaoException {
+        try (Connection connection = ConnectionPool.INSTANCE.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_TARIFF)) {
+            preparedStatement.setString(1, tariffPlan.getName());
+            preparedStatement.setBigDecimal(2, tariffPlan.getPrice());
+            preparedStatement.setInt(3, tariffPlan.getSpeed());
+            preparedStatement.setLong(4, tariffPlan.getId());
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            throw new DaoException(e);
+        }
     }
 
     @Override
