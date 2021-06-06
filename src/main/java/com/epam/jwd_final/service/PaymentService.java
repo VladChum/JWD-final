@@ -12,4 +12,6 @@ public interface PaymentService {
     List<UserPayment> findAllUserPayments(Long userId) throws ServiceException;
 
     void dailyPaymentForAllUser() throws ServiceException;
+
+    boolean checkActivePromisedPayment(Long userId) throws ServiceException;
 }

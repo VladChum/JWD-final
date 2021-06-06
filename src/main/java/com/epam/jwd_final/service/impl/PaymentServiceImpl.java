@@ -9,6 +9,7 @@ import com.epam.jwd_final.service.*;
 
 import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -62,6 +63,27 @@ public class PaymentServiceImpl implements PaymentService {
         }
     }
 
+    @Override
+    public boolean checkActivePromisedPayment(Long userId) throws ServiceException {
+        List<UserPayment> userPayments = findAllUserPayments(userId);
+        Collections.reverse(userPayments);
+        boolean result = false;
+
+        double amount = 0;
+        for (int i = 0; i < userPayments.size(); i++) {
+            UserPayment userPayment = userPayments.get(i);
+            if (userPayment.getPaymentType() == PaymentType.CREDIT_CARD) {
+                amount += userPayment.getAmount().doubleValue();
+            } else if (userPayment.getPaymentType() == PaymentType.PROMISED_PAYMENT) {
+                if (amount <= userPayment.getAmount().doubleValue()) {
+                    result = true;
+                }
+                break;
+            }
+        }
+        return result;
+    }
+
     private void paymentIfSubscriptionActive(Subscription userSubscription, User user) throws ServiceException {
         TariffPlan userTariff = ServiceProvider.INSTANCE.getTariffService().findById(userSubscription.getTariffPlanId().intValue());
         Discount discount = ServiceProvider.INSTANCE.getDiscountService().findById(userTariff.getDiscountId()).get();
@@ -70,9 +92,7 @@ public class PaymentServiceImpl implements PaymentService {
         amount *= -1 / 30.;
         if (ServiceProvider.INSTANCE.getDiscountService().checkActiveDiscount(discount)) {
             amount *= (100 - discount.getSize()) / 100.;
-            topUpUserBalance(BigDecimal.valueOf(amount), user.getId(), 1L);
-        } else {
-            topUpUserBalance(BigDecimal.valueOf(amount), user.getId(), 1L);
         }
+        topUpUserBalance(BigDecimal.valueOf(amount), user.getId(), 1L);
     }
 }
