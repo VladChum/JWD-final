@@ -721,4 +721,15 @@ $("document").ready(function () {
             });
         }
     });
+
+    $('.unblockUser').on('click', function () {
+       var userId = $(this).attr('data-user-id');
+        var data = {
+            userId: userId
+        }
+        var url = "Controller?command=unblockUser";
+        $.post(url, data, function (data, status) {
+            location.reload();
+        });
+    });
 })

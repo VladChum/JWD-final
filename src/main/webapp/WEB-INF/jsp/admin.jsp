@@ -354,7 +354,8 @@
                                                         <td class="color: #D90707">${user.status}</td>
                                                         <td>${user.balance}</td>
                                                         <td>
-                                                            <button>
+                                                            <button class="unblockUser btn btn-outline-secondary"
+                                                                    data-user-id="${user.id}">
                                                                 разблокировать
                                                             </button>
                                                         </td>
@@ -613,8 +614,14 @@
                                                                                     изменить
                                                                                 </button>
                                                                                 <div class="dropdown-menu">
-                                                                                    <button class="dropdown-item"
-                                                                                            type="button">
+                                                                                    <button class="updateTariffButton dropdown-item"
+                                                                                            data-tariff-id="${tariff.id}"
+                                                                                            data-tariff-price="${tariff.price}"
+                                                                                            data-tariff-speed="${tariff.speed}"
+                                                                                            data-tariff-name="${tariff.name}"
+                                                                                            type="button"
+                                                                                            data-bs-toggle="modal"
+                                                                                            data-bs-target="#updateTariffForm">
                                                                                         изменить
                                                                                     </button>
                                                                                     <button class="activateTariffButton dropdown-item"
