@@ -563,7 +563,7 @@ $("document").ready(function () {
             $.post(url, data, function (data, status) {
                 location.reload();
             });
-        } else  {
+        } else {
             $('#errorNewEmail').html("Wrong input!");
         }
     });
@@ -589,27 +589,27 @@ $("document").ready(function () {
 
     //todo доделать проверку пароля
     $('#chengPasswordButton').on('click', function () {
-       var accountId = $(this).attr('data-account-id');
-       var password = $('#oldPassword').val();
-       var newPassword = $('#newPassword').val();
-       var secondNewPassword = $('#secondNewPassword').val();
+        var accountId = $(this).attr('data-account-id');
+        var password = $('#oldPassword').val();
+        var newPassword = $('#newPassword').val();
+        var secondNewPassword = $('#secondNewPassword').val();
 
-       if (newPassword === secondNewPassword && newPassword.length !== 0) {
-           var data = {
-               accountId: accountId,
-               password: password,
-               newPassword: newPassword
-           }
-           var url = "Controller?command=updatePassword";
-           $.post(url, data, function (data, status) {
-               location.reload();
-           });
-       } else {
-           $('#errorUpdatePassword').html("Wrong input!");
-       }
+        if (newPassword === secondNewPassword && newPassword.length !== 0) {
+            var data = {
+                accountId: accountId,
+                password: password,
+                newPassword: newPassword
+            }
+            var url = "Controller?command=updatePassword";
+            $.post(url, data, function (data, status) {
+                location.reload();
+            });
+        } else {
+            $('#errorUpdatePassword').html("Wrong input!");
+        }
     });
 
-    $('#registerNewUserAccount').on('click', function() {
+    $('#registerNewUserAccount').on('click', function () {
         var login = $('#newUserCreateLogin').val();
         var password = $('#newUserCreatePassword').val();
         var firstName = $('#newUserFirstName').val();
@@ -659,7 +659,7 @@ $("document").ready(function () {
         }
     });
 
-    $('#closeRegisterUser').on('click', function() {
+    $('#closeRegisterUser').on('click', function () {
         $('#newUserCreateLogin').val("");
         $('#newUserCreatePassword').val("");
         $('#newUserFirstName').val("");
@@ -723,7 +723,7 @@ $("document").ready(function () {
     });
 
     $('.unblockUser').on('click', function () {
-       var userId = $(this).attr('data-user-id');
+        var userId = $(this).attr('data-user-id');
         var data = {
             userId: userId
         }
@@ -732,4 +732,5 @@ $("document").ready(function () {
             location.reload();
         });
     });
+
 })

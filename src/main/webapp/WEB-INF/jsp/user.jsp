@@ -169,6 +169,18 @@
                                     <div class="container">
                                         <div class="row align-items-start">
                                             <div class="col-2"><h5 class="card-title">Статус : </h5></div>
+                                            <div id="userStatusLight" class="userStatusLight">
+                                                <c:if test="${user.status == 'ACTIVATE'}">
+                                                    <img alt="logo" src="../../resources/user/activeStatus.svg"
+                                                </c:if>
+                                                <c:if test="${user.status == 'SUSPENDED'}">
+                                                     <img alt="logo" src="../../resources/user/suspendedStatus.svg"
+                                                </c:if>
+                                                <c:if test="${user.status == 'BANNED'}">
+                                                    <img alt="logo" src="../../resources/user/blockStatus.svg"
+                                                </c:if>
+                                                data-user-status="${user.status}">
+                                            </div>
                                             <div class="col"><h5>${user.status}</h5></div>
                                         </div>
                                     </div>
