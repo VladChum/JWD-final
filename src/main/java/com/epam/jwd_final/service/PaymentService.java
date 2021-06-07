@@ -13,5 +13,7 @@ public interface PaymentService {
 
     void dailyPaymentForAllUser() throws ServiceException;
 
+    BigDecimal findLastUserPromisedAmount(Long userId) throws ServiceException;
+
     boolean checkActivePromisedPayment(Long userId) throws ServiceException;
 }

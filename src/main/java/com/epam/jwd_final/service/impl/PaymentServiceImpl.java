@@ -18,6 +18,8 @@ public class PaymentServiceImpl implements PaymentService {
 
     @Override
     public void topUpUserBalance(BigDecimal amount, Long userId, Long paymentTypeId) throws ServiceException {
+        boolean activePromised = checkActivePromisedPayment(userId);
+
         Date date = new Date();
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         PaymentType paymentType = PaymentType.resolvePaymentTypeById(paymentTypeId.intValue());
@@ -31,6 +33,8 @@ public class PaymentServiceImpl implements PaymentService {
         } catch (DaoException e) {
             throw new ServiceException(e);
         }
+
+        checkEndPromisedPayment(userId, activePromised);
     }
 
     @Override
@@ -84,6 +88,22 @@ public class PaymentServiceImpl implements PaymentService {
         return result;
     }
 
+    @Override
+    public BigDecimal findLastUserPromisedAmount(Long userId) throws ServiceException {
+        double amount = 0;
+        List<UserPayment> userPayments = findAllUserPayments(userId);
+        Collections.reverse(userPayments);
+        for (int i = 0; i < userPayments.size(); i++) {
+            UserPayment userPayment = userPayments.get(i);
+            if (userPayment.getPaymentType() == PaymentType.PROMISED_PAYMENT) {
+                amount = userPayment.getAmount().doubleValue();
+                break;
+            }
+        }
+
+        return BigDecimal.valueOf(amount);
+    }
+
     private void paymentIfSubscriptionActive(Subscription userSubscription, User user) throws ServiceException {
         TariffPlan userTariff = ServiceProvider.INSTANCE.getTariffService().findById(userSubscription.getTariffPlanId().intValue());
         Discount discount = ServiceProvider.INSTANCE.getDiscountService().findById(userTariff.getDiscountId()).get();
@@ -94,5 +114,15 @@ public class PaymentServiceImpl implements PaymentService {
             amount *= (100 - discount.getSize()) / 100.;
         }
         topUpUserBalance(BigDecimal.valueOf(amount), user.getId(), 1L);
+    }
+
+    private void checkEndPromisedPayment(Long userId, boolean startActivePromised) throws ServiceException {
+        boolean endActivePromised = checkActivePromisedPayment(userId);
+        if (startActivePromised && !endActivePromised) {
+            User user = ServiceProvider.INSTANCE.getUserService().findUserById(userId).get();
+            ServiceProvider.INSTANCE.getUserService().chengStatus(user, Status.ACTIVATE.getId());
+            double amount = findLastUserPromisedAmount(userId).doubleValue() * -1;
+            topUpUserBalance(BigDecimal.valueOf(amount), userId, PaymentType.BALANCE.getId());
+        }
     }
 }
