@@ -11,6 +11,7 @@ import org.quartz.JobExecutionException;
 
 public class DailyPayment implements Job {
     private static final Logger LOGGER = Logger.getLogger(DailyPayment.class);
+
     private final PaymentService paymentService = ServiceProvider.INSTANCE.getPaymentService();
 
     @Override

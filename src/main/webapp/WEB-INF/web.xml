@@ -6,4 +6,10 @@
     <welcome-file-list>
         <welcome-file>/WEB-INF/jsp/home.jsp</welcome-file>
     </welcome-file-list>
+
+    <listener>
+        <listener-class>
+            com.epam.jwd_final.DailyPaymentServlet
+        </listener-class>
+    </listener>
 </web-app>
