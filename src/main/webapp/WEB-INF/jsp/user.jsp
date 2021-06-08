@@ -174,12 +174,12 @@
                                                     <img alt="logo" src="../../resources/user/activeStatus.svg"
                                                 </c:if>
                                                 <c:if test="${user.status == 'SUSPENDED'}">
-                                                     <img alt="logo" src="../../resources/user/suspendedStatus.svg"
+                                                    <img alt="logo" src="../../resources/user/suspendedStatus.svg"
                                                 </c:if>
                                                 <c:if test="${user.status == 'BANNED'}">
-                                                    <img alt="logo" src="../../resources/user/blockStatus.svg"
+                                                <img alt="logo" src="../../resources/user/blockStatus.svg"
                                                 </c:if>
-                                                data-user-status="${user.status}">
+                                                     data-user-status="${user.status}">
                                             </div>
                                             <div class="col"><h5>${user.status}</h5></div>
                                         </div>
@@ -463,6 +463,33 @@
                                         <div class="row align-items-start">
                                             <div class="col-2"><h5 class="card-title">Статус : </h5></div>
                                             <div class="col"><h5>${user.status}</h5></div>
+                                        </div>
+                                    </div>
+                                    <div class="container">
+                                        <div class="row align-items-start">
+                                            <div class="col-8"><h5 class="card-title">Принудительно изменить статус
+                                                пользователя: </h5></div>
+                                            <div class="col">
+                                                <c:if test="${user.status == 'ACTIVATE'}">
+                                                    <button id="chengStatus" class="btn btn-warning" type="button"
+                                                            data-user-status="${user.status}" data-user-id="${user.id}"
+                                                            data-balance="${user.balance}">
+                                                        приостановить
+                                                    </button>
+                                                </c:if>
+                                                <c:if test="${user.status != 'ACTIVATE'}">
+                                                    <button id="chengStatus" class="btn btn-success" type="button"
+                                                            data-user-status="${user.status}" data-user-id="${user.id}"
+                                                            data-balance="${user.balance}">
+                                                        активировать
+                                                    </button>
+                                                </c:if>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="container">
+                                        <div class="row align-items-start">
+                                            <div class="col" id="errorActivateStatus">*Для изменения стутуса , баланс должен быть положительным</div>
                                         </div>
                                     </div>
                                 </div>

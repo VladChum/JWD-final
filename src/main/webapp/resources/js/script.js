@@ -122,7 +122,7 @@ $("document").ready(function () {
             valid++;
         }
 
-        if (valid == 2) {
+        if (valid === 2) {
             var data = {
                 login: login,
                 password: password,
@@ -284,13 +284,13 @@ $("document").ready(function () {
             } else {
                 $('#errorDiscountSize').html("Wrong input:  0 < discount size < 100");
             }
-            if (endDate.length != 10) {
+            if (endDate.length !== 10) {
                 $('#errorEndDateDiscount').html("Wrong input: date example 2020-03-04");
             } else {
                 $('#errorEndDateDiscount').html("");
                 valid++;
             }
-            if (startDate.length != 10) {
+            if (startDate.length !== 10) {
                 $('#errorStartDateDiscount').html("Wrong input: date example 2020-03-04");
             } else {
                 $('#errorStartDateDiscount').html("");
@@ -723,14 +723,44 @@ $("document").ready(function () {
     });
 
     $('.unblockUser').on('click', function () {
-        var userId = $(this).attr('data-user-id');
-        var data = {
+        let userId = $(this).attr('data-user-id');
+        let data = {
             userId: userId
         }
-        var url = "Controller?command=unblockUser";
+        let url = "Controller?command=unblockUser";
         $.post(url, data, function (data, status) {
             location.reload();
         });
     });
 
+    $('#chengStatus').on('click', function () {
+        let userId = $(this).attr('data-user-id');
+        let status = $(this).attr('data-user-status');
+        let balance = parseFloat($(this).attr('data-balance'));
+        let result = false;
+
+        if (status === "ACTIVATE" && balance >= 0) {
+            status = 3;
+            result = true;
+        }else if (status === "SUSPENDED" && balance >= 0) {
+            status = 1;
+            result = true;
+        } else if (status === "BANNED" && balance >= 0) {
+            status = 1;
+            result = true;
+        } else {
+            $('#errorActivateStatus').html('error: you are blocked');
+        }
+
+        if (result === true) {
+            let data = {
+                userId: userId,
+                statusId: status,
+            }
+            let url = "Controller?command=chengUserStatus";
+            $.post(url, data, function (data, status) {
+                location.reload();
+            });
+        }
+    });
 })
