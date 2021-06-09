@@ -4,37 +4,33 @@ import com.epam.jwd_final.exception.ConnectionPoolException;
 import com.epam.jwd_final.exception.DaoException;
 import com.epam.jwd_final.exception.ServiceException;
 import com.epam.jwd_final.service.ServiceProvider;
+import org.quartz.*;
+import org.quartz.impl.JobDetailImpl;
+import org.quartz.impl.StdSchedulerFactory;
+
+import static org.quartz.CronScheduleBuilder.dailyAtHourAndMinute;
+import static org.quartz.SimpleScheduleBuilder.simpleSchedule;
+import static org.quartz.TriggerBuilder.newTrigger;
 
 
 public class Main {
     public static void main(String[] args) throws DaoException, ConnectionPoolException, ServiceException {
-//        String login = "admin";
-//        String password = "admin";
-//
-//
+//        ServiceProvider.INSTANCE.getPaymentService().dailyPaymentForAllUser();
+//        SchedulerFactory schedulerFactory = new StdSchedulerFactory();
 //        try {
-//            if (!ServiceProvider.INSTANCE.getAccountService().findAccountByLogin(login, password).isPresent()) {
-//                System.out.println("no");
-//            } else {
-//                Account account = DaoProvider.INSTANCE.getAccountDao().findAccountByLogin(login, password).get();
-//                if (DaoProvider.INSTANCE.getAdminDao().findAdminById(account.getId().intValue()).isPresent()) {
-//                    System.out.println("admin");
-//                } else if (DaoProvider.INSTANCE.getUserDao().findUserById(account.getId().intValue()).isPresent()) {
-//                    System.out.println("user");
-//                }
-//            }
-//        } catch (ServiceException e) {
+//            Scheduler scheduler =schedulerFactory.getScheduler();
+//            JobDetail job = JobBuilder.newJob(DailyPayment.class)
+//                    .withIdentity("myJob", "group1")
+//                    .build();
+//            Trigger trigger = newTrigger()
+//                    .withIdentity("trigger3", "group1")
+//                    .startNow()
+//                    .withSchedule(dailyAtHourAndMinute(0, 0)) // fire every day at 00:00
+//                    .build();
+//            scheduler.scheduleJob(job, trigger);
+//            scheduler.start();
+//        } catch (SchedulerException e) {
 //            e.printStackTrace();
 //        }
-//        try {
-//            System.out.print(ServiceProvider.INSTANCE.getSubscriptionService().findAllUserSubscription(6L).toString());
-//        } catch (ServiceException e) {
-//            e.printStackTrace();
-//        }
-//        List<Subscription> subscription = ServiceProvider.INSTANCE.getSubscriptionService().findAllUserSubscription(1L);
-//        for (int i = 0; i < subscription.size(); i++) {
-//            System.out.println(subscription.get(i).toString());
-//        }
-//        DaoProvider.INSTANCE.getTariffPlanDao().deleteTariff(2L);
     }
 }

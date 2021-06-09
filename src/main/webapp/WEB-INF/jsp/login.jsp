@@ -10,8 +10,8 @@
 
     <link rel="stylesheet" href="../../resources/css/style.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css"
-    rel="stylesheet"
-    integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
+          rel="stylesheet"
+          integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
 
 
     <title>login</title>
@@ -53,7 +53,8 @@
                                  class="account-button rounded-circle">
                         </a>
                         <ul class="account-menu dropdown-menu text-small">
-                            <li><a class="dropdown-item" href="Controller?command=personalAccount">личный кабинет</a></li>
+                            <li><a class="dropdown-item" href="Controller?command=personalAccount">личный кабинет</a>
+                            </li>
                             <li>
                                 <hr class="dropdown-divider">
                             </li>
@@ -75,7 +76,7 @@
                             <h1 class="h3 mb-3 fw-normal ">Sign in</h1>
                             <div class="form-floating">
                                 <input type="login" name="login" class="form-control" id="login"
-                                           placeholder="name@example.com">
+                                       placeholder="name@example.com">
                                 <label for="login">Login</label>
                             </div>
                             <br>
@@ -88,7 +89,12 @@
                             <span id="msg"></span>
                             <button class="w-100 btn btn-lg btn-primary" type="submit">Sign in</button>
                             <hr class="my-4">
-                            <small class="text-muted"><a id="registerNewAccount" data-bs-toggle="modal" type="button" data-bs-target="#registerNewUser">Register new account</a></small>
+                            <small class="text-muted">
+                                <a id="registerNewAccount" data-bs-toggle="modal" type="button"
+                                                         data-bs-target="#registerNewUser">
+                                    Register new account
+                                </a>
+                            </small>
                         </form>
                     </main>
                 </div>
@@ -145,12 +151,12 @@
                 <br>
             </div>
             <div class="modal-footer">
-                <button type="button" id="closeCreateUserModal"
+                <button type="button" id="closeRegisterUser"
                         class="btn btn-secondary" data-bs-dismiss="modal">
                     отмена
                 </button>
-                <button type="button" id="createUserButton" class="btn btn-primary">
-                    добавить пользователя
+                <button type="button" id="registerNewUserAccount" class="btn btn-primary">
+                    зарегистрироваться
                 </button>
             </div>
         </div>

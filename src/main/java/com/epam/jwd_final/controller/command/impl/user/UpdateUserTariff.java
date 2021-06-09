@@ -1,6 +1,7 @@
 package com.epam.jwd_final.controller.command.impl.user;
 
 import com.epam.jwd_final.controller.command.Command;
+import com.epam.jwd_final.entity.Status;
 import com.epam.jwd_final.entity.User;
 import com.epam.jwd_final.exception.ServiceException;
 import com.epam.jwd_final.service.ServiceProvider;
@@ -14,6 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.math.BigDecimal;
 
 public class UpdateUserTariff implements Command {
     private static final Logger LOGGER = Logger.getLogger(UpdateUserTariff.class);
@@ -34,8 +36,14 @@ public class UpdateUserTariff implements Command {
             if (subscriptionService.findActiveUserSubscription(user.getId()) != null) {
                 activeSubscriptionId = subscriptionService.findActiveUserSubscription(user.getId()).getId();
                 subscriptionService.stopActiveSubscription(user.getId(), activeSubscriptionId);
+            } else {
+                userService.chengStatus(user, Status.ACTIVATE.getId());
             }
             subscriptionService.newSubscription(user.getId(), newTariffId);
+
+            if (user.getBalance().compareTo(BigDecimal.valueOf(0)) >= 0 && !user.getStatus().getId().equals(Status.BANNED.getId())) {
+                userService.chengStatus(user, Status.ACTIVATE.getId());
+            }
         } catch (ServiceException e) {
             LOGGER.log(Level.ERROR, e.getMessage() + " " + e);
         }

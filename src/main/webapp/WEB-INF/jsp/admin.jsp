@@ -354,7 +354,8 @@
                                                         <td class="color: #D90707">${user.status}</td>
                                                         <td>${user.balance}</td>
                                                         <td>
-                                                            <button>
+                                                            <button class="unblockUser btn btn-outline-secondary"
+                                                                    data-user-id="${user.id}">
                                                                 разблокировать
                                                             </button>
                                                         </td>
@@ -497,8 +498,14 @@
                                                                                     изменить
                                                                                 </button>
                                                                                 <div class="dropdown-menu">
-                                                                                    <button class="dropdown-item"
-                                                                                            type="button">
+                                                                                    <button class="updateTariffButton dropdown-item"
+                                                                                            data-tariff-id="${tariff.id}"
+                                                                                            data-tariff-price="${tariff.price}"
+                                                                                            data-tariff-speed="${tariff.speed}"
+                                                                                            data-tariff-name="${tariff.name}"
+                                                                                            type="button"
+                                                                                            data-bs-toggle="modal"
+                                                                                            data-bs-target="#updateTariffForm">
                                                                                         изменить
                                                                                     </button>
                                                                                     <button class="archiveTariffButton dropdown-item"
@@ -519,6 +526,51 @@
                                             </div>
                                         </div>
                                     </div>
+
+                                    <div class="modal fade" id="updateTariffForm" data-bs-backdrop="static"
+                                         data-bs-keyboard="false" tabindex="-1"
+                                         aria-hidden="true">
+                                        <div class="modal-dialog modal-lg">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="updateATariff">update Tariff</h5>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                            aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <br>
+                                                    <h6>Name</h6>
+                                                    <input id="updateTariffName" name="name" class="form-control"
+                                                           placeholder="name">
+                                                    <div id="errorUpdateNameTariff" class="errorMassage"></div>
+                                                    <br>
+                                                    <h6>Price</h6>
+                                                    <input name="price" class="form-control"
+                                                           id="updateTariffPrice"
+                                                           placeholder="price">
+                                                    <div id="errorUpdatePriceTariff" class="errorMassage"></div>
+                                                    <br>
+                                                    <h6>Speed</h6>
+                                                    <input name="speed" class="form-control"
+                                                           id="updateTariffSpeed"
+                                                           placeholder="price">
+                                                    <div id="errorUpdateSpeedTariff" class="errorMassage"></div>
+                                                    <br>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" id="closeUpdateTariff"
+                                                            class="btn btn-secondary" data-bs-dismiss="modal">
+                                                        отмена
+                                                    </button>
+                                                    <button type="button" id="updateTariffButton"
+                                                            class="btn btn-primary">
+                                                        обновить
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
                                     <div class="tab-pane fade" id="archive-tariffs" role="tabpanel">
                                         <div class="tariff-item__top">
                                             <div class="row row-cols-1 row-cols-md-3 g-4">
@@ -562,8 +614,14 @@
                                                                                     изменить
                                                                                 </button>
                                                                                 <div class="dropdown-menu">
-                                                                                    <button class="dropdown-item"
-                                                                                            type="button">
+                                                                                    <button class="updateTariffButton dropdown-item"
+                                                                                            data-tariff-id="${tariff.id}"
+                                                                                            data-tariff-price="${tariff.price}"
+                                                                                            data-tariff-speed="${tariff.speed}"
+                                                                                            data-tariff-name="${tariff.name}"
+                                                                                            type="button"
+                                                                                            data-bs-toggle="modal"
+                                                                                            data-bs-target="#updateTariffForm">
                                                                                         изменить
                                                                                     </button>
                                                                                     <button class="activateTariffButton dropdown-item"

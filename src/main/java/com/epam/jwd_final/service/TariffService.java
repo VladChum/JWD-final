@@ -8,7 +8,7 @@ import java.util.List;
 public interface TariffService {
     List<TariffPlan> findAllTariff() throws ServiceException;
 
-    void updateTariff(Long userId, Long newTariffId) throws ServiceException;
+    void updateTariff(TariffPlan tariffPlan) throws ServiceException;
 
     TariffPlan findById(int tariffId) throws ServiceException;
 

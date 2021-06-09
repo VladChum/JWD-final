@@ -6,4 +6,27 @@
     <welcome-file-list>
         <welcome-file>/WEB-INF/jsp/home.jsp</welcome-file>
     </welcome-file-list>
+
+    <listener>
+        <listener-class>
+            com.epam.jwd_final.DailyPaymentServlet
+        </listener-class>
+    </listener>
+
+    <filter>
+        <filter-name>AuthorizationFilter</filter-name>
+        <filter-class>com.epam.jwd_final.filter.AuthorizationFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>AuthorizationFilter</filter-name>
+        <url-pattern>/Controller/*</url-pattern>
+    </filter-mapping>
+    <filter>
+        <filter-name>TariffPageFilter</filter-name>
+        <filter-class>com.epam.jwd_final.filter.TariffPageFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>TariffPageFilter</filter-name>
+        <url-pattern>/Controller/*</url-pattern>
+    </filter-mapping>
 </web-app>

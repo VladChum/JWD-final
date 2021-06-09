@@ -1,4 +1,4 @@
-package com.epam.jwd_final.controller.command.impl;
+package com.epam.jwd_final.controller.command.impl.admin;
 
 import com.epam.jwd_final.controller.command.Command;
 import com.epam.jwd_final.entity.Discount;
@@ -12,8 +12,6 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class CreateDiscount implements Command {

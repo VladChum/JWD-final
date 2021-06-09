@@ -21,7 +21,7 @@ public class Payment implements Command {
     private final String USER_ID = "userId";
     private final String AMOUNT = "amount";
     private final String PAYMENT_TYPE = "paymentType";
-
+//     добавить проверку дуступен ли обещенный платёж
     @Override
     public void execute(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
         Long userId = Long.valueOf(req.getParameter(USER_ID));

@@ -17,4 +17,5 @@ public interface DiscountService {
 
     void update(Discount discount) throws ServiceException;
 
+    boolean checkActiveDiscount(Discount discount) throws ServiceException;
 }

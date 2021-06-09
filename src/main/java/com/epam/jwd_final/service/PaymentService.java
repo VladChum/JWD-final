@@ -10,4 +10,10 @@ public interface PaymentService {
     void topUpUserBalance(BigDecimal amount, Long userId, Long paymentTypeId) throws ServiceException;
 
     List<UserPayment> findAllUserPayments(Long userId) throws ServiceException;
+
+    void dailyPaymentForAllUser() throws ServiceException;
+
+    BigDecimal findLastUserPromisedAmount(Long userId) throws ServiceException;
+
+    boolean checkActivePromisedPayment(Long userId) throws ServiceException;
 }

@@ -11,15 +11,9 @@ public interface TariffPlanDao {
 
     Optional<TariffPlan> findTariffById(int tariffId) throws DaoException;
 
-    /**
-     * todo
-     * <p>
-     * add cheng price and speed
-     * add cheng discount
-     */
     void createTariff(TariffPlan tariffPlan) throws DaoException;
 
-    void updateTariff(TariffPlan tariffPlan);
+    void updateTariff(TariffPlan tariffPlan) throws DaoException;
 
     void deleteTariff(Long tariffId) throws DaoException;
 

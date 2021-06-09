@@ -33,8 +33,12 @@ public class TariffServiceImpl implements TariffService {
     }
 
     @Override
-    public void updateTariff(Long userId, Long newTariffId) throws ServiceException {
-
+    public void updateTariff(TariffPlan tariffPlan) throws ServiceException {
+        try {
+            tariffPlanDao.updateTariff(tariffPlan);
+        } catch (DaoException e) {
+            throw new ServiceException(e);
+        }
     }
 
     @Override
