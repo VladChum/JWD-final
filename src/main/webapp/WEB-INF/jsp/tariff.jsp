@@ -96,7 +96,7 @@
                                 </b> руб/мес</span>
                                 </div>
                                 <div class="tariff-item__btns">
-                                    <a class="button-tariff js-open-popup" data-id="single"
+                                    <a class="button-tariff js-open-popup" href="Controller?command=tariffPageButton"
                                        data-title="подключение">Подключить</a>
                                 </div>
                             </div>

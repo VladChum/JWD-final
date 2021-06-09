@@ -13,6 +13,8 @@ public class PersonalAccount implements Command {
     private final String ACCOUNT = "account";
     private final String USER = "user";
     private final String ADMIN = "admin";
+    private final String USER_PAGE = "/Controller?command=userPage";
+    private final String ADMIN_PAGE = "/Controller?command=adminPage";
 
     @Override
     public void execute(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
@@ -22,10 +24,10 @@ public class PersonalAccount implements Command {
         if (httpSession != null) {
             Account account = (Account) httpSession.getAttribute(ACCOUNT);
             if (httpSession.getAttribute(USER) != null) {
-                personalAccount = "/Controller?command=userPage";
+                personalAccount = USER_PAGE;
             }
             if (httpSession.getAttribute(ADMIN) != null) {
-                personalAccount = "/Controller?command=adminPage";
+                personalAccount = ADMIN_PAGE;
             }
         }
 

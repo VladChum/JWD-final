@@ -89,9 +89,12 @@
                             <span id="msg"></span>
                             <button class="w-100 btn btn-lg btn-primary" type="submit">Sign in</button>
                             <hr class="my-4">
-                            <small class="text-muted"><a id="registerNewAccount" data-bs-toggle="modal" type="button"
-                                                         data-bs-target="#registerNewUser">Register new
-                                account</a></small>
+                            <small class="text-muted">
+                                <a id="registerNewAccount" data-bs-toggle="modal" type="button"
+                                                         data-bs-target="#registerNewUser">
+                                    Register new account
+                                </a>
+                            </small>
                         </form>
                     </main>
                 </div>

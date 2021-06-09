@@ -5,6 +5,7 @@ import com.epam.jwd_final.entity.Account;
 import com.epam.jwd_final.exception.ServiceException;
 import com.epam.jwd_final.service.AccountService;
 import com.epam.jwd_final.service.ServiceProvider;
+import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
 import javax.servlet.ServletException;
@@ -33,8 +34,7 @@ public class UpdatePassword implements Command {
                 accountService.updatePassword(accountId, newPassword);
             }
         } catch (ServiceException e) {
-            e.printStackTrace();
+            LOGGER.log(Level.ERROR, e.getMessage() + " " + e);
         }
-
     }
 }
