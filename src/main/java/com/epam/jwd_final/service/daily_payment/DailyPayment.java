@@ -1,4 +1,4 @@
-package com.epam.jwd_final;
+package com.epam.jwd_final.service.daily_payment;
 
 import com.epam.jwd_final.exception.ServiceException;
 import com.epam.jwd_final.service.PaymentService;

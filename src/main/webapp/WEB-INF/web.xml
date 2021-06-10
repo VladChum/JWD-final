@@ -9,7 +9,7 @@
 
     <listener>
         <listener-class>
-            com.epam.jwd_final.DailyPaymentServlet
+            com.epam.jwd_final.service.daily_payment.DailyPaymentServlet
         </listener-class>
     </listener>
 

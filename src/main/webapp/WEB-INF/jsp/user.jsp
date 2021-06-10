@@ -1,6 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt" %>
+<%@ taglib prefix="fm" uri="http://provider.com/jsp/tlds/phone" %>
 
 
 <!DOCTYPE html>
@@ -194,7 +195,7 @@
                                     <div class="container">
                                         <div class="row align-items-start">
                                             <div class="col-2"><h5 class="card-title">Телефон : </h5></div>
-                                            <div class="col"><h5>${user.phone}</h5></div>
+                                            <div class="col"><h5><fm:format phone="${user.phone}"/></h5></div>
                                         </div>
                                     </div>
                                     <div class="container">
@@ -489,7 +490,9 @@
                                     </div>
                                     <div class="container">
                                         <div class="row align-items-start">
-                                            <div class="col" id="errorActivateStatus">*Для изменения стутуса , баланс должен быть положительным</div>
+                                            <div class="col" id="errorActivateStatus">*Для изменения стутуса , баланс
+                                                должен быть положительным
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
