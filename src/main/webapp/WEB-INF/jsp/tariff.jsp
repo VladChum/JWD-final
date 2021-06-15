@@ -23,9 +23,12 @@
                     <img alt="logo" src="../../resources/logo2.png">
                 </div>
                 <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-                    <li><a href="Controller?command=homePage" class="nav-link px-2 text-white me-3">Home</a></li>
-                    <li><a href="Controller?command=tariffPage" class="nav-link px-2 text-white me-3">Tariff</a></li>
-                    <li><a href="Controller?command=aboutPage" class="nav-link px-2 text-white me-3">About</a></li>
+                    <li><a href="Controller?command=homePage" class="nav-link px-2 text-white me-3"><fmt:message
+                            key="page.home.navbar.link.home"/></a></li>
+                    <li><a href="Controller?command=tariffPage" class="nav-link px-2 text-white me-3"><fmt:message
+                            key="page.home.navbar.link.tariffs"/></a></li>
+                    <li><a href="Controller?command=aboutPage" class="nav-link px-2 text-white me-3"><fmt:message
+                            key="page.home.navbar.link.about"/></a></li>
                 </ul>
                 <div class="dropdown">
                     <button class="btn btn-outline-light dropdown-toggle me-3" type="button" id="languageMenu"
@@ -40,7 +43,8 @@
                 </div>
                 <c:if test="${account.login == null}">
                     <a href="Controller?command=loginPage">
-                        <button type="button" class="btn btn-primary">Login</button>
+                        <button type="button" class="btn btn-primary"><fmt:message
+                                key="page.home.navbar.button.login"/></button>
                     </a>
                 </c:if>
                 <c:if test="${account.login != null}">
@@ -51,11 +55,11 @@
                                  class="account-button rounded-circle">
                         </a>
                         <ul class="account-menu dropdown-menu text-small">
-                            <li><a class="dropdown-item" href="Controller?command=personalAccount">личный кабинет</a></li>
-                            <li>
-                                <hr class="dropdown-divider">
-                            </li>
-                            <li><a class="dropdown-item" href="Controller?command=signOut">Sign out</a></li>
+                            <li><a class="dropdown-item" href="Controller?command=personalAccount">
+                                <fmt:message key="page.home.navbar.button.personalaccount"/></a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="Controller?command=signOut">
+                                <fmt:message key="page.home.navbar.button.signout"/></a></li>
                         </ul>
                     </div>
                 </c:if>
@@ -66,7 +70,7 @@
 
 <div id="content" class="container">
     <div class="tariff-title">
-        <h1>Тарифы</h1>
+        <h1><fmt:message key="page.tariff.title"/></h1>
     </div>
     <div class="row row-cols-1 row-cols-md-3 g-4">
         <c:forEach items="${tariffPlans}" var="tariffPlan">
@@ -82,22 +86,22 @@
                                     </h5>
                                 </div>
                                 <div class="tariff-item__text">
-                                    <p>Проводное подключение по Ethernet </p>
-                                    <p>Безлимит
+                                    <p><fmt:message key="tariff.card.text1"/></p>
+                                    <p><fmt:message key="tariff.card.text2"/>
                                             ${tariffPlan.speed}
-                                        Мбит/с </p>
-                                    <p>Keenetic Speedster 2.4 + 5 ГГц </p>
+                                        <fmt:message key="tariff.card.text3"/> </p>
+                                    <p><fmt:message key="tariff.card.text4"/> </p>
                                 </div>
                             </div>
                             <div class="tariff-item__body">
                                 <div class="tariff-item__price">
                                 <span><b>
                                         ${tariffPlan.price}
-                                </b> руб/мес</span>
+                                </b> <fmt:message key="tariff.card.amount"/></span>
                                 </div>
                                 <div class="tariff-item__btns">
                                     <a class="button-tariff js-open-popup" href="Controller?command=tariffPageButton"
-                                       data-title="подключение">Подключить</a>
+                                       data-title="подключение"><fmt:message key="tariff.card.link"/></a>
                                 </div>
                             </div>
                         </div>

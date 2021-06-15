@@ -25,9 +25,12 @@
                     <img alt="logo" src="../../resources/logo2.png">
                 </div>
                 <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-                    <li><a href="Controller?command=homePage" class="nav-link px-2 text-white me-3">Home</a></li>
-                    <li><a href="Controller?command=tariffPage" class="nav-link px-2 text-white me-3">Tariff</a></li>
-                    <li><a href="Controller?command=aboutPage" class="nav-link px-2 text-white me-3">About</a></li>
+                    <li><a href="Controller?command=homePage" class="nav-link px-2 text-white me-3"><fmt:message
+                            key="page.home.navbar.link.home"/></a></li>
+                    <li><a href="Controller?command=tariffPage" class="nav-link px-2 text-white me-3"><fmt:message
+                            key="page.home.navbar.link.tariffs"/></a></li>
+                    <li><a href="Controller?command=aboutPage" class="nav-link px-2 text-white me-3"><fmt:message
+                            key="page.home.navbar.link.about"/></a></li>
                 </ul>
                 <div class="dropdown">
                     <button class="btn btn-outline-light dropdown-toggle me-3" type="button" id="languageMenu"
@@ -42,7 +45,8 @@
                 </div>
                 <c:if test="${account.login == null}">
                     <a href="Controller?command=loginPage">
-                        <button type="button" class="btn btn-primary">Login</button>
+                        <button type="button" class="btn btn-primary"><fmt:message
+                                key="page.home.navbar.button.login"/></button>
                     </a>
                 </c:if>
                 <c:if test="${account.login != null}">
@@ -53,12 +57,11 @@
                                  class="account-button rounded-circle">
                         </a>
                         <ul class="account-menu dropdown-menu text-small">
-                            <li><a class="dropdown-item" href="Controller?command=personalAccount">личный кабинет</a>
-                            </li>
-                            <li>
-                                <hr class="dropdown-divider">
-                            </li>
-                            <li><a class="dropdown-item" href="Controller?command=signOut">Sign out</a></li>
+                            <li><a class="dropdown-item" href="Controller?command=personalAccount"><fmt:message
+                                    key="page.home.navbar.button.personalaccount"/></a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="Controller?command=signOut"><fmt:message
+                                    key="page.home.navbar.button.signout"/></a></li>
                         </ul>
                     </div>
                 </c:if>

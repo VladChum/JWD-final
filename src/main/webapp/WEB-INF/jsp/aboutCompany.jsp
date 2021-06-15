@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt" %>
 
 
 <!DOCTYPE html>
@@ -22,9 +23,12 @@
                     <img alt="logo" src="../../resources/logo2.png">
                 </div>
                 <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-                    <li><a href="Controller?command=homePage" class="nav-link px-2 text-white me-3">Home</a></li>
-                    <li><a href="Controller?command=tariffPage" class="nav-link px-2 text-white me-3">Tariff</a></li>
-                    <li><a href="Controller?command=aboutPage" class="nav-link px-2 text-white me-3">About</a></li>
+                    <li><a href="Controller?command=homePage" class="nav-link px-2 text-white me-3">
+                        <fmt:message key="page.home.navbar.link.home"/></a></li>
+                    <li><a href="Controller?command=tariffPage" class="nav-link px-2 text-white me-3">
+                        <fmt:message key="page.home.navbar.link.tariffs"/></a></li>
+                    <li><a href="Controller?command=aboutPage" class="nav-link px-2 text-white me-3">
+                        <fmt:message key="page.home.navbar.link.about"/></a></li>
                 </ul>
                 <div class="dropdown">
                     <button class="btn btn-outline-light dropdown-toggle me-3" type="button" id="languageMenu"
@@ -39,7 +43,8 @@
                 </div>
                 <c:if test="${account.login == null}">
                     <a href="Controller?command=loginPage">
-                        <button type="button" class="btn btn-primary">Login</button>
+                        <button type="button" class="btn btn-primary">
+                            <fmt:message key="page.home.navbar.button.login"/></button>
                     </a>
                 </c:if>
                 <c:if test="${account.login != null}">
@@ -50,11 +55,11 @@
                                  class="account-button rounded-circle">
                         </a>
                         <ul class="account-menu dropdown-menu text-small">
-                            <li><a class="dropdown-item" href="Controller?command=personalAccount">личный кабинет</a></li>
-                            <li>
-                                <hr class="dropdown-divider">
-                            </li>
-                            <li><a class="dropdown-item" href="Controller?command=signOut">Sign out</a></li>
+                            <li><a class="dropdown-item" href="Controller?command=personalAccount">
+                                <fmt:message key="page.home.navbar.button.personalaccount"/></a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="Controller?command=signOut">
+                                <fmt:message key="page.home.navbar.button.signout"/></a></li>
                         </ul>
                     </div>
                 </c:if>
@@ -65,50 +70,39 @@
 <section class="about-page__first">
     <div class="container">
         <img alt="logo" src="../../resources/logo2.png">
-        <div class="about-page__content">
-            <p>Мы — группа интернет-провайдеров, объединённых в общее информационное пространство. Целью создания NAME
-                является обеспечение пользователей интернета разнообразными и удобными сервисами,
-                преимущественно требующими больших объемов трафика.</p>
-        </div>
+        <div class="about-page__content"><p><fmt:message key="page.about.title"/></p></div>
     </div>
 </section>
 <section class="advantages-section">
     <div class="container">
-        <div class="h2">Наши преимущества</div>
+        <div class="h2"><fmt:message key="page.about.card1.title"/></div>
         <div class="row">
             <div class="col-6 col-lg-4">
                 <div class="advantage-item">
                     <div class="advantage-item__img"><img alt="icon" src="../../resources/p1.svg"></div>
-                    <div class="advantage-item__title">Большой выбор тарифов от 30 до 300 Мбит/с</div>
-                    <div class="advantage-item__text"><p>Мы придумали оптимальный набор тарифов для любого пользователя
-                        по цене и скорости. Всё включённое в тарифы проводного интернета оборудование выдаётся бесплатно
-                        на время действия договора. На тарифах беспроводного интернета оборудование можно взять в аренду
-                        или приобрести.</p></div>
+                    <div class="advantage-item__title"><fmt:message key="page.about.card1.text1"/></div>
+                    <div class="advantage-item__text"><p><fmt:message key="page.about.card1.text2"/></p></div>
                 </div>
             </div>
             <div class="col-6 col-lg-4">
                 <div class="advantage-item">
                     <div class="advantage-item__img"><img alt="icon" src="../../resources/p2.svg"></div>
-                    <div class="advantage-item__title">Равная входящая и исходящая скорости</div>
-                    <div class="advantage-item__text"><p>Мы предоставляем одинаковую скорость в обоих направлениях, не
-                        ограничивая исходящую скорость по сравнению с входящей, как часто делают другие провайдеры. Это
-                        позволяет быстрее не только скачивать файлы, но и загружать.</p></div>
+                    <div class="advantage-item__title"><fmt:message key="page.about.card2.text1"/></div>
+                    <div class="advantage-item__text"><p><fmt:message key="page.about.card2.text2" /></p></div>
                 </div>
             </div>
             <div class="col-6 col-lg-4">
                 <div class="advantage-item">
                     <div class="advantage-item__img"><img alt="icon" src="../../resources/p3.svg"></div>
-                    <div class="advantage-item__title">Безлимитный трафик на всех тарифах
-                    </div>
-                    <div class="advantage-item__text"><p>На наших тарифных планах нет ограничений по трафику. Скачивайте
-                        и загружайте сколько угодно!</p></div>
+                    <div class="advantage-item__title"><fmt:message key="page.about.card3.text1"/></div>
+                    <div class="advantage-item__text"><p><fmt:message key="page.about.card3.text2"/></p></div>
                 </div>
             </div>
         </div>
-        <div class="h2">Контакты</div>
+        <div class="h2"><fmt:message key="page.about.contacts.title"/></div>
         <div class="b-contact-info__item">
             <div class="b-contact-info__item-col">
-                <div class="b-contact-info__title">Услуги домашнего интернета</div>
+                <div class="b-contact-info__title"><fmt:message key="page.about.phone_info"/></div>
             </div>
             <div class="b-contact-info__item-col">
                 <div class="b-contact-info__phone">
@@ -120,12 +114,12 @@
                 <div class="b-contact-info__phone-item b-contact-info__phone-number">
                     <a>8 017 237-98-98</a>
                 </div>
-                <div class="b-contact-info__helper">Круглосуточно</div>
+                <div class="b-contact-info__helper"><fmt:message key="page.about.contact_info1"/></div>
             </div>
         </div>
         <div class="b-contact-info__item">
             <div class="b-contact-info__item-col">
-                <div class="b-contact-info__title">Услуги подключения</div>
+                <div class="b-contact-info__title"><fmt:message key="page.about.contact_info2"/></div>
             </div>
             <div class="b-contact-info__item-col">
                 <div class="b-contact-info__phone">
@@ -137,7 +131,7 @@
                 <div class="b-contact-info__phone-item b-contact-info__phone-number">
                     <a>8 017 237-98-91</a>
                 </div>
-                <div class="b-contact-info__helper">Круглосуточно</div>
+                <div class="b-contact-info__helper"><fmt:message key="page.about.contact_info1"/></div>
             </div>
         </div>
     </div>
