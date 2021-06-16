@@ -3,7 +3,8 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt" %>
 <%@ taglib prefix="fm" uri="http://provider.com/jsp/tlds/phone" %>
 
-
+<fmt:setLocale value="en"/>
+<fmt:setBundle basename="locale" />
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -94,9 +95,9 @@
                             <div>
                                 <div class="tariff-item__price">
                                     <div class="balance-user">
-                                        Баланс : <b>
+                                        <fmt:message key="page.user.account.balance"/> : <b>
                                         ${user.balance}
-                                    </b> руб
+                                    </b> <fmt:message key="page.user.account.byn"/>
                                     </div>
                                 </div>
                                 <hr class="featurette-divider">
@@ -108,42 +109,42 @@
                                         id="score-tab" data-bs-toggle="pill"
                                         data-bs-target="#score" role="tab" aria-controls="score"
                                         aria-selected="true">
-                                    Cчёт
+                                    <fmt:message key="page.user.list.button.account"/>
                                 </button>
                                 <button type="button"
                                         class="nav-link btn-user btn-outline-primary tarrifs-filter__item tarrifs-filter__item--bundle ng-star-inserted"
                                         id="tariffs-tab" data-bs-toggle="pill"
                                         data-bs-target="#tariffs" role="tab" aria-controls="tariffs"
                                         aria-selected="false">
-                                    Тарифы
+                                    <fmt:message key="page.user.list.button.tariffs"/>
                                 </button>
                                 <button type="button"
                                         class="nav-link btn-user btn-outline-primary tarrifs-filter__item tarrifs-filter__item--wallet ng-star-inserted"
                                         id="payment-tab" data-bs-toggle="pill"
                                         data-bs-target="#payment" role="tab" aria-controls="payment"
                                         aria-selected="false">
-                                    Платежи
+                                    <fmt:message key="page.user.list.button.payment"/>
                                 </button>
                                 <button type="button"
                                         class="nav-link btn-user btn-outline-primary tarrifs-filter__item tarrifs-filter__item--sails ng-star-inserted"
                                         id="stock-tab" data-bs-toggle="pill"
                                         data-bs-target="#stock" role="tab" aria-controls="payment"
                                         aria-selected="false">
-                                    Акции
+                                    <fmt:message key="page.user.list.button.stock"/>
                                 </button>
                                 <button type="button"
                                         class="nav-link btn-user btn-outline-primary tarrifs-filter__item tarrifs-filter__item--help ng-star-inserted"
                                         id="help-tab" data-bs-toggle="pill"
                                         data-bs-target="#help" role="tab" aria-controls="help"
                                         aria-selected="false">
-                                    Помощь
+                                    <fmt:message key="page.user.list.button.help"/>
                                 </button>
                                 <button type="button"
                                         class="nav-link btn-user btn-outline-primary tarrifs-filter__item tarrifs-filter__item--sating ng-star-inserted"
                                         id="settings-tab" data-bs-toggle="pill"
                                         data-bs-target="#settings" role="tab" aria-controls="settings"
                                         aria-selected="false">
-                                    Настройки
+                                    <fmt:message key="page.user.list.button.settings"/>
                                 </button>
                             </div>
                         </div>
@@ -160,19 +161,19 @@
                                 <div class="tariff-item__top">
                                     <div class="container">
                                         <div class="row align-items-start">
-                                            <div class="col-2"><h5 class="card-title">Абонент : </h5></div>
+                                            <div class="col-2"><h5 class="card-title"><fmt:message key="page.user.account.subscriber"/> : </h5></div>
                                             <div class="col"><h5>${user.firstName} ${user.lastName}</h5></div>
                                         </div>
                                     </div>
                                     <div class="container">
                                         <div class="row align-items-start">
-                                            <div class="col-2"><h5 class="card-title">Логин : </h5></div>
+                                            <div class="col-2"><h5 class="card-title"><fmt:message key="page.user.account.login"/> : </h5></div>
                                             <div class="col"><h5>${account.login}</h5></div>
                                         </div>
                                     </div>
                                     <div class="container">
                                         <div class="row align-items-start">
-                                            <div class="col-2"><h5 class="card-title">Статус : </h5></div>
+                                            <div class="col-2"><h5 class="card-title"><fmt:message key="page.user.account.status"/> : </h5></div>
                                             <div id="userStatusLight" class="userStatusLight">
                                                 <c:if test="${user.status == 'ACTIVATE'}">
                                                     <img alt="logo" src="../../resources/user/activeStatus.svg"
@@ -190,14 +191,14 @@
                                     </div>
                                     <div class="container">
                                         <div class="row align-items-start">
-                                            <div class="col-2"><h5 class="card-title">Баланс : </h5></div>
+                                            <div class="col-2"><h5 class="card-title"><fmt:message key="page.user.account.balance"/> : </h5></div>
                                             <div class="col"><h5 class="card-title">${user.balance}</h5></div>
                                         </div>
                                     </div>
                                     <br><br><br><br><br><br><br><br><br><br><br><br>
                                     <div class="container">
                                         <div class="row align-items-start">
-                                            <div class="col-2"><h5 class="card-title">Телефон : </h5></div>
+                                            <div class="col-2"><h5 class="card-title"><fmt:message key="page.user.account.phone"/> : </h5></div>
                                             <div class="col"><h5><fm:format phone="${user.phone}"/></h5></div>
                                         </div>
                                     </div>
@@ -225,11 +226,11 @@
                                                                         </h5>
                                                                     </div>
                                                                     <div class="tariff-item__text">
-                                                                        <p>Проводное подключение по Ethernet </p>
-                                                                        <p>Безлимит
+                                                                        <p><fmt:message key="tariff.card.text1"/></p>
+                                                                        <p><fmt:message key="tariff.card.text2"/>
                                                                                 ${tariffPlan.speed}
-                                                                            Мбит/с </p>
-                                                                        <p>Keenetic Speedster 2.4 + 5 ГГц </p>
+                                                                            <fmt:message key="tariff.card.text3"/> </p>
+                                                                        <p><fmt:message key="tariff.card.text4"/> </p>
                                                                     </div>
                                                                 </div>
                                                                 <div class="tariff-item__body">
@@ -238,7 +239,7 @@
                                                                         <b>
                                                                                 ${tariffPlan.price}
                                                                         </b>
-                                                                        руб/мес
+                                                                        <fmt:message key="tariff.card.amount"/>
                                                                     </span>
                                                                     </div>
                                                                     <c:if test="${tariffPlan.id != subscription.tariffPlanId}">
@@ -246,7 +247,7 @@
                                                                             <button name="chengTariffButton"
                                                                                     class="chengTariffButton btn button-tariff"
                                                                                     data-tariff-id="${tariffPlan.id}"
-                                                                                    type="button">Подключить
+                                                                                    type="button"><fmt:message key="tariff.card.link"/>
                                                                             </button>
                                                                         </div>
                                                                     </c:if>
@@ -271,22 +272,22 @@
                                     </button>
                                 </div>
                                 <center>
-                                    <h4>Регистрация обещанного платежа</h4>
+                                    <h4><fmt:message key="page.user.payment.replenish.title"/></h4>
                                 </center>
                                 <table>
                                     <tbody>
                                     <tr>
                                         <td align="right">
-                                            <b>Введите cумму платежа:<b></b></b></td>
+                                            <b><fmt:message key="page.user.payment.replenish.amount"/>:<b></b></b></td>
                                         <td>
                                             <input type="text" id="replenishAmount" class="form form-control">
-                                            * max — 15.00 руб.
+                                            <fmt:message key="page.user.payment.replenish.max_amount"/>.
                                             <div id="errorReplenishAmount" class="errorMassage"></div>
                                         </td>
                                         <td>
                                             <button class="ReplenishButton btn btn-primary"
                                                     data-user-id="${user.id}">
-                                                Применить
+                                                <fmt:message key="page.user.payment.replenish.button"/>
                                             </button>
                                         </td>
                                     </tr>
@@ -296,15 +297,15 @@
                                 <br>
                                 <br>
                                 <center>
-                                    <h5>Платежи</h5>
+                                    <h5><fmt:message key="page.user.payment.payment"/></h5>
                                 </center>
                                 <div class="paymentTable">
                                     <table class="table table-bordered">
                                         <thead>
                                         <tr>
-                                            <th scope="col">data</th>
-                                            <th scope="col">amount</th>
-                                            <th scope="col">payment Type</th>
+                                            <th scope="col"><fmt:message key="page.user.payment.table.data"/></th>
+                                            <th scope="col"><fmt:message key="page.user.payment.table.amount"/></th>
+                                            <th scope="col"><fmt:message key="page.user.payment.table.payment_type"/></th>
                                         </tr>
                                         </thead>
                                         <tbody class="table">
@@ -377,12 +378,12 @@
                                         <div class="modal-footer">
                                             <button type="button" id="closeCardForm"
                                                     class="btn btn-secondary" data-bs-dismiss="modal">
-                                                отмена
+                                                <fmt:message key="form.card.button.cancel"/>
                                             </button>
                                             <button type="button" id="replenishButton"
                                                     data-user-id="${user.id}"
                                                     class="btn btn-primary">
-                                                пополнить
+                                                <fmt:message key="form.card.button.replenish"/>
                                             </button>
                                         </div>
                                     </div>
@@ -402,14 +403,13 @@
                                                                     <div class="tariff-item__top">
                                                                         <div class="tariff-item__title">
                                                                             <h5 class="card-title">
-                                                                                discount
+                                                                                <fmt:message key="form.discount.title"/>
                                                                             </h5>
                                                                         </div>
                                                                         <div class="tariff-item__text">
-                                                                            <p>start
-                                                                                date: ${discount.startDate} </p>
+                                                                            <p><fmt:message key="form.discount.start_date"/>: ${discount.startDate} </p>
                                                                             <p></p>
-                                                                            <p>end date: ${discount.endDate} </p>
+                                                                            <p><fmt:message key="form.discount.end_date"/>: ${discount.endDate} </p>
                                                                         </div>
                                                                     </div>
                                                                     <div class="tariff-item__body">
@@ -421,7 +421,7 @@
                                                                                     %
                                                                                 </span>
                                                                             <b class="tariffActive">
-                                                                                active
+                                                                                <fmt:message key="form.discount.status.active"/>
                                                                             </b>
                                                                         </div>
                                                                         <c:forEach var="tariff" items="${tariffPlans}">
@@ -459,33 +459,32 @@
                                 <div class="tariff-item__top">
                                     <div class="container">
                                         <div class="row align-items-start">
-                                            <div class="col-2"><h5 class="card-title">Абонент : </h5></div>
+                                            <div class="col-2"><h5 class="card-title"><fmt:message key="page.user.account.subscriber"/> : </h5></div>
                                             <div class="col"><h5>${user.firstName} ${user.lastName}</h5></div>
                                         </div>
                                     </div>
                                     <div class="container">
                                         <div class="row align-items-start">
-                                            <div class="col-2"><h5 class="card-title">Статус : </h5></div>
+                                            <div class="col-2"><h5 class="card-title"><fmt:message key="page.user.account.status"/> : </h5></div>
                                             <div class="col"><h5>${user.status}</h5></div>
                                         </div>
                                     </div>
                                     <div class="container">
                                         <div class="row align-items-start">
-                                            <div class="col-8"><h5 class="card-title">Принудительно изменить статус
-                                                пользователя: </h5></div>
+                                            <div class="col-8"><h5 class="card-title"><fmt:message key="page.user.settings.change_status"/>: </h5></div>
                                             <div class="col">
                                                 <c:if test="${user.status == 'ACTIVATE'}">
                                                     <button id="chengStatus" class="btn btn-warning" type="button"
                                                             data-user-status="${user.status}" data-user-id="${user.id}"
                                                             data-balance="${user.balance}">
-                                                        приостановить
+                                                        <fmt:message key="page.user.settings.change_status.stop"/>
                                                     </button>
                                                 </c:if>
                                                 <c:if test="${user.status != 'ACTIVATE'}">
                                                     <button id="chengStatus" class="btn btn-success" type="button"
                                                             data-user-status="${user.status}" data-user-id="${user.id}"
                                                             data-balance="${user.balance}">
-                                                        активировать
+                                                        <fmt:message key="page.user.settings.change_status.activate"/>
                                                     </button>
                                                 </c:if>
                                             </div>
@@ -493,8 +492,7 @@
                                     </div>
                                     <div class="container">
                                         <div class="row align-items-start">
-                                            <div class="col" id="errorActivateStatus">*Для изменения стутуса , баланс
-                                                должен быть положительным
+                                            <div class="col" id="errorActivateStatus"><fmt:message key="page.user.settings.change_status.warning"/>
                                             </div>
                                         </div>
                                     </div>
@@ -504,19 +502,21 @@
                                     <li class="nav-item" role="presentation">
                                         <button class="nav-link active" id="pills-contact-tab" data-bs-toggle="pill"
                                                 data-bs-target="#pills-contact" type="button" role="tab"
-                                                aria-controls="pills-contact" aria-selected="true">контактные данные
+                                                aria-controls="pills-contact" aria-selected="true"><fmt:message key="page.user.settings.button.contact"/>
                                         </button>
                                     </li>
                                     <li class="nav-item" role="presentation">
                                         <button class="nav-link" id="pills-phone-tab" data-bs-toggle="pill"
                                                 data-bs-target="#pills-phone" type="button" role="tab"
-                                                aria-controls="pills-phone" aria-selected="false">телефон
+                                                aria-controls="pills-phone" aria-selected="false">
+                                            <fmt:message key="page.user.settings.button.phone"/>
                                         </button>
                                     </li>
                                     <li class="nav-item" role="presentation">
                                         <button class="nav-link" id="pills-password-tab" data-bs-toggle="pill"
                                                 data-bs-target="#pills-password" type="button" role="tab"
-                                                aria-controls="pills-password" aria-selected="false">изменить пароль
+                                                aria-controls="pills-password" aria-selected="false">
+                                            <fmt:message key="page.user.settings.button.change_password"/>
                                         </button>
                                     </li>
                                 </ul>
@@ -540,7 +540,7 @@
                                         <div id="errorNewEmail" class="errorMassage"></div>
                                         <button type="button" id="chengEmailButton" class="btn btn-primary"
                                                 data-email="${user.email}" data-user-id="${user.id}">
-                                            обновить
+                                            <fmt:message key="page.user.settings.button.update"/>
                                         </button>
                                     </div>
                                     <%-- phone--%>
@@ -558,7 +558,7 @@
                                         <div id="errorNewPhone" class="errorMassage"></div>
                                         <button type="button" id="chengPhoneButton" class="btn btn-primary"
                                                 data-phone="${user.phone}" data-user-id="${user.id}">
-                                            обновить
+                                            <fmt:message key="page.user.settings.button.update"/>
                                         </button>
                                     </div>
                                     <%-- cheng password--%>
@@ -567,7 +567,7 @@
                                         <br>
                                         <div class="row align-items-start">
                                             <div class="col-4">
-                                                <h5 class="card-title">старый пароль : </h5>
+                                                <h5 class="card-title"><fmt:message key="page.user.settings.change_password.old"/> : </h5>
                                             </div>
                                             <div class="col">
                                                 <input type="password" id="oldPassword"
@@ -578,7 +578,7 @@
                                         </div>
                                         <div class="row align-items-start">
                                             <div class="col-4">
-                                                <h5 class="card-title">новый пароль : </h5>
+                                                <h5 class="card-title"><fmt:message key="page.user.settings.change_password.new"/> : </h5>
                                             </div>
                                             <div class="col">
                                                 <input type="password" id="newPassword"
@@ -589,7 +589,7 @@
                                         </div>
                                         <div class="row align-items-start">
                                             <div class="col-4">
-                                                <h5 class="card-title">ещё раз новый пароль : </h5>
+                                                <h5 class="card-title"><fmt:message key="page.user.settings.change_password.second_new"/> : </h5>
                                             </div>
                                             <div class="col">
                                                 <input type="password" id="secondNewPassword"
@@ -601,7 +601,7 @@
                                         <div id="errorUpdatePassword" class="errorMassage"></div>
                                         <button type="button" id="chengPasswordButton" class="btn btn-primary"
                                                 data-account-id="${account.id}">
-                                            обновить
+                                            <fmt:message key="page.user.settings.button.update"/>
                                         </button>
                                     </div>
                                 </div>

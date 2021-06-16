@@ -2,6 +2,8 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt" %>
 
+<fmt:setLocale value="en"/>
+<fmt:setBundle basename="locale" />
 <!DOCTYPE html>
 <html lang="en">
 <head>

@@ -9,7 +9,7 @@ import java.util.Arrays;
 
 public class AuthorizationFilter implements Filter {
     private final String ACCOUNT = "account";
-    private final String[] whiteList = {"homePage", "tariffPage", "aboutPage", "loginPage", "signIn", "registerUser", "signOut", "tariffPageButton"};
+    private final String[] whiteList = {"homePage", "tariffPage", "aboutPage", "loginPage", "signIn", "registerUser", "signOut", "tariffPageButton", "changLanguage"};
     private final String LOGIN_PAGE = "/Controller?command=loginPage";
 
     @Override

@@ -2,8 +2,10 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt" %>
 
+<fmt:setLocale value="ru"/>
+<fmt:setBundle basename="locale" />
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -86,35 +88,35 @@
                                         id="users-tab" data-bs-toggle="pill"
                                         data-bs-target="#users" role="tab" aria-controls="users"
                                         aria-selected="true">
-                                    Пользователи
+                                    <fmt:message key="page.admin.list.button.users"/>
                                 </button>
                                 <button type="button"
                                         class="nav-link btn-user btn-outline-primary tarrifs-filter__item admin-filter__item--statistics ng-star-inserted"
                                         id="statistics-tab" data-bs-toggle="pill"
                                         data-bs-target="#statistics" role="tab" aria-controls="statistics"
                                         aria-selected="false">
-                                    Статистика
+                                    <fmt:message key="page.admin.list.button.statistics"/>
                                 </button>
                                 <button type="button"
                                         class="nav-link btn-user btn-outline-primary tarrifs-filter__item tarrifs-filter__item--bundle ng-star-inserted"
                                         id="tariffs-tab" data-bs-toggle="pill"
                                         data-bs-target="#tariffs" role="tab" aria-controls="tariffs"
                                         aria-selected="false">
-                                    Тарифы
+                                    <fmt:message key="page.admin.list.button.tariffs"/>
                                 </button>
                                 <button type="button"
                                         class="nav-link btn-user btn-outline-primary tarrifs-filter__item tarrifs-filter__item--sails ng-star-inserted"
                                         id="stock-tab" data-bs-toggle="pill"
                                         data-bs-target="#stock" role="tab" aria-controls="stock"
                                         aria-selected="false">
-                                    Акции
+                                    <fmt:message key="page.admin.list.button.stock"/>
                                 </button>
                                 <button type="button"
                                         class="nav-link btn-user btn-outline-primary tarrifs-filter__item tarrifs-filter__item--sating ng-star-inserted"
                                         id="settings-tab" data-bs-toggle="pill"
                                         data-bs-target="#settings" role="tab" aria-controls="settings"
                                         aria-selected="false">
-                                    Настройки
+                                    <fmt:message key="page.admin.list.button.settings"/>
                                 </button>
                             </div>
                         </div>
@@ -133,19 +135,19 @@
                                     <li class="nav-item" role="presentation">
                                         <button class="nav-link active" id="pills-home-tab" data-bs-toggle="pill"
                                                 data-bs-target="#pills-home" type="button" role="tab"
-                                                aria-controls="pills-home" aria-selected="true">пользователи
+                                                aria-controls="pills-home" aria-selected="true"><fmt:message key="page.admin.users.navbar.users"/>
                                         </button>
                                     </li>
                                     <li class="nav-item" role="presentation">
                                         <button class="nav-link" id="pills-profile-tab" data-bs-toggle="pill"
                                                 data-bs-target="#pills-profile" type="button" role="tab"
-                                                aria-controls="pills-profile" aria-selected="false">админы
+                                                aria-controls="pills-profile" aria-selected="false"><fmt:message key="page.admin.users.navbar.admins"/>
                                         </button>
                                     </li>
                                     <li class="nav-item" role="presentation">
                                         <button class="nav-link" id="pills-contact-tab" data-bs-toggle="pill"
                                                 data-bs-target="#pills-contact" type="button" role="tab"
-                                                aria-controls="pills-contact" aria-selected="false">заблокированные
+                                                aria-controls="pills-contact" aria-selected="false"><fmt:message key="page.admin.users.navbar.pills"/>
                                         </button>
                                     </li>
                                 </ul>
@@ -159,11 +161,12 @@
                                         </button>
                                         <div class="dropdown-menu" aria-labelledby="add">
                                             <button class="dropdown-item " type="button"
-                                                    data-bs-toggle="modal" data-bs-target="#newUserForm">добавить
-                                                пользователя
+                                                    data-bs-toggle="modal" data-bs-target="#newUserForm">
+                                                <fmt:message key="page.admin.users.navbar.button.new_user"/>
                                             </button>
                                             <button class="dropdown-item" type="button" data-bs-toggle="modal"
-                                                    data-bs-target="#newAdminForm">добавить админа
+                                                    data-bs-target="#newAdminForm">
+                                                <fmt:message key="page.admin.users.navbar.button.new_admin"/>
                                             </button>
                                         </div>
                                     </div>
@@ -175,36 +178,36 @@
                                     <div class="modal-dialog modal-lg">
                                         <div class="modal-content">
                                             <div class="modal-header">
-                                                <h5 class="modal-title" id="newUser">add User</h5>
+                                                <h5 class="modal-title" id="newUser"><fmt:message key="form.add_user.title"/></h5>
                                                 <button type="button" class="btn-close" data-bs-dismiss="modal"
                                                         aria-label="Close"></button>
                                             </div>
                                             <div class="modal-body">
                                                 <br>
-                                                <h6>login</h6>
+                                                <h6><fmt:message key="form.new_user.login"/></h6>
                                                 <input id="newUserCreateLogin" name="login" class="form-control"
                                                        placeholder="login">
                                                 <div id="errorLoginUser" class="errorMassage"></div>
                                                 <br>
-                                                <h6>password</h6>
+                                                <h6><fmt:message key="form.new_user.password"/></h6>
                                                 <input type="password" name="password" class="form-control"
                                                        id="newUserCreatePassword"
                                                        placeholder="password">
                                                 <div id="errorPasswordUser" class="errorMassage"></div>
                                                 <br>
-                                                <h6>имя</h6>
+                                                <h6><fmt:message key="form.new_user.name"/></h6>
                                                 <input name="firstName" class="form-control"
                                                        id="newUserFirstName"
                                                        placeholder="first name">
                                                 <div id="errorFirstNameUser" class="errorMassage"></div>
                                                 <br>
-                                                <h6>Фамилия</h6>
+                                                <h6><fmt:message key="form.new_user.surname"/></h6>
                                                 <input class="form-control"
                                                        id="newUserLastName"
                                                        placeholder="last name">
                                                 <div class="errorMassage" id="errorLastNameUser"></div>
                                                 <br>
-                                                <h6>мобильный номер</h6>
+                                                <h6><fmt:message key="form.new_user.phone"/></h6>
                                                 <input class="form-control"
                                                        id="newUserPhone"
                                                        placeholder="phone">
@@ -220,10 +223,10 @@
                                             <div class="modal-footer">
                                                 <button type="button" id="closeCreateUserModal"
                                                         class="btn btn-secondary" data-bs-dismiss="modal">
-                                                    отмена
+                                                    <fmt:message key="form.new_user.button.cancel"/>
                                                 </button>
                                                 <button type="button" id="createUserButton" class="btn btn-primary">
-                                                    добавить пользователя
+                                                    <fmt:message key="form.add_user.button.add"/>
                                                 </button>
                                             </div>
                                         </div>
@@ -236,18 +239,18 @@
                                     <div class="modal-dialog modal-lg">
                                         <div class="modal-content">
                                             <div class="modal-header">
-                                                <h5 class="modal-title" id="newAdmin">new Admin</h5>
+                                                <h5 class="modal-title" id="newAdmin"><fmt:message key="form.admin.title"/></h5>
                                                 <button type="button" class="btn-close" data-bs-dismiss="modal"
                                                         aria-label="Close"></button>
                                             </div>
                                             <div class="modal-body">
                                                 <br>
-                                                <h6>login</h6>
+                                                <h6><fmt:message key="form.new_user.login"/></h6>
                                                 <input id="newAdminCreateLogin" name="login" class="form-control"
                                                        placeholder="login">
                                                 <div id="errorLoginAdmin" class="errorMassage"></div>
                                                 <br>
-                                                <h6>password</h6>
+                                                <h6><fmt:message key="form.new_user.password"/></h6>
                                                 <input type="password" name="password" class="form-control"
                                                        id="newAdminCreatePassword"
                                                        placeholder="password">
@@ -257,10 +260,10 @@
                                             <div class="modal-footer">
                                                 <button type="button" id="closeCreateAdminModal"
                                                         class="btn btn-secondary" data-bs-dismiss="modal">
-                                                    отмена
+                                                    <fmt:message key="form.new_user.button.cancel"/>
                                                 </button>
                                                 <button type="button" id="createAdminButton" class="btn btn-primary">
-                                                    добавить админа
+                                                    <fmt:message key="form.admin.button.add"/>
                                                 </button>
                                             </div>
                                         </div>
@@ -274,10 +277,10 @@
                                         <table class="table table-striped table-hover">
                                             <thead>
                                             <tr>
-                                                <th scope="col">имя</th>
-                                                <th scope="col">фамилия</th>
-                                                <th scope="col">статус</th>
-                                                <th scope="col">баланс</th>
+                                                <th scope="col"><fmt:message key="page.admin.users.table.name"/></th>
+                                                <th scope="col"><fmt:message key="page.admin.users.table.surname"/></th>
+                                                <th scope="col"><fmt:message key="page.admin.users.table.status"/></th>
+                                                <th scope="col"><fmt:message key="page.admin.users.table.balance"/></th>
                                                 <th></th>
                                             </tr>
                                             <tbody>
@@ -300,7 +303,7 @@
                                                     <td>
                                                         <button class="deleteUser btn btn-outline-danger"
                                                                 data-user-id="${user.id}">
-                                                            удалить
+                                                            <fmt:message key="page.admin.users.table.button.delete"/>
                                                         </button>
                                                     </td>
                                                 </tr>
@@ -315,8 +318,8 @@
                                         <table class="table table-striped table-hover">
                                             <thead>
                                             <tr>
-                                                <th scope="col">account id</th>
-                                                <th scope="col">login</th>
+                                                <th scope="col"><fmt:message key="page.admin.users.table.account_id"/></th>
+                                                <th scope="col"><fmt:message key="page.admin.users.table.login"/></th>
                                                 <th></th>
                                             </tr>
                                             <tbody>
@@ -327,7 +330,7 @@
                                                     <td>
                                                         <button class="deleteAdmin btn btn-outline-danger"
                                                                 data-admin-id="${admin.id}">
-                                                            удалить
+                                                            <fmt:message key="page.admin.users.table.button.delete"/>
                                                         </button>
                                                     </td>
                                                 </tr>
@@ -342,10 +345,10 @@
                                         <table class="table table-striped">
                                             <thead>
                                             <tr>
-                                                <th scope="col">имя</th>
-                                                <th scope="col">фамилия</th>
-                                                <th scope="col">статус</th>
-                                                <th scope="col">баланс</th>
+                                                <th scope="col"><fmt:message key="page.admin.users.table.name"/></th>
+                                                    <th scope="col"><fmt:message key="page.admin.users.table.surname"/></th>
+                                                <th scope="col"><fmt:message key="page.admin.users.table.status"/></th>
+                                                <th scope="col"><fmt:message key="page.admin.users.table.balance"/></th>
                                                 <th></th>
                                                 <th></th>
                                             </tr>
@@ -360,13 +363,13 @@
                                                         <td>
                                                             <button class="unblockUser btn btn-outline-secondary"
                                                                     data-user-id="${user.id}">
-                                                                разблокировать
+                                                                <fmt:message key="page.admin.users.table.button.activate"/>
                                                             </button>
                                                         </td>
                                                         <td>
                                                             <button class="deleteUser btn btn-outline-danger"
                                                                     data-user-id="${user.id}">
-                                                                удалить
+                                                                <fmt:message key="page.admin.users.table.button.delete"/>
                                                             </button>
                                                         </td>
                                                     </tr>
@@ -379,18 +382,7 @@
                                 </div>
                             </div>
                             <div class="tab-pane fade show" id="statistics" role="tabpanel">
-                                <div class="tariff-item__title">
-                                    <h5 class="card-title">Абонент : Чумачёв Владислав Константинович</h5>
-                                </div>
-                                <div class="tariff-item__title">
-                                    <h5 class="card-title">Логин : 1561001453502</h5>
-                                </div>
-                                <div class="tariff-item__title">
-                                    <h5 class="card-title">Статус :</h5>
-                                </div>
-                                <div class="tariff-item__title">
-                                    <h5 class="card-title">Дата активации : 11.03.2021 02:37:21</h5>
-                                </div>
+
                             </div>
                             <%--                            tariffs--%>
                             <div class="tab-pane fade show" id="tariffs" role="tabpanel">
@@ -398,13 +390,13 @@
                                     <li class="nav-item" role="presentation">
                                         <button class="nav-link active" id="active-tab" data-bs-toggle="pill"
                                                 data-bs-target="#active-tariffs" type="button" role="tab"
-                                                aria-selected="false">активные тарифы
+                                                aria-selected="false"><fmt:message key="page.admin.tariffs.navbar.active"/>
                                         </button>
                                     </li>
                                     <li class="nav-item" role="presentation">
                                         <button class="nav-link" id="archive-tab" data-bs-toggle="pill"
                                                 data-bs-target="#archive-tariffs" type="button" role="tab"
-                                                aria-selected="false">архив
+                                                aria-selected="false"><fmt:message key="page.admin.tariffs.navbar.archive"/>
                                         </button>
                                     </li>
                                 </ul>
@@ -422,24 +414,24 @@
                                     <div class="modal-dialog modal-lg">
                                         <div class="modal-content">
                                             <div class="modal-header">
-                                                <h5 class="modal-title" id="newATariff">new Tariff</h5>
+                                                <h5 class="modal-title" id="newATariff"><fmt:message key="form.new_tariff.title"/></h5>
                                                 <button type="button" class="btn-close" data-bs-dismiss="modal"
                                                         aria-label="Close"></button>
                                             </div>
                                             <div class="modal-body">
                                                 <br>
-                                                <h6>Name</h6>
+                                                <h6><fmt:message key="form.new_tariff.name"/></h6>
                                                 <input id="newTariffName" name="name" class="form-control"
                                                        placeholder="name">
                                                 <div id="errorNameTariff" class="errorMassage"></div>
                                                 <br>
-                                                <h6>Price</h6>
+                                                <h6><fmt:message key="form.new_tariff.price"/></h6>
                                                 <input name="price" class="form-control"
                                                        id="newTariffPrice"
                                                        placeholder="price">
                                                 <div id="errorPriceTariff" class="errorMassage"></div>
                                                 <br>
-                                                <h6>Speed</h6>
+                                                <h6><fmt:message key="form.new_tariff.speed"/></h6>
                                                 <input name="speed" class="form-control"
                                                        id="newTariffSpeed"
                                                        placeholder="price">
@@ -449,10 +441,10 @@
                                             <div class="modal-footer">
                                                 <button type="button" id="closeCreateTariff"
                                                         class="btn btn-secondary" data-bs-dismiss="modal">
-                                                    отмена
+                                                    <fmt:message key="form.card.button.cancel"/>
                                                 </button>
                                                 <button type="button" id="createTariff" class="btn btn-primary">
-                                                    добавить тариф
+                                                    <fmt:message key="form.new_tariff.button.add"/>
                                                 </button>
                                             </div>
                                         </div>
@@ -476,12 +468,11 @@
                                                                                 </h5>
                                                                             </div>
                                                                             <div class="tariff-item__text">
-                                                                                <p>Проводное подключение по
-                                                                                    Ethernet </p>
-                                                                                <p>Безлимит
+                                                                                <p><fmt:message key="tariff.card.text1"/> </p>
+                                                                                <p><fmt:message key="tariff.card.text2"/>
                                                                                         ${tariff.speed}
-                                                                                    Мбит/с </p>
-                                                                                <p>Keenetic Speedster 2.4 + 5 ГГц </p>
+                                                                                    <fmt:message key="tariff.card.text3"/> </p>
+                                                                                <p><fmt:message key="tariff.card.text4"/></p>
                                                                             </div>
                                                                         </div>
                                                                         <div class="tariff-item__body">
@@ -490,7 +481,7 @@
                                                                         <b>
                                                                                 ${tariff.price}
                                                                         </b>
-                                                                        руб/мес
+                                                                        <fmt:message key="tariff.card.amount"/>
                                                                     </span>
                                                                             </div>
                                                                             <div class="dropdown">
@@ -499,7 +490,7 @@
                                                                                         data-bs-toggle="dropdown"
                                                                                         aria-haspopup="true"
                                                                                         aria-expanded="false">
-                                                                                    изменить
+                                                                                    <fmt:message key="page.admin.tariffs.button.change"/>
                                                                                 </button>
                                                                                 <div class="dropdown-menu">
                                                                                     <button class="updateTariffButton dropdown-item"
@@ -510,13 +501,13 @@
                                                                                             type="button"
                                                                                             data-bs-toggle="modal"
                                                                                             data-bs-target="#updateTariffForm">
-                                                                                        изменить
+                                                                                        <fmt:message key="page.admin.tariffs.button.change"/>
                                                                                     </button>
                                                                                     <button class="archiveTariffButton dropdown-item"
                                                                                             name="archiveTariffButton"
                                                                                             data-tariff-id="${tariff.id}"
                                                                                             type="button">
-                                                                                        удалить
+                                                                                        <fmt:message key="page.admin.users.table.button.delete"/>
                                                                                     </button>
                                                                                 </div>
                                                                             </div>
@@ -537,24 +528,24 @@
                                         <div class="modal-dialog modal-lg">
                                             <div class="modal-content">
                                                 <div class="modal-header">
-                                                    <h5 class="modal-title" id="updateATariff">update Tariff</h5>
+                                                    <h5 class="modal-title" id="updateATariff"><fmt:message key="form.update_tariff.title"/></h5>
                                                     <button type="button" class="btn-close" data-bs-dismiss="modal"
                                                             aria-label="Close"></button>
                                                 </div>
                                                 <div class="modal-body">
                                                     <br>
-                                                    <h6>Name</h6>
+                                                    <h6><fmt:message key="form.new_tariff.name"/></h6>
                                                     <input id="updateTariffName" name="name" class="form-control"
                                                            placeholder="name">
                                                     <div id="errorUpdateNameTariff" class="errorMassage"></div>
                                                     <br>
-                                                    <h6>Price</h6>
+                                                    <h6><fmt:message key="form.new_tariff.price"/></h6>
                                                     <input name="price" class="form-control"
                                                            id="updateTariffPrice"
                                                            placeholder="price">
                                                     <div id="errorUpdatePriceTariff" class="errorMassage"></div>
                                                     <br>
-                                                    <h6>Speed</h6>
+                                                    <h6><fmt:message key="form.new_tariff.speed"/></h6>
                                                     <input name="speed" class="form-control"
                                                            id="updateTariffSpeed"
                                                            placeholder="price">
@@ -564,11 +555,11 @@
                                                 <div class="modal-footer">
                                                     <button type="button" id="closeUpdateTariff"
                                                             class="btn btn-secondary" data-bs-dismiss="modal">
-                                                        отмена
+                                                        <fmt:message key="form.new_user.button.cancel"/>
                                                     </button>
                                                     <button type="button" id="updateTariffButton"
                                                             class="btn btn-primary">
-                                                        обновить
+                                                        <fmt:message key="page.user.settings.button.update"/>
                                                     </button>
                                                 </div>
                                             </div>
@@ -591,12 +582,11 @@
                                                                                 </h5>
                                                                             </div>
                                                                             <div class="tariff-item__text">
-                                                                                <p>Проводное подключение по
-                                                                                    Ethernet </p>
-                                                                                <p>Безлимит
+                                                                                <p><fmt:message key="tariff.card.text1"/> </p>
+                                                                                <p><fmt:message key="tariff.card.text2"/>
                                                                                         ${tariff.speed}
-                                                                                    Мбит/с </p>
-                                                                                <p>Keenetic Speedster 2.4 + 5 ГГц </p>
+                                                                                    <fmt:message key="tariff.card.text3"/> </p>
+                                                                                <p><fmt:message key="tariff.card.text4"/></p>
                                                                             </div>
                                                                         </div>
                                                                         <div class="tariff-item__body">
@@ -605,7 +595,7 @@
                                                                                     <b>
                                                                                             ${tariff.price}
                                                                                     </b>
-                                                                                    руб/мес
+                                                                                    <fmt:message key="tariff.card.amount"/>
                                                                                 </span>
                                                                             </div>
                                                                             <div class="dropdown">
@@ -615,7 +605,7 @@
                                                                                         data-bs-toggle="dropdown"
                                                                                         aria-haspopup="true"
                                                                                         aria-expanded="false">
-                                                                                    изменить
+                                                                                    <fmt:message key="page.admin.tariffs.button.change"/>
                                                                                 </button>
                                                                                 <div class="dropdown-menu">
                                                                                     <button class="updateTariffButton dropdown-item"
@@ -626,13 +616,13 @@
                                                                                             type="button"
                                                                                             data-bs-toggle="modal"
                                                                                             data-bs-target="#updateTariffForm">
-                                                                                        изменить
+                                                                                        <fmt:message key="page.admin.tariffs.button.change"/>
                                                                                     </button>
                                                                                     <button class="activateTariffButton dropdown-item"
                                                                                             name="activateTariffButton"
                                                                                             data-tariff-Id="${tariff.id}"
                                                                                             type="button">
-                                                                                        активировать
+                                                                                        <fmt:message key="tariff.card.button.activate"/>
                                                                                     </button>
                                                                                 </div>
                                                                             </div>
@@ -654,13 +644,13 @@
                                     <li class="nav-item" role="presentation">
                                         <button class="nav-link active" id="activeDiscount-tab" data-bs-toggle="pill"
                                                 data-bs-target="#active-discount" type="button" role="tab"
-                                                aria-selected="false">активные
+                                                aria-selected="false"><fmt:message key="page.admin.discount.navbar.button.active"/>
                                         </button>
                                     </li>
                                     <li class="nav-item" role="presentation">
                                         <button class="nav-link" id="archiveDiscount-tab" data-bs-toggle="pill"
                                                 data-bs-target="#archive-discount" type="button" role="tab"
-                                                aria-selected="false">архив
+                                                aria-selected="false"><fmt:message key="page.admin.discount.navbar.button.archive"/>
                                         </button>
                                     </li>
                                 </ul>
@@ -678,24 +668,24 @@
                                     <div class="modal-dialog modal-lg">
                                         <div class="modal-content">
                                             <div class="modal-header">
-                                                <h5 class="modal-title" id="newDiscount">new Discount</h5>
+                                                <h5 class="modal-title" id="newDiscount"><fmt:message key="form.new_discount.title"/></h5>
                                                 <button type="button" class="btn-close" data-bs-dismiss="modal"
                                                         aria-label="Close"></button>
                                             </div>
                                             <div class="modal-body">
                                                 <br>
-                                                <h6>Discount size</h6>
+                                                <h6><fmt:message key="form.new_discount.size"/></h6>
                                                 <input id="newDiscountSize" name="discountSize" class="form-control"
                                                        placeholder="discountSize">
                                                 <div id="errorDiscountSize" class="errorMassage"></div>
                                                 <br>
-                                                <h6>start date</h6>
+                                                <h6><fmt:message key="form.discount.start_date"/></h6>
                                                 <input name="startDate" class="form-control"
                                                        id="newStartDateDiscount"
                                                        placeholder="price">
                                                 <div id="errorStartDateDiscount" class="errorMassage"></div>
                                                 <br>
-                                                <h6>end date</h6>
+                                                <h6><fmt:message key="form.discount.end_date"/></h6>
                                                 <input name="endDate" class="form-control"
                                                        id="newEndDateDiscount"
                                                        placeholder="price">
@@ -705,10 +695,10 @@
                                             <div class="modal-footer">
                                                 <button type="button" id="closeCreateDiscount"
                                                         class="btn btn-secondary" data-bs-dismiss="modal">
-                                                    отмена
+                                                    <fmt:message key="form.new_user.button.cancel"/>
                                                 </button>
                                                 <button type="button" id="createDiscount" class="btn btn-primary">
-                                                    добавить скидку
+                                                    <fmt:message key="form.new_discount.button.add"/>
                                                 </button>
                                             </div>
                                         </div>
@@ -728,14 +718,13 @@
                                                                         <div class="tariff-item__top">
                                                                             <div class="tariff-item__title">
                                                                                 <h5 class="card-title">
-                                                                                    discount
+                                                                                    <fmt:message key="discount.card.title"/>
                                                                                 </h5>
                                                                             </div>
                                                                             <div class="tariff-item__text">
-                                                                                <p>start
-                                                                                    date: ${discount.startDate} </p>
+                                                                                <p><fmt:message key="form.discount.start_date"/>: ${discount.startDate} </p>
                                                                                 <p></p>
-                                                                                <p>end date: ${discount.endDate} </p>
+                                                                                <p><fmt:message key="form.discount.end_date"/>: ${discount.endDate} </p>
                                                                             </div>
                                                                         </div>
                                                                         <div class="tariff-item__body">
@@ -747,7 +736,7 @@
                                                                                     %
                                                                                 </span>
                                                                                 <b class="tariffActive">
-                                                                                    active
+                                                                                    <fmt:message key="form.discount.status.active"/>
                                                                                 </b>
                                                                             </div>
                                                                             <div class="dropdown">
@@ -757,7 +746,7 @@
                                                                                         data-bs-toggle="dropdown"
                                                                                         aria-haspopup="true"
                                                                                         aria-expanded="false">
-                                                                                    изменить
+                                                                                    <fmt:message key="page.admin.tariffs.button.change"/>
                                                                                 </button>
                                                                                 <div class=" dropdown-menu">
                                                                                     <button class="updateDiscountButton dropdown-item"
@@ -769,7 +758,7 @@
                                                                                             data-bs-target="#updateDiscountForm"
                                                                                             aria-expanded="false"
                                                                                             type="button">
-                                                                                        изменить
+                                                                                        <fmt:message key="page.admin.tariffs.button.change"/>
                                                                                     </button>
                                                                                     <button class="addTariffsForDiscountButton dropdown-item"
                                                                                             data-discount-id="${discount.id}"
@@ -778,13 +767,13 @@
                                                                                             data-bs-target="#addTariffsForDiscountForm"
                                                                                             aria-expanded="false"
                                                                                             type="button">
-                                                                                        тарифы
+                                                                                        <fmt:message key="discount.card.button.tariffs"/>
                                                                                     </button>
                                                                                     <button class="archiveDiscountButton dropdown-item"
                                                                                             name="archiveDiscountButton"
                                                                                             data-tariff-id="${discount.id}"
                                                                                             type="button">
-                                                                                        остановить
+                                                                                        <fmt:message key="page.user.settings.change_status.stop"/>
                                                                                     </button>
                                                                                 </div>
                                                                             </div>
@@ -810,14 +799,13 @@
                                                                         <div class="tariff-item__top">
                                                                             <div class="tariff-item__title">
                                                                                 <h5 class="card-title">
-                                                                                    discount
+                                                                                    <fmt:message key="discount.card.title"/>
                                                                                 </h5>
                                                                             </div>
                                                                             <div class="tariff-item__text">
-                                                                                <p>start
-                                                                                    date: ${discount.startDate} </p>
+                                                                                <p><fmt:message key="form.discount.start_date"/>: ${discount.startDate} </p>
                                                                                 <p></p>
-                                                                                <p>end date: ${discount.endDate} </p>
+                                                                                <p><fmt:message key="form.discount.end_date"/>: ${discount.endDate} </p>
                                                                             </div>
                                                                         </div>
                                                                         <div class="tariff-item__body">
@@ -830,12 +818,12 @@
                                                                                 </span>
                                                                                 <c:if test="${discount.startDate > dateNow}">
                                                                                     <b class="planed">
-                                                                                        planed
+                                                                                        <fmt:message key="discount.card.status.planed"/>
                                                                                     </b>
                                                                                 </c:if>
                                                                                 <c:if test="${discount.startDate < dateNow}">
                                                                                     <b class="ended">
-                                                                                        ended
+                                                                                        <fmt:message key="discount.card.status.ended"/>
                                                                                     </b>
                                                                                 </c:if>
                                                                             </div>
@@ -849,7 +837,7 @@
                                                                                     date-discount-start="${discount.startDate}"
                                                                                     data-discount-end="${discount.endDate}"
                                                                                     type="button">
-                                                                                обновить
+                                                                                <fmt:message key="page.user.settings.button.update"/>
                                                                             </button>
                                                                         </div>
                                                                     </div>
@@ -870,24 +858,24 @@
                                 <div class="modal-dialog modal-lg">
                                     <div class="modal-content">
                                         <div class="modal-header">
-                                            <h5 class="modal-title" id="updateDiscount">update Discount</h5>
+                                            <h5 class="modal-title" id="updateDiscount"><fmt:message key="form.update_discount.title"/></h5>
                                             <button type="button" class="btn-close" data-bs-dismiss="modal"
                                                     aria-label="Close"></button>
                                         </div>
                                         <div class="modal-body">
                                             <br>
-                                            <h6>Discount size</h6>
+                                            <h6><fmt:message key="form.new_discount.size"/></h6>
                                             <input id="updateDiscountSize" name="discountSize" class="form-control"
                                                    placeholder="discountSize">
                                             <div id="errorUpdateDiscountSize" class="errorMassage"></div>
                                             <br>
-                                            <h6>start date</h6>
+                                            <h6><fmt:message key="form.discount.start_date"/></h6>
                                             <input name="startDate" class="form-control"
                                                    id="updateStartDateDiscount"
                                                    placeholder="price">
                                             <div id="errorUpdateStartDateDiscount" class="errorMassage"></div>
                                             <br>
-                                            <h6>end date</h6>
+                                            <h6><fmt:message key="form.discount.end_date"/></h6>
                                             <input name="endDate" class="form-control"
                                                    id="updateEndDateDiscount"
                                                    placeholder="price">
@@ -897,11 +885,11 @@
                                         <div class="modal-footer">
                                             <button type="button" id="closeUpdateDiscount"
                                                     class="btn btn-secondary" data-bs-dismiss="modal">
-                                                отмена
+                                                <fmt:message key="form.new_user.button.cancel"/>
                                             </button>
                                             <button type="button" id="updateDiscountButton"
                                                     class="btn btn-primary">
-                                                обновить
+                                                <fmt:message key="form.update_discount.button"/>
                                             </button>
                                         </div>
                                     </div>
@@ -914,7 +902,7 @@
                                 <div class="modal-dialog modal-lg">
                                     <div class="modal-content">
                                         <div class="modal-header">
-                                            <h5 class="modal-title" id="addTariffsForDiscount">add tariffs discount</h5>
+                                            <h5 class="modal-title" id="addTariffsForDiscount"><fmt:message key="form.add_tariffs_discount.title"/></h5>
                                             <button type="button" class="btn-close" data-bs-dismiss="modal"
                                                     aria-label="Close"></button>
                                         </div>
@@ -923,10 +911,10 @@
                                             <table class="table table-striped table-hover">
                                                 <thead>
                                                 <tr>
-                                                    <th scope="col">name</th>
-                                                    <th scope="col">price</th>
-                                                    <th scope="col">speed</th>
-                                                    <th scope="col">discount id</th>
+                                                    <th scope="col"><fmt:message key="form.new_tariff.name"/></th>
+                                                    <th scope="col"><fmt:message key="form.new_tariff.price"/></th>
+                                                    <th scope="col"><fmt:message key="form.new_tariff.speed"/></th>
+                                                    <th scope="col"><fmt:message key="form.add_tariffs_discount.discount_id"/></th>
                                                     <th></th>
                                                 </tr>
                                                 <tbody>
@@ -940,7 +928,7 @@
                                                             <button class="addTariff btn btn-primary"
                                                                     data-tariff-id="${tariff.id}"
                                                                     data-discount-id="${tariff.discountId}">
-                                                                добавить
+                                                                <fmt:message key="form.add_tariffs_discount.button.add"/>
                                                             </button>
                                                         </td>
                                                     </tr>
@@ -952,11 +940,11 @@
                                         <div class="modal-footer">
                                             <button type="button" id="closeAddTariffsForDiscount"
                                                     class="btn btn-secondary" data-bs-dismiss="modal">
-                                                отмена
+                                                <fmt:message key="form.card.button.cancel"/>
                                             </button>
                                             <button type="button" id="addTariffsForDiscountButton"
                                                     class="btn btn-primary">
-                                                добавить
+                                                <fmt:message key="form.add_tariffs_discount.button.add"/>
                                             </button>
                                         </div>
                                     </div>
@@ -966,7 +954,7 @@
                                 <br>
                                 <div class="row align-items-start">
                                     <div class="col-4">
-                                        <h5 class="card-title">старый пароль : </h5>
+                                        <h5 class="card-title"><fmt:message key="page.user.settings.change_password.old"/> : </h5>
                                     </div>
                                     <div class="col">
                                         <input type="password" id="oldPassword" class="oldPassword form-control">
@@ -976,7 +964,7 @@
                                 </div>
                                 <div class="row align-items-start">
                                     <div class="col-4">
-                                        <h5 class="card-title">новый пароль : </h5>
+                                        <h5 class="card-title"><fmt:message key="page.user.settings.change_password.new"/> : </h5>
                                     </div>
                                     <div class="col">
                                         <input type="password" id="newPassword" class="newPassword form-control">
@@ -986,7 +974,7 @@
                                 </div>
                                 <div class="row align-items-start">
                                     <div class="col-4">
-                                        <h5 class="card-title">ещё раз новый пароль : </h5>
+                                        <h5 class="card-title"><fmt:message key="page.user.settings.change_password.second_new"/> : </h5>
                                     </div>
                                     <div class="col">
                                         <input type="password" id="secondNewPassword"
@@ -998,7 +986,7 @@
                                 <div id="errorUpdatePassword" class="errorMassage"></div>
                                 <button type="button" id="chengPasswordButton" class="btn btn-primary"
                                         data-account-id="${account.id}">
-                                    обновить
+                                    <fmt:message key="page.user.settings.button.update"/>
                                 </button>
                             </div>
                         </div>
