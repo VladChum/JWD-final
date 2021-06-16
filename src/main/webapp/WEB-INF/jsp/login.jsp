@@ -1,9 +1,12 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
-
-<!DOCTYPE html>
-<html lang="en">
+<c:set var="locale" value="${empty cookie['locale'].getValue() ? 'en' : cookie['locale'].getValue() }"/>
+<fmt:setLocale value="${locale}"/>
+<fmt:setBundle basename="locale" />
+<!doctype html>
+<html lang="${locale}">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -25,24 +28,28 @@
                     <img alt="logo" src="../../resources/logo2.png">
                 </div>
                 <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-                    <li><a href="Controller?command=homePage" class="nav-link px-2 text-white me-3">Home</a></li>
-                    <li><a href="Controller?command=tariffPage" class="nav-link px-2 text-white me-3">Tariff</a></li>
-                    <li><a href="Controller?command=aboutPage" class="nav-link px-2 text-white me-3">About</a></li>
+                    <li><a href="Controller?command=homePage" class="nav-link px-2 text-white me-3"><fmt:message
+                            key="page.home.navbar.link.home"/></a></li>
+                    <li><a href="Controller?command=tariffPage" class="nav-link px-2 text-white me-3"><fmt:message
+                            key="page.home.navbar.link.tariffs"/></a></li>
+                    <li><a href="Controller?command=aboutPage" class="nav-link px-2 text-white me-3"><fmt:message
+                            key="page.home.navbar.link.about"/></a></li>
                 </ul>
                 <div class="dropdown">
                     <button class="btn btn-outline-light dropdown-toggle me-3" type="button" id="languageMenu"
                             data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        RU
+                        ${locale.toUpperCase()}
                     </button>
                     <div class="dropdown-menu" aria-labelledby="languageMenu">
-                        <button class="dropdown-item" type="button">RU</button>
-                        <button class="dropdown-item" type="button">BE</button>
-                        <button class="dropdown-item" type="button">EN</button>
+                        <button class="dropdown-item locale" data-locale="ru" type="button">RU</button>
+                        <button class="dropdown-item locale" data-locale="pl" type="button">PL</button>
+                        <button class="dropdown-item locale" data-locale="en" type="button">EN</button>
                     </div>
                 </div>
                 <c:if test="${account.login == null}">
                     <a href="Controller?command=loginPage">
-                        <button type="button" class="btn btn-primary">Login</button>
+                        <button type="button" class="btn btn-primary"><fmt:message
+                                key="page.home.navbar.button.login"/></button>
                     </a>
                 </c:if>
                 <c:if test="${account.login != null}">
@@ -53,12 +60,11 @@
                                  class="account-button rounded-circle">
                         </a>
                         <ul class="account-menu dropdown-menu text-small">
-                            <li><a class="dropdown-item" href="Controller?command=personalAccount">личный кабинет</a>
-                            </li>
-                            <li>
-                                <hr class="dropdown-divider">
-                            </li>
-                            <li><a class="dropdown-item" href="Controller?command=signOut">Sign out</a></li>
+                            <li><a class="dropdown-item" href="Controller?command=personalAccount"><fmt:message
+                                    key="page.home.navbar.button.personalaccount"/></a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="Controller?command=signOut"><fmt:message
+                                    key="page.home.navbar.button.signout"/></a></li>
                         </ul>
                     </div>
                 </c:if>
@@ -66,6 +72,7 @@
         </div>
     </header>
 </div>
+
 <div class="login-color">
     <div class="position-signIn">
         <div class="row row-cols-1 row-cols-md-12 g-10">
@@ -73,26 +80,27 @@
                 <div class="card">
                     <main class="form-signin">
                         <form id="loginPage" method="post" action="/Controller?command=signIn">
-                            <h1 class="h3 mb-3 fw-normal ">Sign in</h1>
+                            <h1 class="h3 mb-3 fw-normal "><fmt:message key="page.login.sign_in"/></h1>
                             <div class="form-floating">
                                 <input type="login" name="login" class="form-control" id="login"
                                        placeholder="name@example.com">
-                                <label for="login">Login</label>
+                                <label for="login"><fmt:message key="page.login.label.login"/></label>
                             </div>
                             <br>
                             <div class="form-floating">
                                 <input type="password" name="password" class="form-control" id="floatingPassword"
                                        placeholder="Password">
-                                <label for="floatingPassword">Password</label>
+                                <label for="floatingPassword"><fmt:message key="page.login.label.password"/></label>
                             </div>
                             <br>
                             <span id="msg"></span>
-                            <button class="w-100 btn btn-lg btn-primary" type="submit">Sign in</button>
+                            <button class="w-100 btn btn-lg btn-primary" type="submit">
+                                <fmt:message key="page.login.sign_in"/></button>
                             <hr class="my-4">
                             <small class="text-muted">
                                 <a id="registerNewAccount" data-bs-toggle="modal" type="button"
                                                          data-bs-target="#registerNewUser">
-                                    Register new account
+                                    <fmt:message key="page.login.link.register_new_account"/>
                                 </a>
                             </small>
                         </form>
@@ -102,42 +110,40 @@
         </div>
     </div>
 </div>
-<div class="modal fade" id="registerNewUser" data-bs-backdrop="static"
-     data-bs-keyboard="false" tabindex="-1"
+<div class="modal fade" id="registerNewUser" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
      aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="newUser">Register new User</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal"
-                        aria-label="Close"></button>
+                <h5 class="modal-title" id="newUser"><fmt:message key="form.new_user.title"/></h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 <br>
-                <h6>login</h6>
+                <h6><fmt:message key="form.new_user.login"/></h6>
                 <input id="newUserCreateLogin" name="login" class="form-control"
                        placeholder="login">
                 <div id="errorLoginUser" class="errorMassage"></div>
                 <br>
-                <h6>password</h6>
+                <h6><fmt:message key="form.new_user.password"/></h6>
                 <input type="password" name="password" class="form-control"
                        id="newUserCreatePassword"
                        placeholder="password">
                 <div id="errorPasswordUser" class="errorMassage"></div>
                 <br>
-                <h6>имя</h6>
+                <h6><fmt:message key="form.new_user.name"/></h6>
                 <input name="firstName" class="form-control"
                        id="newUserFirstName"
                        placeholder="first name">
                 <div id="errorFirstNameUser" class="errorMassage"></div>
                 <br>
-                <h6>Фамилия</h6>
+                <h6><fmt:message key="form.new_user.surname"/></h6>
                 <input class="form-control"
                        id="newUserLastName"
                        placeholder="last name">
                 <div class="errorMassage" id="errorLastNameUser"></div>
                 <br>
-                <h6>мобильный номер</h6>
+                <h6><fmt:message key="form.new_user.phone"/></h6>
                 <input class="form-control"
                        id="newUserPhone"
                        placeholder="phone">
@@ -153,10 +159,10 @@
             <div class="modal-footer">
                 <button type="button" id="closeRegisterUser"
                         class="btn btn-secondary" data-bs-dismiss="modal">
-                    отмена
+                    <fmt:message key="form.new_user.button.cancel"/>
                 </button>
                 <button type="button" id="registerNewUserAccount" class="btn btn-primary">
-                    зарегистрироваться
+                    <fmt:message key="form.new_user.button.register"/>
                 </button>
             </div>
         </div>

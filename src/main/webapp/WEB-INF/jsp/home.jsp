@@ -1,8 +1,12 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
+<c:set var="locale" value="${empty cookie['locale'].getValue() ? 'en' : cookie['locale'].getValue() }"/>
+<fmt:setLocale value="${locale}"/>
+<fmt:setBundle basename="locale" />
 <!doctype html>
-<html lang="en">
+<html lang="${locale}">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -23,24 +27,28 @@
                     <img alt="logo" src="../../resources/logo2.png">
                 </div>
                 <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-                    <li><a href="Controller?command=homePage" class="nav-link px-2 text-white me-3">Home</a></li>
-                    <li><a href="Controller?command=tariffPage" class="nav-link px-2 text-white me-3">Tariff</a></li>
-                    <li><a href="Controller?command=aboutPage" class="nav-link px-2 text-white me-3">About</a></li>
+                    <li><a href="Controller?command=homePage" class="nav-link px-2 text-white me-3"><fmt:message
+                            key="page.home.navbar.link.home"/></a></li>
+                    <li><a href="Controller?command=tariffPage" class="nav-link px-2 text-white me-3"><fmt:message
+                            key="page.home.navbar.link.tariffs"/></a></li>
+                    <li><a href="Controller?command=aboutPage" class="nav-link px-2 text-white me-3"><fmt:message
+                            key="page.home.navbar.link.about"/></a></li>
                 </ul>
                 <div class="dropdown">
                     <button class="btn btn-outline-light dropdown-toggle me-3" type="button" id="languageMenu"
                             data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        RU
+                        ${locale.toUpperCase()}
                     </button>
                     <div class="dropdown-menu" aria-labelledby="languageMenu">
-                        <button class="dropdown-item" type="button">RU</button>
-                        <button class="dropdown-item" type="button">BE</button>
-                        <button class="dropdown-item" type="button">EN</button>
+                        <button class="dropdown-item locale" data-locale="ru" type="button">RU</button>
+                        <button class="dropdown-item locale" data-locale="pl" type="button">PL</button>
+                        <button class="dropdown-item locale" data-locale="en" type="button">EN</button>
                     </div>
                 </div>
                 <c:if test="${account.login == null}">
                     <a href="Controller?command=loginPage">
-                        <button type="button" class="btn btn-primary">Login</button>
+                        <button type="button" class="btn btn-primary"><fmt:message
+                                key="page.home.navbar.button.login"/></button>
                     </a>
                 </c:if>
                 <c:if test="${account.login != null}">
@@ -51,11 +59,11 @@
                                  class="account-button rounded-circle">
                         </a>
                         <ul class="account-menu dropdown-menu text-small">
-                            <li><a class="dropdown-item" href="Controller?command=personalAccount">личный кабинет</a></li>
-                            <li>
-                                <hr class="dropdown-divider">
-                            </li>
-                            <li><a class="dropdown-item" href="Controller?command=signOut">Sign out</a></li>
+                            <li><a class="dropdown-item" href="Controller?command=personalAccount"><fmt:message
+                                    key="page.home.navbar.button.personalaccount"/></a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="Controller?command=signOut"><fmt:message
+                                    key="page.home.navbar.button.signout"/></a></li>
                         </ul>
                     </div>
                 </c:if>
@@ -66,15 +74,14 @@
 
 <div class="text-white">
     <img src="../../resources/1.png" class="card-img" alt="...">
-
     <div class="img-text">
-        <h1 class="card-title">Самый быстрый безлимит у нас!
-        </h1>
-        <div class="banner-item__text"><p>Безлимитный интернет со скоростью от 30 до 300 Мбит/с.</p>
-            <p>Мощные Wi-Fi роутеры (2,4 + 5 ГГЦ).</p>
-            <p>Всё оборудование выдаётся без доплаты.</p></div>
+        <h1 class="card-title"><fmt:message key="page.home.text.title"/></h1>
+        <div class="banner-item__text"><p><fmt:message key="page.home.text.title2"/></p>
+            <p><fmt:message key="page.home.text.title3"/></p>
+            <p><fmt:message key="page.home.text.title4"/></p></div>
         <div class="banner-item__btn">
-            <a class="button primary" href="Controller?command=tariffPage">Выбрать тариф</a>
+            <a class="button primary" href="Controller?command=tariffPage">
+                <fmt:message key="page.home.button.tariffs"/></a>
         </div>
     </div>
 </div>
@@ -85,15 +92,11 @@
     <br>
     <div class="card border-dark mb-12">
         <div class="card-header">
-            <h2>О компании</h2>
+            <h2><fmt:message key="page.home.card1.title"/></h2>
         </div>
         <div class="card-body text-dark">
-            <p>В наши дни мы используем наш домашний интернет для всего, от работы из дома, чтобы транслировать наши
-                любимые фильмы. Это то, от чего большинство из нас действительно зависят. Вот почему так важно
-                получить интернет-сервис, который быстрый и надежный.</p>
-            <p>Мы — группа интернет-провайдеров, объединённых в общее информационное пространство. Целью создания нашей
-                компании является обеспечение пользователей интернета разнообразными и удобными сервисами,
-                преимущественно требующими больших объемов трафика. </p>
+            <p><fmt:message key="page.home.card1.text1"/></p>
+            <p><fmt:message key="page.home.card1.text2"/></p>
         </div>
     </div>
     <br>
@@ -102,13 +105,8 @@
             <div class="card">
                 <img src="../../resources/card1.png" class="card-img-top" alt="...">
                 <div class="card-body">
-                    <h2>Один из крупнейших интернет провайдоров РБ</h2>
-                    <p>
-                        Мы являемся одним из крупнейших в Беларуси частным оператором фиксированного интернет-доступа,
-                        предоставляя абонентам высокоскоростной доступ в интернет на основе собственной оптоволоконной
-                        сети по технологиям Ethernet. При этом для клиентов оказывается комплекс
-                        услуг по организации доступа в интернет по индивидуальной волоконной линии.
-                    </p>
+                    <h2><fmt:message key="page.home.card2.title"/></h2>
+                    <p><fmt:message key="page.home.card2.text1"/></p>
                 </div>
             </div>
         </div>
@@ -116,13 +114,11 @@
             <div class="card">
                 <img src="../../resources/card2.png" class="card-img-top" alt="...">
                 <div class="card-body">
-                    <h2>Самое современное оборудование</h2>
+                    <h2><fmt:message key="page.home.card3.title"/></h2>
                     <p>
                         <br>
-                    <p>Постоянное обновление оборудования помогает предоставлять высокоскоростное подключение.</p>
-                    Мы предоставляем одинаковую скорость в обоих направлениях, не ограничивая исходящую скорость по
-                    сравнению с входящей, как часто делают другие провайдеры. Это позволяет быстрее не только скачивать
-                    файлы, но и загружать.
+                    <p><fmt:message key="page.home.card3.text1"/></p>
+                    <fmt:message key="page.home.card3.text2"/>
                     </p>
                 </div>
             </div>
@@ -131,12 +127,8 @@
             <div class="card">
                 <img src="../../resources/card3.png" class="card-img-top" alt="...">
                 <div class="card-body">
-                    <h2>Скорость, которую вам нужна по цене, которую вы будете любить</h2>
-                    <p>
-                        Мы придумали оптимальный набор тарифов для любого пользователя по цене и скорости. Всё
-                        включённое в тарифы проводного интернета оборудование выдаётся бесплатно на время действия
-                        договора. На тарифах беспроводного интернета оборудование можно взять в аренду или приобрести.
-                    </p>
+                    <h2><fmt:message key="page.home.card4.title"/></h2>
+                    <p><fmt:message key="page.home.card4.text1"/></p>
                     <br>
                 </div>
             </div>
@@ -145,8 +137,7 @@
     <br>
     <hr class="featurette-divider">
     <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
-        <h1 class="display-4">Карта покрытия</h1>
-        <!--        <p class="lead">Quickly build an effective pricing table for your potential customers with this Bootstrap example. It's built with default Bootstrap components and utilities with little customization.</p>-->
+        <h1 class="display-4"><fmt:message key="page.home.map"/></h1>
     </div>
     <div id="map"></div>
     <br>
@@ -188,7 +179,6 @@
             zoom: 11,
             center: uluru,
         });
-        // The marker, positioned at Uluru
         const marker = new google.maps.Marker({
             position: uluru,
             map: map,
@@ -324,5 +314,7 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
         crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+<script src="../../resources/js/script.js"></script>
 </body>
 </html>

@@ -1,4 +1,6 @@
 $("document").ready(function () {
+    const DEFAULT_LANGUAGE = 'en';
+
     $('.chengTariffButton').on('click', function () {
         var id = $(this).attr('data-tariff-id');
         var url = "Controller?command=updateUserTariff";
@@ -764,4 +766,15 @@ $("document").ready(function () {
         }
     });
 
+    $('.locale').on('click', function () {
+       let locale = $(this).attr('data-locale');
+
+       let data = {
+           locale: locale
+       }
+        let url = "Controller?command=changLanguage";
+        $.post(url, data, function (data, status) {
+            location.reload();
+        });
+    });
 })

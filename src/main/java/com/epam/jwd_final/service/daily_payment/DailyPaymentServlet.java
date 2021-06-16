@@ -1,4 +1,4 @@
-package com.epam.jwd_final;
+package com.epam.jwd_final.service.daily_payment;
 
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
