@@ -1,12 +1,12 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
-<%--<c:set var="language" value="en"/>--%>
-<fmt:setLocale value="ru"/>
+<c:set var="locale" value="${empty cookie['locale'].getValue() ? 'en' : cookie['locale'].getValue() }"/>
+<fmt:setLocale value="${locale}"/>
 <fmt:setBundle basename="locale" />
 <!doctype html>
-<html lang="ru">
+<html lang="${locale}">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -37,7 +37,7 @@
                 <div class="dropdown">
                     <button class="btn btn-outline-light dropdown-toggle me-3" type="button" id="languageMenu"
                             data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        RU
+                        ${locale.toUpperCase()}
                     </button>
                     <div class="dropdown-menu" aria-labelledby="languageMenu">
                         <button class="dropdown-item locale" data-locale="ru" type="button">RU</button>

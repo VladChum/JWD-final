@@ -1,12 +1,13 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fm" uri="http://provider.com/jsp/tlds/phone" %>
 
-<fmt:setLocale value="en"/>
+<c:set var="locale" value="${empty cookie['locale'].getValue() ? 'en' : cookie['locale'].getValue() }"/>
+<fmt:setLocale value="${locale}"/>
 <fmt:setBundle basename="locale" />
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="${locale}">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -36,12 +37,12 @@
                 <div class="dropdown">
                     <button class="btn btn-outline-light dropdown-toggle me-3" type="button" id="languageMenu"
                             data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        RU
+                        ${locale.toUpperCase()}
                     </button>
                     <div class="dropdown-menu" aria-labelledby="languageMenu">
-                        <button class="dropdown-item" type="button">RU</button>
-                        <button class="dropdown-item" type="button">BE</button>
-                        <button class="dropdown-item" type="button">EN</button>
+                        <button class="dropdown-item locale" data-locale="ru" type="button">RU</button>
+                        <button class="dropdown-item locale" data-locale="pl" type="button">PL</button>
+                        <button class="dropdown-item locale" data-locale="en" type="button">EN</button>
                     </div>
                 </div>
                 <c:if test="${account.login == null}">
