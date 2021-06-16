@@ -12,8 +12,8 @@ import java.io.IOException;
 
 public class ChangLanguage implements Command {
     private static final Logger LOGGER = Logger.getLogger(ChangLanguage.class);
-    private final String COOKIE_LOCALE = "locale";
-    private final String LOCALE = "locale";
+    private static final String LOCALE = "locale";
+    private static final String COOKIE_LOCALE = "locale";
 
     @Override
     public void execute(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
@@ -22,7 +22,7 @@ public class ChangLanguage implements Command {
 
         Cookie localeCookie = findLocaleCookie(cookies);
 
-        if (locale.equals("en") || locale.equals("ru") || locale.equals("pl")) {
+        if (locale.equals("en") || locale.equals("ru") || locale.equals("be")) {
             localeCookie = updateLocaleCookie(localeCookie, locale);
             LOGGER.log(Level.DEBUG, "chang language: " + locale);
         }

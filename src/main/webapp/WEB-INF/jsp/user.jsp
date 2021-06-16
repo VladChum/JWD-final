@@ -41,7 +41,7 @@
                     </button>
                     <div class="dropdown-menu" aria-labelledby="languageMenu">
                         <button class="dropdown-item locale" data-locale="ru" type="button">RU</button>
-                        <button class="dropdown-item locale" data-locale="pl" type="button">PL</button>
+                        <button class="dropdown-item locale" data-locale="be" type="button">BE</button>
                         <button class="dropdown-item locale" data-locale="en" type="button">EN</button>
                     </div>
                 </div>

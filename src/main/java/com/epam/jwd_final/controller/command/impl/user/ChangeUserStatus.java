@@ -13,8 +13,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-public class ChengUserStatus implements Command {
-    private static final Logger LOGGER = Logger.getLogger(ChengUserStatus.class);
+public class ChangeUserStatus implements Command {
+    private static final Logger LOGGER = Logger.getLogger(ChangeUserStatus.class);
 
     private final UserService userService = ServiceProvider.INSTANCE.getUserService();
 
@@ -28,7 +28,7 @@ public class ChengUserStatus implements Command {
 
         try {
             User user = userService.findUserById(userId).get();
-            userService.chengStatus(user, statusId);
+            userService.changeStatus(user, statusId);
         } catch (ServiceException e) {
             LOGGER.log(Level.ERROR, e.getMessage() + " " + e);
         }

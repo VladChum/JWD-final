@@ -37,12 +37,12 @@ public class UpdateUserTariff implements Command {
                 activeSubscriptionId = subscriptionService.findActiveUserSubscription(user.getId()).getId();
                 subscriptionService.stopActiveSubscription(user.getId(), activeSubscriptionId);
             } else {
-                userService.chengStatus(user, Status.ACTIVATE.getId());
+                userService.changeStatus(user, Status.ACTIVATE.getId());
             }
             subscriptionService.newSubscription(user.getId(), newTariffId);
 
             if (user.getBalance().compareTo(BigDecimal.valueOf(0)) >= 0 && !user.getStatus().getId().equals(Status.BANNED.getId())) {
-                userService.chengStatus(user, Status.ACTIVATE.getId());
+                userService.changeStatus(user, Status.ACTIVATE.getId());
             }
         } catch (ServiceException e) {
             LOGGER.log(Level.ERROR, e.getMessage() + " " + e);

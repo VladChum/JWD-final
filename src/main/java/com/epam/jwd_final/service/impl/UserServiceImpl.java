@@ -60,7 +60,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void chengStatus(User user, Long statusId) throws ServiceException {
+    public void changeStatus(User user, Long statusId) throws ServiceException {
         try {
             userDao.updateUserStatus(user, statusId);
         } catch (DaoException e) {

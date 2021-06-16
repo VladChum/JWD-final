@@ -775,6 +775,7 @@ $("document").ready(function () {
         let url = "Controller?command=changLanguage";
         $.post(url, data, function (data, status) {
             location.reload();
+            console.log(data + status);
         });
     });
 })

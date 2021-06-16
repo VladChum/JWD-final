@@ -26,7 +26,7 @@ public class UnblockUser implements Command {
 
         try {
             User user = userService.findUserById(userId).get();
-            userService.chengStatus(user, Status.SUSPENDED.getId());
+            userService.changeStatus(user, Status.SUSPENDED.getId());
         } catch (ServiceException e) {
             e.printStackTrace();
         }

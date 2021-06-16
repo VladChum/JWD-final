@@ -18,7 +18,7 @@ public interface UserService {
 
     void delete(Long userId) throws ServiceException;
 
-    void chengStatus(User user, Long statusId) throws ServiceException;
+    void changeStatus(User user, Long statusId) throws ServiceException;
 
     void updateBalance(Long userId, BigDecimal amount) throws ServiceException;
 

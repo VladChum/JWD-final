@@ -58,10 +58,10 @@ public class PaymentServiceImpl implements PaymentService {
                     if (userSubscription != null) {
                         paymentIfSubscriptionActive(userSubscription, user);
                     } else {
-                        ServiceProvider.INSTANCE.getUserService().chengStatus(user, 3L);
+                        ServiceProvider.INSTANCE.getUserService().changeStatus(user, 3L);
                     }
                 } else {
-                    ServiceProvider.INSTANCE.getUserService().chengStatus(user, 2L);
+                    ServiceProvider.INSTANCE.getUserService().changeStatus(user, 2L);
                 }
             }
         }
@@ -120,7 +120,7 @@ public class PaymentServiceImpl implements PaymentService {
         boolean endActivePromised = checkActivePromisedPayment(userId);
         if (startActivePromised && !endActivePromised) {
             User user = ServiceProvider.INSTANCE.getUserService().findUserById(userId).get();
-            ServiceProvider.INSTANCE.getUserService().chengStatus(user, Status.ACTIVATE.getId());
+            ServiceProvider.INSTANCE.getUserService().changeStatus(user, Status.ACTIVATE.getId());
             double amount = findLastUserPromisedAmount(userId).doubleValue() * -1;
             topUpUserBalance(BigDecimal.valueOf(amount), userId, PaymentType.BALANCE.getId());
         }

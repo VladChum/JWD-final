@@ -19,7 +19,7 @@
     <title>Home</title>
 </head>
 <body class="d-flex flex-column min-vh-100">
-<div class="intro">
+<div9 class="intro">
     <header class="header p-3 text-white">
         <div class="container">
             <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
@@ -41,7 +41,7 @@
                     </button>
                     <div class="dropdown-menu" aria-labelledby="languageMenu">
                         <button class="dropdown-item locale" data-locale="ru" type="button">RU</button>
-                        <button class="dropdown-item locale" data-locale="pl" type="button">PL</button>
+                        <button class="dropdown-item locale" data-locale="be" type="button">BE</button>
                         <button class="dropdown-item locale" data-locale="en" type="button">EN</button>
                     </div>
                 </div>
@@ -70,7 +70,7 @@
             </div>
         </div>
     </header>
-</div>
+</div9>
 
 <div class="text-white">
     <img src="../../resources/1.png" class="card-img" alt="...">
