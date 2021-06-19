@@ -11,6 +11,8 @@ public interface AccountDao {
 
     Optional<Account> findAccountById(int accountId) throws DaoException;
 
+    Optional<Account> findAccountByLogin(String login) throws DaoException;
+
     Optional<Account> findAccountByLoginAndPassword(String accountLogin, String accountPassword) throws DaoException;
 
     void createAccount(String login, String password) throws DaoException;

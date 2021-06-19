@@ -27,9 +27,6 @@ public class TariffPlanDaoImpl implements com.epam.jwd_final.dao.TariffPlanDao {
     private static final String CREATE_TARIFF = "insert into tariff_plan " +
             "(name, price, speed) " +
             "VALUES (?, ?, ?)";
-    /**TODO
-     * add update tariff price
-     * */
     private static final String UPDATE_DISCOUNT = "update tariff_plan set discount_id = ? where id = ?;";
     private static final String ACTIVATE_TARIFF = "update tariff_plan set active = 1 where id = ?;";
     private static final String UPDATE_TARIFF = "update tariff_plan set name = ?, price = ?, speed = ? where id = ?;";

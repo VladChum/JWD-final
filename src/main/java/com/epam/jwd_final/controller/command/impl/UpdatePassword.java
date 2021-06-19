@@ -5,6 +5,8 @@ import com.epam.jwd_final.entity.Account;
 import com.epam.jwd_final.exception.ServiceException;
 import com.epam.jwd_final.service.AccountService;
 import com.epam.jwd_final.service.ServiceProvider;
+import com.epam.jwd_final.service.validator.Validator;
+import com.epam.jwd_final.service.validator.ValidatorProvider;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
@@ -17,6 +19,7 @@ public class UpdatePassword implements Command {
     private static final Logger LOGGER = Logger.getLogger(UpdatePassword.class);
 
     private final AccountService accountService = ServiceProvider.INSTANCE.getAccountService();
+    private final Validator passwordValidator = ValidatorProvider.INSTANCE.getPasswordValidator();
 
     private final String ACCOUNT_ID = "accountId";
     private final String PASSWORD = "password";
@@ -30,8 +33,11 @@ public class UpdatePassword implements Command {
 
         try {
             Account account = accountService.findAccountById(accountId).get();
-            if (account.getPassword().equals(password)) {
+            if (account.getPassword().equals(password)
+                    && passwordValidator.isValid(newPassword)) {
                 accountService.updatePassword(accountId, newPassword);
+            } else {
+                resp.getWriter().write("Wrong account password!");
             }
         } catch (ServiceException e) {
             LOGGER.log(Level.ERROR, e.getMessage() + " " + e);

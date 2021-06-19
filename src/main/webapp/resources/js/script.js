@@ -1,6 +1,16 @@
 $("document").ready(function () {
     const DEFAULT_LANGUAGE = 'en';
 
+    function validateEmail(email) {
+        const re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        return re.test(email);
+    }
+
+    function validatePassword(password) {
+        const pattern = /^(?=.*\d)(?=.*[a-zA-Z])[a-zA-Z0-9]{8,}$/;
+        return pattern.test(password);
+    }
+
     $('.chengTariffButton').on('click', function () {
         var id = $(this).attr('data-tariff-id');
         var url = "Controller?command=updateUserTariff";
@@ -74,7 +84,11 @@ $("document").ready(function () {
             }
             var url = "Controller?command=createUser";
             $.post(url, data, function (data, status) {
-                location.reload();
+                if (data === "false") {
+                    $('#errorLoginUser').html("error: user with this login already exists!");
+                } else {
+                    location.reload();
+                }
             });
         }
     });
@@ -556,7 +570,7 @@ $("document").ready(function () {
         var userId = $(this).attr('data-user-id');
         var newEmail = $('#newEmail').val();
 
-        if (oldEmail !== newEmail && newEmail.length !== 0) {
+        if (oldEmail !== newEmail && newEmail.length !== 0 && validateEmail(newEmail)) {
             var data = {
                 userId: userId,
                 newEmail: newEmail
@@ -566,21 +580,22 @@ $("document").ready(function () {
                 location.reload();
             });
         } else {
-            $('#errorNewEmail').html("Wrong input!");
+            $('#errorNewEmail').html("*Email is not valid");
         }
     });
 
     $('#chengPhoneButton').on('click', function () {
-        var oldPhone = $(this).attr('data-phone');
-        var userId = $(this).attr('data-user-id');
-        var newPhone = $('#newPhone').val();
+        let oldPhone = $(this).attr('data-phone');
+        let userId = $(this).attr('data-user-id');
+        let newPhone = $('#newPhone').val();
+        let phoneno = /^\+?([0-9]{3})\)?[-. ]?([0-9]{5})[-. ]?([0-9]{4})$/;
 
-        if (oldPhone !== newPhone && newPhone.length !== 0) {
-            var data = {
+        if (oldPhone !== newPhone && newPhone.length !== 0 && phoneno.test(newPhone)) {
+            let data = {
                 userId: userId,
                 newPhone: newPhone
             }
-            var url = "Controller?command=updateUserPhone";
+            let url = "Controller?command=updateUserPhone";
             $.post(url, data, function (data, status) {
                 location.reload();
             });
@@ -596,7 +611,7 @@ $("document").ready(function () {
         var newPassword = $('#newPassword').val();
         var secondNewPassword = $('#secondNewPassword').val();
 
-        if (newPassword === secondNewPassword && newPassword.length !== 0) {
+        if (newPassword === secondNewPassword && validatePassword(newPassword)) {
             var data = {
                 accountId: accountId,
                 password: password,
@@ -604,21 +619,29 @@ $("document").ready(function () {
             }
             var url = "Controller?command=updatePassword";
             $.post(url, data, function (data, status) {
-                location.reload();
+                if (!data.empty()) {
+                    $('#errorUpdatePassword').html(data);
+                } else {
+                    location.reload();
+                }
             });
         } else {
-            $('#errorUpdatePassword').html("Wrong input!");
+            $('#errorUpdatePassword').html("Wrong input!" +
+                "<p>*should contain at least one digit</p>" +
+                "<p>*should contain at least one lower case</p>" +
+                "<p>*should contain at least one upper case\n</p>" +
+                "*should contain at least 8 from the mentioned characters");
         }
     });
 
     $('#registerNewUserAccount').on('click', function () {
-        var login = $('#newUserCreateLogin').val();
-        var password = $('#newUserCreatePassword').val();
-        var firstName = $('#newUserFirstName').val();
-        var lastName = $('#newUserLastName').val();
-        var phone = $('#newUserPhone').val();
-        var email = $('#newUserEmail').val();
-        var valid = 0;
+        let login = $('#newUserCreateLogin').val();
+        let password = $('#newUserCreatePassword').val();
+        let firstName = $('#newUserFirstName').val();
+        let lastName = $('#newUserLastName').val();
+        let phone = $('#newUserPhone').val();
+        let email = $('#newUserEmail').val();
+        let valid = 0;
 
         if (password.length < 8 || password.length > 30) {
             $('#errorPasswordUser').html("Wrong input: password must be 8 to 30 characters long");
@@ -654,9 +677,14 @@ $("document").ready(function () {
                 phone: phone,
                 email: email
             }
-            var url = "Controller?command=registerUser";
+            let url = "Controller?command=registerUser";
             $.post(url, data, function (data, status) {
-                location.reload();
+                console.log(data);
+                if (data === "false") {
+                    $('#errorLoginUser').html("error: user with this login already exists!");
+                } else {
+                    location.reload();
+                }
             });
         }
     });
@@ -676,7 +704,7 @@ $("document").ready(function () {
         $('#errorPhoneUser').html("");
     });
 
-    var tariffIdForUpdate;
+    let tariffIdForUpdate;
 
     $('.updateTariffButton').on('click', function () {
         tariffIdForUpdate = $(this).attr('data-tariff-id');
@@ -744,7 +772,7 @@ $("document").ready(function () {
         if (status === "ACTIVATE" && balance >= 0) {
             status = 3;
             result = true;
-        }else if (status === "SUSPENDED" && balance >= 0) {
+        } else if (status === "SUSPENDED" && balance >= 0) {
             status = 1;
             result = true;
         } else if (status === "BANNED" && balance >= 0) {
@@ -767,15 +795,41 @@ $("document").ready(function () {
     });
 
     $('.locale').on('click', function () {
-       let locale = $(this).attr('data-locale');
-
-       let data = {
-           locale: locale
-       }
+        let locale = $(this).attr('data-locale');
+        let data = {
+            locale: locale
+        }
         let url = "Controller?command=changLanguage";
         $.post(url, data, function (data, status) {
-            location.reload();
-            console.log(data + status);
+            if (data === "update") {
+                location.reload();
+            }
         });
     });
+
+    $('#loginButton').on('click', function () {
+        let login = $('#loginLoginPage').val();
+        let password = $('#floatingPassword').val();
+        console.log(login.length + " " + password.length);
+        if (login.length !== 0 && password.length !== 0) {
+            let data = {
+                login: login,
+                password: password
+            }
+            let url = "Controller?command=signIn";
+            $.post(url, data, function (data, status) {
+                console.log(data);
+                if (data === "false") {
+                    console.log(data);
+                    $('#errorLoginOrPassword').html("error: Incorrect login or password");
+                } else {
+                    location.reload();
+                }
+            });
+        } else {
+            $('#errorLoginOrPassword').html("error: empty login or password");
+        }
+    });
+
+
 })

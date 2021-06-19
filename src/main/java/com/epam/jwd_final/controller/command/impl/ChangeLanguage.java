@@ -10,8 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-public class ChangLanguage implements Command {
-    private static final Logger LOGGER = Logger.getLogger(ChangLanguage.class);
+public class ChangeLanguage implements Command {
+    private static final Logger LOGGER = Logger.getLogger(ChangeLanguage.class);
     private static final String LOCALE = "locale";
     private static final String COOKIE_LOCALE = "locale";
 
@@ -22,11 +22,13 @@ public class ChangLanguage implements Command {
 
         Cookie localeCookie = findLocaleCookie(cookies);
 
-        if (locale.equals("en") || locale.equals("ru") || locale.equals("be")) {
+        if ((locale.equals("en") || locale.equals("ru") || locale.equals("be")) && !locale.equals(localeCookie.getValue())) {
             localeCookie = updateLocaleCookie(localeCookie, locale);
             LOGGER.log(Level.DEBUG, "chang language: " + locale);
+            resp.addCookie(localeCookie);
+            resp.getWriter().write("update");
         }
-        resp.addCookie(localeCookie);
+
     }
 
     private Cookie findLocaleCookie(Cookie[] cookies) {

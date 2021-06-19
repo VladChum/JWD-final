@@ -10,9 +10,11 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 public class LoginPage implements Command {
-    private final String LOGIN_PAGE = "/WEB-INF/jsp/login.jsp";
-    private final String SIGN_IN_USER = "/Controller?command=userPage";
-    private final String USER = "user";
+    private static final String LOGIN_PAGE = "/WEB-INF/jsp/login.jsp";
+    private static final String SIGN_IN_USER = "/Controller?command=userPage";
+    private static final String SIGN_IN_ADMIN = "/Controller?command=adminPage";
+    private static final String USER = "user";
+    private static final String ADMIN = "admin";
 
     @Override
     public void execute(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
@@ -20,6 +22,8 @@ public class LoginPage implements Command {
 
         if (httpSession.getAttribute(USER) != null) {
             resp.sendRedirect(SIGN_IN_USER);
+        } else if (httpSession.getAttribute(ADMIN) != null) {
+            resp.sendRedirect(SIGN_IN_ADMIN);
         } else {
             RequestDispatcher requestDispatcher = req.getRequestDispatcher(LOGIN_PAGE);
             requestDispatcher.forward(req, resp);

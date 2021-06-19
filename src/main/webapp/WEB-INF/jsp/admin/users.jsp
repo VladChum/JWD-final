@@ -10,22 +10,22 @@
     <li class="nav-item" role="presentation">
         <button class="nav-link active" id="pills-home-tab" data-bs-toggle="pill"
                 data-bs-target="#pills-home" type="button" role="tab"
-                aria-controls="pills-home" aria-selected="true"><fmt:message
-                key="page.admin.users.navbar.users"/>
+                aria-controls="pills-home" aria-selected="true">
+            <fmt:message key="page.admin.users.navbar.users"/>
         </button>
     </li>
     <li class="nav-item" role="presentation">
         <button class="nav-link" id="pills-profile-tab" data-bs-toggle="pill"
                 data-bs-target="#pills-profile" type="button" role="tab"
-                aria-controls="pills-profile" aria-selected="false"><fmt:message
-                key="page.admin.users.navbar.admins"/>
+                aria-controls="pills-profile" aria-selected="false">
+            <fmt:message key="page.admin.users.navbar.admins"/>
         </button>
     </li>
     <li class="nav-item" role="presentation">
         <button class="nav-link" id="pills-contact-tab" data-bs-toggle="pill"
                 data-bs-target="#pills-contact" type="button" role="tab"
-                aria-controls="pills-contact" aria-selected="false"><fmt:message
-                key="page.admin.users.navbar.pills"/>
+                aria-controls="pills-contact" aria-selected="false">
+            <fmt:message key="page.admin.users.navbar.pills"/>
         </button>
     </li>
 </ul>
@@ -203,10 +203,12 @@
                     <td>${admin.id}</td>
                     <td>${admin.login}</td>
                     <td>
-                        <button class="deleteAdmin btn btn-outline-danger"
-                                data-admin-id="${admin.id}">
-                            <fmt:message key="page.admin.users.table.button.delete"/>
-                        </button>
+                        <c:if test="${account.id != admin.id}">
+                            <button class="deleteAdmin btn btn-outline-danger"
+                                    data-admin-id="${admin.id}">
+                                <fmt:message key="page.admin.users.table.button.delete"/>
+                            </button>
+                        </c:if>
                     </td>
                 </tr>
             </c:forEach>

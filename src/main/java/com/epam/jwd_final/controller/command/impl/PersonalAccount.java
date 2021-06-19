@@ -10,11 +10,10 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 public class PersonalAccount implements Command {
-    private final String ACCOUNT = "account";
-    private final String USER = "user";
-    private final String ADMIN = "admin";
-    private final String USER_PAGE = "/Controller?command=userPage";
-    private final String ADMIN_PAGE = "/Controller?command=adminPage";
+    private static final String USER = "user";
+    private static final String ADMIN = "admin";
+    private static final String USER_PAGE = "/Controller?command=userPage";
+    private static final String ADMIN_PAGE = "/Controller?command=adminPage";
 
     @Override
     public void execute(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
@@ -22,7 +21,6 @@ public class PersonalAccount implements Command {
         String personalAccount = "";
 
         if (httpSession != null) {
-            Account account = (Account) httpSession.getAttribute(ACCOUNT);
             if (httpSession.getAttribute(USER) != null) {
                 personalAccount = USER_PAGE;
             }
@@ -30,7 +28,6 @@ public class PersonalAccount implements Command {
                 personalAccount = ADMIN_PAGE;
             }
         }
-
         resp.sendRedirect(personalAccount);
     }
 }

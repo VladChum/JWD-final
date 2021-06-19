@@ -15,12 +15,13 @@ import java.util.Optional;
 
 public class AccountDaoImpl implements AccountDao {
     private static final String FIND_ACCOUNT_BY_ID = "select a.id, a.login, a.password from account a where id = ?";
+    private static final String FIND_ACCOUNT_BY_LOGIN = "select a.id, a.login, a.password from account a where login = ?";
+    private static final String FIND_ACCOUNT_BY_LOGIN_AND_PASSWORD = "select a.id, a.login, a.password " +
+            "from account a where a.login = ? and a.password = ?";
     private static final String GET_ALL_ACCOUNT = "select a.id, a.login, a.password from account a";
     private static final String CREATE_ACCOUNT = "insert into account (login, password) VALUES (?, ?)";
     private static final String UPDATE_PASSWORD = "update account set password = ? where id = ?";
     private static final String DELETE_ACCOUNT = "delete from account where id = ?";
-    private static final String FIND_ACCOUNT_BY_LOGIN_AND_PASSWORD
-            = "select a.id, a.login, a.password from account a where a.login = ? and a.password = ?";
 
     AccountDaoImpl() {
     }
@@ -28,7 +29,6 @@ public class AccountDaoImpl implements AccountDao {
     @Override
     public List<Account> findAllAccount() throws DaoException {
         List<Account> accounts = new ArrayList<Account>();
-
         try (Connection connection = ConnectionPool.INSTANCE.getConnection();
              PreparedStatement prepareStatement = connection.prepareStatement(GET_ALL_ACCOUNT)) {
             try (ResultSet resultSet = prepareStatement.executeQuery()) {
@@ -52,6 +52,25 @@ public class AccountDaoImpl implements AccountDao {
              PreparedStatement prepareStatement = connection.prepareStatement(FIND_ACCOUNT_BY_ID)) {
 
             prepareStatement.setInt(1, accountId);
+            try (ResultSet resultSet = prepareStatement.executeQuery()) {
+                if (resultSet.next()) {
+                    return Optional.of(new Account(resultSet.getLong("id"),
+                            resultSet.getString("login"),
+                            resultSet.getString("password")));
+                }
+            }
+        } catch (SQLException e) {
+            throw new DaoException(e);
+        }
+        return Optional.empty();
+    }
+
+    @Override
+    public Optional<Account> findAccountByLogin(String login) throws DaoException {
+        try (Connection connection = ConnectionPool.INSTANCE.getConnection();
+             PreparedStatement prepareStatement = connection.prepareStatement(FIND_ACCOUNT_BY_LOGIN)) {
+
+            prepareStatement.setString(1, login);
             try (ResultSet resultSet = prepareStatement.executeQuery()) {
                 if (resultSet.next()) {
                     return Optional.of(new Account(resultSet.getLong("id"),
