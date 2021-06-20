@@ -2,6 +2,7 @@ package com.epam.jwd_final.controller;
 
 import com.epam.jwd_final.controller.command.Command;
 import com.epam.jwd_final.controller.command.CommandProvider;
+import com.epam.jwd_final.controller.command.impl.page.ErrorPage;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
@@ -30,6 +31,9 @@ public class Controller extends HttpServlet {
         String name = req.getParameter("command");
         LOGGER.log(Level.DEBUG, "command name: " + name);
         Command command = CommandProvider.INSTANCE.getCommand(name);
+        if (command == null) {
+            command = new ErrorPage();
+        }
         command.execute(req, resp);
     }
 }

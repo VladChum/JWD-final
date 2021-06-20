@@ -14,7 +14,7 @@ public enum CommandProvider {
     INSTANCE;
 
     private static final Logger LOGGER = Logger.getLogger(CommandProvider.class);
-    private Map<String, Command> commands = new HashMap<>();
+    private final Map<String, Command> commands = new HashMap<>();
 
     CommandProvider() {
         commands.put("homePage", new HomePage());
