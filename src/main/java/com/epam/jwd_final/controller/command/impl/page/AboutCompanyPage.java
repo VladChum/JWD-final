@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 public class AboutCompanyPage implements Command {
-    private final String ABOUT_COMPANY_PAGE = "/WEB-INF/jsp/aboutCompany.jsp";
+    private static final String ABOUT_COMPANY_PAGE = "/WEB-INF/jsp/aboutCompany.jsp";
 
     @Override
     public void execute(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {

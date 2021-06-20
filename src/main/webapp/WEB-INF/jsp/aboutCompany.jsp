@@ -24,7 +24,7 @@
 
 <section class="about-page__first">
     <div class="container">
-        <img alt="logo" src="../../resources/logo2.png">
+        <img alt="logo" src="../../resources/general/logo2.png">
         <div class="about-page__content"><p><fmt:message key="page.about.title"/></p></div>
     </div>
 </section>
@@ -34,21 +34,21 @@
         <div class="row">
             <div class="col-6 col-lg-4">
                 <div class="advantage-item">
-                    <div class="advantage-item__img"><img alt="icon" src="../../resources/p1.svg"></div>
+                    <div class="advantage-item__img"><img alt="icon" src="../../resources/general/p1.svg"></div>
                     <div class="advantage-item__title"><fmt:message key="page.about.card1.text1"/></div>
                     <div class="advantage-item__text"><p><fmt:message key="page.about.card1.text2"/></p></div>
                 </div>
             </div>
             <div class="col-6 col-lg-4">
                 <div class="advantage-item">
-                    <div class="advantage-item__img"><img alt="icon" src="../../resources/p2.svg"></div>
+                    <div class="advantage-item__img"><img alt="icon" src="../../resources/general/p2.svg"></div>
                     <div class="advantage-item__title"><fmt:message key="page.about.card2.text1"/></div>
                     <div class="advantage-item__text"><p><fmt:message key="page.about.card2.text2" /></p></div>
                 </div>
             </div>
             <div class="col-6 col-lg-4">
                 <div class="advantage-item">
-                    <div class="advantage-item__img"><img alt="icon" src="../../resources/p3.svg"></div>
+                    <div class="advantage-item__img"><img alt="icon" src="../../resources/general/p3.svg"></div>
                     <div class="advantage-item__title"><fmt:message key="page.about.card3.text1"/></div>
                     <div class="advantage-item__text"><p><fmt:message key="page.about.card3.text2"/></p></div>
                 </div>

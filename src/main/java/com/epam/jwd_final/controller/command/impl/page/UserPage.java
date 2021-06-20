@@ -21,13 +21,13 @@ import java.util.List;
 public class UserPage implements Command {
     private static final Logger LOGGER = Logger.getLogger(UserPage.class);
 
-    private final String USER_PAGE = "/WEB-INF/jsp/user.jsp";
-    private final String TARIFF_PLANS = "tariffPlans";
-    private final String SUBSCRIPTION = "subscription";
-    private final String ACCOUNT = "account";
-    private final String USER = "user";
-    private final String DISCOUNT = "discounts";
-    private final String USER_PAYMENTS = "userPayments";
+    private static final String USER_PAGE = "/WEB-INF/jsp/user.jsp";
+    private static final String TARIFF_PLANS = "tariffPlans";
+    private static final String SUBSCRIPTION = "subscription";
+    private static final String ACCOUNT = "account";
+    private static final String USER = "user";
+    private static final String DISCOUNT = "discounts";
+    private static final String USER_PAYMENTS = "userPayments";
 
     private final UserService userService = ServiceProvider.INSTANCE.getUserService();
     private final AccountService accountService = ServiceProvider.INSTANCE.getAccountService();
