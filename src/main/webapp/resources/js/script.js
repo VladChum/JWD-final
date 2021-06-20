@@ -7,14 +7,70 @@ $("document").ready(function () {
     }
 
     function validatePassword(password) {
-        const pattern = /^(?=.*\d)(?=.*[a-zA-Z])[a-zA-Z0-9]{8,}$/;
+        const pattern = /^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z]).{8,30}$/;
         return pattern.test(password);
     }
 
+    function validatePhone(phone) {
+        const phoneno = /^\+?([0-9]{3})\)?[-. ]?([0-9]{5})[-. ]?([0-9]{4})$/;
+        return phoneno.test(phone);
+    }
+
+    function validateSpeed(speed) {
+        const pattern = /^[0-9]+$/;
+        return pattern.test(speed);
+    }
+
+    function validatePrice(price) {
+        const pattern = /^\d*\.?\d*$/;
+        return pattern.test(price);
+    }
+
+    function validateRegisterDataUser(password, login, firstName, lastName, email, phone) {
+        let valid = 0;
+        if (password.length < 8 || password.length > 30) {
+            $('#errorPasswordUser').html("Wrong input: password must be 8 to 30 characters long");
+        } else {
+            $('#errorPasswordUser').html("");
+            valid++;
+        }
+        if (login.length < 5 || login.length > 30) {
+            $('#errorLoginUser').html("Wrong input: login must be 5 to 30 characters long");
+        } else {
+            $('#errorLoginUser').html("");
+            valid++;
+        }
+        if (firstName.length <= 1) {
+            $('#errorFirstNameUser').html("Wrong input: invalid first name!");
+        } else {
+            $('#errorFirstNameUser').html("");
+            valid++;
+        }
+        if (lastName.length <= 1) {
+            $('#errorLastNameUser').html("Wrong input: invalid last name!");
+        } else {
+            $('#errorLastNameUser').html("");
+            valid++;
+        }
+        if (validateEmail(email) || email.length === 0) {
+            $('#errorEmailUser').html("");
+            valid++;
+        } else {
+            $('#errorEmailUser').html("Wrong input: invalid email!");
+        }
+        if (phone.length === 0 || validatePhone(phone)) {
+            $('#errorPhoneUser').html("");
+            valid++;
+        } else {
+            $('#errorPhoneUser').html("Wrong input: invalid phone!");
+        }
+        return valid;
+    }
+
     $('.chengTariffButton').on('click', function () {
-        var id = $(this).attr('data-tariff-id');
-        var url = "Controller?command=updateUserTariff";
-        var data = {tariffId: id};
+        let id = $(this).attr('data-tariff-id');
+        let url = "Controller?command=updateUserTariff";
+        let data = {tariffId: id};
         $.post(url, data, function (data, status) {
             location.reload();
         });
@@ -40,41 +96,16 @@ $("document").ready(function () {
     });
 
     $('#createUserButton').on('click', function () {
-        var login = $('#newUserCreateLogin').val();
-        var password = $('#newUserCreatePassword').val();
-        var firstName = $('#newUserFirstName').val();
-        var lastName = $('#newUserLastName').val();
-        var phone = $('#newUserPhone').val();
-        var email = $('#newUserEmail').val();
-        var valid = 0;
+        let login = $('#newUserCreateLogin').val();
+        let password = $('#newUserCreatePassword').val();
+        let firstName = $('#newUserFirstName').val();
+        let lastName = $('#newUserLastName').val();
+        let phone = $('#newUserPhone').val();
+        let email = $('#newUserEmail').val();
+        let valid = validateRegisterDataUser(password, login, firstName, lastName, email, phone);
 
-        if (password.length < 8 || password.length > 30) {
-            $('#errorPasswordUser').html("Wrong input: password must be 8 to 30 characters long");
-        } else {
-            $('#errorPasswordUser').html("");
-            valid++;
-        }
-        if (login.length < 5 || login.length > 30) {
-            $('#errorLoginUser').html("Wrong input: login must be 5 to 30 characters long");
-        } else {
-            $('#errorLoginUser').html("");
-            valid++;
-        }
-        if (firstName.length <= 1) {
-            $('#errorFirstNameUser').html("Wrong input: invalid first name!");
-        } else {
-            $('#errorFirstNameUser').html("");
-            valid++;
-        }
-        if (lastName.length <= 1) {
-            $('#errorLastNameUser').html("Wrong input: invalid last name!");
-        } else {
-            $('#errorLastNameUser').html("");
-            valid++;
-        }
-
-        if (valid >= 4) {
-            var data = {
+        if (valid >= 6) {
+            let data = {
                 login: login,
                 password: password,
                 firstName: firstName,
@@ -82,7 +113,7 @@ $("document").ready(function () {
                 phone: phone,
                 email: email
             }
-            var url = "Controller?command=createUser";
+            let url = "Controller?command=createUser";
             $.post(url, data, function (data, status) {
                 if (data === "false") {
                     $('#errorLoginUser').html("error: user with this login already exists!");
@@ -109,7 +140,7 @@ $("document").ready(function () {
     });
 
     $('#newAdminCreateLogin').on('keyup', function () {
-        var login = $('#newAdminCreateLogin').val();
+        let login = $('#newAdminCreateLogin').val();
         if (login.length < 5 || login.length > 30) {
             $('#errorLoginAdmin').html("Wrong input: login must be 5 to 30 characters long");
         } else {
@@ -118,7 +149,7 @@ $("document").ready(function () {
     });
 
     $('#newAdminCreatePassword').on('keyup', function () {
-        var password = $('#newAdminCreatePassword').val();
+        let password = $('#newAdminCreatePassword').val();
         if (password.length < 8 || password.length > 30) {
             $('#errorPasswordAdmin').html("Wrong input: password must be 8 to 30 characters long");
         } else {
@@ -127,9 +158,9 @@ $("document").ready(function () {
     });
 
     $('#createAdminButton').on('click', function () {
-        var login = $('#newAdminCreateLogin').val();
-        var password = $('#newAdminCreatePassword').val();
-        var valid = 0;
+        let login = $('#newAdminCreateLogin').val();
+        let password = $('#newAdminCreatePassword').val();
+        let valid = 0;
 
         if (password.length >= 8 || password.length <= 30) {
             valid++;
@@ -139,13 +170,17 @@ $("document").ready(function () {
         }
 
         if (valid === 2) {
-            var data = {
+            let data = {
                 login: login,
                 password: password,
             }
-            var url = "Controller?command=createAdmin";
+            let url = "Controller?command=createAdmin";
             $.post(url, data, function (data, status) {
-                location.reload();
+                if (data !== "") {
+                    $('#errorLoginAdmin').html(data);
+                } else {
+                    location.reload();
+                }
             });
         }
     });
@@ -158,7 +193,7 @@ $("document").ready(function () {
     });
 
     $('#newTariffName').on('keyup', function () {
-        var name = $('#newTariffName').val();
+        let name = $('#newTariffName').val();
         if (name.length < 2 && name.length !== 0) {
             $('#errorNameTariff').html("Wrong input: name too short");
         } else {
@@ -167,8 +202,8 @@ $("document").ready(function () {
     });
 
     $('#newTariffSpeed').on('keyup', function () {
-        var speed = parseInt($('#newTariffSpeed').val());
-        if (speed <= 0 || speed > 100000000) {
+        let speed = $('#newTariffSpeed').val();
+        if (!validateSpeed(speed) || speed === "0" || speed > 999999) {
             $('#errorSpeedTariff').html("Wrong input: speed > 0 and speed < 100000000");
         } else {
             $('#errorSpeedTariff').html("");
@@ -176,8 +211,8 @@ $("document").ready(function () {
     });
 
     $('#newTariffPrice').on('keyup', function () {
-        var price = parseFloat($('#newTariffPrice').val());
-        if (price < 0 || price > 100000000) {
+        let price = $('#newTariffPrice').val();
+        if (!validatePrice(price) || price === "0" || parseFloat(price) >= 100000) {
             $('#errorPriceTariff').html("Wrong input: price >= 0 and price < 100000000");
         } else {
             $('#errorPriceTariff').html("");
@@ -194,10 +229,10 @@ $("document").ready(function () {
     });
 
     $('#createTariff').on('click', function () {
-        var name = $('#newTariffName').val();
-        var price = parseFloat($('#newTariffPrice').val());
-        var speed = parseInt($('#newTariffSpeed').val());
-        var valid = 0;
+        let name = $('#newTariffName').val();
+        let price = $('#newTariffPrice').val();
+        let speed = $('#newTariffSpeed').val();
+        let valid = 0;
 
         if (name.length < 2 && name.length !== 0) {
             $('#errorNameTariff').html("Wrong input: name too short");
@@ -205,13 +240,13 @@ $("document").ready(function () {
             $('#errorNameTariff').html("");
             valid++;
         }
-        if (speed <= 0 || speed > 100000000) {
+        if (!validateSpeed(speed) || speed === "0" || speed >= 999999 || speed === "") {
             $('#errorSpeedTariff').html("Wrong input: speed > 0 and speed < 100000000");
         } else {
             $('#errorSpeedTariff').html("");
             valid++;
         }
-        if (price < 0 || price > 100000000) {
+        if (!validatePrice(price) || price === "0" || parseFloat(price) >= 100000 || speed === "") {
             $('#errorPriceTariff').html("Wrong input: price >= 0 and price < 100000000");
         } else {
             $('#errorPriceTariff').html("");
@@ -219,24 +254,28 @@ $("document").ready(function () {
         }
 
         if (valid === 3) {
-            var data = {
+            let data = {
                 name: name,
                 price: price,
                 speed: speed
             }
-            var url = "Controller?command=createTariff";
+            let url = "Controller?command=createTariff";
             $.post(url, data, function (data, status) {
-                location.reload();
+                if (data !== "") {
+                    $('#errorNameTariff').html(data);
+                } else {
+                    location.reload();
+                }
             });
         }
     });
 
     $('.archiveTariffButton').on('click', function () {
-        var tariffId = $(this).attr('data-tariff-id');
-        var data = {
+        let tariffId = $(this).attr('data-tariff-id');
+        let data = {
             tariffId: tariffId
         }
-        var url = "Controller?command=deleteTariff";
+        let url = "Controller?command=deleteTariff";
         $.post(url, data, function (data, status) {
             location.reload();
         });
@@ -494,7 +533,7 @@ $("document").ready(function () {
     $('.userStatus').on('click', function () {
         var userIdForStatus = $(this).attr('data-user-id');
         var statusId = $('option:selected', this).attr('value');
-        ;
+
         var data = {
             userId: userIdForStatus,
             statusId: statusId
@@ -566,18 +605,22 @@ $("document").ready(function () {
     });
 
     $('#chengEmailButton').on('click', function () {
-        var oldEmail = $(this).attr('data-email');
-        var userId = $(this).attr('data-user-id');
-        var newEmail = $('#newEmail').val();
+        let oldEmail = $(this).attr('data-email');
+        let userId = $(this).attr('data-user-id');
+        let newEmail = $('#newEmail').val();
 
         if (oldEmail !== newEmail && newEmail.length !== 0 && validateEmail(newEmail)) {
-            var data = {
+            let data = {
                 userId: userId,
                 newEmail: newEmail
             }
-            var url = "Controller?command=updateUserEmail";
+            let url = "Controller?command=updateUserEmail";
             $.post(url, data, function (data, status) {
-                location.reload();
+                if (data !== "") {
+                    $('#errorNewEmail').html(data);
+                } else {
+                    location.reload();
+                }
             });
         } else {
             $('#errorNewEmail').html("*Email is not valid");
@@ -597,14 +640,17 @@ $("document").ready(function () {
             }
             let url = "Controller?command=updateUserPhone";
             $.post(url, data, function (data, status) {
-                location.reload();
+                if (data !== "") {
+                    $('#errorNewPhone').html(data);
+                } else {
+                    location.reload();
+                }
             });
         } else {
             $('#errorNewPhone').html("Wrong input!");
         }
     });
 
-    //todo доделать проверку пароля
     $('#chengPasswordButton').on('click', function () {
         var accountId = $(this).attr('data-account-id');
         var password = $('#oldPassword').val();
@@ -619,7 +665,7 @@ $("document").ready(function () {
             }
             var url = "Controller?command=updatePassword";
             $.post(url, data, function (data, status) {
-                if (!data.empty()) {
+                if (data !== "") {
                     $('#errorUpdatePassword').html(data);
                 } else {
                     location.reload();
@@ -641,34 +687,9 @@ $("document").ready(function () {
         let lastName = $('#newUserLastName').val();
         let phone = $('#newUserPhone').val();
         let email = $('#newUserEmail').val();
-        let valid = 0;
+        let valid = validateRegisterDataUser(password, login, firstName, lastName, email, phone);
 
-        if (password.length < 8 || password.length > 30) {
-            $('#errorPasswordUser').html("Wrong input: password must be 8 to 30 characters long");
-        } else {
-            $('#errorPasswordUser').html("");
-            valid++;
-        }
-        if (login.length < 5 || login.length > 30) {
-            $('#errorLoginUser').html("Wrong input: login must be 5 to 30 characters long");
-        } else {
-            $('#errorLoginUser').html("");
-            valid++;
-        }
-        if (firstName.length <= 1) {
-            $('#errorFirstNameUser').html("Wrong input: invalid first name!");
-        } else {
-            $('#errorFirstNameUser').html("");
-            valid++;
-        }
-        if (lastName.length <= 1) {
-            $('#errorLastNameUser').html("Wrong input: invalid last name!");
-        } else {
-            $('#errorLastNameUser').html("");
-            valid++;
-        }
-
-        if (valid >= 4) {
+        if (valid >= 6) {
             var data = {
                 login: login,
                 password: password,
@@ -714,10 +735,10 @@ $("document").ready(function () {
     });
 
     $('#updateTariffButton').on('click', function () {
-        var name = $('#updateTariffName').val();
-        var price = parseFloat($('#updateTariffPrice').val());
-        var speed = parseInt($('#updateTariffSpeed').val());
-        var valid = 0;
+        let name = $('#updateTariffName').val();
+        let price = $('#updateTariffPrice').val();
+        let speed = $('#updateTariffSpeed').val();
+        let valid = 0;
 
         if (name.length < 2 && name.length !== 0) {
             $('#errorUpdateNameTariff').html("Wrong input: name too short");
@@ -725,29 +746,33 @@ $("document").ready(function () {
             $('#errorUpdateNameTariff').html("");
             valid++;
         }
-        if (speed <= 0 || speed > 100000000) {
-            $('#errorUpdateSpeedTariff').html("Wrong input: speed > 0 and speed < 100000000");
+        if (!validateSpeed(speed) || speed === "0" || speed > 999999 || speed === "") {
+            $('#errorUpdateSpeedTariff').html("Wrong input: speed > 0 and speed < 100000");
         } else {
             $('#errorUpdateSpeedTariff').html("");
             valid++;
         }
-        if (price < 0 || price > 100000000) {
-            $('#errorUpdatePriceTariff').html("Wrong input: price >= 0 and price < 100000000");
+        if (!validatePrice(price) || price === "0" || parseFloat(price) >= 100000 || price === "") {
+            $('#errorUpdatePriceTariff').html("Wrong input: price >= 0 and price < 100000");
         } else {
             $('#errorUpdatePriceTariff').html("");
             valid++;
         }
 
         if (valid === 3) {
-            var data = {
+            let data = {
                 tariffId: tariffIdForUpdate,
                 name: name,
                 price: price,
                 speed: speed
             }
-            var url = "Controller?command=updateTariff";
+            let url = "Controller?command=updateTariff";
             $.post(url, data, function (data, status) {
-                location.reload();
+                if (data !== "") {
+                    $('#errorUpdateNameTariff').html(data);
+                } else {
+                    location.reload();
+                }
             });
         }
     });

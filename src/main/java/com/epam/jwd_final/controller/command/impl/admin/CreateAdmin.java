@@ -20,8 +20,8 @@ public class CreateAdmin implements Command {
     private final AdminService adminService = ServiceProvider.INSTANCE.getAdminService();
     private final AccountService accountService = ServiceProvider.INSTANCE.getAccountService();
 
-    private final String LOGIN = "login";
-    private final String PASSWORD = "password";
+    private static final String LOGIN = "login";
+    private static final String PASSWORD = "password";
 
     @Override
     public void execute(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
@@ -29,9 +29,13 @@ public class CreateAdmin implements Command {
         String password = req.getParameter(PASSWORD);
 
         try {
-            Long accountId = accountService.addAccount(login, password);
-            Admin admin = new Admin(1L, accountId);
-            adminService.createAdmin(admin);
+            if (!accountService.checkExistence(login)) {
+                Long accountId = accountService.addAccount(login, password);
+                Admin admin = new Admin(1L, accountId);
+                adminService.createAdmin(admin);
+            } else {
+                resp.getWriter().write("error: account with this login already exists!");
+            }
         } catch (ServiceException e) {
             LOGGER.log(Level.ERROR, e.getMessage() + " " + e);
         }

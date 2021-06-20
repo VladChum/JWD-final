@@ -33,8 +33,7 @@ public class UpdatePassword implements Command {
 
         try {
             Account account = accountService.findAccountById(accountId).get();
-            if (account.getPassword().equals(password)
-                    && passwordValidator.isValid(newPassword)) {
+            if (account.getPassword().equals(password) && passwordValidator.isValid(newPassword)) {
                 accountService.updatePassword(accountId, newPassword);
             } else {
                 resp.getWriter().write("Wrong account password!");

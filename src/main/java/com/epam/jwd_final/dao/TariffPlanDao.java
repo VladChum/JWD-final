@@ -11,6 +11,8 @@ public interface TariffPlanDao {
 
     Optional<TariffPlan> findTariffById(int tariffId) throws DaoException;
 
+    Optional<TariffPlan> findTariffByName(String name) throws DaoException;
+
     void createTariff(TariffPlan tariffPlan) throws DaoException;
 
     void updateTariff(TariffPlan tariffPlan) throws DaoException;
@@ -20,4 +22,5 @@ public interface TariffPlanDao {
     void activateTariff(Long tariffId) throws DaoException;
 
     void updateDiscount(TariffPlan tariffPlan, Long discountId) throws DaoException;
+
 }
