@@ -10,6 +10,8 @@ public enum ValidatorProvider {
     private final Validator phoneValidator = new PhoneValidatorImpl();
     private final Validator priceValidator = new PriceValidatorImpl();
     private final Validator speedValidator = new SpeedValidatorImpl();
+    private final Validator dateValidator = new DateValidatorImpl();
+    private final Validator numberValidator = new NumberValidatorImpl();
 
     public Validator getEmailValidator() {
         return emailValidator;
@@ -29,5 +31,13 @@ public enum ValidatorProvider {
 
     public Validator getSpeedValidator() {
         return speedValidator;
+    }
+
+    public Validator getDateValidator() {
+        return dateValidator;
+    }
+
+    public Validator getNumberValidator() {
+        return numberValidator;
     }
 }

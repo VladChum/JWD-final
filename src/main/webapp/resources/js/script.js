@@ -26,6 +26,28 @@ $("document").ready(function () {
         return pattern.test(price);
     }
 
+    function validateDate(date) {
+        const pattern = /^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/;
+        if (pattern.test(date)) {
+            let parts = date.split("-");
+            let day = parseInt(parts[2], 10);
+            let month = parseInt(parts[1], 10);
+            let year = parseInt(parts[0], 10);
+
+            if (year < 1000 || year > 3000 || month === 0 || month > 12) {
+                return false;
+            }
+            let monthLength = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+
+            if (year % 400 === 0 || (year % 100 !== 0 && year % 4 === 0)) {
+                monthLength[1] = 29;
+            }
+            return day > 0 && day <= monthLength[month - 1];
+        } else {
+            return false;
+        }
+    }
+
     function validateRegisterDataUser(password, login, firstName, lastName, email, phone) {
         let valid = 0;
         if (password.length < 8 || password.length > 30) {
@@ -77,7 +99,7 @@ $("document").ready(function () {
     });
 
     $('#newUserCreateLogin').on('keyup', function () {
-        var login = $('#newUserCreateLogin').val();
+        let login = $('#newUserCreateLogin').val();
         if (login.length < 5 || login.length > 30) {
             $('#errorLoginUser').html("Wrong input: login must be 5 to 30 characters long");
         } else {
@@ -87,7 +109,7 @@ $("document").ready(function () {
     });
 
     $('#newUserCreatePassword').on('keyup', function () {
-        var password = $('#newUserCreatePassword').val();
+        let password = $('#newUserCreatePassword').val();
         if (password.length < 8 || password.length > 30) {
             $('#errorPasswordUser').html("Wrong input: password must be 8 to 30 characters long");
         } else {
@@ -282,19 +304,19 @@ $("document").ready(function () {
     });
 
     $('.activateTariffButton').on('click', function () {
-        var tariffId = $(this).attr('data-tariff-id');
-        var data = {
+        let tariffId = $(this).attr('data-tariff-id');
+        let data = {
             tariffId: tariffId
         }
-        var url = "Controller?command=activateTariff";
+        let url = "Controller?command=activateTariff";
         $.post(url, data, function (data, status) {
             location.reload();
         });
     });
 
     $('#newDiscountSize').on('keyup', function () {
-        let size = parseFloat($('#newDiscountSize').val());
-        if (size > 0 && size <= 100 || $('#newDiscountSize').val().length === 0) {
+        let size = $('#newDiscountSize').val();
+        if (parseFloat(size) > 0 && parseFloat(size) < 100 && validatePrice(size)) {
             $('#errorDiscountSize').html("");
         } else {
             $('#errorDiscountSize').html("Wrong input: 0 < discount size < 100");
@@ -302,8 +324,8 @@ $("document").ready(function () {
     });
 
     $('#newStartDateDiscount').on('keyup', function () {
-        var startDate = $('#newStartDateDiscount').val();
-        if (startDate.length != 10) {
+        let startDate = $('#newStartDateDiscount').val();
+        if (!validateDate(startDate)) {
             $('#errorStartDateDiscount').html("Wrong input: date example 2020-03-03");
         } else {
             $('#errorStartDateDiscount').html("");
@@ -311,41 +333,37 @@ $("document").ready(function () {
     });
 
     $('#newEndDateDiscount').on('keyup', function () {
-        var endDate = $('#newEndDateDiscount').val();
-        if (endDate.length != 10) {
+        let endDate = $('#newEndDateDiscount').val();
+        if (!validateDate(endDate)) {
             $('#errorEndDateDiscount').html("Wrong input: date example 2020-03-04");
         } else {
             $('#errorEndDateDiscount').html("");
         }
     });
-    // доделать нормальную проверку даты
 
     $('#createDiscount').on('click', function () {
-        var size = parseFloat($('#newDiscountSize').val());
-        var startDate = $('#newStartDateDiscount').val();
-        var endDate = $('#newEndDateDiscount').val();
-        var valid = 0;
-
-        var startDateTime = new Date(startDate);
-        var endDateTime = new Date(endDate);
+        let size = $('#newDiscountSize').val();
+        let startDate = $('#newStartDateDiscount').val();
+        let endDate = $('#newEndDateDiscount').val();
+        let valid = 0;
 
         if (startDate > endDate) {
             $('#errorEndDateDiscount').html("Wrong input: date example 2020-03-04");
             $('#errorStartDateDiscount').html("Wrong input: date example 2020-03-04");
         } else {
-            if (size > 0 && size <= 100 && $('#newDiscountSize').val().length != 0) {
+            if (parseFloat(size) > 0 && parseFloat(size) < 100 && validatePrice(size)) {
                 $('#errorDiscountSize').html("");
                 valid++;
             } else {
                 $('#errorDiscountSize').html("Wrong input:  0 < discount size < 100");
             }
-            if (endDate.length !== 10) {
+            if (!validateDate(endDate)) {
                 $('#errorEndDateDiscount').html("Wrong input: date example 2020-03-04");
             } else {
                 $('#errorEndDateDiscount').html("");
                 valid++;
             }
-            if (startDate.length !== 10) {
+            if (!validateDate(startDate)) {
                 $('#errorStartDateDiscount').html("Wrong input: date example 2020-03-04");
             } else {
                 $('#errorStartDateDiscount').html("");
@@ -354,12 +372,12 @@ $("document").ready(function () {
         }
 
         if (valid === 3) {
-            var data = {
+            let data = {
                 size: size,
                 startDate: startDate,
                 endDate: endDate
             }
-            var url = "Controller?command=createDiscount";
+            let url = "Controller?command=createDiscount";
             $.post(url, data, function (data, status) {
                 location.reload();
             });
@@ -367,11 +385,11 @@ $("document").ready(function () {
     });
 
     $('.archiveDiscountButton').on('click', function () {
-        var discountId = $(this).attr('data-tariff-id');
-        var data = {
+        let discountId = $(this).attr('data-tariff-id');
+        let data = {
             discountId: discountId
         }
-        var url = "Controller?command=stopDiscount";
+        let url = "Controller?command=stopDiscount";
         $.post(url, data, function (data, status) {
             location.reload();
         });
@@ -380,9 +398,9 @@ $("document").ready(function () {
     var discountIdForUpdate;
 
     $('.updateDiscountButton').on('click', function () {
-        var size = $(this).attr('data-discount-size');
-        var startDate = $(this).attr('date-discount-start');
-        var endDate = $(this).attr('data-discount-end');
+        let size = $(this).attr('data-discount-size');
+        let startDate = $(this).attr('date-discount-start');
+        let endDate = $(this).attr('data-discount-end');
         discountIdForUpdate = $(this).attr('data-discount-id');
 
         document.getElementById('updateDiscountSize').value = size;
@@ -391,8 +409,8 @@ $("document").ready(function () {
     });
 
     $('#updateDiscountSize').on('keyup', function () {
-        var size = parseFloat($('#updateDiscountSize').val());
-        if (size > 0 && size <= 100 || $('#updateDiscountSize').val().length === 0) {
+        let size = $('#updateDiscountSize').val();
+        if (parseFloat(size) > 0 && parseFloat(size) < 100 && validatePrice(size)) {
             $('#errorUpdateDiscountSize').html("");
         } else {
             $('#errorUpdateDiscountSize').html("Wrong input: 0 < discount size < 100");
@@ -400,8 +418,8 @@ $("document").ready(function () {
     });
 
     $('#updateStartDateDiscount').on('keyup', function () {
-        var startDate = $('#updateStartDateDiscount').val();
-        if (startDate.length != 10) {
+        let startDate = $('#updateStartDateDiscount').val();
+        if (!validateDate(startDate)) {
             $('#errorUpdateStartDateDiscount').html("Wrong input: date example 2020-03-03");
         } else {
             $('#errorUpdateStartDateDiscount').html("");
@@ -409,8 +427,8 @@ $("document").ready(function () {
     });
 
     $('#updateEndDateDiscount').on('keyup', function () {
-        var endDate = $('#updateEndDateDiscount').val();
-        if (endDate.length != 10) {
+        let endDate = $('#updateEndDateDiscount').val();
+        if (!validateDate(endDate)) {
             $('#errorUpdateEndDateDiscount').html("Wrong input: date example 2020-03-04");
         } else {
             $('#errorUpdateEndDateDiscount').html("");
@@ -418,31 +436,28 @@ $("document").ready(function () {
     });
 
     $('#updateDiscountButton').on('click', function () {
-        var size = parseFloat($('#updateDiscountSize').val());
-        var startDate = $('#updateStartDateDiscount').val();
-        var endDate = $('#updateEndDateDiscount').val();
-        var valid = 0;
-
-        var startDateTime = new Date(startDate);
-        var endDateTime = new Date(endDate);
+        let size = $('#updateDiscountSize').val();
+        let startDate = $('#updateStartDateDiscount').val();
+        let endDate = $('#updateEndDateDiscount').val();
+        let valid = 0;
 
         if (startDate > endDate) {
             $('#errorUpdateStartDateDiscount').html("Wrong input: date example 2020-03-03");
             $('#errorUpdateEndDateDiscount').html("Wrong input: date example 2020-03-04");
         } else {
-            if (size > 0 && size <= 100 || $('#updateDiscountSize').val().length === 0) {
+            if (parseFloat(size) > 0 && parseFloat(size) < 100 && validatePrice(size)) {
                 $('#errorUpdateDiscountSize').html("");
                 valid++;
             } else {
                 $('#errorUpdateDiscountSize').html("Wrong input: 0 < discount size < 100");
             }
-            if (startDate.length != 10) {
+            if (!validateDate(startDate)) {
                 $('#errorUpdateStartDateDiscount').html("Wrong input: date example 2020-03-03");
             } else {
                 $('#errorUpdateStartDateDiscount').html("");
                 valid++;
             }
-            if (endDate.length != 10) {
+            if (!validateDate(endDate)) {
                 $('#errorUpdateEndDateDiscount').html("Wrong input: date example 2020-03-04");
             } else {
                 $('#errorUpdateEndDateDiscount').html("");
@@ -451,15 +466,19 @@ $("document").ready(function () {
         }
 
         if (valid === 3) {
-            var data = {
+            let data = {
                 discountId: discountIdForUpdate,
                 discountSize: size,
                 startDate: startDate,
                 endDate: endDate
             }
-            var url = "Controller?command=updateDiscount";
+            let url = "Controller?command=updateDiscount";
             $.post(url, data, function (data, status) {
-                location.reload();
+                if (data !== "") {
+                    $('#errorNewEmail').html(data);
+                } else {
+                    location.reload();
+                }
             });
         }
     });
@@ -497,75 +516,76 @@ $("document").ready(function () {
     });
 
     $('#addTariffsForDiscountButton').on('click', function () {
-        var data = {
+        let data = {
             discountId: discountIdForTariffs,
             tariffs: tariffs.toString()
         }
         tariffs.splice(0, tariffs.length);
-        var url = "Controller?command=addTariffsToDiscount";
+        let url = "Controller?command=addTariffsToDiscount";
         $.post(url, data, function (data, status) {
             location.reload();
         });
     });
 
     $('.deleteAdmin').on('click', function () {
-        var adminId = $(this).attr('data-admin-id');
-        var data = {
+        let adminId = $(this).attr('data-admin-id');
+        let data = {
             adminId: adminId
         }
-        var url = "Controller?command=deleteAdmin";
+        let url = "Controller?command=deleteAdmin";
         $.post(url, data, function (data, status) {
             location.reload();
         });
     });
 
     $('.deleteUser').on('click', function () {
-        var userId = $(this).attr('data-user-id');
-        var data = {
+        let userId = $(this).attr('data-user-id');
+        let data = {
             userId: userId
         }
-        var url = "Controller?command=deleteUser";
+        let url = "Controller?command=deleteUser";
         $.post(url, data, function (data, status) {
             location.reload();
         });
     });
 
     $('.userStatus').on('click', function () {
-        var userIdForStatus = $(this).attr('data-user-id');
-        var statusId = $('option:selected', this).attr('value');
+        let userIdForStatus = $(this).attr('data-user-id');
+        let statusId = $('option:selected', this).attr('value');
 
-        var data = {
+        let data = {
             userId: userIdForStatus,
             statusId: statusId
         }
-        var url = "Controller?command=chengUserStatus";
+        let url = "Controller?command=chengUserStatus";
         $.post(url, data, function (data, status) {
             location.reload();
         });
     });
 
     $('.cardAmount').on('keyup', function () {
-        var amount = parseFloat($('.cardAmount').val());
-        if ((amount > 1000 || amount <= 0) && $('.cardAmount').val().length !== 0) {
-            $('#errorAmount').html("Wrong input: 0 < amount <= 1000");
-        } else {
+        let amount = $('.cardAmount').val();
+        if (parseFloat(amount) > 0 && parseFloat(amount) <= 1000 && validatePrice(amount)) {
             $('#errorAmount').html("");
+        } else {
+            $('#errorAmount').html("Wrong input: 0 < amount <= 1000");
         }
     });
 
     $('#replenishButton').on('click', function () {
-        var amount = parseFloat($('.cardAmount').val());
-        var userId = $(this).attr('data-user-id');
-        var paymentType = 2;
-        if ((amount > 1000 || amount <= 0) || $('.cardAmount').val().length === 0) {
+        let amount = $('.cardAmount').val();
+        let userId = $(this).attr('data-user-id');
+        let paymentType = 2;
+
+        if (parseFloat(amount) > 0 && parseFloat(amount) <= 1000 && validatePrice(amount)) {
             $('#errorAmount').html("Wrong input: 0 < amount <= 1000");
         } else {
-            var data = {
+            let data = {
                 userId: userId,
                 amount: amount,
                 paymentType: paymentType
             }
-            var url = "Controller?command=userPayment";
+            let url = "Controller?command=userPayment";
             $.post(url, data, function (data, status) {
                 location.reload();
             });
@@ -690,7 +710,7 @@ $("document").ready(function () {
         let valid = validateRegisterDataUser(password, login, firstName, lastName, email, phone);
 
         if (valid >= 6) {
-            var data = {
+            let data = {
                 login: login,
                 password: password,
                 firstName: firstName,
