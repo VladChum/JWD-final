@@ -7,11 +7,11 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 public class TariffPageFilter implements Filter {
-    private final String USER = "user";
-    private final String ADMIN = "admin";
-    private final String LOGIN_PAGE = "/Controller?command=loginPage";
-    private final String USER_PAGE = "/Controller?command=userPage";
-    private final String ADMIN_PAGE = "/Controller?command=adminPage";
+    private static final String USER = "user";
+    private static final String ADMIN = "admin";
+    private static final String LOGIN_PAGE = "/Controller?command=loginPage";
+    private static final String USER_PAGE = "/Controller?command=userPage";
+    private static final String ADMIN_PAGE = "/Controller?command=adminPage";
 
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {

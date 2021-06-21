@@ -17,13 +17,12 @@ import java.io.IOException;
 
 public class UpdatePassword implements Command {
     private static final Logger LOGGER = Logger.getLogger(UpdatePassword.class);
+    private static final String ACCOUNT_ID = "accountId";
+    private static final String PASSWORD = "password";
+    private static final String NEW_PASSWORD = "newPassword";
 
     private final AccountService accountService = ServiceProvider.INSTANCE.getAccountService();
     private final Validator passwordValidator = ValidatorProvider.INSTANCE.getPasswordValidator();
-
-    private final String ACCOUNT_ID = "accountId";
-    private final String PASSWORD = "password";
-    private final String NEW_PASSWORD = "newPassword";
 
     @Override
     public void execute(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {

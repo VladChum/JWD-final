@@ -15,11 +15,10 @@ import java.io.IOException;
 
 public class ChangeUserStatus implements Command {
     private static final Logger LOGGER = Logger.getLogger(ChangeUserStatus.class);
-
-    private final UserService userService = ServiceProvider.INSTANCE.getUserService();
-
     private static final String USER_ID = "userId";
     private static final String STATUS_ID = "statusId";
+
+    private final UserService userService = ServiceProvider.INSTANCE.getUserService();
 
     @Override
     public void execute(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {

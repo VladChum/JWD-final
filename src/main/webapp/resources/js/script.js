@@ -89,6 +89,47 @@ $("document").ready(function () {
         return valid;
     }
 
+    function tariffsButtonsOnDiscount() {
+        $('.addTariff').each(function () {
+            if ($(this).attr('data-discount-id') === discountIdForTariffs) {
+                $(this).prop('disabled', true);
+            } else {
+                $(this).prop('disabled', false);
+            }
+        });
+    }
+
+    function cardDataValidation(name, cardNumber, cvv, expiration) {
+        const cardNumberPattern = /^(?:4[0-9]{12}(?:[0-9]{3})?|[25][1-7][0-9]{14}|6(?:011|5[0-9][0-9])[0-9]{12}|3[47][0-9]{13}|3(?:0[0-5]|[68][0-9])[0-9]{11}|(?:2131|1800|35\d{3})\d{11})$/;
+        const expirationPattern = /^(0[1-9]|1[0-2])\/(0[1-9]|[1-9][0-9])$/;
+        let valid = 0;
+        if (name.length <= 0) {
+            $('#errorNameOfCard').html("Wrong input");
+        } else {
+            $('#errorNameOfCard').html("");
+            valid++;
+        }
+        if (!cardNumberPattern.test(cardNumber)) {
+            $('#errorCardNumber').html("Wrong input: incorrect card number");
+        } else {
+            $('#errorCardNumber').html("");
+            valid++;
+        }
+        if (!validateSpeed(cvv) || parseInt(cvv) > 999 || parseInt(cvv) < 100) {
+            $('#errorCVV').html("Wrong input: incorrect CVV");
+        } else {
+            $('#errorCVV').html("");
+            valid++;
+        }
+        if (!expirationPattern.test(expiration)) {
+            $('#errorExpiration').html("Wrong input: incorrect expiration (10/20)");
+        } else {
+            $('#errorExpiration').html("");
+            valid++;
+        }
+        return valid === 4;
+    }
+
     $('.chengTariffButton').on('click', function () {
         let id = $(this).attr('data-tariff-id');
         let url = "Controller?command=updateUserTariff";
@@ -496,23 +537,19 @@ $("document").ready(function () {
 
     $('.addTariffsForDiscountButton').on('click', function () {
         discountIdForTariffs = $(this).attr('data-discount-id');
+        tariffsButtonsOnDiscount();
     });
 
     var tariffs = [];
 
     $('.addTariff').on('click', function () {
-        var tariffDiscountId = $(this).attr('data-tariff-id');
+        let tariffDiscountId = $(this).attr('data-tariff-id');
         $(this).prop('disabled', true);
         tariffs.push(tariffDiscountId);
     });
 
-    //ToDo изменить оброботку события при создании
-    $('.addTariff').on('mouseenter', function () {
-        var tariffDiscountId = $(this).attr('data-discount-id');
-        var discountId = discountIdForTariffs;
-        if (tariffDiscountId === discountId) {
-            $(this).prop('disabled', true);
-        }
+    $('#closeAddTariffsForDiscount').click(function () {
+        tariffs = [];
     });
 
     $('#addTariffsForDiscountButton').on('click', function () {
@@ -576,8 +613,13 @@ $("document").ready(function () {
         let amount = $('.cardAmount').val();
         let userId = $(this).attr('data-user-id');
         let paymentType = 2;
+        let cvv = $('#cc-cvv').val();
+        let name = $('#cc-name').val();
+        let cardNumber = $('#cc-number').val();
+        let expiration = $('#cc-expiration').val();
 
-        if (parseFloat(amount) > 0 && parseFloat(amount) <= 1000 && validatePrice(amount)) {
+        if (parseFloat(amount) > 0 && parseFloat(amount) <= 1000 && validatePrice(amount)
+            && cardDataValidation(name, cardNumber, cvv, expiration)) {
             let data = {
                 userId: userId,
                 amount: amount,
@@ -676,18 +718,18 @@ $("document").ready(function () {
     });
 
     $('#chengPasswordButton').on('click', function () {
-        var accountId = $(this).attr('data-account-id');
-        var password = $('#oldPassword').val();
-        var newPassword = $('#newPassword').val();
-        var secondNewPassword = $('#secondNewPassword').val();
+        let accountId = $(this).attr('data-account-id');
+        let password = $('#oldPassword').val();
+        let newPassword = $('#newPassword').val();
+        let secondNewPassword = $('#secondNewPassword').val();
 
         if (newPassword === secondNewPassword && validatePassword(newPassword)) {
-            var data = {
+            let data = {
                 accountId: accountId,
                 password: password,
                 newPassword: newPassword
             }
-            var url = "Controller?command=updatePassword";
+            let url = "Controller?command=updatePassword";
             $.post(url, data, function (data, status) {
                 if (data !== "") {
                     $('#errorUpdatePassword').html(data);

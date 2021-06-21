@@ -27,6 +27,7 @@
                         <div class="invalid-feedback">
                             Name on card is required
                         </div>
+                        <div id="errorNameOfCard" class="errorMassage"></div>
                     </div>
 
                     <div class="col-md-6">
@@ -36,6 +37,7 @@
                         <div class="invalid-feedback">
                             Credit card number is required
                         </div>
+                        <div id="errorCardNumber" class="errorMassage"></div>
                     </div>
 
                     <div class="col-md-3">
@@ -44,6 +46,7 @@
                         <div class="invalid-feedback">
                             Expiration date required
                         </div>
+                        <div id="errorExpiration" class="errorMassage"></div>
                     </div>
 
                     <div class="col-md-3">
@@ -52,6 +55,7 @@
                         <div class="invalid-feedback">
                             Security code required
                         </div>
+                        <div id="errorCVV" class="errorMassage"></div>
                     </div>
                 </div>
                 <br>

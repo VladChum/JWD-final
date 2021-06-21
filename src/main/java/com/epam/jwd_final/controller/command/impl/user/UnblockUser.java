@@ -14,11 +14,9 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 public class UnblockUser implements Command {
-    private static final Logger LOGGER = Logger.getLogger(UnblockUser.class);
+    private static final String USER_ID = "userId";
 
     private final UserService userService = ServiceProvider.INSTANCE.getUserService();
-
-    private final String USER_ID = "userId";
 
     @Override
     public void execute(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
