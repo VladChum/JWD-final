@@ -79,7 +79,7 @@ public class PaymentServiceImpl implements PaymentService {
             if (userPayment.getPaymentType() == PaymentType.CREDIT_CARD) {
                 amount += userPayment.getAmount().doubleValue();
             } else if (userPayment.getPaymentType() == PaymentType.PROMISED_PAYMENT) {
-                if (amount <= userPayment.getAmount().doubleValue()) {
+                if (amount < userPayment.getAmount().doubleValue()) {
                     result = true;
                 }
                 break;

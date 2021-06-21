@@ -475,7 +475,7 @@ $("document").ready(function () {
             let url = "Controller?command=updateDiscount";
             $.post(url, data, function (data, status) {
                 if (data !== "") {
-                    $('#errorNewEmail').html(data);
+                    $('#errorUpdateDiscountSize').html(data);
                 } else {
                     location.reload();
                 }
@@ -578,8 +578,6 @@ $("document").ready(function () {
         let paymentType = 2;
 
         if (parseFloat(amount) > 0 && parseFloat(amount) <= 1000 && validatePrice(amount)) {
-            $('#errorAmount').html("Wrong input: 0 < amount <= 1000");
-        } else {
             let data = {
                 userId: userId,
                 amount: amount,
@@ -589,6 +587,8 @@ $("document").ready(function () {
             $.post(url, data, function (data, status) {
                 location.reload();
             });
+        } else {
+            $('#errorAmount').html("Wrong input: 0 < amount <= 1000");
         }
     });
 
@@ -597,30 +597,34 @@ $("document").ready(function () {
     });
 
     $('#replenishAmount').on('keyup', function () {
-        var amount = parseFloat($('#replenishAmount').val());
-        if ((amount > 15 || amount <= 0) && $('#replenishAmount').val().length !== 0) {
-            $('#errorReplenishAmount').html("Wrong input: 0 < amount <= 15");
-        } else {
+        let amount = $('#replenishAmount').val();
+        if (parseFloat(amount) > 0 && parseFloat(amount) <= 15 && validatePrice(amount)) {
             $('#errorReplenishAmount').html("");
+        } else {
+            $('#errorReplenishAmount').html("Wrong input: 0 < amount <= 15");
         }
     });
 
     $('.ReplenishButton').on('click', function () {
-        var userId = $(this).attr('data-user-id');
-        var paymentType = 3;
-        var amount = parseFloat($('#replenishAmount').val());
-        if ((amount > 15 || amount <= 0) || $('#replenishAmount').val().length === 0) {
-            $('#errorReplenishAmount').html("Wrong input: 0 < amount <= 15");
-        } else {
-            var data = {
+        let userId = $(this).attr('data-user-id');
+        let paymentType = 3;
+        let amount = $('#replenishAmount').val();
+        if (parseFloat(amount) > 0 && parseFloat(amount) <= 15 && validatePrice(amount)) {
+            let data = {
                 userId: userId,
                 amount: amount,
                 paymentType: paymentType
             }
-            var url = "Controller?command=userPayment";
+            let url = "Controller?command=userPayment";
             $.post(url, data, function (data, status) {
-                location.reload();
+                if (data !== "") {
+                    $('#errorReplenishAmount').html(data);
+                } else {
+                    location.reload();
+                }
             });
+        } else {
+            $('#errorReplenishAmount').html("Wrong input: 0 < amount <= 15");
         }
     });
 
