@@ -1,6 +1,7 @@
 package com.epam.jwd_final.controller.command.impl.user;
 
 import com.epam.jwd_final.controller.command.Command;
+import com.epam.jwd_final.entity.PaymentType;
 import com.epam.jwd_final.exception.ServiceException;
 import com.epam.jwd_final.service.PaymentService;
 import com.epam.jwd_final.service.ServiceProvider;
@@ -15,13 +16,12 @@ import java.math.BigDecimal;
 
 public class Payment implements Command {
     private static final Logger LOGGER = Logger.getLogger(Payment.class);
+    private static final String USER_ID = "userId";
+    private static final String AMOUNT = "amount";
+    private static final String PAYMENT_TYPE = "paymentType";
 
     private final PaymentService paymentService = ServiceProvider.INSTANCE.getPaymentService();
 
-    private final String USER_ID = "userId";
-    private final String AMOUNT = "amount";
-    private final String PAYMENT_TYPE = "paymentType";
-//     добавить проверку дуступен ли обещенный платёж
     @Override
     public void execute(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
         Long userId = Long.valueOf(req.getParameter(USER_ID));
@@ -29,7 +29,11 @@ public class Payment implements Command {
         Long paymentType = Long.valueOf(req.getParameter(PAYMENT_TYPE));
 
         try {
-            paymentService.topUpUserBalance(amount, userId, paymentType);
+            if (paymentType.equals(PaymentType.PROMISED_PAYMENT.getId()) && paymentService.checkActivePromisedPayment(userId)) {
+                resp.getWriter().write("*Sorry you have active promisedPayment");
+            } else {
+                paymentService.topUpUserBalance(amount, userId, paymentType);
+            }
         } catch (ServiceException e) {
             LOGGER.log(Level.ERROR, e.getMessage() + " " + e);
         }

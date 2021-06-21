@@ -19,11 +19,11 @@ import java.util.List;
 public class AdminPage implements Command {
     private static final Logger LOGGER = Logger.getLogger(AdminPage.class);
 
-    private final String ADMIN_PAGE = "/WEB-INF/jsp/admin.jsp";
-    private final String USERS = "users";
-    private final String ADMINS = "admins";
-    private final String TARIFFS = "tariffs";
-    private final String DISCOUNT = "discounts";
+    private static final String ADMIN_PAGE = "/WEB-INF/jsp/admin.jsp";
+    private static final String USERS = "users";
+    private static final String ADMINS = "admins";
+    private static final String TARIFFS = "tariffs";
+    private static final String DISCOUNT = "discounts";
 
     private final UserService userService = ServiceProvider.INSTANCE.getUserService();
     private final AdminService adminService = ServiceProvider.INSTANCE.getAdminService();

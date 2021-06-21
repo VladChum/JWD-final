@@ -33,7 +33,7 @@
                 <div class="card-body">
                     <div class="tariff-item">
                         <div class="tariff-item__body">
-                            <img src="../../resources/admin.jpg" class="card-img-top" alt="...">
+                            <img src="../../resources/admin/admin.jpg" class="card-img-top" alt="...">
                             <hr class="featurette-divider">
                             <jsp:include page="admin/menu.jsp"/>
                         </div>

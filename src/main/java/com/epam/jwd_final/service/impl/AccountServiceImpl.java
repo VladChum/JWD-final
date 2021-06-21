@@ -48,4 +48,17 @@ public class AccountServiceImpl implements AccountService {
             throw new ServiceException(e);
         }
     }
+
+    @Override
+    public boolean checkExistence(String login) throws ServiceException {
+        boolean result = false;
+        try {
+            if (!accountDao.findAccountByLogin(login).isEmpty()) {
+                result = true;
+            }
+        } catch (DaoException e) {
+            throw  new ServiceException(e);
+        }
+        return result;
+    }
 }

@@ -25,7 +25,7 @@
 </jsp:include>
 
 <div class="text-white">
-    <img src="../../resources/1.png" class="card-img" alt="...">
+    <img src="../../resources/general/1.png" class="card-img" alt="...">
     <div class="img-text">
         <h1 class="card-title"><fmt:message key="page.home.text.title"/></h1>
         <div class="banner-item__text"><p><fmt:message key="page.home.text.title2"/></p>
@@ -55,7 +55,7 @@
     <div class="row row-cols-1 row-cols-md-3 g-4">
         <div class="col">
             <div class="card">
-                <img src="../../resources/card1.png" class="card-img-top" alt="...">
+                <img src="../../resources/general/card1.png" class="card-img-top" alt="...">
                 <div class="card-body">
                     <h2><fmt:message key="page.home.card2.title"/></h2>
                     <p><fmt:message key="page.home.card2.text1"/></p>
@@ -64,7 +64,7 @@
         </div>
         <div class="col">
             <div class="card">
-                <img src="../../resources/card2.png" class="card-img-top" alt="...">
+                <img src="../../resources/general/card2.png" class="card-img-top" alt="...">
                 <div class="card-body">
                     <h2><fmt:message key="page.home.card3.title"/></h2>
                     <p>
@@ -77,7 +77,7 @@
         </div>
         <div class="col">
             <div class="card">
-                <img src="../../resources/card3.png" class="card-img-top" alt="...">
+                <img src="../../resources/general/card3.png" class="card-img-top" alt="...">
                 <div class="card-body">
                     <h2><fmt:message key="page.home.card4.title"/></h2>
                     <p><fmt:message key="page.home.card4.text1"/></p>

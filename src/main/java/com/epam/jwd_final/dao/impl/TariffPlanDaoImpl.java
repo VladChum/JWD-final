@@ -24,12 +24,15 @@ public class TariffPlanDaoImpl implements com.epam.jwd_final.dao.TariffPlanDao {
             "t.active " +
             "from tariff_plan t " +
             "where t.id = ?";
+    private static final String FIND_TARIFF_BY_NAME = "select t.id, t.name, " +
+            "t.price, t.discount_id, " +
+            "t.speed," +
+            "t.active " +
+            "from tariff_plan t " +
+            "where t.name = ?";
     private static final String CREATE_TARIFF = "insert into tariff_plan " +
             "(name, price, speed) " +
             "VALUES (?, ?, ?)";
-    /**TODO
-     * add update tariff price
-     * */
     private static final String UPDATE_DISCOUNT = "update tariff_plan set discount_id = ? where id = ?;";
     private static final String ACTIVATE_TARIFF = "update tariff_plan set active = 1 where id = ?;";
     private static final String UPDATE_TARIFF = "update tariff_plan set name = ?, price = ?, speed = ? where id = ?;";
@@ -66,6 +69,27 @@ public class TariffPlanDaoImpl implements com.epam.jwd_final.dao.TariffPlanDao {
         try (Connection connection = ConnectionPool.INSTANCE.getConnection();
              PreparedStatement prepareStatement = connection.prepareStatement(FIND_TARIFF_BY_ID)) {
             prepareStatement.setInt(1, tariffId);
+            try (ResultSet resultSet = prepareStatement.executeQuery()) {
+                if (resultSet.next()) {
+                    return Optional.of(new TariffPlan(resultSet.getLong("id"),
+                            resultSet.getString(2),
+                            resultSet.getBigDecimal(3),
+                            resultSet.getLong(4),
+                            resultSet.getInt(5),
+                            resultSet.getBoolean(6)));
+                }
+            }
+        } catch (SQLException e) {
+            throw new DaoException(e);
+        }
+        return Optional.empty();
+    }
+
+    @Override
+    public Optional<TariffPlan> findTariffByName(String name) throws DaoException {
+        try (Connection connection = ConnectionPool.INSTANCE.getConnection();
+             PreparedStatement prepareStatement = connection.prepareStatement(FIND_TARIFF_BY_NAME)) {
+            prepareStatement.setString(1, name);
             try (ResultSet resultSet = prepareStatement.executeQuery()) {
                 if (resultSet.next()) {
                     return Optional.of(new TariffPlan(resultSet.getLong("id"),

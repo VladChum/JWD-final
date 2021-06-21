@@ -14,7 +14,7 @@ public enum CommandProvider {
     INSTANCE;
 
     private static final Logger LOGGER = Logger.getLogger(CommandProvider.class);
-    private Map<String, Command> commands = new HashMap<>();
+    private final Map<String, Command> commands = new HashMap<>();
 
     CommandProvider() {
         commands.put("homePage", new HomePage());
@@ -46,7 +46,7 @@ public enum CommandProvider {
         commands.put("updateUserTariff", new UpdateUserTariff());
         commands.put("registerUser", new RegisterUser());
         commands.put("unblockUser", new UnblockUser());
-        commands.put("changLanguage", new ChangLanguage());
+        commands.put("changLanguage", new ChangeLanguage());
     }
 
     public Command getCommand(String commandName) {

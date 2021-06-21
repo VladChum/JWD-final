@@ -17,7 +17,6 @@ public class SignOut implements Command {
         if (session != null) {
             session.invalidate();
         }
-
         resp.sendRedirect(HOME_PAGE);
     }
 }

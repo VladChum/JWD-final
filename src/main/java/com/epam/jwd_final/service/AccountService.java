@@ -13,4 +13,6 @@ public interface AccountService {
     Long addAccount(String login, String password) throws ServiceException;
 
     void updatePassword(Long id, String newPassword) throws ServiceException;
+
+    boolean checkExistence(String login) throws ServiceException;
 }

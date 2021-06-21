@@ -4,7 +4,7 @@
 
 <c:set var="locale" value="${empty cookie['locale'].getValue() ? 'en' : cookie['locale'].getValue() }"/>
 <fmt:setLocale value="${locale}"/>
-<fmt:setBundle basename="locale" />
+<fmt:setBundle basename="locale"/>
 <!doctype html>
 <html lang="${locale}">
 <head>
@@ -24,38 +24,37 @@
     <jsp:param name="locale" value="${locale}"/>
 </jsp:include>
 
-
 <div class="login-color">
     <div class="position-signIn">
         <div class="row row-cols-1 row-cols-md-12 g-10">
             <div class="col-sm-7">
                 <div class="card">
                     <main class="form-signin">
-                        <form id="loginPage" method="post" action="/Controller?command=signIn">
-                            <h1 class="h3 mb-3 fw-normal "><fmt:message key="page.login.sign_in"/></h1>
-                            <div class="form-floating">
-                                <input type="login" name="login" class="form-control" id="login"
-                                       placeholder="name@example.com">
-                                <label for="login"><fmt:message key="page.login.label.login"/></label>
-                            </div>
-                            <br>
-                            <div class="form-floating">
-                                <input type="password" name="password" class="form-control" id="floatingPassword"
-                                       placeholder="Password">
-                                <label for="floatingPassword"><fmt:message key="page.login.label.password"/></label>
-                            </div>
-                            <br>
-                            <span id="msg"></span>
-                            <button class="w-100 btn btn-lg btn-primary" type="submit">
-                                <fmt:message key="page.login.sign_in"/></button>
-                            <hr class="my-4">
-                            <small class="text-muted">
-                                <a id="registerNewAccount" data-bs-toggle="modal" type="button"
-                                                         data-bs-target="#registerNewUser">
-                                    <fmt:message key="page.login.link.register_new_account"/>
-                                </a>
-                            </small>
-                        </form>
+                        <h1 class="h3 mb-3 fw-normal "><fmt:message key="page.login.sign_in"/></h1>
+                        <div class="form-floating">
+                            <input type="login" name="login" class="form-control" id="loginLoginPage"
+                                   placeholder="Login">
+                            <label for="loginLoginPage"><fmt:message key="page.login.label.login"/></label>
+                        </div>
+                        <br>
+                        <div class="form-floating">
+                            <input type="password" name="password" class="form-control" id="floatingPassword"
+                                   placeholder="Password">
+                            <label for="floatingPassword"><fmt:message key="page.login.label.password"/></label>
+                        </div>
+                        <br>
+                        <div id="errorLoginOrPassword" class="errorMassage"></div>
+                        <span id="msg"></span>
+                        <button class="w-100 btn btn-lg btn-primary" id="loginButton">
+                            <fmt:message key="page.login.sign_in"/>
+                        </button>
+                        <hr class="my-4">
+                        <small class="text-muted">
+                            <a id="registerNewAccount" data-bs-toggle="modal" type="button"
+                               data-bs-target="#registerNewUser">
+                                <fmt:message key="page.login.link.register_new_account"/>
+                            </a>
+                        </small>
                     </main>
                 </div>
             </div>
@@ -73,8 +72,7 @@
             <div class="modal-body">
                 <br>
                 <h6><fmt:message key="form.new_user.login"/></h6>
-                <input id="newUserCreateLogin" name="login" class="form-control"
-                       placeholder="login">
+                <input id="newUserCreateLogin" name="login" class="form-control" placeholder="login">
                 <div id="errorLoginUser" class="errorMassage"></div>
                 <br>
                 <h6><fmt:message key="form.new_user.password"/></h6>

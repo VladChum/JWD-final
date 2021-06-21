@@ -1,9 +1,12 @@
 package com.epam.jwd_final.controller.command.impl.user;
 
 import com.epam.jwd_final.controller.command.Command;
+import com.epam.jwd_final.entity.User;
 import com.epam.jwd_final.exception.ServiceException;
 import com.epam.jwd_final.service.ServiceProvider;
 import com.epam.jwd_final.service.UserService;
+import com.epam.jwd_final.service.validator.Validator;
+import com.epam.jwd_final.service.validator.ValidatorProvider;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
@@ -16,9 +19,10 @@ public class UpdateUserPhone implements Command {
     private static final Logger LOGGER = Logger.getLogger(UpdateUserPhone.class);
 
     private final UserService userService = ServiceProvider.INSTANCE.getUserService();
+    private final Validator phoneValidator = ValidatorProvider.INSTANCE.getPhoneValidator();
 
-    private final String USER_ID = "userId";
-    private final String NEW_PHONE = "newPhone";
+    private static final String USER_ID = "userId";
+    private static final String NEW_PHONE = "newPhone";
 
     @Override
     public void execute(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
@@ -26,7 +30,12 @@ public class UpdateUserPhone implements Command {
         String newPhone = req.getParameter(NEW_PHONE);
 
         try {
-            userService.updatePhone(userId, newPhone);
+            User user = userService.findUserById(userId).get();
+            if (phoneValidator.isValid(newPhone) && !user.getPhone().equals(newPhone)) {
+                userService.updatePhone(userId, newPhone);
+            } else {
+                resp.getWriter().write("*Incorrect phone number, example: +375291111111");
+            }
         } catch (ServiceException e) {
             LOGGER.log(Level.ERROR, e.getMessage() + " " + e);
         }
