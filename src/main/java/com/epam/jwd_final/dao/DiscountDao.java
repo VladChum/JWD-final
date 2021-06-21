@@ -15,7 +15,5 @@ public interface DiscountDao {
 
     void stopDiscount(Discount discount) throws DaoException;
 
-    void activateDiscount(Discount discount) throws DaoException;
-
     void updateDiscount(Discount discount) throws DaoException;
 }

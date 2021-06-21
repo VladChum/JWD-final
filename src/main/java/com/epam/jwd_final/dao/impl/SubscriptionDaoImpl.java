@@ -29,7 +29,6 @@ public class SubscriptionDaoImpl implements SubscriptionDao {
             "(start_date, user_id, tariff_plan_id) " +
             "VALUES (?, ?, ?)";
     private static final String UPDATE_SUBSCRIPTION = "update user_subscription set end_date = ? where id = ?";
-    private static final String DELETE_SUBSCRIPTION = "delete from user where id = ?";
 
     SubscriptionDaoImpl() {
     }
@@ -102,8 +101,5 @@ public class SubscriptionDaoImpl implements SubscriptionDao {
         }
     }
 
-    @Override
-    public void deleteSubscription(Subscription subscription) throws DaoException {
 
-    }
 }

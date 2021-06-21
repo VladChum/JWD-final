@@ -103,11 +103,6 @@ public class AccountDaoImpl implements AccountDao {
         return Optional.empty();
     }
 
-
-    /**
-     * TODO
-     * check duplicate account
-     */
     @Override
     public void createAccount(String login, String password) throws DaoException {
         try (Connection connection = ConnectionPool.INSTANCE.getConnection();
