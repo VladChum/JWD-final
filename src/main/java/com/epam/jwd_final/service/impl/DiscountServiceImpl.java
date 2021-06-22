@@ -4,6 +4,7 @@ import com.epam.jwd_final.dao.DiscountDao;
 import com.epam.jwd_final.dao.impl.DaoProvider;
 import com.epam.jwd_final.entity.Discount;
 import com.epam.jwd_final.entity.Subscription;
+import com.epam.jwd_final.entity.User;
 import com.epam.jwd_final.exception.DaoException;
 import com.epam.jwd_final.exception.ServiceException;
 import com.epam.jwd_final.service.DiscountService;
@@ -76,5 +77,32 @@ public class DiscountServiceImpl implements DiscountService {
             result = true;
         }
         return result;
+    }
+
+    @Override
+    public boolean checkPlanedDiscount(Discount discount) throws ServiceException {
+        boolean result = false;
+
+        Date startDate = new Date();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        if (discount.getStartDate().compareTo(java.sql.Date.valueOf(dateFormat.format(startDate))) >= 0
+                && discount.getEndDate().compareTo(java.sql.Date.valueOf(dateFormat.format(startDate))) >= 0) {
+            result = true;
+        }
+        return result;
+    }
+
+    @Override
+    public int[] findDiscountsByStatus(List<Discount> discounts) throws ServiceException {
+        int[] paymentByStatus = new int[]{0, 0, 0};
+        for (Discount discount : discounts) {
+            if (checkActiveDiscount(discount)) {
+                paymentByStatus[0]++;
+            } else if (checkPlanedDiscount(discount)) {
+                paymentByStatus[1]++;
+            }
+        }
+        paymentByStatus[2] = discounts.size() - paymentByStatus[0] - paymentByStatus[1];
+        return paymentByStatus;
     }
 }

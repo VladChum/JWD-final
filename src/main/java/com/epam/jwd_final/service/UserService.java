@@ -25,4 +25,6 @@ public interface UserService {
     void updateEmail(Long userId, String email) throws ServiceException;
 
     void updatePhone(Long userId, String phone) throws ServiceException;
+
+    int[] findAllUsersByStatus(List<User> users);
 }

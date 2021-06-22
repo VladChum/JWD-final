@@ -13,6 +13,7 @@ import java.util.List;
 public class PaymentDaoImpl implements PaymentDao {
     private static final String TOP_UP_USER_BALANCE = "insert into user_payment (date, amount, user_id, payment_type_id) VALUES (?, ?, ?, ?);";
     private static final String FIND_ALL_USER_PAYMENT = "select p.id, p.date, p.amount, p.user_id, p.payment_type_id from user_payment p where user_id = ?;";
+    private static final String FIND_ALL_PAYMENT = "select p.id, p.date, p.amount, p.user_id, p.payment_type_id from user_payment p;";
 
     PaymentDaoImpl() {
     }
@@ -38,6 +39,30 @@ public class PaymentDaoImpl implements PaymentDao {
         try (Connection connection = ConnectionPool.INSTANCE.getConnection();
              PreparedStatement prepareStatement = connection.prepareStatement(FIND_ALL_USER_PAYMENT)) {
             prepareStatement.setInt(1, userId.intValue());
+            try (ResultSet resultSet = prepareStatement.executeQuery()) {
+                while (resultSet.next()) {
+                    UserPayment userPayment = new UserPayment(
+                            resultSet.getLong("id"),
+                            resultSet.getDate(2),
+                            resultSet.getBigDecimal(3),
+                            resultSet.getLong(4),
+                            PaymentType.resolvePaymentTypeById(resultSet.getInt(5))
+                    );
+                    userPayments.add(userPayment);
+                }
+            }
+        } catch (SQLException e) {
+            throw new DaoException(e);
+        }
+        return userPayments;
+    }
+
+    @Override
+    public List<UserPayment> findAllPayments() throws DaoException {
+        List<UserPayment> userPayments = new ArrayList<>();
+
+        try (Connection connection = ConnectionPool.INSTANCE.getConnection();
+             PreparedStatement prepareStatement = connection.prepareStatement(FIND_ALL_PAYMENT)) {
             try (ResultSet resultSet = prepareStatement.executeQuery()) {
                 while (resultSet.next()) {
                     UserPayment userPayment = new UserPayment(

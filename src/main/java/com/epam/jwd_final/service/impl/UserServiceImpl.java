@@ -97,4 +97,19 @@ public class UserServiceImpl implements UserService {
             throw new ServiceException(e);
         }
     }
+
+    @Override
+    public int[] findAllUsersByStatus(List<User> users) {
+        int[] usersByStatus = new int[]{0, 0, 0};
+        for (User user : users) {
+            if (user.getStatus().getId() == 1L) {
+                usersByStatus[0]++;
+            } else if (user.getStatus().getId() == 2L) {
+                usersByStatus[1]++;
+            } else {
+                usersByStatus[2]++;
+            }
+        }
+        return usersByStatus;
+    }
 }

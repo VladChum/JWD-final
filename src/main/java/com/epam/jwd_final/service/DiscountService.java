@@ -18,4 +18,8 @@ public interface DiscountService {
     void update(Discount discount) throws ServiceException;
 
     boolean checkActiveDiscount(Discount discount) throws ServiceException;
+
+    boolean checkPlanedDiscount(Discount discount) throws ServiceException;
+
+    int[] findDiscountsByStatus(List<Discount> discounts) throws ServiceException;
 }

@@ -21,4 +21,7 @@ public interface TariffService {
     void updateTariffDiscount(TariffPlan tariffPlan, Long discountId) throws ServiceException;
 
     boolean checkExistence(Long tariffId, String name) throws ServiceException;
+
+    int[] findTariffsByStatus(List<TariffPlan> tariffPlans);
+
 }
