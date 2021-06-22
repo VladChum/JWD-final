@@ -23,7 +23,6 @@
 <jsp:include page="general/navbar.jsp">
     <jsp:param name="locale" value="${locale}"/>
 </jsp:include>
-
 <div id="content" class="container">
     <br>
     <br>
@@ -53,7 +52,11 @@
                                 </jsp:include>
                             </div>
                             <div class="tab-pane fade show" id="statistics" role="tabpanel">
-
+                                <jsp:include page="admin/statistics.jsp">
+                                    <jsp:param name="activeUsers" value="${activeUsers}"/>
+                                    <jsp:param name="banedUsers" value="${banedUsers}"/>
+                                    <jsp:param name="suspendedUsers" value="${suspendedUsers}"/>
+                                </jsp:include>
                             </div>
                             <div class="tab-pane fade show" id="tariffs" role="tabpanel">
                                 <jsp:include page="admin/tariffs.jsp">
@@ -86,5 +89,7 @@
         crossorigin="anonymous"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script type="text/javascript" src="/resources/js/script.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="../resources/js/chart.js"></script>
 </body>
 </html>
