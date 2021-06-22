@@ -3,6 +3,7 @@ package com.epam.jwd_final.service.impl;
 import com.epam.jwd_final.dao.TariffPlanDao;
 import com.epam.jwd_final.dao.impl.DaoProvider;
 import com.epam.jwd_final.entity.TariffPlan;
+import com.epam.jwd_final.entity.User;
 import com.epam.jwd_final.exception.DaoException;
 import com.epam.jwd_final.exception.ServiceException;
 import com.epam.jwd_final.service.TariffService;
@@ -89,5 +90,18 @@ public class TariffServiceImpl implements TariffService {
             throw  new ServiceException(e);
         }
         return result;
+    }
+
+    @Override
+    public int[] findTariffsByStatus(List<TariffPlan> tariffPlans) {
+        int[] tariffsByStatus = new int[]{0, 0};
+        for (TariffPlan tariffPlan : tariffPlans) {
+            if (tariffPlan.isActive()) {
+                tariffsByStatus[0]++;
+            } else {
+                tariffsByStatus[1]++;
+            }
+        }
+        return tariffsByStatus;
     }
 }

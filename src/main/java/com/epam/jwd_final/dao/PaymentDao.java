@@ -10,4 +10,5 @@ public interface PaymentDao {
 
     List<UserPayment> findAllUserPayment(Long userId) throws DaoException;
 
+    List<UserPayment> findAllPayments() throws DaoException;
 }
