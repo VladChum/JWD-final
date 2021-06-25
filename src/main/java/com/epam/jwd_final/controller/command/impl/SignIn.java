@@ -7,8 +7,8 @@ import com.epam.jwd_final.service.AccountService;
 import com.epam.jwd_final.service.AdminService;
 import com.epam.jwd_final.service.ServiceProvider;
 import com.epam.jwd_final.service.UserService;
-import org.apache.log4j.Level;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -16,7 +16,8 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 public class SignIn implements Command {
-    private static final Logger LOGGER = Logger.getLogger(SignIn.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(SignIn.class);
+
     private static final String ACCOUNT = "account";
     private static final String ADMIN = "admin";
     private static final String USER = "user";
@@ -33,19 +34,14 @@ public class SignIn implements Command {
         String password = req.getParameter(PASSWORD);
         HttpSession session = req.getSession();
 
-// todo     temporary solution
         try {
             if (!accountService.findAccountByLoginAndPassword(login, password).isPresent()) {
                 resp.getWriter().write("false");
             } else {
                 Account account = accountService.findAccountByLoginAndPassword(login, password).get();
-                if (session.getAttribute(ACCOUNT) == null) {
-                    session.setAttribute(ACCOUNT, account);
-                    LOGGER.log(Level.DEBUG, "add account in session: " + account.getId());
-                } else {
-                    session.setAttribute(ACCOUNT, account);
-                    LOGGER.log(Level.DEBUG, "change account in session " + account.getId());
-                }
+                session.setAttribute(ACCOUNT, account);
+                LOGGER.debug("change account in session " + account.getId());
+
                 if (adminService.findAdminByAccountId(account.getId()).isPresent()) {
                     session.setAttribute(ADMIN, adminService.findAdminByAccountId(account.getId()).get().getAccountId());
                 } else if (userService.findUserByAccountId(account.getId()).isPresent()) {
@@ -53,7 +49,7 @@ public class SignIn implements Command {
                 }
             }
         } catch (ServiceException e) {
-            LOGGER.log(Level.ERROR, e.getMessage(), e);
+            LOGGER.error(e.getMessage(), e);
         }
     }
 }

@@ -57,7 +57,7 @@ public class AccountServiceImpl implements AccountService {
                 result = true;
             }
         } catch (DaoException e) {
-            throw  new ServiceException(e);
+            throw new ServiceException(e);
         }
         return result;
     }
