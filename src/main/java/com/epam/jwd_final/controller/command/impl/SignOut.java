@@ -9,7 +9,7 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 public class SignOut implements Command {
-    private final String HOME_PAGE = "/Controller?command=homePage";
+    private static final String HOME_PAGE = "/Controller?command=homePage";
 
     @Override
     public void execute(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {

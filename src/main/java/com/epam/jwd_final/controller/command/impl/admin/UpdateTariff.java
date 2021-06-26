@@ -19,14 +19,14 @@ import java.math.BigDecimal;
 public class UpdateTariff implements Command {
     private static final Logger LOGGER = Logger.getLogger(UpdateTariff.class);
 
-    private final TariffService tariffService = ServiceProvider.INSTANCE.getTariffService();
-    private final Validator priceValidator = ValidatorProvider.INSTANCE.getPriceValidator();
-    private final Validator speedValidator = ValidatorProvider.INSTANCE.getSpeedValidator();
-
     private static final String TARIFF_ID = "tariffId";
     private static final String TARIFF_NAME = "name";
     private static final String PRICE = "price";
     private static final String SPEED = "speed";
+
+    private final TariffService tariffService = ServiceProvider.INSTANCE.getTariffService();
+    private final Validator priceValidator = ValidatorProvider.INSTANCE.getPriceValidator();
+    private final Validator speedValidator = ValidatorProvider.INSTANCE.getSpeedValidator();
 
     @Override
     public void execute(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {

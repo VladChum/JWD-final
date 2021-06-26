@@ -18,11 +18,11 @@ import java.io.IOException;
 public class UpdateUserEmail implements Command {
     private static final Logger LOGGER = Logger.getLogger(UpdateUserEmail.class);
 
-    private final UserService userService = ServiceProvider.INSTANCE.getUserService();
-    private final Validator emailValidator = ValidatorProvider.INSTANCE.getEmailValidator();
-
     private static final String USER_ID = "userId";
     private static final String NEW_EMAIL = "newEmail";
+
+    private final UserService userService = ServiceProvider.INSTANCE.getUserService();
+    private final Validator emailValidator = ValidatorProvider.INSTANCE.getEmailValidator();
 
     @Override
     public void execute(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {

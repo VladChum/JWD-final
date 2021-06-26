@@ -19,15 +19,14 @@ import java.util.Date;
 public class UpdateDiscount implements Command {
     private static final Logger LOGGER = Logger.getLogger(UpdateDiscount.class);
 
-    private final DiscountService discountService = ServiceProvider.INSTANCE.getDiscountService();
-    private final Validator dateValidator = ValidatorProvider.INSTANCE.getDateValidator();
-    private final Validator numberValidator = ValidatorProvider.INSTANCE.getNumberValidator();
-
-
     private static final String DISCOUNT_ID = "discountId";
     private static final String DISCOUNT_SIZE = "discountSize";
     private static final String START_DATE = "startDate";
     private static final String END_DATE = "endDate";
+
+    private final DiscountService discountService = ServiceProvider.INSTANCE.getDiscountService();
+    private final Validator dateValidator = ValidatorProvider.INSTANCE.getDateValidator();
+    private final Validator numberValidator = ValidatorProvider.INSTANCE.getNumberValidator();
 
     @Override
     public void execute(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {

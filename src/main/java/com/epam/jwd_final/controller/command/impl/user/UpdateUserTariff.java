@@ -20,9 +20,10 @@ import java.math.BigDecimal;
 public class UpdateUserTariff implements Command {
     private static final Logger LOGGER = LoggerFactory.getLogger(UpdateUserTariff.class);
 
-    private final String USER_PAGE = "/Controller?command=userPage";
-    private final String USER = "user";
-    private final String TARIFF_ID = "tariffId";
+    private static final String USER_PAGE = "/Controller?command=userPage";
+    private static final String USER = "user";
+    private static final String TARIFF_ID = "tariffId";
+
     private final SubscriptionService subscriptionService = ServiceProvider.INSTANCE.getSubscriptionService();
     private final UserService userService = ServiceProvider.INSTANCE.getUserService();
 
