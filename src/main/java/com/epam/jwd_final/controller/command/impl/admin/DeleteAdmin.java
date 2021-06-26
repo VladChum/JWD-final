@@ -15,9 +15,9 @@ import java.io.IOException;
 public class DeleteAdmin implements Command {
     private static final Logger LOGGER = Logger.getLogger(DeleteAdmin.class);
 
-    private final AdminService adminService = ServiceProvider.INSTANCE.getAdminService();
+    private static final String ADMIN_ID = "adminId";
 
-    private final String ADMIN_ID = "adminId";
+    private final AdminService adminService = ServiceProvider.INSTANCE.getAdminService();
 
     @Override
     public void execute(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {

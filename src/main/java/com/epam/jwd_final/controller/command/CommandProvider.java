@@ -51,6 +51,6 @@ public enum CommandProvider {
 
     public Command getCommand(String commandName) {
         LOGGER.log(Level.DEBUG, "command name: " + commandName.toUpperCase());
-        return  commands.get(commandName);
+        return commands.get(commandName);
     }
 }

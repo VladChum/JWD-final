@@ -7,8 +7,8 @@ import com.epam.jwd_final.exception.ServiceException;
 import com.epam.jwd_final.service.ServiceProvider;
 import com.epam.jwd_final.service.SubscriptionService;
 import com.epam.jwd_final.service.UserService;
-import org.apache.log4j.Level;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -18,11 +18,12 @@ import java.io.IOException;
 import java.math.BigDecimal;
 
 public class UpdateUserTariff implements Command {
-    private static final Logger LOGGER = Logger.getLogger(UpdateUserTariff.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(UpdateUserTariff.class);
 
-    private final String USER_PAGE = "/Controller?command=userPage";
-    private final String USER = "user";
-    private final String TARIFF_ID = "tariffId";
+    private static final String USER_PAGE = "/Controller?command=userPage";
+    private static final String USER = "user";
+    private static final String TARIFF_ID = "tariffId";
+
     private final SubscriptionService subscriptionService = ServiceProvider.INSTANCE.getSubscriptionService();
     private final UserService userService = ServiceProvider.INSTANCE.getUserService();
 
@@ -45,7 +46,7 @@ public class UpdateUserTariff implements Command {
                 userService.changeStatus(user, Status.ACTIVATE.getId());
             }
         } catch (ServiceException e) {
-            LOGGER.log(Level.ERROR, e.getMessage() + " " + e);
+            LOGGER.error(e.getMessage() + " " + e);
         }
 
         resp.sendRedirect(USER_PAGE);

@@ -20,9 +20,6 @@ import java.io.IOException;
 public class RegisterUser implements Command {
     private static final Logger LOGGER = Logger.getLogger(RegisterUser.class);
 
-    private final UserService userService = ServiceProvider.INSTANCE.getUserService();
-    private final AccountService accountService = ServiceProvider.INSTANCE.getAccountService();
-
     private static final String SIGN_IN_USER = "/Controller?command=userPage";
     private static final String LOGIN = "login";
     private static final String PASSWORD = "password";
@@ -32,6 +29,9 @@ public class RegisterUser implements Command {
     private static final String EMAIL = "email";
     private static final String USER = "user";
     private static final String ACCOUNT = "account";
+
+    private final UserService userService = ServiceProvider.INSTANCE.getUserService();
+    private final AccountService accountService = ServiceProvider.INSTANCE.getAccountService();
 
     @Override
     public void execute(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {

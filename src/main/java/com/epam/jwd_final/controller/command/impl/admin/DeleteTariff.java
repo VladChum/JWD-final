@@ -15,9 +15,9 @@ import java.io.IOException;
 public class DeleteTariff implements Command {
     private static final Logger LOGGER = Logger.getLogger(DeleteTariff.class);
 
-    private final TariffService tariffService = ServiceProvider.INSTANCE.getTariffService();
+    private static final String TARIFF_ID = "tariffId";
 
-    private final String TARIFF_ID = "tariffId";
+    private final TariffService tariffService = ServiceProvider.INSTANCE.getTariffService();
 
     @Override
     public void execute(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {

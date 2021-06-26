@@ -15,9 +15,9 @@ import java.io.IOException;
 public class StopDiscount implements Command {
     private static final Logger LOGGER = Logger.getLogger(StopDiscount.class);
 
-    private final DiscountService discountService = ServiceProvider.INSTANCE.getDiscountService();
+    private static final String DISCOUNT_ID = "discountId";
 
-    private final String DISCOUNT_ID = "discountId";
+    private final DiscountService discountService = ServiceProvider.INSTANCE.getDiscountService();
 
     @Override
     public void execute(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {

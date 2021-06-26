@@ -17,10 +17,10 @@ import java.io.IOException;
 public class AddTariffsToDiscount implements Command {
     private static final Logger LOGGER = Logger.getLogger(AddTariffsToDiscount.class);
 
-    private final TariffService tariffService = ServiceProvider.INSTANCE.getTariffService();
+    private static final String DISCOUNT_ID = "discountId";
+    private static final String TARIFFS = "tariffs";
 
-    private final String DISCOUNT_ID = "discountId";
-    private final String TARIFFS = "tariffs";
+    private final TariffService tariffService = ServiceProvider.INSTANCE.getTariffService();
 
     @Override
     public void execute(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {

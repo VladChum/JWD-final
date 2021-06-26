@@ -19,13 +19,13 @@ import java.math.BigDecimal;
 public class CreateTariff implements Command {
     private static final Logger LOGGER = Logger.getLogger(CreateTariff.class);
 
-    private final TariffService tariffService = ServiceProvider.INSTANCE.getTariffService();
-    private final Validator priceValidator = ValidatorProvider.INSTANCE.getPriceValidator();
-    private final Validator speedValidator = ValidatorProvider.INSTANCE.getSpeedValidator();
-
     private static final String TARIFF_NAME = "name";
     private static final String PRICE = "price";
     private static final String SPEED = "speed";
+
+    private final TariffService tariffService = ServiceProvider.INSTANCE.getTariffService();
+    private final Validator priceValidator = ValidatorProvider.INSTANCE.getPriceValidator();
+    private final Validator speedValidator = ValidatorProvider.INSTANCE.getSpeedValidator();
 
     @Override
     public void execute(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {

@@ -9,8 +9,9 @@ import java.util.Arrays;
 
 public class AuthorizationFilter implements Filter {
     private static final String ACCOUNT = "account";
-    private final String[] whiteList = {"homePage", "tariffPage", "aboutPage", "loginPage", "signIn", "registerUser", "signOut", "tariffPageButton", "changLanguage"};
     private static final String LOGIN_PAGE = "/Controller?command=loginPage";
+
+    private final String[] whiteList = {"homePage", "tariffPage", "aboutPage", "loginPage", "signIn", "registerUser", "signOut", "tariffPageButton", "changLanguage"};
 
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {

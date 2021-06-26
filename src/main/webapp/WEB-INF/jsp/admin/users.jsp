@@ -146,7 +146,7 @@
 <%--                                    --%>
 <div class="tab-content" id="pills-tabContent">
     <%--                                    user table--%>
-    <div class="tab-pane fade show active" id="pills-home" role="tabpanel"
+    <div class="tab-pane fade show active userTable" id="pills-home" role="tabpanel"
          aria-labelledby="pills-home-tab">
         <table class="table table-striped table-hover">
             <thead>
@@ -187,7 +187,7 @@
         </table>
     </div>
     <%--                                    admin table--%>
-    <div class="tab-pane fade" id="pills-profile" role="tabpanel"
+    <div class="tab-pane fade userTable" id="pills-profile" role="tabpanel"
          aria-labelledby="pills-profile-tab">
         <table class="table table-striped table-hover">
             <thead>
@@ -217,7 +217,7 @@
         </table>
     </div>
     <%--                                    baned users--%>
-    <div class="tab-pane fade" id="pills-contact" role="tabpanel"
+    <div class="tab-pane fade userTable" id="pills-contact" role="tabpanel"
          aria-labelledby="pills-contact-tab">
         <table class="table table-striped">
             <thead>

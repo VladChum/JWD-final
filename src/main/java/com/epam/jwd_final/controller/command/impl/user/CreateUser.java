@@ -7,8 +7,9 @@ import com.epam.jwd_final.exception.ServiceException;
 import com.epam.jwd_final.service.AccountService;
 import com.epam.jwd_final.service.ServiceProvider;
 import com.epam.jwd_final.service.UserService;
-import org.apache.log4j.Level;
-import org.apache.log4j.Logger;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -16,7 +17,8 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 public class CreateUser implements Command {
-    private static final Logger LOGGER = Logger.getLogger(CreateUser.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(CreateUser.class);
+
     private static final String LOGIN = "login";
     private static final String PASSWORD = "password";
     private static final String FIRST_NAME = "firstName";
@@ -45,7 +47,7 @@ public class CreateUser implements Command {
                 resp.getWriter().write("false");
             }
         } catch (ServiceException e) {
-            LOGGER.log(Level.ERROR, e.getMessage() + " " + e);
+            LOGGER.error(e.getMessage() + " " + e);
         }
     }
 }

@@ -1,6 +1,6 @@
 package com.epam.jwd_final.service.impl;
 
-import  com.epam.jwd_final.dao.PaymentDao;
+import com.epam.jwd_final.dao.PaymentDao;
 import com.epam.jwd_final.dao.impl.DaoProvider;
 import com.epam.jwd_final.entity.*;
 import com.epam.jwd_final.exception.DaoException;
@@ -118,7 +118,7 @@ public class PaymentServiceImpl implements PaymentService {
 
     private void checkEndPromisedPayment(Long userId, boolean startActivePromised) throws ServiceException {
         boolean endActivePromised = checkActivePromisedPayment(userId);
-        if (startActivePromised && !endActivePromised) {
+        if (startActivePromised && !endActivePromised && ServiceProvider.INSTANCE.getUserService().findUserById(userId).get().getBalance().doubleValue() >= 0) {
             User user = ServiceProvider.INSTANCE.getUserService().findUserById(userId).get();
             ServiceProvider.INSTANCE.getUserService().changeStatus(user, Status.ACTIVATE.getId());
             double amount = findLastUserPromisedAmount(userId).doubleValue() * -1;

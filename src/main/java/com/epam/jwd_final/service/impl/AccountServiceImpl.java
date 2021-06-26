@@ -53,11 +53,11 @@ public class AccountServiceImpl implements AccountService {
     public boolean checkExistence(String login) throws ServiceException {
         boolean result = false;
         try {
-            if (!accountDao.findAccountByLogin(login).isEmpty()) {
+            if (accountDao.findAccountByLogin(login).isPresent()) {
                 result = true;
             }
         } catch (DaoException e) {
-            throw  new ServiceException(e);
+            throw new ServiceException(e);
         }
         return result;
     }
