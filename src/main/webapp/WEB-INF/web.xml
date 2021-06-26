@@ -12,13 +12,20 @@
             com.epam.jwd_final.service.daily_payment.DailyPaymentServlet
         </listener-class>
     </listener>
-
     <filter>
         <filter-name>AuthorizationFilter</filter-name>
         <filter-class>com.epam.jwd_final.filter.AuthorizationFilter</filter-class>
     </filter>
     <filter-mapping>
         <filter-name>AuthorizationFilter</filter-name>
+        <url-pattern>/Controller/*</url-pattern>
+    </filter-mapping>
+    <filter>
+        <filter-name>AdminFilter</filter-name>
+        <filter-class>com.epam.jwd_final.filter.AdminFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>AdminFilter</filter-name>
         <url-pattern>/Controller/*</url-pattern>
     </filter-mapping>
     <filter>
