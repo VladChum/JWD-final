@@ -484,6 +484,11 @@ center {
     overflow-y: scroll;
 }
 
+.userTable {
+    height: 600px;
+    overflow-y: scroll;
+}
+
 .account-menu {
     position: absolute;
     inset: 0px auto auto 0px;
