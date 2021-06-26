@@ -95,8 +95,7 @@ public class AdminDaoImpl implements AdminDao {
                     Account account = new Account(
                             resultSet.getLong("id"),
                             resultSet.getString("login"),
-                            resultSet.getString("password")
-                    );
+                            resultSet.getString("password"));
                     accounts.add(account);
                 }
             }

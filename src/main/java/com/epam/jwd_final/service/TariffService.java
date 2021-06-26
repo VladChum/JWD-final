@@ -67,11 +67,19 @@ public interface TariffService {
     boolean checkExistence(Long tariffId, String name) throws ServiceException;
 
     /**
+     * Checks if a tariff exists with the same name and with a different id
+     *
+     * @param tariffId - tariff id
+     * @param name     - tariff name
+     * @return result of check
+     */
+    boolean checkExistenceForUpdate(Long tariffId, String name) throws ServiceException;
+
+    /**
      * Sort tariffs by status in new array
      *
      * @param tariffPlans - list tariffs
      * @return array of 3 elements 0 - active, 1 - archive
      */
     int[] findTariffsByStatus(List<TariffPlan> tariffPlans);
-
 }

@@ -225,11 +225,17 @@ $("document").ready(function () {
         let password = $('#newAdminCreatePassword').val();
         let valid = 0;
 
-        if (password.length >= 8 || password.length <= 30) {
+        if (password.length >= 8 && password.length <= 30) {
+            $('#errorPasswordAdmin').html("");
             valid++;
+        } else{
+            $('#errorPasswordAdmin').html("Wrong input: password must be 8 to 30 characters long");
         }
-        if (login.length >= 5 || login.length <= 30) {
+        if (login.length >= 5 && login.length <= 30) {
+            $('#errorLoginAdmin').html("");
             valid++;
+        } else {
+            $('#errorLoginAdmin').html("Wrong input: login must be 5 to 30 characters long");
         }
 
         if (valid === 2) {
@@ -297,7 +303,7 @@ $("document").ready(function () {
         let speed = $('#newTariffSpeed').val();
         let valid = 0;
 
-        if (name.length < 2 && name.length !== 0) {
+        if (name.length < 2) {
             $('#errorNameTariff').html("Wrong input: name too short");
         } else {
             $('#errorNameTariff').html("");

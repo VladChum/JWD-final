@@ -37,7 +37,7 @@ public class UpdateTariff implements Command {
 
         try {
             if (priceValidator.isValid(price.toString()) && speedValidator.isValid(String.valueOf(speed))
-                    && !tariffService.checkExistence(tariffId, tariffName)) {
+                    && !tariffService.checkExistenceForUpdate(tariffId, tariffName)) {
                 TariffPlan tariffPlan = tariffService.findById(tariffId.intValue());
                 tariffPlan.setName(tariffName);
                 tariffPlan.setPrice(price);

@@ -82,7 +82,23 @@ public class TariffServiceImpl implements TariffService {
     public boolean checkExistence(Long tariffId, String name) throws ServiceException {
         boolean result = false;
         try {
-            if (!tariffPlanDao.findTariffById(tariffId.intValue()).get().getName().equals(name)
+            if ((tariffPlanDao.findTariffById(tariffId.intValue()).isPresent() &&
+                    tariffPlanDao.findTariffById(tariffId.intValue()).get().getName().equals(name))
+                    || tariffPlanDao.findTariffByName(name).isPresent()) {
+                result = true;
+            }
+        } catch (DaoException e) {
+            throw  new ServiceException(e);
+        }
+        return result;
+    }
+
+    @Override
+    public boolean checkExistenceForUpdate(Long tariffId, String name) throws ServiceException {
+        boolean result = false;
+        try {
+            if (tariffPlanDao.findTariffById(tariffId.intValue()).isPresent() &&
+                    !tariffPlanDao.findTariffById(tariffId.intValue()).get().getName().equals(name)
                     && tariffPlanDao.findTariffByName(name).isPresent()) {
                 result = true;
             }
