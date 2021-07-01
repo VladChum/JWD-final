@@ -36,7 +36,7 @@
                                         <c:forEach var="tariff" items="${tariffPlans}">
                                             <c:if test="${discount.id == tariff.discountId}">
                                                 <p class="discountTariff">
-                                                    <b>${tariff.name}<s>${tariff.price}</s>
+                                                    <b>${tariff.name} <s>${tariff.price}</s>
                                                         <fmt:formatNumber type="number" maxFractionDigits="2">
                                                             ${tariff.price * (100 - discount.size) / 100}
                                                         </fmt:formatNumber>
