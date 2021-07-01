@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 public class ErrorPage implements Command {
-    private static final String ERROR_PAGE = "/WEB-INF/jsp/404.jsp";
+    private static final String ERROR_PAGE = "/404.jsp";
 
     @Override
     public void execute(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
