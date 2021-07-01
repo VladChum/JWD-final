@@ -120,4 +120,21 @@ public class TariffServiceImpl implements TariffService {
         }
         return tariffsByStatus;
     }
+
+    @Override
+    public int beforePaymentDays(User user, Long tariffId) throws ServiceException {
+        double balance = user.getBalance().doubleValue();
+        int days = 0;
+        try {
+            if (tariffPlanDao.findTariffById(tariffId.intValue()).isPresent()) {
+                 TariffPlan tariff = tariffPlanDao.findTariffById(tariffId.intValue()).get();
+                if (balance > 0) {
+                    days = (int) (balance / (tariff.getPrice().doubleValue() / 30.));
+                }
+            }
+        } catch (DaoException e) {
+            throw new ServiceException(e);
+        }
+        return days;
+    }
 }

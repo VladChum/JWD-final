@@ -8,8 +8,10 @@ import com.epam.jwd_final.exception.ServiceException;
 import com.epam.jwd_final.service.UserService;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 public class UserServiceImpl implements UserService {
     private final UserDao userDao = DaoProvider.INSTANCE.getUserDao();
@@ -111,5 +113,24 @@ public class UserServiceImpl implements UserService {
             }
         }
         return usersByStatus;
+    }
+
+    @Override
+    public List<User> findUserByCriteria(User userWithCriteria) throws ServiceException {
+        List<User> allUsers = findAll();
+
+        return allUsers.stream().filter(user -> (
+                (user.getFirstName().equalsIgnoreCase(userWithCriteria.getFirstName()) || userWithCriteria.getFirstName() == null)
+                        && (user.getLastName().equalsIgnoreCase(userWithCriteria.getLastName())
+                        || userWithCriteria.getLastName() == null)
+                        && (user.getStatus().equals(userWithCriteria.getStatus())
+                        || userWithCriteria.getStatus() == null)
+                        && (user.getAccountId().equals(userWithCriteria.getAccountId())
+                        || userWithCriteria.getAccountId() == null)
+                        && (user.getPhone().equals(userWithCriteria.getPhone())
+                        || userWithCriteria.getPhone() == null)
+                        && (user.getEmail().equals(userWithCriteria.getEmail())
+                        || userWithCriteria.getEmail() == null)
+        )).collect(Collectors.toList());
     }
 }

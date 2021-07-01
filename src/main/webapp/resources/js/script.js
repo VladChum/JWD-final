@@ -62,13 +62,13 @@ $("document").ready(function () {
             $('#errorLoginUser').html("");
             valid++;
         }
-        if (firstName.length <= 1) {
+        if (firstName.length <= 1 || firstName.length >= 50) {
             $('#errorFirstNameUser').html("Wrong input: invalid first name!");
         } else {
             $('#errorFirstNameUser').html("");
             valid++;
         }
-        if (lastName.length <= 1) {
+        if (lastName.length <= 1 || lastName.length >= 50) {
             $('#errorLastNameUser').html("Wrong input: invalid last name!");
         } else {
             $('#errorLastNameUser').html("");
@@ -228,7 +228,7 @@ $("document").ready(function () {
         if (password.length >= 8 && password.length <= 30) {
             $('#errorPasswordAdmin').html("");
             valid++;
-        } else{
+        } else {
             $('#errorPasswordAdmin').html("Wrong input: password must be 8 to 30 characters long");
         }
         if (login.length >= 5 && login.length <= 30) {
@@ -263,7 +263,7 @@ $("document").ready(function () {
 
     $('#newTariffName').on('keyup', function () {
         let name = $('#newTariffName').val();
-        if (name.length < 2 && name.length !== 0) {
+        if ((name.length < 2 && name.length !== 0) || name.length >= 30) {
             $('#errorNameTariff').html("Wrong input: name too short");
         } else {
             $('#errorNameTariff').html("");
@@ -303,7 +303,7 @@ $("document").ready(function () {
         let speed = $('#newTariffSpeed').val();
         let valid = 0;
 
-        if (name.length < 2) {
+        if (name.length < 2 || name.length >= 30) {
             $('#errorNameTariff').html("Wrong input: name too short");
         } else {
             $('#errorNameTariff').html("");
@@ -581,7 +581,7 @@ $("document").ready(function () {
         });
     });
 
-    $('.deleteUser').on('click', function () {
+    $(document).on('click', '.deleteUser', function () {
         let userId = $(this).attr('data-user-id');
         let data = {
             userId: userId
@@ -592,7 +592,7 @@ $("document").ready(function () {
         });
     });
 
-    $('.userStatus').on('click', function () {
+    $(document).on('click', '.userStatus', function () {
         let userIdForStatus = $(this).attr('data-user-id');
         let statusId = $('option:selected', this).attr('value');
 
@@ -928,5 +928,55 @@ $("document").ready(function () {
         }
     });
 
+    $('#findUsersButton').on('click', function () {
+        let login = $('#find-login').val();
+        let firstName = $('#findFirstName').val();
+        let lastName = $('#findLastName').val();
+        let phone = $('#findPhone').val();
+        let email = $('#findEmail').val();
+        let statusId = $('option:selected', '.userStatusFind').attr('value');
+        let buttonMassage = $(this).attr('data-massage');
 
+        let data = {
+            login: login,
+            firstName: firstName,
+            lastName: lastName,
+            phone: phone,
+            email: email,
+            statusId: statusId
+        }
+        console.log(data);
+        let url = "Controller?command=findUsersByCriteria";
+        $.ajax({
+            url: url,
+            method: 'post',
+            dataType: 'json',
+            data: data,
+            success: function (data) {
+                loadTable('userTable', buttonMassage, data);
+            }
+        });
+    });
+
+    function loadTable(tableId, buttonMassage, data) {
+        let rows = '';
+        $(data).each(function (i, item) {
+            let row = '<tr class="tableLine" data-status="' + item['status'] + '">';
+            row += '<td>' + item['firstName'] + '</td>';
+            row += '<td>' + item['lastName'] + '</td>';
+            row += '<td>' + ' <div class="col-md-10">' +
+                '                    <select id="inputState" class="userStatus form-select"' +
+                '                            data-user-id="' + item['id'] + '">' +
+                '                        <option class="status" selected>' + item['status'] + '</option>' +
+                '                        <option class="status" value="1">ACTIVATE</option>' +
+                '                        <option class="status" value="2">BANNED</option>' +
+                '                        <option class="status" value="3">SUSPENDED</option>' +
+                '                    </select>' +
+                '</div>' + '</td>';
+            row += '<td>' + item['balance'] + '</td>';
+            row += '<td>' + '<button class="deleteUser btn btn-outline-danger" data-user-id="' + item['id'] + '"> ' + buttonMassage + ' </button>' + '</td>';
+            rows += row + '</tr>';
+        });
+        $('#' + tableId + ' tbody').html(rows);
+    }
 })

@@ -13,8 +13,8 @@ Java 11
 
 #### Frontend
 - Html / CSS + Bootstrap 5.0
-- JS / JQuery
-- ChartJS
+- JS / JQuery (ajax)
+- ChartJS, Gson
 
 #### Database
 * [Database](docs/db.png)

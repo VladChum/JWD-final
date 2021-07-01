@@ -24,6 +24,14 @@ public interface AccountService {
     Optional<Account> findAccountById(Long id) throws ServiceException;
 
     /**
+     * Find account in db by login
+     *
+     * @param login - account id
+     * @return account if it exists
+     */
+    Optional<Account> findAccountByLogin(String login) throws ServiceException;
+
+    /**
      * Add new account in db
      *
      * @param login    - account login

@@ -84,4 +84,12 @@ public interface UserService {
      * @return array of 3 elements 0 - active, 1 - baned, 2- suspended
      */
     int[] findAllUsersByStatus(List<User> users);
+
+    /**
+     * Find all users with this criteria
+     *
+     * @param userWithCriteria - user account with options
+     * @return list of find users
+     */
+    List<User> findUserByCriteria(User userWithCriteria) throws ServiceException;
 }

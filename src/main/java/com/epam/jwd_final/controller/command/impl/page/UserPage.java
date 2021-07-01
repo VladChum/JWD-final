@@ -28,6 +28,7 @@ public class UserPage implements Command {
     private static final String USER = "user";
     private static final String DISCOUNT = "discounts";
     private static final String USER_PAYMENTS = "userPayments";
+    private static final String ACTIVE_DAYS = "activeDays";
 
     private final UserService userService = ServiceProvider.INSTANCE.getUserService();
     private final AccountService accountService = ServiceProvider.INSTANCE.getAccountService();
@@ -52,8 +53,11 @@ public class UserPage implements Command {
             SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
             Collections.reverse(userPayments);
 
+            int activeDays = tariffService.beforePaymentDays(user, subscription.getTariffPlanId());
+
             req.setAttribute(USER, user);
             req.setAttribute(ACCOUNT, account);
+            req.setAttribute(ACTIVE_DAYS, activeDays);
             req.setAttribute(TARIFF_PLANS, tariffPlans);
             req.setAttribute(SUBSCRIPTION, subscription);
             req.setAttribute(DISCOUNT, discounts);
