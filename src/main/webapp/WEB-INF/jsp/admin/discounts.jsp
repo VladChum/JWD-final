@@ -90,6 +90,17 @@
                                                     <fmt:message key="form.discount.status.active"/>
                                                 </b>
                                             </div>
+                                            <c:forEach var="tariff" items="${tariffs}">
+                                                <c:if test="${discount.id == tariff.discountId}">
+                                                    <p class="discountTariff">
+                                                        <b>${tariff.name} <s>${tariff.price}</s>
+                                                            <fmt:formatNumber type="number" maxFractionDigits="2">
+                                                                ${tariff.price * (100 - discount.size) / 100}
+                                                            </fmt:formatNumber>
+                                                        </b>
+                                                    </p>
+                                                </c:if>
+                                            </c:forEach>
                                             <div class="dropdown">
                                                 <button class="btn button-tariff  me-3" type="button"
                                                         id="discountMenu" data-bs-toggle="dropdown"

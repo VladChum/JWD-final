@@ -17,7 +17,7 @@ public class AdminFilter implements Filter {
             "changLanguage", "chengUserStatus", "userPayment", "personalAccount", "updateTariff", "updateUserEmail", "updateUserPhone", "updatePassword", "updateUserTariff", "unblockUser"};
     private final String[] adminCommand = {"homePage", "tariffPage", "aboutPage", "adminPage", "loginPage", "signIn", "registerUser", "signOut", "tariffPageButton", "changLanguage",
             "createTariff", "createUser", "deleteTariff", "createAdmin", "activateTariff", "createDiscount", "stopDiscount", "addTariffsToDiscount", "deleteUser", "deleteAdmin",
-            "chengUserStatus", "personalAccount", "updateTariff", "updateDiscount", "updatePassword", "registerUser", "unblockUser"};
+            "chengUserStatus", "personalAccount", "updateTariff", "updateDiscount", "updatePassword", "registerUser", "unblockUser", "findUsersByCriteria"};
 
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {

@@ -49,6 +49,78 @@
         </div>
     </div>
 </div>
+<div class="accordion" id="accordionExample">
+    <div class="accordion-item">
+        <h2 class="accordion-header" id="headingOne">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false"
+                    aria-controls="panelsStayOpen-collapseTwo">
+                <fmt:message key="page.user.list.button.find"/>
+            </button>
+        </h2>
+        <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse"
+             aria-labelledby="panelsStayOpen-headingTwo">
+            <div class="accordion-body">
+                <center>
+                    <h5><fmt:message key="page.admin.users.navbar.button.findCategories"/></h5>
+                </center>
+                <div class="container">
+                    <div class="row align-items-start">
+                        <div class="col-3">
+                            <label for="find-login" class="form-label"><fmt:message
+                                    key="page.user.account.login"/></label>
+                            <input type="text" class="form-control" id="find-login" placeholder="" required="">
+                        </div>
+                        <div class="col-3">
+                            <label for="findFirstName" class="form-label"><fmt:message
+                                    key="form.new_user.name"/></label>
+                            <input type="text" class="form-control" id="findFirstName" placeholder="" required="">
+                        </div>
+                        <div class="col-3">
+                            <label for="findLastName" class="form-label"><fmt:message
+                                    key="form.new_user.surname"/></label>
+                            <input type="text" class="form-control" id="findLastName" placeholder="" required="">
+                        </div>
+                        <div class="col-3">
+                            <button type="button"
+                                    class="btn-user btn-outline-primary findUsers-filter findUsers_button"
+                                    id="findUsersButton" data-bs-toggle="pill" data-massage="<fmt:message key="page.admin.users.table.button.delete"/>">
+                                <fmt:message key="page.user.list.button.find"/>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="container">
+                    <div class="row align-items-start">
+                        <div class="col-3">
+                            <div class="col-md-12">
+                                <label for="findStatus" class="form-label"><fmt:message
+                                        key="page.user.account.status"/></label>
+                                <select id="findStatus" class="userStatusFind form-select"
+                                        data-user-id="">
+                                    <option class="status" value=""></option>
+                                    <option class="status" value="1">ACTIVATE</option>
+                                    <option class="status" value="2">BANNED</option>
+                                    <option class="status" value="3">SUSPENDED</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-3">
+                            <label for="findPhone" class="form-label"><fmt:message
+                                    key="page.user.account.phone"/></label>
+                            <input type="text" class="form-control" id="findPhone" placeholder="" required="">
+                        </div>
+                        <div class="col-3">
+                            <label for="findEmail" class="form-label">E-mail</label>
+                            <input type="text" class="form-control" id="findEmail" placeholder="" required="">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<br>
 <%--                                    modal add user--%>
 <div class="modal fade" id="newUserForm" data-bs-backdrop="static"
      data-bs-keyboard="false" tabindex="-1"
@@ -148,43 +220,9 @@
     <%--                                    user table--%>
     <div class="tab-pane fade show active userTable" id="pills-home" role="tabpanel"
          aria-labelledby="pills-home-tab">
-        <table class="table table-striped table-hover">
-            <thead>
-            <tr>
-                <th scope="col"><fmt:message key="page.admin.users.table.name"/></th>
-                <th scope="col"><fmt:message key="page.admin.users.table.surname"/></th>
-                <th scope="col"><fmt:message key="page.admin.users.table.status"/></th>
-                <th scope="col"><fmt:message key="page.admin.users.table.balance"/></th>
-                <th></th>
-            </tr>
-            <tbody>
-            <c:forEach items="${users}" var="user">
-                <tr class="tableLine" data-status="${user.status}">
-                    <td>${user.firstName}</td>
-                    <td>${user.lastName}</td>
-                    <td>
-                        <div class="col-md-10">
-                            <select id="inputState" class="userStatus form-select"
-                                    data-user-id="${user.id}">
-                                <option class="status" selected>${user.status}</option>
-                                <option class="status" value="1">ACTIVATE</option>
-                                <option class="status" value="2">BANNED</option>
-                                <option class="status" value="3">SUSPENDED</option>
-                            </select>
-                        </div>
-                    </td>
-                    <td>${user.balance}</td>
-                    <td>
-                        <button class="deleteUser btn btn-outline-danger"
-                                data-user-id="${user.id}">
-                            <fmt:message key="page.admin.users.table.button.delete"/>
-                        </button>
-                    </td>
-                </tr>
-            </c:forEach>
-            </tbody>
-            </thead>
-        </table>
+        <jsp:include page="userTable.jsp">
+            <jsp:param name="users" value="${users}"/>
+        </jsp:include>
     </div>
     <%--                                    admin table--%>
     <div class="tab-pane fade userTable" id="pills-profile" role="tabpanel"
