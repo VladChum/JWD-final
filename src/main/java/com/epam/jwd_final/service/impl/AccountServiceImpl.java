@@ -22,6 +22,15 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
+    public Optional<Account> findAccountByLogin(String login) throws ServiceException {
+        try {
+           return accountDao.findAccountByLogin(login);
+        } catch (DaoException e) {
+            throw new ServiceException(e);
+        }
+    }
+
+    @Override
     public Optional<Account> findAccountById(Long id) throws ServiceException {
         try {
             return accountDao.findAccountById(id.intValue());

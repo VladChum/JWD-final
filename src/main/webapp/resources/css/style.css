@@ -304,19 +304,21 @@ primary {
     background-position: 30px 50%;
     background-repeat: no-repeat;
     cursor: pointer;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-    border-color: rgba(0, 0, 0, .09);
-    border-radius: 100px;
-    display: inline-block;
-    font-weight: 500;
-    font-size: 15px;
-    text-align: center;
-    letter-spacing: .01em;
-    text-decoration: none;
     margin: 0 0 10px -10px;
+}
+
+.findUsers-filter {
+    padding-left: 80px;
+    background-size: 25px;
+    background-position: 30px 50%;
+    background-repeat: no-repeat;
+    margin: 30px 0 0 0;
+}
+
+.findUsers_button {
+    background-image: url(../admin/search.svg);
+    background-size: 25px;
+    /*background-position-x: 35px;*/
 }
 
 .tarrifs-filter__item--wallet {

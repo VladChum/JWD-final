@@ -1,6 +1,7 @@
 package com.epam.jwd_final.service;
 
 import com.epam.jwd_final.entity.TariffPlan;
+import com.epam.jwd_final.entity.User;
 import com.epam.jwd_final.exception.ServiceException;
 
 import java.util.List;
@@ -82,4 +83,12 @@ public interface TariffService {
      * @return array of 3 elements 0 - active, 1 - archive
      */
     int[] findTariffsByStatus(List<TariffPlan> tariffPlans);
+
+    /**
+     * Calculated how many days there is still enough money in the account
+     *
+     * @param user - user with balance
+     * @return amount of days before payment
+     */
+    int beforePaymentDays(User user, Long tariffId) throws ServiceException;
 }
