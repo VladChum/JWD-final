@@ -48,6 +48,7 @@ public enum CommandProvider {
         commands.put("unblockUser", new UnblockUser());
         commands.put("changLanguage", new ChangeLanguage());
         commands.put("findUsersByCriteria", new FindUserByCriteria());
+        commands.put("findUserInfo", new FindUserInfo());
     }
 
     public Command getCommand(String commandName) {

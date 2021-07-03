@@ -17,7 +17,7 @@
     </tr>
     <tbody>
     <c:forEach items="${users}" var="user">
-        <tr class="tableLine" data-status="${user.status}">
+        <tr class="tableLine activeUserTable" data-user-id="${user.id}">
             <td>${user.firstName}</td>
             <td>${user.lastName}</td>
             <td>

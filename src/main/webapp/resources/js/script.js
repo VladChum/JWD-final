@@ -929,13 +929,29 @@ $("document").ready(function () {
     });
 
     $('#findUsersButton').on('click', function () {
+        let buttonMassage = $(this).attr('data-massage');
+        findUsers(buttonMassage);
+    });
+
+    $('#cancelUserFindSettings').on('click', function () {
+        $('#find-login').val("");
+        $('#findFirstName').val("");
+        $('#findLastName').val("");
+        $('#findEmail').val("");
+        $('#findPhone').val("");
+        $('.userStatusFind').val("");
+        let buttonMassage = $(this).attr('data-massage');
+        findUsers(buttonMassage);
+    });
+
+    function findUsers(massage) {
         let login = $('#find-login').val();
         let firstName = $('#findFirstName').val();
         let lastName = $('#findLastName').val();
         let phone = $('#findPhone').val();
         let email = $('#findEmail').val();
         let statusId = $('option:selected', '.userStatusFind').attr('value');
-        let buttonMassage = $(this).attr('data-massage');
+        let buttonMassage = massage;
 
         let data = {
             login: login,
@@ -945,7 +961,6 @@ $("document").ready(function () {
             email: email,
             statusId: statusId
         }
-        console.log(data);
         let url = "Controller?command=findUsersByCriteria";
         $.ajax({
             url: url,
@@ -956,12 +971,13 @@ $("document").ready(function () {
                 loadTable('userTable', buttonMassage, data);
             }
         });
-    });
+
+    }
 
     function loadTable(tableId, buttonMassage, data) {
         let rows = '';
         $(data).each(function (i, item) {
-            let row = '<tr class="tableLine" data-status="' + item['status'] + '">';
+            let row = '<tr class="tableLine activeUserTable" data-user-id="' + item['id'] + '">';
             row += '<td>' + item['firstName'] + '</td>';
             row += '<td>' + item['lastName'] + '</td>';
             row += '<td>' + ' <div class="col-md-10">' +
@@ -978,5 +994,69 @@ $("document").ready(function () {
             rows += row + '</tr>';
         });
         $('#' + tableId + ' tbody').html(rows);
+
     }
+
+    $(document).on('click', '.activeUserTable', function () {
+        let userId = $(this).attr('data-user-id');
+        let data = {
+            userId: userId
+        }
+        console.log(data);
+        let url = "Controller?command=findUserInfo";
+        $.ajax({
+            url: url,
+            method: 'post',
+            dataType: 'json',
+            data: data,
+            success: function (data) {
+                console.log(data);
+                let myModal = new bootstrap.Modal(document.getElementById('userInfoForm'), {
+                    keyboard: false
+                });
+                let body;
+                body = '<div class="container"><div class="row align-items-start">' +
+                    '                <div class="col-2"><h5 class="card-title">name : </h5></div>' +
+                    '                <div class="col"><h5>' + data[0]['firstName'] + ' </h5></div></div></div>' +
+                    '        <div class="container"><div class="row align-items-start">' +
+                    '                <div class="col-2"><h5 class="card-title">surname : </h5></div>' +
+                    '                <div class="col"><h5>' + data[0]['lastName'] + '</h5></div></div></div>' +
+                    '        <div class="container">' +
+                    '            <div class="row align-items-start">' +
+                    '                <div class="col-2"><h5 class="card-title">login : </h5></div>' +
+                    '                <div class="col"><h5>' + data[1] + '</h5></div></div></div>' +
+                    '       <div class="container"><div class="row align-items-start">' +
+                    '                <div class="col-2"><h5 class="card-title">status : </h5></div>' +
+                    '                <div class="col"><h5>' + data[0]['status'] + '</h5></div></div></div>' +
+                    '       <div class="container"><div class="row align-items-start">' +
+                    '                <div class="col-2"><h5 class="card-title">balance : </h5></div>' +
+                    '                <div class="col"><h5>' + data[0]['balance'] + '  BYN</h5></div></div>' +
+                    '        </div><div class="container"><div class="row align-items-start">' +
+                    '                <div class="col-2"><h5 class="card-title">phone : </h5></div>' +
+                    '                <div class="col"><h5>' + data[0]['phone'] + '</h5></div></div>' +
+                    '        </div><div class="container"><div class="row align-items-start">' +
+                    '                <div class="col-2"><h5 class="card-title">email : </h5></div>' +
+                    '                <div class="col"><h5>' + data[0]['email'] + '</h5></div></div></div>';
+                if (data[2] !== null) {
+                    body += '<br><br><div class="container"><div class="row align-items-start">' +
+                        '                <div class="col"><center><h5>Active subscription</h5></center></div></div>' +
+                        '        </div><div class="container"><div class="row align-items-start">' +
+                        '                <div class="col-4"><h5 class="card-title">start date subscription : </h5></div>' +
+                        '                <div class="col"><h5>' + data[2]['startDate'] + '</h5></div></div>' +
+                        '        </div><div class="container"><div class="row align-items-start">' +
+                        '                <div class="col-4"><h5 class="card-title">tariff name : </h5></div>' +
+                        '                <div class="col"><h5>' + data[3]['name'] + '</h5></div></div>' +
+                        '        </div><div class="container"><div class="row align-items-start">' +
+                        '                <div class="col-4"><h5 class="card-title">tariff price : </h5></div>' +
+                        '                <div class="col"><h5>' + data[3]['price'] + '</h5></div></div>' +
+                        '        </div><div class="container"><div class="row align-items-start">' +
+                        '                <div class="col-4"><h5 class="card-title">tariff speed : </h5></div>' +
+                        '                <div class="col"><h5>' + data[3]['speed'] + '</h5></div></div></div>';
+                }
+                $('.userInfoBody').html(body);
+                myModal.show();
+            }
+        });
+
+    });
 })

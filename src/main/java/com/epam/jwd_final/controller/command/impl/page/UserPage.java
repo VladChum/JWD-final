@@ -41,32 +41,36 @@ public class UserPage implements Command {
     public void execute(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
         try {
             HttpSession session = req.getSession();
-            User user = userService.findUserByAccountId((Long) session.getAttribute(USER)).get();
-            Account account = accountService.findAccountById(user.getAccountId()).get();
+            if (session != null) {
+                User user = userService.findUserByAccountId((Long) session.getAttribute(USER)).get();
+                Account account = accountService.findAccountById(user.getAccountId()).get();
 
-            List<TariffPlan> tariffPlans = tariffService.findAllTariff();
-            List<Discount> discounts = discountService.findAll();
-            List<UserPayment> userPayments = paymentService.findAllUserPayments(user.getId());
+                List<TariffPlan> tariffPlans = tariffService.findAllTariff();
+                List<Discount> discounts = discountService.findAll();
+                List<UserPayment> userPayments = paymentService.findAllUserPayments(user.getId());
 
-            Subscription subscription = subscriptionService.findActiveUserSubscription(user.getId());
-            Date date = new Date();
-            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-            Collections.reverse(userPayments);
+                Subscription subscription = subscriptionService.findActiveUserSubscription(user.getId());
+                Date date = new Date();
+                SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+                Collections.reverse(userPayments);
 
-            int activeDays = tariffService.beforePaymentDays(user, subscription.getTariffPlanId());
+                int activeDays = 0;
+                if (subscription != null) {
+                    activeDays = tariffService.beforePaymentDays(user, subscription.getTariffPlanId());
+                }
 
-            req.setAttribute(USER, user);
-            req.setAttribute(ACCOUNT, account);
-            req.setAttribute(ACTIVE_DAYS, activeDays);
-            req.setAttribute(TARIFF_PLANS, tariffPlans);
-            req.setAttribute(SUBSCRIPTION, subscription);
-            req.setAttribute(DISCOUNT, discounts);
-            req.setAttribute("dateNow", java.sql.Date.valueOf(dateFormat.format(date)));
-            req.setAttribute(USER_PAYMENTS, userPayments);
+                req.setAttribute(USER, user);
+                req.setAttribute(ACCOUNT, account);
+                req.setAttribute(TARIFF_PLANS, tariffPlans);
+                req.setAttribute(SUBSCRIPTION, subscription);
+                req.setAttribute(DISCOUNT, discounts);
+                req.setAttribute("dateNow", java.sql.Date.valueOf(dateFormat.format(date)));
+                req.setAttribute(ACTIVE_DAYS, activeDays);
+                req.setAttribute(USER_PAYMENTS, userPayments);
+            }
         } catch (ServiceException e) {
             LOGGER.log(Level.ERROR, e.getMessage() + " " + e);
         }
-
         RequestDispatcher requestDispatcher = req.getRequestDispatcher(USER_PAGE);
         requestDispatcher.forward(req, resp);
     }
