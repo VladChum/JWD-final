@@ -321,6 +321,13 @@ primary {
     /*background-position-x: 35px;*/
 }
 
+.cancelUsers_button {
+    background-image: url(../admin/cancel.svg);
+    background-size: 25px;
+    width: 220px;
+    background-color: rgb(255 0 71 / 23%);
+}
+
 .tarrifs-filter__item--wallet {
     background-image: url(../user/icon-wallet.svg);
     background-size: 25px;

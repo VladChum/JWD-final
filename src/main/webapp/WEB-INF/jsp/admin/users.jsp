@@ -114,6 +114,13 @@
                             <label for="findEmail" class="form-label">E-mail</label>
                             <input type="text" class="form-control" id="findEmail" placeholder="" required="">
                         </div>
+                        <div class="col-3">
+                            <button type="button"
+                                    class="btn-user btn-outline-primary findUsers-filter cancelUsers_button"
+                                    id="cancelUserFindSettings" data-bs-toggle="pill" data-massage="<fmt:message key="page.admin.users.table.button.delete"/>">
+                                <fmt:message key="page.admin.users.table.button.cancel"/>
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -215,6 +222,20 @@
         </div>
     </div>
 </div>
+<%--                                    user info form--%>
+<div class="modal fade" id="userInfoForm" data-bs-backdrop="static"
+     data-bs-keyboard="false" tabindex="-1"
+     aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="userInfoBody">
+            </div>
+        </div>
+    </div>
+</div>
 <%--                                    --%>
 <div class="tab-content" id="pills-tabContent">
     <%--                                    user table--%>
@@ -270,7 +291,7 @@
             <tbody class="table-danger">
             <c:forEach items="${users}" var="user">
                 <c:if test="${user.status == \"BANNED\"}">
-                    <tr>
+                    <tr class="activeUserTable" data-user-id="${user.id}">
                         <td>${user.firstName}</td>
                         <td>${user.lastName}</td>
                         <td class="color: #D90707">${user.status}</td>
