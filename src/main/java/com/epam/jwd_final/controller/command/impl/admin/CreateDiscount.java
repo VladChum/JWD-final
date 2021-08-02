@@ -4,9 +4,9 @@ import com.epam.jwd_final.controller.command.Command;
 import com.epam.jwd_final.entity.Discount;
 import com.epam.jwd_final.exception.ServiceException;
 import com.epam.jwd_final.service.DiscountService;
-import com.epam.jwd_final.service.ServiceProvider;
+import com.epam.jwd_final.service.impl.ServiceProvider;
 import com.epam.jwd_final.service.validator.Validator;
-import com.epam.jwd_final.service.validator.ValidatorProvider;
+import com.epam.jwd_final.service.validator.impl.ValidatorProvider;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 

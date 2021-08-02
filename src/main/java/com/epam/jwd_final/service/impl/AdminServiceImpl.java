@@ -14,6 +14,10 @@ import java.util.Optional;
 public class AdminServiceImpl implements AdminService {
     private final AdminDao adminDao = DaoProvider.INSTANCE.getAdminDao();
 
+    AdminServiceImpl() {
+
+    }
+
     @Override
     public Optional<Admin> findAdminById(Long id) throws ServiceException {
         try {

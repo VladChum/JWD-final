@@ -1,7 +1,5 @@
 package com.epam.jwd_final.controller.command;
 
-import com.epam.jwd_final.exception.DaoException;
-
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

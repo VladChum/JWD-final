@@ -10,6 +10,9 @@ public class PhoneValidatorImpl implements Validator {
 
     private static final Pattern pattern = Pattern.compile(PHONE_PATTERN);
 
+    PhoneValidatorImpl() {
+    }
+
     @Override
     public boolean isValid(String phone) {
         Matcher matcher = pattern.matcher(phone);

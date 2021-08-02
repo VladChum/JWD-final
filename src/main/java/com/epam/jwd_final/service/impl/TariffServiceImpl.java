@@ -13,6 +13,10 @@ import java.util.List;
 public class TariffServiceImpl implements TariffService {
     private final TariffPlanDao tariffPlanDao = DaoProvider.INSTANCE.getTariffPlanDao();
 
+    TariffServiceImpl() {
+
+    }
+
     @Override
     public List<TariffPlan> findAllTariff() throws ServiceException {
         try {

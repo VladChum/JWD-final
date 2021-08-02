@@ -1,5 +1,6 @@
-package com.epam.jwd_final.service;
+package com.epam.jwd_final.service.impl;
 
+import com.epam.jwd_final.service.*;
 import com.epam.jwd_final.service.impl.*;
 
 public enum ServiceProvider {

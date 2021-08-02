@@ -10,6 +10,10 @@ public class NumberValidatorImpl implements Validator {
 
     private static final Pattern pattern = Pattern.compile(NUMBER_PATTERN);
 
+    NumberValidatorImpl() {
+        
+    }
+
     @Override
     public boolean isValid(String speed) {
         Matcher matcher = pattern.matcher(speed);

@@ -1,6 +1,6 @@
-package com.epam.jwd_final.service.validator;
+package com.epam.jwd_final.service.validator.impl;
 
-import com.epam.jwd_final.service.validator.impl.*;
+import com.epam.jwd_final.service.validator.Validator;
 
 public enum ValidatorProvider {
     INSTANCE;

@@ -10,6 +10,9 @@ public class PriceValidatorImpl implements Validator {
 
     private static final Pattern pattern = Pattern.compile(PRICE_PATTERN);
 
+    PriceValidatorImpl() {
+    }
+
     @Override
     public boolean isValid(String price) {
         Matcher matcher = pattern.matcher(price);

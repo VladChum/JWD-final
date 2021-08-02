@@ -1,6 +1,5 @@
 package com.epam.jwd_final.entity;
 
-import java.awt.desktop.QuitStrategy;
 import java.util.Objects;
 
 public class Question extends AbstractBaseEntity {
@@ -60,7 +59,7 @@ public class Question extends AbstractBaseEntity {
         if (obj == null || getClass() != obj.getClass()) return false;
 
         Question question = (Question) obj;
-        return Objects.equals(question, question.question)
+        return Objects.equals(this.question, question.question)
                 && Objects.equals(answer, question.answer)
                 && Objects.equals(userId, question.userId)
                 && Objects.equals(supportId,question.supportId);

@@ -2,7 +2,7 @@ package com.epam.jwd_final.service.daily_payment;
 
 import com.epam.jwd_final.exception.ServiceException;
 import com.epam.jwd_final.service.PaymentService;
-import com.epam.jwd_final.service.ServiceProvider;
+import com.epam.jwd_final.service.impl.ServiceProvider;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 import org.quartz.Job;

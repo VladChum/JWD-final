@@ -16,6 +16,10 @@ import java.util.stream.Collectors;
 public class UserServiceImpl implements UserService {
     private final UserDao userDao = DaoProvider.INSTANCE.getUserDao();
 
+    UserServiceImpl() {
+
+    }
+
     @Override
     public Optional<User> findUserById(Long id) throws ServiceException {
         try {

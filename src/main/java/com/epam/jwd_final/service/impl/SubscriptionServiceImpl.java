@@ -16,6 +16,10 @@ import java.util.Optional;
 public class SubscriptionServiceImpl implements SubscriptionService {
     private final SubscriptionDao subscriptionDao = DaoProvider.INSTANCE.getSubscriptionDao();
 
+    SubscriptionServiceImpl() {
+
+    }
+
     @Override
     public Optional<Subscription> findById(Long id) throws ServiceException {
         try {

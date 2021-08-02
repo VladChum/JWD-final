@@ -10,11 +10,14 @@ public class SpeedValidatorImpl implements Validator {
 
     private static final Pattern pattern = Pattern.compile(SPEED_PATTERN);
 
+    SpeedValidatorImpl() {
+    }
+
     @Override
     public boolean isValid(String speed) {
         Matcher matcher = pattern.matcher(speed);
         boolean result = false;
-        if (matcher.matches() && ! speed.equals("0") && Integer.parseInt(speed) < 100000) {
+        if (matcher.matches() && !speed.equals("0") && Integer.parseInt(speed) < 100000) {
             result = true;
         }
         return result;

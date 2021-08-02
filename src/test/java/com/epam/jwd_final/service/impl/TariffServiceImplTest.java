@@ -2,7 +2,6 @@ package com.epam.jwd_final.service.impl;
 
 import com.epam.jwd_final.entity.TariffPlan;
 import com.epam.jwd_final.exception.ServiceException;
-import com.epam.jwd_final.service.ServiceProvider;
 import com.epam.jwd_final.service.TariffService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;

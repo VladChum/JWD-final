@@ -7,6 +7,7 @@ import com.epam.jwd_final.entity.TariffPlan;
 import com.epam.jwd_final.entity.User;
 import com.epam.jwd_final.exception.ServiceException;
 import com.epam.jwd_final.service.*;
+import com.epam.jwd_final.service.impl.ServiceProvider;
 import com.google.gson.Gson;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;

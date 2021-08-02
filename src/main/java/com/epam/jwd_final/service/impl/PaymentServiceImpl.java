@@ -16,6 +16,10 @@ import java.util.List;
 public class PaymentServiceImpl implements PaymentService {
     private final PaymentDao paymentDao = DaoProvider.INSTANCE.getPaymentDao();
 
+    PaymentServiceImpl() {
+
+    }
+
     @Override
     public void topUpUserBalance(BigDecimal amount, Long userId, Long paymentTypeId) throws ServiceException {
         boolean activePromised = checkActivePromisedPayment(userId);

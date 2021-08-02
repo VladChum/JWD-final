@@ -4,7 +4,7 @@ import com.epam.jwd_final.controller.command.Command;
 import com.epam.jwd_final.entity.Status;
 import com.epam.jwd_final.entity.User;
 import com.epam.jwd_final.exception.ServiceException;
-import com.epam.jwd_final.service.ServiceProvider;
+import com.epam.jwd_final.service.impl.ServiceProvider;
 import com.epam.jwd_final.service.SubscriptionService;
 import com.epam.jwd_final.service.UserService;
 import org.slf4j.Logger;

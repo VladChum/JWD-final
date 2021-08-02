@@ -17,6 +17,10 @@ import java.util.Optional;
 public class DiscountServiceImpl implements DiscountService {
     private final DiscountDao discountDao = DaoProvider.INSTANCE.getDiscountDao();
 
+    DiscountServiceImpl() {
+
+    }
+
     @Override
     public List<Discount> findAll() throws ServiceException {
         try {

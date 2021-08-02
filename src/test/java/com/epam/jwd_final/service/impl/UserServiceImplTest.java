@@ -3,7 +3,6 @@ package com.epam.jwd_final.service.impl;
 import com.epam.jwd_final.entity.Status;
 import com.epam.jwd_final.entity.User;
 import com.epam.jwd_final.exception.ServiceException;
-import com.epam.jwd_final.service.ServiceProvider;
 import com.epam.jwd_final.service.UserService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;

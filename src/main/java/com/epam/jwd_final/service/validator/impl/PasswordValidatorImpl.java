@@ -10,6 +10,9 @@ public class PasswordValidatorImpl implements Validator {
 
     private static final Pattern pattern = Pattern.compile(PASSWORD_PATTERN);
 
+    PasswordValidatorImpl() {
+    }
+
     @Override
     public boolean isValid(String validateData) {
         Matcher matcher = pattern.matcher(validateData);

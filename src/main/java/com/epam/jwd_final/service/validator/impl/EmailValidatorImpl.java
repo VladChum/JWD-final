@@ -10,6 +10,10 @@ public class EmailValidatorImpl implements Validator {
 
     private static final Pattern pattern = Pattern.compile(EMAIL_PATTERN);
 
+    EmailValidatorImpl() {
+
+    }
+
     @Override
     public boolean isValid(String email) {
         Matcher matcher = pattern.matcher(email);
