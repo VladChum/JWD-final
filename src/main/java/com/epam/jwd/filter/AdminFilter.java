@@ -5,7 +5,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.List;
 
 public class AdminFilter implements Filter {
     private static final String ADMIN = "admin";
@@ -13,11 +14,11 @@ public class AdminFilter implements Filter {
     private static final String ADMIN_PAGE = "/Controller?command=adminPage";
     private static final String USER_PAGE = "/Controller?command=userPage";
 
-    private final String[] userCommand = {"homePage", "tariffPage", "aboutPage", "userPage", "loginPage", "signIn", "registerUser", "signOut", "tariffPageButton",
-            "changLanguage", "chengUserStatus", "userPayment", "personalAccount", "updateTariff", "updateUserEmail", "updateUserPhone", "updatePassword", "updateUserTariff", "unblockUser"};
-    private final String[] adminCommand = {"homePage", "tariffPage", "aboutPage", "adminPage", "loginPage", "signIn", "registerUser", "signOut", "tariffPageButton", "changLanguage",
-            "createTariff", "createUser", "deleteTariff", "createAdmin", "activateTariff", "createDiscount", "stopDiscount", "addTariffsToDiscount", "deleteUser", "deleteAdmin",
-            "chengUserStatus", "personalAccount", "updateTariff", "updateDiscount", "updatePassword", "registerUser", "unblockUser", "findUsersByCriteria", "findUserInfo"};
+    private final List<String> generalCommand = new ArrayList<>(List.of("homePage", "tariffPage", "aboutPage", "loginPage", "signIn", "registerUser",
+            "signOut", "tariffPageButton", "changLanguage", "updatePassword", "unblockUser", "personalAccount", "chengUserStatus"));
+    private final List<String> userCommand = new ArrayList<>(List.of("userPage", "userPayment", "updateTariff", "updateUserEmail", "updateUserPhone", "updateUserTariff"));
+    private final List<String> adminCommand = new ArrayList<>(List.of("adminPage", "createTariff", "createUser", "deleteTariff", "createAdmin",
+            "activateTariff", "createDiscount", "stopDiscount", "addTariffsToDiscount", "deleteUser", "deleteAdmin", "updateTariff", "updateDiscount", "registerUser", "findUsersByCriteria", "findUserInfo"));
 
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
@@ -50,7 +51,7 @@ public class AdminFilter implements Filter {
     }
 
     private void adminFilter(String command, HttpServletResponse response, ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain, Object admin) throws IOException, ServletException {
-        if (admin != null && Arrays.stream(adminCommand).noneMatch(command::equalsIgnoreCase)) {
+        if (admin != null && !adminCommand.contains(command) && !generalCommand.contains(command)) {
             response.sendRedirect(ADMIN_PAGE);
         } else {
             filterChain.doFilter(servletRequest, servletResponse);
@@ -58,7 +59,9 @@ public class AdminFilter implements Filter {
     }
 
     private void userFilter(String command, HttpServletResponse response, ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain, Object user) throws IOException, ServletException {
-        if (user != null && Arrays.stream(userCommand).noneMatch(command::equalsIgnoreCase)) {
+        System.out.println(userCommand.contains(command));
+        System.out.println(generalCommand.contains(command));
+        if (user != null && !userCommand.contains(command) && !generalCommand.contains(command)) {
             response.sendRedirect(USER_PAGE);
         } else {
             filterChain.doFilter(servletRequest, servletResponse);

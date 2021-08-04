@@ -5,13 +5,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.List;
 
 public class AuthorizationFilter implements Filter {
     private static final String ACCOUNT = "account";
     private static final String LOGIN_PAGE = "/Controller?command=loginPage";
 
-    private final String[] whiteList = {"homePage", "tariffPage", "aboutPage", "loginPage", "signIn", "registerUser", "signOut", "tariffPageButton", "changLanguage"};
+    private final List<String> whiteList = new ArrayList<>(List.of("homePage", "tariffPage", "aboutPage", "loginPage", "signIn", "registerUser", "signOut", "tariffPageButton", "changLanguage"));
 
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
@@ -32,7 +33,7 @@ public class AuthorizationFilter implements Filter {
         String command = request.getParameter("command");
         if (httpSession != null) {
             Object account = httpSession.getAttribute(ACCOUNT);
-            if (account == null && Arrays.stream(whiteList).noneMatch(command::equalsIgnoreCase)) {
+            if (account == null && !whiteList.contains(command)) {
                 response.sendRedirect(LOGIN_PAGE);
             } else {
                 filterChain.doFilter(servletRequest, servletResponse);
