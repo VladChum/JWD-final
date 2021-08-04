@@ -31,19 +31,21 @@ public class UpdateUserTariff implements Command {
     public void execute(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
         HttpSession session = req.getSession();
         try {
-            User user = userService.findUserByAccountId((Long) session.getAttribute(USER)).get();
-            Long newTariffId = Long.valueOf(req.getParameter(TARIFF_ID));
-            Long activeSubscriptionId = null;
-            if (subscriptionService.findActiveUserSubscription(user.getId()) != null) {
-                activeSubscriptionId = subscriptionService.findActiveUserSubscription(user.getId()).getId();
-                subscriptionService.stopActiveSubscription(user.getId(), activeSubscriptionId);
-            } else {
-                userService.changeStatus(user, Status.ACTIVATE.getId());
-            }
-            subscriptionService.newSubscription(user.getId(), newTariffId);
+            if (userService.findUserByAccountId((Long) session.getAttribute(USER)).isPresent()) {
+                User user = userService.findUserByAccountId((Long) session.getAttribute(USER)).get();
+                Long newTariffId = Long.valueOf(req.getParameter(TARIFF_ID));
+                Long activeSubscriptionId = null;
+                if (subscriptionService.findActiveUserSubscription(user.getId()) != null) {
+                    activeSubscriptionId = subscriptionService.findActiveUserSubscription(user.getId()).getId();
+                    subscriptionService.stopActiveSubscription(user.getId(), activeSubscriptionId);
+                } else {
+                    userService.changeStatus(user, Status.ACTIVATE.getId());
+                }
+                subscriptionService.newSubscription(user.getId(), newTariffId);
 
-            if (user.getBalance().compareTo(BigDecimal.valueOf(0)) >= 0 && !user.getStatus().getId().equals(Status.BANNED.getId())) {
-                userService.changeStatus(user, Status.ACTIVATE.getId());
+                if (user.getBalance().compareTo(BigDecimal.valueOf(0)) >= 0 && !user.getStatus().getId().equals(Status.BANNED.getId())) {
+                    userService.changeStatus(user, Status.ACTIVATE.getId());
+                }
             }
         } catch (ServiceException e) {
             LOGGER.error(e.getMessage() + " " + e);

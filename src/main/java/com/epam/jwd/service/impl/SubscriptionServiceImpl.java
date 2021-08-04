@@ -33,9 +33,9 @@ public class SubscriptionServiceImpl implements SubscriptionService {
         Subscription subscription = null;
         try {
             List<Subscription> subscriptions = subscriptionDao.findAllUserSubscription(userId);
-            for (int i = 0; i < subscriptions.size(); i++){
-                if (subscriptions.get(i).getEndDate() == null) {
-                    subscription = subscriptions.get(i);
+            for (Subscription value : subscriptions) {
+                if (value.getEndDate() == null) {
+                    subscription = value;
                 }
             }
         } catch (DaoException e) {

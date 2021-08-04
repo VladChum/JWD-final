@@ -47,7 +47,7 @@ public class FindUserByCriteria implements Command {
 
         try {
             if (login != null) {
-                if (accountService.checkExistence(login)) {
+                if (accountService.checkExistence(login) && accountService.findAccountByLogin(login).isPresent()) {
                     accountId = accountService.findAccountByLogin(login).get().getId();
                 } else {
                     accountId = 0L;

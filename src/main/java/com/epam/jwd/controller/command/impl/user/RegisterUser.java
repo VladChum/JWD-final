@@ -46,12 +46,16 @@ public class RegisterUser implements Command {
         try {
             if (!accountService.checkExistence(login)) {
                 Long accountId = accountService.addAccount(login, password);
-                Account account = accountService.findAccountById(accountId).get();
-                User user = new User(accountId, firstNme, lastName, phone, email, Status.SUSPENDED);
-                userService.addUser(user);
-                session.setAttribute(ACCOUNT, account);
-                session.setAttribute(USER, userService.findUserByAccountId(account.getId()).get().getAccountId());
-                resp.sendRedirect(SIGN_IN_USER);
+                if (accountService.findAccountById(accountId).isPresent()) {
+                    Account account = accountService.findAccountById(accountId).get();
+                    User user = new User(accountId, firstNme, lastName, phone, email, Status.SUSPENDED);
+                    userService.addUser(user);
+                    session.setAttribute(ACCOUNT, account);
+                    if (userService.findUserByAccountId(account.getId()).isPresent()) {
+                        session.setAttribute(USER, userService.findUserByAccountId(account.getId()).get().getAccountId());
+                        resp.sendRedirect(SIGN_IN_USER);
+                    }
+                }
             } else {
                 resp.getWriter().write("false");
             }

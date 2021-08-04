@@ -30,11 +30,13 @@ public class UpdateUserPhone implements Command {
         String newPhone = req.getParameter(NEW_PHONE);
 
         try {
-            User user = userService.findUserById(userId).get();
-            if (phoneValidator.isValid(newPhone) && !user.getPhone().equals(newPhone)) {
-                userService.updatePhone(userId, newPhone);
-            } else {
-                resp.getWriter().write("*Incorrect phone number, example: +375291111111");
+            if (userService.findUserById(userId).isPresent()) {
+                User user = userService.findUserById(userId).get();
+                if (phoneValidator.isValid(newPhone) && !user.getPhone().equals(newPhone)) {
+                    userService.updatePhone(userId, newPhone);
+                } else {
+                    resp.getWriter().write("*Incorrect phone number, example: +375291111111");
+                }
             }
         } catch (ServiceException e) {
             LOGGER.log(Level.ERROR, e.getMessage() + " " + e);

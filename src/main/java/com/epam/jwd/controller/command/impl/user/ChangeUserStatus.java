@@ -27,8 +27,10 @@ public class ChangeUserStatus implements Command {
         Long statusId = Long.valueOf(req.getParameter(STATUS_ID));
 
         try {
-            User user = userService.findUserById(userId).get();
-            userService.changeStatus(user, statusId);
+            if (userService.findUserById(userId).isPresent()) {
+                User user = userService.findUserById(userId).get();
+                userService.changeStatus(user, statusId);
+            }
         } catch (ServiceException e) {
             LOGGER.error(e.getMessage() + " " + e);
         }

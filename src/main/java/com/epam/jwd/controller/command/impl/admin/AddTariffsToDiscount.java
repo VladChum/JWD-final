@@ -29,8 +29,8 @@ public class AddTariffsToDiscount implements Command {
         String[] tariffs = tariffsString[0].split(",");
 
         try {
-            for (int i = 0; i < tariffs.length; i++) {
-                int tariffId = Integer.parseInt(tariffs[i]);
+            for (String tariff : tariffs) {
+                int tariffId = Integer.parseInt(tariff);
                 TariffPlan tariffPlan = tariffService.findById(tariffId);
                 tariffService.updateTariffDiscount(tariffPlan, discountId);
             }

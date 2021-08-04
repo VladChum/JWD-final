@@ -22,8 +22,10 @@ public class UnblockUser implements Command {
         Long userId = Long.valueOf(req.getParameter(USER_ID));
 
         try {
-            User user = userService.findUserById(userId).get();
-            userService.changeStatus(user, Status.SUSPENDED.getId());
+            if (userService.findUserById(userId).isPresent()) {
+                User user = userService.findUserById(userId).get();
+                userService.changeStatus(user, Status.SUSPENDED.getId());
+            }
         } catch (ServiceException e) {
             e.printStackTrace();
         }

@@ -57,8 +57,10 @@ public class AdminServiceImpl implements AdminService {
     @Override
     public void delete(Long accountId) throws ServiceException {
         try {
-            Admin admin = adminDao.findAdminByAccountId(accountId.intValue()).get();
-            adminDao.deleteAdmin(admin.getId());
+            if (adminDao.findAdminByAccountId(accountId.intValue()).isPresent()) {
+                Admin admin = adminDao.findAdminByAccountId(accountId.intValue()).get();
+                adminDao.deleteAdmin(admin.getId());
+            }
         } catch (DaoException e) {
             throw new ServiceException(e);
         }

@@ -38,13 +38,6 @@ public interface UserDao {
     void createUser(User user) throws DaoException;
 
     /**
-     * Update user data in db
-     *
-     * @param user - user with new data
-     */
-    void updateUser(User user) throws DaoException;
-
-    /**
      * Add amount for user deposit and update user balance in db
      *
      * @param user - user with new balancce

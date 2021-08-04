@@ -4,7 +4,6 @@ import com.epam.jwd.controller.command.Command;
 import com.epam.jwd.entity.Discount;
 import com.epam.jwd.exception.ServiceException;
 import com.epam.jwd.service.DiscountService;
-import com.epam.jwd.service.impl.DiscountServiceImpl;
 import com.epam.jwd.service.impl.ServiceProvider;
 import com.epam.jwd.service.validator.Validator;
 import com.epam.jwd.service.validator.impl.ValidatorProvider;

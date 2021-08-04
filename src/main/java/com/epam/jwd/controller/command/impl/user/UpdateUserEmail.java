@@ -30,11 +30,13 @@ public class UpdateUserEmail implements Command {
         String newEmail = req.getParameter(NEW_EMAIL);
 
         try {
-            User user = userService.findUserById(userId).get();
-            if (!user.getEmail().equals(newEmail) && emailValidator.isValid(newEmail)) {
-                userService.updateEmail(userId, newEmail);
-            } else {
-                resp.getWriter().write("*Incorrect email, example: Sparkl@gmail.com");
+            if (userService.findUserById(userId).isPresent()) {
+                User user = userService.findUserById(userId).get();
+                if (!user.getEmail().equals(newEmail) && emailValidator.isValid(newEmail)) {
+                    userService.updateEmail(userId, newEmail);
+                } else {
+                    resp.getWriter().write("*Incorrect email, example: Sparkl@gmail.com");
+                }
             }
         } catch (ServiceException e) {
             LOGGER.log(Level.ERROR, e.getMessage() + " " + e);

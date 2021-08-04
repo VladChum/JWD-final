@@ -35,9 +35,9 @@ public class ChangeLanguage implements Command {
     private Cookie findLocaleCookie(Cookie[] cookies) {
         Cookie localeCookie = null;
         if (cookies != null) {
-            for (int i = 0; i < cookies.length; i++) {
-                if (cookies[i].getName().equals(COOKIE_LOCALE)) {
-                    localeCookie = cookies[i];
+            for (Cookie cookie : cookies) {
+                if (cookie.getName().equals(COOKIE_LOCALE)) {
+                    localeCookie = cookie;
                     break;
                 }
             }

@@ -16,7 +16,6 @@ public class UserServiceImpl implements UserService {
     private final UserDao userDao = DaoProvider.INSTANCE.getUserDao();
 
     UserServiceImpl() {
-
     }
 
     @Override
@@ -75,13 +74,15 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void updateBalance(Long userId, BigDecimal amount) throws ServiceException {
-        User user = findUserById(userId).get();
-        amount = user.getBalance().add(amount);
-        user.setBalance(amount);
-        try {
-            userDao.updateBalance(user);
-        } catch (DaoException e) {
-            throw new ServiceException(e);
+        if (findUserById(userId).isPresent()) {
+            User user = findUserById(userId).get();
+            amount = user.getBalance().add(amount);
+            user.setBalance(amount);
+            try {
+                userDao.updateBalance(user);
+            } catch (DaoException e) {
+                throw new ServiceException(e);
+            }
         }
     }
 

@@ -54,8 +54,7 @@ public class PaymentServiceImpl implements PaymentService {
     public void dailyPaymentForAllUser() throws ServiceException {
         List<User> users = ServiceProvider.INSTANCE.getUserService().findAll();
 
-        for (int i = 0; i < users.size(); i++) {
-            User user = users.get(i);
+        for (User user : users) {
             if (user.getStatus() == Status.ACTIVATE) {
                 if (user.getBalance().compareTo(BigDecimal.valueOf(0)) >= 0) {
                     Subscription userSubscription = ServiceProvider.INSTANCE.getSubscriptionService().findActiveUserSubscription(user.getId());
@@ -78,8 +77,7 @@ public class PaymentServiceImpl implements PaymentService {
         boolean result = false;
 
         double amount = 0;
-        for (int i = 0; i < userPayments.size(); i++) {
-            UserPayment userPayment = userPayments.get(i);
+        for (UserPayment userPayment : userPayments) {
             if (userPayment.getPaymentType() == PaymentType.CREDIT_CARD) {
                 amount += userPayment.getAmount().doubleValue();
             } else if (userPayment.getPaymentType() == PaymentType.PROMISED_PAYMENT) {
@@ -97,8 +95,7 @@ public class PaymentServiceImpl implements PaymentService {
         double amount = 0;
         List<UserPayment> userPayments = findAllUserPayments(userId);
         Collections.reverse(userPayments);
-        for (int i = 0; i < userPayments.size(); i++) {
-            UserPayment userPayment = userPayments.get(i);
+        for (UserPayment userPayment : userPayments) {
             if (userPayment.getPaymentType() == PaymentType.PROMISED_PAYMENT) {
                 amount = userPayment.getAmount().doubleValue();
                 break;
@@ -110,19 +107,22 @@ public class PaymentServiceImpl implements PaymentService {
 
     private void paymentIfSubscriptionActive(Subscription userSubscription, User user) throws ServiceException {
         TariffPlan userTariff = ServiceProvider.INSTANCE.getTariffService().findById(userSubscription.getTariffPlanId().intValue());
-        Discount discount = ServiceProvider.INSTANCE.getDiscountService().findById(userTariff.getDiscountId()).get();
+        if (ServiceProvider.INSTANCE.getDiscountService().findById(userTariff.getDiscountId()).isPresent()) {
+            Discount discount = ServiceProvider.INSTANCE.getDiscountService().findById(userTariff.getDiscountId()).get();
 
-        double amount = userTariff.getPrice().doubleValue();
-        amount *= -1 / 30.;
-        if (ServiceProvider.INSTANCE.getDiscountService().checkActiveDiscount(discount)) {
-            amount *= (100 - discount.getSize()) / 100.;
+            double amount = userTariff.getPrice().doubleValue();
+            amount *= -1 / 30.;
+            if (ServiceProvider.INSTANCE.getDiscountService().checkActiveDiscount(discount)) {
+                amount *= (100 - discount.getSize()) / 100.;
+            }
+            topUpUserBalance(BigDecimal.valueOf(amount), user.getId(), 1L);
         }
-        topUpUserBalance(BigDecimal.valueOf(amount), user.getId(), 1L);
     }
 
     private void checkEndPromisedPayment(Long userId, boolean startActivePromised) throws ServiceException {
         boolean endActivePromised = checkActivePromisedPayment(userId);
-        if (startActivePromised && !endActivePromised && ServiceProvider.INSTANCE.getUserService().findUserById(userId).get().getBalance().doubleValue() >= 0) {
+        if (startActivePromised && !endActivePromised && ServiceProvider.INSTANCE.getUserService().findUserById(userId).isPresent()
+                && ServiceProvider.INSTANCE.getUserService().findUserById(userId).get().getBalance().doubleValue() >= 0) {
             User user = ServiceProvider.INSTANCE.getUserService().findUserById(userId).get();
             ServiceProvider.INSTANCE.getUserService().changeStatus(user, Status.ACTIVATE.getId());
             double amount = findLastUserPromisedAmount(userId).doubleValue() * -1;

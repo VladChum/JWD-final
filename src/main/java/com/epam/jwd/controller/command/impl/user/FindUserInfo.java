@@ -23,14 +23,6 @@ public class FindUserInfo implements Command {
     private static final Logger LOGGER = Logger.getLogger(FindUserInfo.class);
 
     private static final String USER_ID = "userId";
-    private static final String LOGIN = "login";
-    private static final String FIRST_NAME = "firstName";
-    private static final String LAST_NAME = "lastName";
-    private static final String PHONE = "phone";
-    private static final String EMAIL = "email";
-    private static final String STATUS = "status";
-    private static final String TARIFF = "tariff";
-
 
     private final UserService userService = ServiceProvider.INSTANCE.getUserService();
     private final AccountService accountService = ServiceProvider.INSTANCE.getAccountService();
@@ -44,23 +36,25 @@ public class FindUserInfo implements Command {
         try {
             if (userService.findUserById(userId).isPresent()) {
                 User user = userService.findUserById(userId).get();
-                Account account = accountService.findAccountById(user.getAccountId()).get();
-                Subscription subscription = subscriptionService.findActiveUserSubscription(userId);
+                if (accountService.findAccountById(user.getAccountId()).isPresent()) {
+                    Account account = accountService.findAccountById(user.getAccountId()).get();
+                    Subscription subscription = subscriptionService.findActiveUserSubscription(userId);
 
-                List<Object> userInfo = new ArrayList<>();
-                userInfo.add(user);
-                userInfo.add(account.getLogin());
-                userInfo.add(subscription);
+                    List<Object> userInfo = new ArrayList<>();
+                    userInfo.add(user);
+                    userInfo.add(account.getLogin());
+                    userInfo.add(subscription);
 
-                if (subscription != null) {
-                    TariffPlan tariffPlan = tariffService.findById(subscription.getTariffPlanId().intValue());
-                    userInfo.add(tariffPlan);
+                    if (subscription != null) {
+                        TariffPlan tariffPlan = tariffService.findById(subscription.getTariffPlanId().intValue());
+                        userInfo.add(tariffPlan);
+                    }
+
+                    String resultJson = new Gson().toJson(userInfo);
+
+                    resp.setCharacterEncoding("UTF-8");
+                    resp.getWriter().write(resultJson);
                 }
-
-                String resultJson = new Gson().toJson(userInfo);
-
-                resp.setCharacterEncoding("UTF-8");
-                resp.getWriter().write(resultJson);
             }
         } catch (ServiceException e) {
             LOGGER.log(Level.ERROR, e.getMessage() + " " + e);

@@ -38,7 +38,8 @@ public class UpdateDiscount implements Command {
 
         try {
             if (dateValidator.isValid(newStartDate.toString()) && dateValidator.isValid(newEndDate.toString())
-                && numberValidator.isValid(String.valueOf(newDiscountSize)) && newDiscountSize < 100) {
+                    && numberValidator.isValid(String.valueOf(newDiscountSize)) && newDiscountSize < 100
+                    && discountService.findById(discountId).isPresent()) {
                 Discount discount = discountService.findById(discountId).get();
                 discount.setStartDate(newStartDate);
                 discount.setEndDate(newEndDate);

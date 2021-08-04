@@ -31,11 +31,13 @@ public class UpdatePassword implements Command {
         String newPassword = req.getParameter(NEW_PASSWORD);
 
         try {
-            Account account = accountService.findAccountById(accountId).get();
-            if (account.getPassword().equals(password) && passwordValidator.isValid(newPassword)) {
-                accountService.updatePassword(accountId, newPassword);
-            } else {
-                resp.getWriter().write("Wrong account password!");
+            if (accountService.findAccountById(accountId).isPresent()) {
+                Account account = accountService.findAccountById(accountId).get();
+                if (account.getPassword().equals(password) && passwordValidator.isValid(newPassword)) {
+                    accountService.updatePassword(accountId, newPassword);
+                } else {
+                    resp.getWriter().write("Wrong account password!");
+                }
             }
         } catch (ServiceException e) {
             LOGGER.log(Level.ERROR, e.getMessage() + " " + e);

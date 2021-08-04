@@ -32,14 +32,14 @@ class UserServiceImplTest {
     @Test
     void findAllUsersByStatus() {
         userService = ServiceProvider.INSTANCE.getUserService();
-        int[] validArray = new int[]{2, 1,2};
+        int[] validArray = new int[]{2, 1, 2};
         Assertions.assertArrayEquals(validArray, userService.findAllUsersByStatus(users));
     }
 
     @Test
     void findAllUsersByStatus_false() {
         userService = ServiceProvider.INSTANCE.getUserService();
-        int[] incorrectArray = new int[]{2, 2,2};
+        int[] incorrectArray = new int[]{2, 2, 2};
         Assertions.assertFalse(Arrays.equals(incorrectArray, userService.findAllUsersByStatus(users)));
     }
 
@@ -47,16 +47,20 @@ class UserServiceImplTest {
     void findUserById() throws ServiceException {
         userService = mock(UserServiceImpl.class);
         when(userService.findUserById(2L)).thenReturn(java.util.Optional.ofNullable(users.get(4)));
-        User user = userService.findUserById(2L).get();
-        Assertions.assertEquals(users.get(4), user);
+        if (userService.findUserById(2L).isPresent()) {
+            User user = userService.findUserById(2L).get();
+            Assertions.assertEquals(users.get(4), user);
+        }
     }
 
     @Test
     void findUserByAccountId() throws ServiceException {
         userService = mock(UserServiceImpl.class);
         when(userService.findUserByAccountId(2L)).thenReturn(java.util.Optional.ofNullable(users.get(1)));
-        User user = userService.findUserByAccountId(2L).get();
-        Assertions.assertEquals(users.get(1), user);
+        if (userService.findUserByAccountId(2L).isPresent()) {
+            User user = userService.findUserByAccountId(2L).get();
+            Assertions.assertEquals(users.get(1), user);
+        }
     }
 
     @Test

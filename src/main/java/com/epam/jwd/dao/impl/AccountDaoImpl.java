@@ -28,7 +28,7 @@ public class AccountDaoImpl implements AccountDao {
 
     @Override
     public List<Account> findAllAccount() throws DaoException {
-        List<Account> accounts = new ArrayList<Account>();
+        List<Account> accounts = new ArrayList<>();
         try (Connection connection = ConnectionPool.INSTANCE.getConnection();
              PreparedStatement prepareStatement = connection.prepareStatement(GET_ALL_ACCOUNT)) {
             try (ResultSet resultSet = prepareStatement.executeQuery()) {

@@ -49,11 +49,13 @@ public class DiscountServiceImpl implements DiscountService {
     @Override
     public void stopDiscountById(Long id) throws ServiceException {
         try {
-            Discount discount = findById(id).get();
-            Date startDate = new Date();
-            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-            discount.setEndDate(java.sql.Date.valueOf(dateFormat.format(startDate)));
-            discountDao.stopDiscount(discount);
+            if (findById(id).isPresent()) {
+                Discount discount = findById(id).get();
+                Date startDate = new Date();
+                SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+                discount.setEndDate(java.sql.Date.valueOf(dateFormat.format(startDate)));
+                discountDao.stopDiscount(discount);
+            }
         } catch (DaoException e) {
             throw new ServiceException(e);
         }
@@ -69,7 +71,7 @@ public class DiscountServiceImpl implements DiscountService {
     }
 
     @Override
-    public boolean checkActiveDiscount(Discount discount) throws ServiceException {
+    public boolean checkActiveDiscount(Discount discount) {
         boolean result = false;
 
         Date startDate = new Date();
@@ -82,7 +84,7 @@ public class DiscountServiceImpl implements DiscountService {
     }
 
     @Override
-    public boolean checkPlanedDiscount(Discount discount) throws ServiceException {
+    public boolean checkPlanedDiscount(Discount discount) {
         boolean result = false;
 
         Date startDate = new Date();
@@ -95,7 +97,7 @@ public class DiscountServiceImpl implements DiscountService {
     }
 
     @Override
-    public int[] findDiscountsByStatus(List<Discount> discounts) throws ServiceException {
+    public int[] findDiscountsByStatus(List<Discount> discounts) {
         int[] paymentByStatus = new int[]{0, 0, 0};
         for (Discount discount : discounts) {
             if (checkActiveDiscount(discount)) {

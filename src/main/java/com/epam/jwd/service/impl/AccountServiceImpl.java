@@ -47,7 +47,10 @@ public class AccountServiceImpl implements AccountService {
     public Long addAccount(String login, String password) throws ServiceException {
         try {
             accountDao.createAccount(login, password);
-            return findAccountByLoginAndPassword(login, password).get().getId();
+            if (findAccountByLoginAndPassword(login, password).isPresent()) {
+                return findAccountByLoginAndPassword(login, password).get().getId();
+            }
+            return 1L;
         } catch (DaoException e) {
             throw new ServiceException(e);
         }
