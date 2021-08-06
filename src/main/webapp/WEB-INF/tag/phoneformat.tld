@@ -10,7 +10,7 @@
 
     <tag>
         <name>format</name>
-        <tag-class>com.epam.jwd_final.jsptag.PhoneFormatTag</tag-class>
+        <tag-class>com.epam.jwd.jsptag.PhoneFormatTag</tag-class>
         <body-content>scriptless</body-content>
 
         <attribute>
