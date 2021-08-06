@@ -944,6 +944,93 @@ $("document").ready(function () {
         findUsers(buttonMassage);
     });
 
+    $('#userTable').ready(function () {
+        let buttonMassage = $(this).attr('data-massage');
+        findUsers(buttonMassage);
+    });
+
+    $(document).on('click', '.pageButton', function () {
+        let group = $(this).attr('data-page-number');
+        let login = $('#find-login').val();
+        let firstName = $('#findFirstName').val();
+        let lastName = $('#findLastName').val();
+        let phone = $('#findPhone').val();
+        let email = $('#findEmail').val();
+        let statusId = $('option:selected', '.userStatusFind').attr('value');
+        let buttonMassage = $(this).attr('data-massage');
+
+        let data = {
+            login: login,
+            firstName: firstName,
+            lastName: lastName,
+            phone: phone,
+            email: email,
+            statusId: statusId,
+            group: group
+        }
+        let url = "Controller?command=findUsersByCriteria";
+        $.ajax({
+            url: url,
+            method: 'post',
+            dataType: 'json',
+            data: data,
+            success: function (data) {
+                loadTable('userTable', buttonMassage, data);
+            }
+        });
+        data = {
+            login: login,
+            firstName: firstName,
+            lastName: lastName,
+            phone: phone,
+            email: email,
+            statusId: statusId,
+            group: group,
+            allUsers: "allUsers"
+        }
+        $.ajax({
+            url: url,
+            method: 'post',
+            dataType: 'json',
+            data: data,
+            success: function (data) {
+                pageUserTable(data, buttonMassage, group);
+            }
+        });
+    });
+
+    function pageUserTable(data, massage, group) {
+        let amount = parseInt(data);
+        let pageNumber = parseInt(group);
+        amount = Math.trunc(amount / 10);
+        if (amount * 10 < parseInt(data)) {
+            amount++;
+        }
+        let rows = '';
+        if (amount === 2)  {
+            rows += '<button type="button" class="pageButton btn btn-primary" data-page-number="1" data-massage="' + massage + '"/>1</button>\n';
+            rows += '<button type="button" class="pageButton btn btn-primary" data-page-number="2" data-massage="' + massage + '"/>2</button>\n';
+        }
+        if (amount === 3 || (amount > 3 && pageNumber === 1))  {
+            rows += '<button type="button" class="pageButton btn btn-primary" data-page-number="1" data-massage="' + massage + '"/>1</button>\n';
+            rows += '<button type="button" class="pageButton btn btn-primary" data-page-number="2" data-massage="' + massage + '"/>2</button>\n';
+            rows += '<button type="button" class="pageButton btn btn-primary" data-page-number="3" data-massage="' + massage + '"/>3</button>\n';
+        }
+        if (amount > 3) {
+            if (pageNumber === amount) {
+                rows += '<button type="button" class="pageButton btn btn-primary" data-page-number="' + (amount - 3) + '" data-massage="' + massage + '"/>' + (amount - 3) + '</button>\n';
+                rows += '<button type="button" class="pageButton btn btn-primary" data-page-number="' + (amount - 2) + '" data-massage="' + massage + '"/>' + (amount - 2) + '</button>\n';
+                rows += '<button type="button" class="pageButton btn btn-primary" data-page-number="' + (amount - 1) + '" data-massage="' + massage + '"/>' + (amount - 1) + '</button>\n';
+            } else if (pageNumber > 1) {
+                rows += '<button type="button" class="pageButton btn btn-primary" data-page-number="' + (pageNumber - 1) + '" data-massage="' + massage + '"/>' + (pageNumber - 1) + '</button>\n';
+                rows += '<button type="button" class="pageButton btn btn-primary" data-page-number="' + pageNumber + '" data-massage="' + massage + '"/>' + pageNumber + '</button>\n';
+                rows += '<button type="button" class="pageButton btn btn-primary" data-page-number="' + (pageNumber + 1) + '" data-massage="' + massage + '"/>' + (pageNumber + 1) + '</button>\n';
+            }
+            rows += '... <button type="button" class="pageButton btn btn-primary" data-page-number="' + amount + '" data-massage="' + massage + '"/>' + amount + '</button>\n';
+        }
+        $('#switchButtons').html(rows);
+    }
+
     function findUsers(massage) {
         let login = $('#find-login').val();
         let firstName = $('#findFirstName').val();
@@ -971,7 +1058,24 @@ $("document").ready(function () {
                 loadTable('userTable', buttonMassage, data);
             }
         });
-
+        data = {
+            login: login,
+            firstName: firstName,
+            lastName: lastName,
+            phone: phone,
+            email: email,
+            statusId: statusId,
+            allUsers: "allUsers"
+        }
+        $.ajax({
+            url: url,
+            method: 'post',
+            dataType: 'json',
+            data: data,
+            success: function (data) {
+                pageUserTable(data, buttonMassage, 1);
+            }
+        });
     }
 
     function loadTable(tableId, buttonMassage, data) {

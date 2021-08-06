@@ -16,30 +16,6 @@
         <th></th>
     </tr>
     <tbody>
-    <c:forEach items="${users}" var="user">
-        <tr class="tableLine activeUserTable" data-user-id="${user.id}">
-            <td>${user.firstName}</td>
-            <td>${user.lastName}</td>
-            <td>
-                <div class="col-md-10">
-                    <select id="inputState" class="userStatus form-select"
-                            data-user-id="${user.id}">
-                        <option class="status" selected>${user.status}</option>
-                        <option class="status" value="1">ACTIVATE</option>
-                        <option class="status" value="2">BANNED</option>
-                        <option class="status" value="3">SUSPENDED</option>
-                    </select>
-                </div>
-            </td>
-            <td>${user.balance}</td>
-            <td>
-                <button class="deleteUser btn btn-outline-danger"
-                        data-user-id="${user.id}">
-                    <fmt:message key="page.admin.users.table.button.delete"/>
-                </button>
-            </td>
-        </tr>
-    </c:forEach>
     </tbody>
     </thead>
 </table>

@@ -84,7 +84,8 @@
                         <div class="col-3">
                             <button type="button"
                                     class="btn-user btn-outline-primary findUsers-filter findUsers_button"
-                                    id="findUsersButton" data-bs-toggle="pill" data-massage="<fmt:message key="page.admin.users.table.button.delete"/>">
+                                    id="findUsersButton" data-bs-toggle="pill"
+                                    data-massage="<fmt:message key="page.admin.users.table.button.delete"/>">
                                 <fmt:message key="page.user.list.button.find"/>
                             </button>
                         </div>
@@ -117,7 +118,8 @@
                         <div class="col-3">
                             <button type="button"
                                     class="btn-user btn-outline-primary findUsers-filter cancelUsers_button"
-                                    id="cancelUserFindSettings" data-bs-toggle="pill" data-massage="<fmt:message key="page.admin.users.table.button.delete"/>">
+                                    id="cancelUserFindSettings" data-bs-toggle="pill"
+                                    data-massage="<fmt:message key="page.admin.users.table.button.delete"/>">
                                 <fmt:message key="page.admin.users.table.button.cancel"/>
                             </button>
                         </div>
@@ -244,7 +246,24 @@
         <jsp:include page="userTable.jsp">
             <jsp:param name="users" value="${users}"/>
         </jsp:include>
+        <br>
+        <div class="col-md-3 ms-auto" id="switchButtons" role="group">
+            <button type="button" class="pageButton btn btn-primary" data-page-number="1"
+                    data-massage="<fmt:message key="page.admin.users.table.button.delete"/>">1
+            </button>
+            <button type="button" class="pageButton btn btn-primary" data-page-number="2"
+                    data-massage="<fmt:message key="page.admin.users.table.button.delete"/>">2
+            </button>
+            <button type="button" class="pageButton btn btn-primary" data-page-number="3"
+                    data-massage="<fmt:message key="page.admin.users.table.button.delete"/>">...
+            </button>
+            ...
+            <button type="button" class="pageButton btn btn-primary" data-page-number="4"
+                    data-massage="<fmt:message key="page.admin.users.table.button.delete"/>">4
+            </button>
+        </div>
     </div>
+
     <%--                                    admin table--%>
     <div class="tab-pane fade userTable" id="pills-profile" role="tabpanel"
          aria-labelledby="pills-profile-tab">
