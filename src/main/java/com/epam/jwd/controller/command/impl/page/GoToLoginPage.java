@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
-public class LoginPage implements Command {
+public class GoToLoginPage implements Command {
     private static final String LOGIN_PAGE = "/WEB-INF/jsp/login.jsp";
     private static final String SIGN_IN_USER = "/Controller?command=userPage";
     private static final String SIGN_IN_ADMIN = "/Controller?command=adminPage";

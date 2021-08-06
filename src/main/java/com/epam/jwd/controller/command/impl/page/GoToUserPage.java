@@ -19,8 +19,8 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
-public class UserPage implements Command {
-    private static final Logger LOGGER = Logger.getLogger(UserPage.class);
+public class GoToUserPage implements Command {
+    private static final Logger LOGGER = Logger.getLogger(GoToUserPage.class);
 
     private static final String USER_PAGE = "/WEB-INF/jsp/user.jsp";
     private static final String TARIFF_PLANS = "tariffPlans";

@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-public class AboutCompanyPage implements Command {
+public class GoToAboutCompanyPage implements Command {
     private static final String ABOUT_COMPANY_PAGE = "/WEB-INF/jsp/aboutCompany.jsp";
 
     @Override

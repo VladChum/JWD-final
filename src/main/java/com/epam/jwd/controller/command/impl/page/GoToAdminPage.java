@@ -17,8 +17,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
-public class AdminPage implements Command {
-    private static final Logger LOGGER = Logger.getLogger(AdminPage.class);
+public class GoToAdminPage implements Command {
+    private static final Logger LOGGER = Logger.getLogger(GoToAdminPage.class);
 
     private static final String ADMIN_PAGE = "/WEB-INF/jsp/admin.jsp";
     private static final String USERS = "users";

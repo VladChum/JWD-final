@@ -15,8 +15,8 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
-public class TariffPage implements Command {
-    private static final Logger LOGGER = Logger.getLogger(TariffPage.class);
+public class GoToTariffPage implements Command {
+    private static final Logger LOGGER = Logger.getLogger(GoToTariffPage.class);
 
     private static final String TARIFF_PAGE = "/WEB-INF/jsp/tariff.jsp";
     private static final String TARIFF_PLANS = "tariffPlans";

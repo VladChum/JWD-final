@@ -17,12 +17,12 @@ public enum CommandProvider {
     private final Map<String, Command> commands = new HashMap<>();
 
     CommandProvider() {
-        commands.put("homePage", new HomePage());
-        commands.put("tariffPage", new TariffPage());
-        commands.put("aboutPage", new AboutCompanyPage());
-        commands.put("loginPage", new LoginPage());
-        commands.put("userPage", new UserPage());
-        commands.put("adminPage", new AdminPage());
+        commands.put("homePage", new GoToHomePage());
+        commands.put("tariffPage", new GoToTariffPage());
+        commands.put("aboutPage", new GoToAboutCompanyPage());
+        commands.put("loginPage", new GoToLoginPage());
+        commands.put("userPage", new GoToUserPage());
+        commands.put("adminPage", new GoToAdminPage());
         commands.put("signIn", new SignIn());
         commands.put("signOut", new SignOut());
         commands.put("createTariff", new CreateTariff());
