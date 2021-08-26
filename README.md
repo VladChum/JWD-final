@@ -1,4 +1,7 @@
 # Internet provider
+
+![Image alt](docs/homePage.png)
+
 ## Description
 
 This project is a system that allows the user to connect and manage tariffs, replenish an account, change personal parameters.  If the rules for using the system are violated, it can block. The administrator can manage tariffs and promotions, add and remove users, register new admins, add tariffs to certain promotions. Withdrawals from a personal account are made automatically on a daily basis, taking into account the status of the user and the state of his account.
