@@ -59,8 +59,6 @@ public class AdminFilter implements Filter {
     }
 
     private void userFilter(String command, HttpServletResponse response, ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain, Object user) throws IOException, ServletException {
-        System.out.println(userCommand.contains(command));
-        System.out.println(generalCommand.contains(command));
         if (user != null && !userCommand.contains(command) && !generalCommand.contains(command)) {
             response.sendRedirect(USER_PAGE);
         } else {
